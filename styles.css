@@ -1,0 +1,459 @@
+/* ============================================================
+   date-of-death.com â Global Stylesheet
+   ============================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #1a1a1a;
+  background: #ffffff;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: #1a5276; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #111;
+}
+
+/* --- Layout --- */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   Header & Navigation
+   ============================================================ */
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.logo {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.logo:hover { text-decoration: none; }
+
+.main-nav { display: flex; align-items: center; gap: 28px; }
+.main-nav a {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #444;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.main-nav a:hover { color: #111; text-decoration: none; }
+
+.nav-cta {
+  background: #1a5276;
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-weight: 600 !important;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #154360; }
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #333;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
+.hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e8eef3 100%);
+  padding: 80px 24px 72px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+  color: #111;
+}
+.hero .subtitle {
+  font-size: 1.3rem;
+  color: #444;
+  max-width: 680px;
+  margin: 0 auto 12px;
+  font-family: Georgia, serif;
+}
+.hero .sub-detail {
+  font-size: 1.05rem;
+  color: #666;
+  margin-bottom: 36px;
+}
+.hero-cta {
+  display: inline-block;
+  background: #1a5276;
+  color: #fff;
+  padding: 16px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.hero-cta:hover { background: #154360; transform: translateY(-1px); text-decoration: none; }
+
+/* ============================================================
+   Section Utility
+   ============================================================ */
+section {
+  padding: 72px 24px;
+}
+section:nth-child(even) {
+  background: #f8f9fa;
+}
+.section-title {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.section-lead {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 48px;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+/* ============================================================
+   Step-Up in Basis Explainer
+   ============================================================ */
+.explainer-box {
+  background: #fff;
+  border: 1px solid #dde4ea;
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.explainer-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #1a5276;
+}
+.explainer-box p {
+  margin-bottom: 16px;
+  color: #444;
+}
+.explainer-example {
+  background: #f0f5f9;
+  border-left: 4px solid #1a5276;
+  padding: 20px 24px;
+  border-radius: 0 6px 6px 0;
+  margin: 20px 0;
+}
+.explainer-example strong { color: #111; }
+
+/* ============================================================
+   How It Works â Steps
+   ============================================================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.step-card {
+  text-align: center;
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #1a5276;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+.step-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.step-card p {
+  font-size: 0.92rem;
+  color: #555;
+}
+
+/* ============================================================
+   Service Tiers / Pricing Cards
+   ============================================================ */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.tier-card {
+  background: #fff;
+  border: 1px solid #dde4ea;
+  border-radius: 8px;
+  padding: 40px 32px;
+  text-align: center;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.tier-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.tier-card.recommended {
+  border-color: #1a5276;
+  border-width: 2px;
+}
+.tier-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a5276;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tier-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+.tier-price {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 16px;
+}
+.tier-card ul {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.tier-card li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  color: #444;
+  padding-left: 24px;
+  position: relative;
+}
+.tier-card li::before {
+  content: 'â';
+  position: absolute;
+  left: 0;
+  color: #1a5276;
+  font-weight: 700;
+}
+.tier-card li:last-child { border-bottom: none; }
+.tier-cta {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.tier-card.recommended .tier-cta {
+  background: #1a5276;
+  color: #fff;
+}
+.tier-card.recommended .tier-cta:hover { background: #154360; text-decoration: none; }
+.tier-card:not(.recommended) .tier-cta {
+  background: #f0f5f9;
+  color: #1a5276;
+}
+.tier-card:not(.recommended) .tier-cta:hover { background: #dde8f0; text-decoration: none; }
+.tier-note {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ============================================================
+   Trust / Credentials Bar
+   ============================================================ */
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+.trust-item .trust-number {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a5276;
+  display: block;
+  margin-bottom: 4px;
+}
+.trust-item .trust-label {
+  font-size: 0.92rem;
+  color: #555;
+}
+
+/* ============================================================
+   CTA Banner
+   ============================================================ */
+.cta-banner {
+  background: #1a5276;
+  padding: 64px 24px;
+  text-align: center;
+  color: #fff;
+}
+.cta-banner h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.cta-banner p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 28px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-banner .hero-cta {
+  background: #fff;
+  color: #1a5276;
+}
+.cta-banner .hero-cta:hover { background: #f0f5f9; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  background: #111;
+  color: #aaa;
+  padding: 48px 24px;
+  font-size: 0.9rem;
+}
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.footer-col h4 {
+  color: #fff;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.footer-col a {
+  color: #aaa;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+}
+.footer-col a:hover { color: #fff; text-decoration: none; }
+.footer-bottom {
+  max-width: 1080px;
+  margin: 32px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #777;
+}
+.footer-bottom a { color: #777; }
+.footer-bottom a:hover { color: #ccc; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero { padding: 56px 20px 48px; }
+  .hero h1 { font-size: 2rem; }
+  .hero .subtitle { font-size: 1.1rem; }
+
+  .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .tiers-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+  .main-nav { display: none; }
+  .main-nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 16px 24px;
+    gap: 16px;
+  }
+  .menu-toggle { display: block; }
+
+  .footer-inner { flex-direction: column; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+
+  section { padding: 48px 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.7rem; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .explainer-box { padding: 24px; }
+}
