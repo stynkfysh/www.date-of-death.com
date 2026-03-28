@@ -6,7 +6,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #1a1a1a;
   background: #ffffff;
   line-height: 1.7;
@@ -18,7 +18,7 @@ a:hover { text-decoration: underline; }
 
 /* --- Typography --- */
 h1, h2, h3, h4 {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   line-height: 1.25;
   color: #111;
@@ -50,7 +50,7 @@ h1, h2, h3, h4 {
   margin: 0 auto;
 }
 .logo {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: #111;
@@ -61,7 +61,7 @@ h1, h2, h3, h4 {
 
 .main-nav { display: flex; align-items: center; gap: 28px; }
 .main-nav a {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
   color: #444;
@@ -105,6 +105,17 @@ h1, h2, h3, h4 {
   padding: 80px 24px 72px;
   text-align: center;
 }
+.hero.hero-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url('/images/hero.png') center/cover no-repeat;
+  padding: 100px 24px 88px;
+}
+.hero.hero-bg h1,
+.hero.hero-bg .subtitle,
+.hero.hero-bg .sub-detail {
+  color: #fff;
+}
+.hero.hero-bg .subtitle { opacity: 0.92; }
+.hero.hero-bg .sub-detail { opacity: 0.8; }
 .hero h1 {
   font-size: 2.8rem;
   margin-bottom: 16px;
@@ -115,7 +126,6 @@ h1, h2, h3, h4 {
   color: #444;
   max-width: 680px;
   margin: 0 auto 12px;
-  font-family: Georgia, serif;
 }
 .hero .sub-detail {
   font-size: 1.05rem;
@@ -127,7 +137,7 @@ h1, h2, h3, h4 {
   background: #1a5276;
   color: #fff;
   padding: 16px 40px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 6px;
@@ -208,7 +218,7 @@ section:nth-child(even) {
   height: 48px;
   background: #1a5276;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   border-radius: 50%;
@@ -254,7 +264,7 @@ section:nth-child(even) {
   transform: translateX(-50%);
   background: #1a5276;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   padding: 4px 16px;
@@ -267,7 +277,7 @@ section:nth-child(even) {
   margin-bottom: 8px;
 }
 .tier-price {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 2.8rem;
   font-weight: 800;
   color: #111;
@@ -298,7 +308,7 @@ section:nth-child(even) {
   display: inline-block;
   padding: 12px 32px;
   border-radius: 6px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
@@ -333,7 +343,7 @@ section:nth-child(even) {
   text-align: center;
 }
 .trust-item .trust-number {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 2.2rem;
   font-weight: 800;
   color: #1a5276;
@@ -485,6 +495,21 @@ section:nth-child(even) {
 }
 
 /* ============================================================
+   Accent Images
+   ============================================================ */
+.accent-image {
+  max-width: 760px;
+  margin: 0 auto 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.accent-image img {
+  width: 100%;
+  display: block;
+}
+
+/* ============================================================
    Detail List (used in How It Works, Pricing, FAQ)
    ============================================================ */
 .detail-list {
@@ -553,7 +578,7 @@ section:nth-child(even) {
   border-bottom: 1px solid #e5e5e5;
 }
 .comparison-table th {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 600;
   color: #111;
   background: #f8f9fa;
@@ -586,7 +611,7 @@ section:nth-child(even) {
 }
 .faq-item summary {
   padding: 18px 32px 18px 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: #222;
@@ -643,7 +668,7 @@ section:nth-child(even) {
   background: #fff;
 }
 .form-section legend {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: #111;
@@ -663,7 +688,7 @@ section:nth-child(even) {
 }
 .form-group label {
   display: block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
   color: #333;
@@ -677,7 +702,7 @@ section:nth-child(even) {
   padding: 10px 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.95rem;
   color: #222;
   background: #fff;
