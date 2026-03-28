@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order a Date-of-Death Appraisal Online | Date of Death Appraisals</title>
+    <meta name="description" content="Order your California desktop date-of-death appraisal online. Enter property details, select your tier, and pay securely. No phone calls required.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Order a Date-of-Death Appraisal Online">
+    <meta property="og:description" content="Order your California desktop date-of-death appraisal in minutes. No phone calls, no waiting for quotes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://date-of-death.com/order">
+    <link rel="canonical" href="https://date-of-death.com/order">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="logo">Date of Death Appraisals</a>
+        <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.main-nav').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav">
+            <a href="/why-desktop">Why Desktop</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/faq">FAQ</a>
+            <a href="/about">About</a>
+            <a href="/order" class="nav-cta">Order Now</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Order Your Appraisal</h1>
+        <p class="subtitle">Fill out the form below with your property details. All orders are reviewed by a certified appraiser before acceptance.</p>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <form class="order-form" id="order-form" action="#" method="POST">
+
+            <fieldset class="form-section">
+                <legend>Contact Information</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="client-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="client-name" name="client_name" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="client-email" name="client_email" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="client-phone">Phone Number</label>
+                        <input type="tel" id="client-phone" name="client_phone" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="client-role">Your Role <span class="required">*</span></label>
+                        <select id="client-role" name="client_role" required>
+                            <option value="">Select...</option>
+                            <option value="heir">Heir / Beneficiary</option>
+                            <option value="trustee">Trustee</option>
+                            <option value="executor">Executor / Administrator</option>
+                            <option value="attorney">Attorney</option>
+                            <option value="cpa">CPA / Tax Professional</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+                <legend>Property Information</legend>
+                <div class="form-group full-width">
+                    <label for="property-address">Property Address <span class="required">*</span></label>
+                    <input type="text" id="property-address" name="property_address" required placeholder="Street address, City, CA ZIP">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="property-type">Property Type <span class="required">*</span></label>
+                        <select id="property-type" name="property_type" required>
+                            <option value="">Select...</option>
+                            <option value="sfr">Single-Family Residence</option>
+                            <option value="condo">Condominium</option>
+                            <option value="pud">PUD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-of-death">Date of Death <span class="required">*</span></label>
+                        <input type="date" id="date-of-death" name="date_of_death" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sqft">Approx. Square Footage <span class="required">*</span></label>
+                        <input type="number" id="sqft" name="sqft" required min="100" placeholder="e.g. 1850">
+                    </div>
+                    <div class="form-group">
+                        <label for="lot-size">Lot Size (sq ft)</label>
+                        <input type="number" id="lot-size" name="lot_size" min="0" placeholder="e.g. 6500">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="year-built">Year Built <span class="required">*</span></label>
+                        <input type="number" id="year-built" name="year_built" required min="1800" max="2026" placeholder="e.g. 1975">
+                    </div>
+                    <div class="form-group">
+                        <label for="bedrooms">Bedrooms <span class="required">*</span></label>
+                        <select id="bedrooms" name="bedrooms" required>
+                            <option value="">Select...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6+">6+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bathrooms">Bathrooms <span class="required">*</span></label>
+                        <select id="bathrooms" name="bathrooms" required>
+                            <option value="">Select...</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4+">4+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="condition">Condition at Date of Death <span class="required">*</span></label>
+                        <select id="condition" name="condition" required>
+                            <option value="">Select...</option>
+                            <option value="excellent">Excellent &mdash; Fully updated</option>
+                            <option value="good">Good &mdash; Well maintained</option>
+                            <option value="average">Average &mdash; Normal wear</option>
+                            <option value="fair">Fair &mdash; Needs some work</option>
+                            <option value="poor">Poor &mdash; Significant deferred maintenance</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="updates">Notable Updates or Features</label>
+                    <textarea id="updates" name="updates" rows="3" placeholder="Remodeled kitchen (2018), new roof (2020), pool, ADU, etc."></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+                <legend>Appraisal Details</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="purpose">Purpose <span class="required">*</span></label>
+                        <select id="purpose" name="purpose" required>
+                            <option value="">Select...</option>
+                            <option value="step-up">Step-Up in Basis (Date of Death)</option>
+                            <option value="trust">Trust Valuation</option>
+                            <option value="gift-tax">Gift Tax</option>
+                            <option value="estate-tax">Estate Tax</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tier">Report Tier <span class="required">*</span></label>
+                        <select id="tier" name="tier" required>
+                            <option value="">Select...</option>
+                            <option value="standard">Standard Desktop &mdash; $449</option>
+                            <option value="basic">Basic Desktop &mdash; $299</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know &mdash; special circumstances, multiple properties, rush request, etc."></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-summary">
+                <p>All orders are reviewed by a certified appraiser before acceptance. You'll receive a confirmation email with instructions for submitting property photos and completing payment.</p>
+            </div>
+
+            <button type="submit" class="hero-cta form-submit">Submit Order</button>
+        </form>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">What Happens Next</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <span class="step-number">1</span>
+                <h3>Order Review</h3>
+                <p>We review your order details and confirm acceptance within one business day.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">2</span>
+                <h3>Photo Submission</h3>
+                <p>You'll receive instructions for submitting property photos via your preferred method.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">3</span>
+                <h3>Payment</h3>
+                <p>Pay securely online after your order is confirmed and accepted.</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">4</span>
+                <h3>Delivery</h3>
+                <p>Receive your completed appraisal via secure download link within 5&ndash;7 business days.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/pricing">Pricing</a>
+            <a href="/why-desktop">Why Desktop Appraisals</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/order">Order Now</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="/faq">FAQ</a>
+            <a href="/about">About &amp; Credentials</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:b@appraiser.llc">b@appraiser.llc</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 Appraiser LLC. All rights reserved.</span>
+        <span>California Certified Residential Appraiser &middot; License No. AR036053</span>
+    </div>
+</footer>
+
+</body>
+</html>
