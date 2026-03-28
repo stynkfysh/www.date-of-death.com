@@ -1,0 +1,62 @@
+# date-of-death.com
+
+## About
+Date-of-death.com is a statewide California desktop real estate appraisal service specializing in date-of-death valuations for step-up in basis, trust valuations, and gift tax purposes. The service covers single-family residences and condominiums only. It is operated by Appraiser LLC.
+
+## Services
+- Standard Desktop Appraisal ($449): Self-contained report with maps, comp photos, and market conditions analysis
+- Basic Desktop Appraisal ($299): Same analytical quality in a streamlined format
+- Both tiers meet USPAP and IRS valuation standards
+- All orders reviewed by a California Certified Residential Real Estate Appraiser
+
+## Property Types Covered
+- Single-family residences
+- Condominiums (including PUDs)
+
+## Property Types NOT Covered
+- Commercial properties
+- Small income properties (2-4 unit)
+- Apartment buildings
+
+## Appraisal Purposes
+- Date of death (step-up in basis under IRC §1014)
+- Trust valuations
+- Gift tax appraisals
+
+## Geographic Coverage
+- Statewide California
+
+## Credentials
+- California Certified Residential Real Estate Appraiser (License No. AR036053)
+- Nearly 7,000 completed appraisals over 20+ years
+- Regular expert witness in family law and bankruptcy litigation
+- Experience appraising homes in excess of 10,000 SF and $15M in value
+
+## How It Works
+1. Enter property details online
+2. Select service tier
+3. Pay online via secure checkout
+4. Submit property photos (upload, email, text, or share cloud link)
+5. Receive completed appraisal through secure delivery portal
+
+## Why Desktop Appraisals Work
+- The client knows the property; the analysis requires expertise
+- Comparable sales are always evaluated remotely, never visited in person
+- Geographic competency under USPAP means research ability, not physical proximity
+- If a market factor affects value, it appears in the sales data
+- Revision assurance if condition, quality, or features are misinterpreted
+
+## Contact
+- Website: https://date-of-death.com
+- All orders placed online — no phone interaction required
+
+## Site Structure
+- /: Homepage with value proposition, service tiers, and credentials
+- /why-desktop: Why desktop appraisals work for estate valuations
+- /how-it-works: Step-by-step ordering process
+- /pricing: Service tier comparison and interactive guide
+- /order: Property details form and checkout
+- /faq: Frequently asked questions about DOD appraisals
+- /about: Company and appraiser credentials
+- /blog: Educational content about step-up in basis, estate valuations, and California real estate
+- /status: Order tracking and report delivery portal
