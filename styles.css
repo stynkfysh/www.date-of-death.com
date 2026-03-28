@@ -1,5 +1,5 @@
 /* ============================================================
-   date-of-death.com â Global Stylesheet
+   date-of-death.com -- Global Stylesheet
    ============================================================ */
 
 /* --- Reset & Base --- */
@@ -198,7 +198,7 @@ section:nth-child(even) {
 .explainer-example strong { color: #111; }
 
 /* ============================================================
-   How It Works â Steps
+   How It Works -- Steps
    ============================================================ */
 .steps-grid {
   display: grid;
@@ -297,7 +297,7 @@ section:nth-child(even) {
   position: relative;
 }
 .tier-card li::before {
-  content: 'â';
+  content: '\2713';
   position: absolute;
   left: 0;
   color: #1a5276;
