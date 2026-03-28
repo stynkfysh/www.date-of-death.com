@@ -1,7 +1,7 @@
 # date-of-death.com
 
 ## About
-Date-of-death.com is a statewide California desktop real estate appraisal service specializing in date-of-death valuations for step-up in basis, trust valuations, and gift tax purposes. The service covers single-family residences and condominiums only. It is operated by Appraiser LLC.
+Date-of-death.com is a statewide California desktop real estate appraisal service specializing in date-of-death valuations for step-up in basis, trust valuations, and gift tax purposes. The service covers single-family residences and condominiums only. It is operated by Date of Death Appraisals.
 
 ## Services
 - Standard Desktop Appraisal ($449): Self-contained report with maps, comp photos, and market conditions analysis
