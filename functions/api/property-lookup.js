@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const apiKey = context.env.ANTHROPIC_API_KEY;
+    const apiKey = context.env.GEMINI_API_KEY;
     if (!apiKey) {
       return new Response(JSON.stringify({ error: 'Service not configured' }), {
         status: 500,
@@ -54,24 +54,24 @@ For the complexity assessment, consider:
 
 Return ONLY the JSON object, no other text.`;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 500,
-        temperature: 0,
-        messages: [{ role: 'user', content: prompt }],
-      }),
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            temperature: 0,
+            responseMimeType: 'application/json',
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
       const err = await response.text();
-      console.error('Anthropic API error:', err);
+      console.error('Gemini API error:', err);
       return new Response(JSON.stringify({ error: 'Property lookup failed' }), {
         status: 502,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -79,14 +79,22 @@ Return ONLY the JSON object, no other text.`;
     }
 
     const result = await response.json();
-    const text = result.content[0].text.trim();
+    const text = result.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+
+    if (!text) {
+      console.error('Empty Gemini response:', JSON.stringify(result));
+      return new Response(JSON.stringify({ error: 'No data returned' }), {
+        status: 502,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     let propertyData;
     try {
       const jsonStr = text.replace(/^```json\n?/, '').replace(/\n?```$/, '');
       propertyData = JSON.parse(jsonStr);
     } catch (e) {
-      console.error('Failed to parse AI response:', text);
+      console.error('Failed to parse Gemini response:', text);
       return new Response(JSON.stringify({ error: 'Could not parse property data' }), {
         status: 502,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
