@@ -161,12 +161,19 @@
                     <label for="updates">Notable Updates or Features</label>
                     <textarea id="updates" name="updates" rows="3" placeholder="Remodeled kitchen (2018), new roof (2020), pool, ADU, etc."></textarea>
                 </div>
+                <div id="noncomplex-alert" class="noncomplex-alert" style="display: none;">
+                    <div class="noncomplex-icon">&#10004;</div>
+                    <div class="noncomplex-content">
+                        <strong>Standard Property</strong>
+                        <p>This property qualifies for our standard desktop appraisal. Please verify the details above and complete the order below.</p>
+                    </div>
+                </div>
                 <div id="complexity-alert" class="complexity-alert" style="display: none;">
                     <div class="complexity-icon">&#9888;</div>
                     <div class="complexity-content">
-                        <strong>Complex Property Assessment</strong>
+                        <strong>Complex Property</strong>
                         <p id="complexity-reason"></p>
-                        <p class="complexity-note">Complex properties may require additional research time and are subject to review before acceptance. We will contact you if additional fees apply.</p>
+                        <p class="complexity-note">This property requires a manual review before we can provide a quote. Please use the contact form below and we'll get back to you within one business day.</p>
                     </div>
                 </div>
                 <p id="autofill-note" class="form-note" style="display: none;">Property details auto-filled from public records &mdash; please verify and correct as needed.</p>
@@ -206,11 +213,34 @@
                 </div>
             </fieldset>
 
-            <div class="form-summary">
+            <div class="form-summary" id="order-summary">
                 <p>All orders are reviewed by a certified appraiser before acceptance. You'll receive a confirmation email with instructions for submitting property photos and completing payment.</p>
             </div>
 
-            <button type="submit" class="hero-cta form-submit">Submit Order</button>
+            <button type="submit" class="hero-cta form-submit" id="order-submit-btn">Submit Order</button>
+
+            <!-- Contact Me form for complex properties -->
+            <div id="complex-contact-section" class="complex-contact-form" style="display: none;">
+                <h3>Request a Custom Quote</h3>
+                <p class="complex-subtitle">Complex properties require additional analysis. Fill in your details below and we'll reach out within one business day with a custom quote and timeline.</p>
+                <div class="form-group">
+                    <label for="contact-name">Full Name <span class="required">*</span></label>
+                    <input type="text" id="contact-name" name="contact_name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="contact-email" name="contact_email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="contact-phone">Phone Number</label>
+                    <input type="tel" id="contact-phone" name="contact_phone" autocomplete="tel">
+                </div>
+                <div class="form-group">
+                    <label for="contact-notes">Additional Details</label>
+                    <textarea id="contact-notes" name="contact_notes" rows="3" placeholder="Any details that might help us assess your property..."></textarea>
+                </div>
+                <button type="submit" class="hero-cta form-submit">Request Quote</button>
+            </div>
         </form>
     </div>
 </section>
@@ -356,21 +386,50 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
             status.className = "lookup-status success";
         }
 
-        // Complexity assessment
+        // Complexity assessment — switch form mode
         var complexAlert = document.getElementById("complexity-alert");
+        var noncomplexAlert = document.getElementById("noncomplex-alert");
+        var appraisalDetails = document.querySelectorAll(".form-section")[2]; // Appraisal Details fieldset
+        var orderSummary = document.getElementById("order-summary");
+        var orderSubmitBtn = document.getElementById("order-submit-btn");
+        var contactSection = document.getElementById("complex-contact-section");
+
         if (data.complexity && data.complexity.isComplex) {
-            var reasons = [];
-            if (data.complexity.reason) reasons.push(data.complexity.reason);
-            if (data.complexity.estimatedComps) {
-                reasons.push("Estimated comparable sales availability: " + data.complexity.estimatedComps + ".");
-            }
-            if (data.complexity.factors && data.complexity.factors.length > 0) {
-                reasons.push("Factors: " + data.complexity.factors.join(", ") + ".");
-            }
-            document.getElementById("complexity-reason").textContent = reasons.join(" ");
+            // COMPLEX: show warning, hide order fields, show contact form
+            var reason = data.complexity.reason || "This property has been identified as complex based on our analysis.";
+            document.getElementById("complexity-reason").textContent = reason;
             complexAlert.style.display = "flex";
-        } else {
+            noncomplexAlert.style.display = "none";
+
+            // Hide order-specific sections
+            appraisalDetails.style.display = "none";
+            orderSummary.style.display = "none";
+            orderSubmitBtn.style.display = "none";
+
+            // Pre-fill contact form from Contact Information section
+            var nameVal = document.getElementById("client-name").value;
+            var emailVal = document.getElementById("client-email").value;
+            var phoneVal = document.getElementById("client-phone").value;
+            if (nameVal) document.getElementById("contact-name").value = nameVal;
+            if (emailVal) document.getElementById("contact-email").value = emailVal;
+            if (phoneVal) document.getElementById("contact-phone").value = phoneVal;
+
+            // Show contact form
+            contactSection.style.display = "block";
+        } else if (data.complexity && !data.complexity.isComplex) {
+            // NON-COMPLEX: show success, keep order form visible
+            noncomplexAlert.style.display = "flex";
             complexAlert.style.display = "none";
+
+            // Make sure order sections are visible
+            appraisalDetails.style.display = "";
+            orderSummary.style.display = "";
+            orderSubmitBtn.style.display = "";
+            contactSection.style.display = "none";
+        } else {
+            // No complexity data — keep defaults
+            complexAlert.style.display = "none";
+            noncomplexAlert.style.display = "none";
         }
 
     } catch (err) {
