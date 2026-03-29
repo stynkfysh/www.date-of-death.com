@@ -22,49 +22,49 @@ export async function onRequestPost(context) {
       });
     }
 
-    const prompt = `You are a California real estate data assistant. Given a residential property address, provide your best estimate of the property details based on public records and your knowledge.
+    const prompt = `Search for property details for: ${address}
 
-Address: ${address}
+Look up this property on Zillow, Redfin, Realtor.com, or county assessor records. Find the actual square footage, lot size, year built, bedrooms, bathrooms, and property type from public records.
 
-Return ONLY a valid JSON object with these fields:
+After searching, provide the results as a JSON code block with this exact format:
+\`\`\`json
 {
-  "sqft": number or null (living area square footage),
-  "lotSize": number or null (lot size in square feet),
-  "yearBuilt": number or null (year the home was built),
+  "sqft": number or null,
+  "lotSize": number or null,
+  "yearBuilt": number or null,
   "bedrooms": number or null,
-  "bathrooms": number or null (e.g. 2, 2.5),
+  "bathrooms": number or null,
   "propertyType": "sfr" or "condo" or "pud" or null,
-  "confidence": "high" or "medium" or "low" (how confident you are in the data),
+  "confidence": "high" or "medium" or "low",
   "complexity": {
-    "isComplex": boolean (true if this would be a complex appraisal),
-    "reason": string or null (brief explanation if complex),
-    "estimatedComps": "abundant" or "adequate" or "limited" or "very limited" (estimated availability of comparable sales within a reasonable radius),
-    "factors": [string] (list of factors: e.g. "rural location", "luxury price range", "unique architecture", "large acreage", "waterfront", "mixed use", "very old construction")
+    "isComplex": false,
+    "reason": null,
+    "estimatedComps": "abundant" or "adequate" or "limited" or "very limited",
+    "factors": []
   }
 }
+\`\`\`
 
-For the complexity assessment, consider:
-- Location: rural or remote areas have fewer comps
-- Value: homes over $2M in most markets, or over $5M in luxury markets, have fewer comps
-- Size: homes over 4000 sqft or under 800 sqft have fewer comps
-- Lot: lots over 1 acre in suburban areas or over 5 acres anywhere
-- Age: pre-1900 construction can be harder to comp
-- Type: unique architectural styles, mixed-use, or unusual property types
-- Market: some California markets (e.g., dense urban areas) have abundant comps while rural mountain or desert areas may not
+For confidence: use "high" if you found the exact property data from a reliable source, "medium" if data is from a less direct source, "low" if you could not find this specific property.
 
-Return ONLY the JSON object, no other text.`;
+For complexity, consider whether this would be a complex appraisal based on: rural location, luxury price range (over $2M), large size (over 4000 sqft), large lot (over 1 acre suburban, 5 acres rural), pre-1900 construction, unique architecture, or limited comparable sales availability.`;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          systemInstruction: {
+            parts: [{
+              text: 'You are a California real estate data assistant. You MUST use Google Search to look up actual property data from public records, Zillow, Redfin, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first, then report what you found.'
+            }]
+          },
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
             temperature: 0,
-            responseMimeType: 'application/json',
           },
+          tools: [{ google_search: {} }],
         }),
       }
     );
@@ -79,9 +79,18 @@ Return ONLY the JSON object, no other text.`;
     }
 
     const result = await response.json();
-    const text = result.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
 
-    if (!text) {
+    // Gemini with tools returns multiple parts - find the text parts and combine them
+    const parts = result.candidates?.[0]?.content?.parts || [];
+    let fullText = '';
+    for (const part of parts) {
+      if (part.text) {
+        fullText += part.text;
+      }
+    }
+    fullText = fullText.trim();
+
+    if (!fullText) {
       console.error('Empty Gemini response:', JSON.stringify(result));
       return new Response(JSON.stringify({ error: 'No data returned' }), {
         status: 502,
@@ -91,10 +100,19 @@ Return ONLY the JSON object, no other text.`;
 
     let propertyData;
     try {
-      const jsonStr = text.replace(/^```json\n?/, '').replace(/\n?```$/, '');
+      // Extract JSON from markdown code block or raw JSON
+      const jsonMatch = fullText.match(/```json\s*([\s\S]*?)\s*```/);
+      let jsonStr;
+      if (jsonMatch) {
+        jsonStr = jsonMatch[1];
+      } else {
+        // Try to find raw JSON object
+        const braceMatch = fullText.match(/\{[\s\S]*\}/);
+        jsonStr = braceMatch ? braceMatch[0] : fullText;
+      }
       propertyData = JSON.parse(jsonStr);
     } catch (e) {
-      console.error('Failed to parse Gemini response:', text);
+      console.error('Failed to parse Gemini response:', fullText.substring(0, 500));
       return new Response(JSON.stringify({ error: 'Could not parse property data' }), {
         status: 502,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
