@@ -781,3 +781,11 @@ section:nth-child(even) {
 .hero.hero-howitworks .subtitle, .hero.hero-desktop .subtitle, .hero.hero-order .subtitle { opacity: 0.92; }
 .hero.hero-about .sub-detail, .hero.hero-pricing .sub-detail, .hero.hero-faq .sub-detail,
 .hero.hero-howitworks .sub-detail, .hero.hero-desktop .sub-detail, .hero.hero-order .sub-detail { opacity: 0.8; }
+
+/* --- Form Note --- */
+.form-note {
+  font-size: 0.82rem;
+  color: #666;
+  margin-top: 6px;
+  line-height: 1.5;
+}
