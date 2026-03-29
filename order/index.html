@@ -75,7 +75,6 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-
                 </div>
             </fieldset>
 
@@ -83,7 +82,11 @@
                 <legend>Property Information</legend>
                 <div class="form-group full-width">
                     <label for="property-address">Property Address <span class="required">*</span></label>
-                    <input type="text" id="property-address" name="property_address" required placeholder="Street address, City, CA ZIP">
+                    <div class="address-lookup-row">
+                        <input type="text" id="property-address" name="property_address" required placeholder="Start typing an address..." autocomplete="off">
+                        <button type="button" id="lookup-btn" class="lookup-btn" disabled>Look Up Property</button>
+                    </div>
+                    <div id="lookup-status" class="lookup-status"></div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -158,6 +161,15 @@
                     <label for="updates">Notable Updates or Features</label>
                     <textarea id="updates" name="updates" rows="3" placeholder="Remodeled kitchen (2018), new roof (2020), pool, ADU, etc."></textarea>
                 </div>
+                <div id="complexity-alert" class="complexity-alert" style="display: none;">
+                    <div class="complexity-icon">&#9888;</div>
+                    <div class="complexity-content">
+                        <strong>Complex Property Assessment</strong>
+                        <p id="complexity-reason"></p>
+                        <p class="complexity-note">Complex properties may require additional research time and are subject to review before acceptance. We will contact you if additional fees apply.</p>
+                    </div>
+                </div>
+                <p id="autofill-note" class="form-note" style="display: none;">Property details auto-filled from public records &mdash; please verify and correct as needed.</p>
             </fieldset>
 
             <fieldset class="form-section">
@@ -256,13 +268,12 @@
     </div>
 </footer>
 
-
 <script>
+// --- Purpose dropdown logic ---
 document.getElementById("purpose").addEventListener("change", function() {
     var otherGroup = document.getElementById("other-purpose-group");
     var dodField = document.getElementById("date-of-death");
     otherGroup.style.display = this.value === "other" ? "block" : "none";
-    // Date of death is contextually important but not required for non-DOD purposes
     if (this.value === "step-up" || this.value === "estate-tax") {
         dodField.required = true;
         dodField.closest(".form-group").querySelector("label").innerHTML = 'Date of Death / Effective Date <span class="required">*</span>';
@@ -270,6 +281,105 @@ document.getElementById("purpose").addEventListener("change", function() {
         dodField.required = false;
         dodField.closest(".form-group").querySelector("label").innerHTML = 'Date of Death / Effective Date';
     }
+});
+
+// --- Address input: enable lookup button ---
+document.getElementById("property-address").addEventListener("input", function() {
+    document.getElementById("lookup-btn").disabled = this.value.trim().length < 10;
+});
+
+// --- Property Lookup via AI ---
+document.getElementById("lookup-btn").addEventListener("click", async function() {
+    var btn = this;
+    var address = document.getElementById("property-address").value.trim();
+    var status = document.getElementById("lookup-status");
+
+    if (!address) return;
+
+    btn.disabled = true;
+    btn.textContent = "Looking up\u2026";
+    status.textContent = "Searching property records\u2026";
+    status.className = "lookup-status loading";
+
+    try {
+        var resp = await fetch("/api/property-lookup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ address: address })
+        });
+
+        if (!resp.ok) throw new Error("Lookup failed");
+
+        var data = await resp.json();
+        if (data.error) throw new Error(data.error);
+
+        // Populate form fields
+        if (data.sqft) document.getElementById("sqft").value = data.sqft;
+        if (data.lotSize) document.getElementById("lot-size").value = data.lotSize;
+        if (data.yearBuilt) document.getElementById("year-built").value = data.yearBuilt;
+
+        if (data.bedrooms) {
+            var bedSel = document.getElementById("bedrooms");
+            var bedVal = data.bedrooms >= 6 ? "6+" : String(data.bedrooms);
+            for (var i = 0; i < bedSel.options.length; i++) {
+                if (bedSel.options[i].value === bedVal) { bedSel.selectedIndex = i; break; }
+            }
+        }
+
+        if (data.bathrooms) {
+            var bathSel = document.getElementById("bathrooms");
+            var bathVal = data.bathrooms >= 4 ? "4+" : String(data.bathrooms);
+            for (var i = 0; i < bathSel.options.length; i++) {
+                if (bathSel.options[i].value === bathVal) { bathSel.selectedIndex = i; break; }
+            }
+        }
+
+        if (data.propertyType) {
+            var typeSel = document.getElementById("property-type");
+            for (var i = 0; i < typeSel.options.length; i++) {
+                if (typeSel.options[i].value === data.propertyType) { typeSel.selectedIndex = i; break; }
+            }
+        }
+
+        // Show autofill note
+        document.getElementById("autofill-note").style.display = "block";
+
+        // Confidence indicator
+        if (data.confidence === "low") {
+            status.textContent = "Property found, but data confidence is low. Please verify all fields carefully.";
+            status.className = "lookup-status warning";
+        } else if (data.confidence === "medium") {
+            status.textContent = "Property found. Please verify the details below.";
+            status.className = "lookup-status success";
+        } else {
+            status.textContent = "Property found. Details auto-filled below.";
+            status.className = "lookup-status success";
+        }
+
+        // Complexity assessment
+        var complexAlert = document.getElementById("complexity-alert");
+        if (data.complexity && data.complexity.isComplex) {
+            var reasons = [];
+            if (data.complexity.reason) reasons.push(data.complexity.reason);
+            if (data.complexity.estimatedComps) {
+                reasons.push("Estimated comparable sales availability: " + data.complexity.estimatedComps + ".");
+            }
+            if (data.complexity.factors && data.complexity.factors.length > 0) {
+                reasons.push("Factors: " + data.complexity.factors.join(", ") + ".");
+            }
+            document.getElementById("complexity-reason").textContent = reasons.join(" ");
+            complexAlert.style.display = "flex";
+        } else {
+            complexAlert.style.display = "none";
+        }
+
+    } catch (err) {
+        status.textContent = "Could not look up property. Please fill in the details manually.";
+        status.className = "lookup-status error";
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Look Up Property";
 });
 </script>
 </body>

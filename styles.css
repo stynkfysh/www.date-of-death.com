@@ -789,3 +789,79 @@ section:nth-child(even) {
   margin-top: 6px;
   line-height: 1.5;
 }
+
+/* --- Address Lookup --- */
+.address-lookup-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+.address-lookup-row input {
+  flex: 1;
+}
+.lookup-btn {
+  background: #1a5276;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, opacity 0.2s;
+}
+.lookup-btn:hover:not(:disabled) { background: #154360; }
+.lookup-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.lookup-status {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  min-height: 1.2em;
+}
+.lookup-status.loading { color: #666; }
+.lookup-status.success { color: #1a7a3a; }
+.lookup-status.warning { color: #b8860b; }
+.lookup-status.error { color: #c0392b; }
+
+/* --- Complexity Alert --- */
+.complexity-alert {
+  display: flex;
+  gap: 14px;
+  background: #fff8e1;
+  border: 1px solid #f0d060;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-top: 16px;
+}
+.complexity-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  color: #e6a800;
+}
+.complexity-content strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+}
+.complexity-content p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 6px;
+}
+.complexity-note {
+  font-size: 0.82rem !important;
+  color: #777 !important;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .address-lookup-row {
+    flex-direction: column;
+  }
+  .lookup-btn {
+    width: 100%;
+  }
+}
