@@ -75,11 +75,7 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <div class="form-group full-width" id="other-purpose-group" style="display: none;">
-                        <label for="other-purpose">Please describe the purpose of your appraisal</label>
-                        <input type="text" id="other-purpose" name="other_purpose" placeholder="e.g., bankruptcy, immigration, divorce, etc.">
-                        <p class="form-note">Our expertise is date-of-death valuations and the IRS step-up in basis. For other purposes, please confirm with your attorney or the requesting party that a desktop appraisal will be accepted.</p>
-                    </div>
+
                 </div>
             </fieldset>
 
@@ -100,8 +96,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="date-of-death">Date of Death <span class="required">*</span></label>
-                        <input type="date" id="date-of-death" name="date_of_death" required>
+                        <label for="date-of-death">Date of Death / Effective Date</label>
+                        <input type="date" id="date-of-death" name="date_of_death">
                     </div>
                 </div>
                 <div class="form-row">
@@ -147,7 +143,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="condition">Condition at Date of Death <span class="required">*</span></label>
+                        <label for="condition">Condition at Effective Date <span class="required">*</span></label>
                         <select id="condition" name="condition" required>
                             <option value="">Select...</option>
                             <option value="excellent">Excellent &mdash; Fully updated</option>
@@ -186,6 +182,11 @@
                             <option value="basic">Basic Desktop &mdash; $299</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-group full-width" id="other-purpose-group" style="display: none;">
+                    <label for="other-purpose">Please describe the purpose of your appraisal</label>
+                    <input type="text" id="other-purpose" name="other_purpose" placeholder="e.g., bankruptcy, immigration, divorce, etc.">
+                    <p class="form-note">Our expertise is date-of-death valuations and the IRS step-up in basis. For other purposes, please confirm with your attorney or the requesting party that a desktop appraisal will be accepted.</p>
                 </div>
                 <div class="form-group full-width">
                     <label for="notes">Additional Notes</label>
@@ -259,7 +260,16 @@
 <script>
 document.getElementById("purpose").addEventListener("change", function() {
     var otherGroup = document.getElementById("other-purpose-group");
+    var dodField = document.getElementById("date-of-death");
     otherGroup.style.display = this.value === "other" ? "block" : "none";
+    // Date of death is contextually important but not required for non-DOD purposes
+    if (this.value === "step-up" || this.value === "estate-tax") {
+        dodField.required = true;
+        dodField.closest(".form-group").querySelector("label").innerHTML = 'Date of Death / Effective Date <span class="required">*</span>';
+    } else {
+        dodField.required = false;
+        dodField.closest(".form-group").querySelector("label").innerHTML = 'Date of Death / Effective Date';
+    }
 });
 </script>
 </body>
