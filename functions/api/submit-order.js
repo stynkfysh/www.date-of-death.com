@@ -185,7 +185,7 @@ async function createSquareCheckout(data, env) {
   if (!resp.ok) {
     const errText = await resp.text();
     console.error('Square API error:', errText);
-    throw new Error('Failed to create payment link');
+    throw new Error('Failed to create payment link: ' + errText);
   }
 
   const result = await resp.json();
