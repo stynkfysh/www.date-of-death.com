@@ -305,7 +305,7 @@ export async function onRequestPost(context) {
 
   } catch (err) {
     console.error('Submit error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong. Please email us directly at orders@date-of-death.com.' }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong. Please email us directly at orders@date-of-death.com.', debug: err.message }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
