@@ -1,14 +1,117 @@
-export async function onRequestPost(context) {
-  const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
+// --- Rate limiter (per worker instance) ---
+const rateLimitMap = new Map();
+const RATE_LIMIT_MAX = 5;       // max lookups per window
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  // Clean old entries periodically (every 100 checks)
+  if (Math.random() < 0.01) {
+    for (const [key, val] of rateLimitMap) {
+      if (now - val.windowStart > RATE_LIMIT_WINDOW) rateLimitMap.delete(key);
+    }
+  }
+
+  if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW) {
+    rateLimitMap.set(ip, { windowStart: now, count: 1 });
+    return false;
+  }
+
+  entry.count++;
+  if (entry.count > RATE_LIMIT_MAX) return true;
+  return false;
+}
+
+// --- Allowed origins ---
+const ALLOWED_ORIGINS = [
+  'https://date-of-death.com',
+  'https://www.date-of-death.com',
+];
+
+function getCorsHeaders(requestOrigin) {
+  const origin = ALLOWED_ORIGINS.includes(requestOrigin) ? requestOrigin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
+}
+
+export async function onRequestPost(context) {
+  const requestOrigin = context.request.headers.get('Origin') || '';
+  const corsHeaders = getCorsHeaders(requestOrigin);
 
   try {
-    const { address } = await context.request.json();
-    if (!address || address.trim().length < 5) {
-      return new Response(JSON.stringify({ error: 'Address is required' }), {
+    // --- Security Layer 1: Origin check ---
+    if (!ALLOWED_ORIGINS.includes(requestOrigin)) {
+      return new Response(JSON.stringify({ error: 'Forbidden' }), {
+        status: 403,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // --- Security Layer 2: Rate limiting by IP ---
+    const clientIP = context.request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (isRateLimited(clientIP)) {
+      return new Response(JSON.stringify({ error: 'Too many requests. Please try again later.' }), {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+          'Retry-After': '900',
+        },
+      });
+    }
+
+    const body = await context.request.json();
+
+    // --- Security Layer 3: Honeypot ---
+    if (body.website || body.company_url) {
+      // Bot filled the hidden field — silently return a fake success
+      return new Response(JSON.stringify({
+        sqft: null, lotSize: null, yearBuilt: null, bedrooms: null, bathrooms: null,
+        propertyType: null, confidence: 'low',
+        complexity: { isComplex: false, reason: 'Unable to determine', compsFound: 0 }
+      }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // --- Security Layer 4: Timestamp check (min 3 seconds on page) ---
+    if (body._ts) {
+      const elapsed = Date.now() - Number(body._ts);
+      if (elapsed < 3000 || elapsed > 3600000) {
+        // Too fast (bot) or token older than 1 hour (replay)
+        return new Response(JSON.stringify({ error: 'Invalid request. Please reload and try again.' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+    } else {
+      // No timestamp — reject
+      return new Response(JSON.stringify({ error: 'Invalid request format.' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // --- Validate address ---
+    const { address } = body;
+    if (!address || typeof address !== 'string' || address.trim().length < 10 || address.trim().length > 200) {
+      return new Response(JSON.stringify({ error: 'A valid property address is required.' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const cleanAddress = address.trim();
+
+    // Basic format check — should contain at least one digit and one letter
+    if (!/\d/.test(cleanAddress) || !/[a-zA-Z]/.test(cleanAddress)) {
+      return new Response(JSON.stringify({ error: 'Please enter a valid street address.' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -22,7 +125,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const prompt = `Search for property details and perform a complexity analysis for: ${address}
+    const prompt = `Search for property details and perform a complexity analysis for: ${cleanAddress}
 
 STEP 1: LOOK UP THE SUBJECT PROPERTY
 Search Zillow, Redfin, Realtor.com, or county assessor records to find:
@@ -67,6 +170,7 @@ If you cannot find 3 qualifying comps within 1 mile, the property is COMPLEX.
 
 STEP 4: RETURN RESULTS
 After completing your analysis, provide the results as a JSON code block with this exact format:
+
 \`\`\`json
 {
   "sqft": number or null,
@@ -188,17 +292,14 @@ IMPORTANT: Do not fabricate comparable sales. If data is unavailable or unreliab
     console.error('Function error:', err);
     return new Response(JSON.stringify({ error: 'Internal error' }), {
       status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      headers: { ...getCorsHeaders(''), 'Content-Type': 'application/json' },
     });
   }
 }
 
-export async function onRequestOptions() {
+export async function onRequestOptions(context) {
+  const requestOrigin = context.request.headers.get('Origin') || '';
   return new Response(null, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
+    headers: getCorsHeaders(requestOrigin),
   });
 }

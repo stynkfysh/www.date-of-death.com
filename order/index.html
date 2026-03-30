@@ -87,6 +87,11 @@
                         <button type="button" id="lookup-btn" class="lookup-btn" disabled>Look Up Property</button>
                     </div>
                     <div id="lookup-status" class="lookup-status"></div>
+                    <!-- Honeypot: invisible to humans, bots will fill it -->
+                    <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -299,6 +304,10 @@
 </footer>
 
 <script>
+// --- Anti-bot: record page load time ---
+var _pageLoadTs = Date.now();
+var _lookupUsed = false;
+
 // --- Purpose dropdown logic ---
 document.getElementById("purpose").addEventListener("change", function() {
     var otherGroup = document.getElementById("other-purpose-group");
@@ -324,7 +333,7 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
     var address = document.getElementById("property-address").value.trim();
     var status = document.getElementById("lookup-status");
 
-    if (!address) return;
+    if (!address || _lookupUsed) return;
 
     btn.disabled = true;
     btn.textContent = "Looking up\u2026";
@@ -332,12 +341,18 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
     status.className = "lookup-status loading";
 
     try {
+        var honeypot = document.getElementById("website").value;
         var resp = await fetch("/api/property-lookup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ address: address })
+            body: JSON.stringify({
+                address: address,
+                website: honeypot,
+                _ts: _pageLoadTs
+            })
         });
 
+        if (resp.status === 429) throw new Error("Rate limited");
         if (!resp.ok) throw new Error("Lookup failed");
 
         var data = await resp.json();
@@ -371,8 +386,11 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
             }
         }
 
-        // Show autofill note
+        // Show autofill note and lock lookup to one use
         document.getElementById("autofill-note").style.display = "block";
+        _lookupUsed = true;
+        btn.textContent = "Lookup Complete";
+        btn.disabled = true;
 
         // Confidence indicator
         if (data.confidence === "low") {
@@ -433,12 +451,19 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
         }
 
     } catch (err) {
-        status.textContent = "Could not look up property. Please fill in the details manually.";
-        status.className = "lookup-status error";
+        if (err.message === 'Rate limited') {
+            status.textContent = "Too many lookups. Please wait 15 minutes or fill in the details manually.";
+            status.className = "lookup-status warning";
+        } else {
+            status.textContent = "Could not look up property. Please fill in the details manually.";
+            status.className = "lookup-status error";
+        }
     }
 
-    btn.disabled = false;
-    btn.textContent = "Look Up Property";
+    if (!_lookupUsed) {
+        btn.disabled = false;
+        btn.textContent = "Look Up Property";
+    }
 });
 </script>
 </body>
