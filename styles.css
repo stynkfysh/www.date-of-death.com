@@ -149,8 +149,7 @@ h1, h2, h3, h4 {
 /* ============================================================
    Section Utility
    ============================================================ */
-section {
-  padding: 72px 24px;
+section { padding: 72px 24px;
 }
 section:nth-child(even) {
   background: #f8f9fa;
@@ -418,7 +417,7 @@ section:nth-child(even) {
 .footer-bottom {
   max-width: 1080px;
   margin: 32px auto 0;
-  padding-top: 24px;
+  paddin--top: 24px;
   border-top: 1px solid #333;
   display: flex;
   justify-content: space-between;
@@ -925,4 +924,44 @@ section:nth-child(even) {
   .lookup-btn {
     width: 100%;
   }
+}
+
+/* --- Order Confirmation --- */
+.order-confirmation {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 32px;
+  background: #f0faf0;
+  border: 1px solid #66bb6a;
+  border-radius: 12px;
+}
+.confirmation-icon {
+  font-size: 3rem;
+  color: #2e7d32;
+  margin-bottom: 16px;
+}
+.order-confirmation h2 {
+  color: #1b5e20;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+}
+.order-confirmation p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.confirmation-detail {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+.confirmation-fallback {
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: #777;
+}
+.confirmation-fallback a {
+  color: #1a5276;
 }

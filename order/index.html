@@ -222,7 +222,7 @@
                 <p>All orders are reviewed by a certified appraiser before acceptance. You'll receive a confirmation email with instructions for submitting property photos and completing payment.</p>
             </div>
 
-            <button type="submit" class="hero-cta form-submit" id="order-submit-btn">Submit Order</button>
+            <button type="button" class="hero-cta form-submit" id="order-submit-btn">Submit Order</button>
 
             <!-- Contact Me form for complex properties -->
             <div id="complex-contact-section" class="complex-contact-form" style="display: none;">
@@ -244,9 +244,18 @@
                     <label for="contact-notes">Additional Details</label>
                     <textarea id="contact-notes" name="contact_notes" rows="3" placeholder="Any details that might help us assess your property..."></textarea>
                 </div>
-                <button type="submit" class="hero-cta form-submit">Request Quote</button>
+                <button type="button" id="contact-submit-btn" class="hero-cta form-submit">Request Quote</button>
             </div>
         </form>
+
+        <!-- Confirmation overlay (shown after successful submit) -->
+        <div id="order-confirmation" class="order-confirmation" style="display: none;">
+            <div class="confirmation-icon">&#10004;</div>
+            <h2 id="confirmation-title">Order Received!</h2>
+            <p id="confirmation-message">Thank you for your order. We'll review your details and send a Square invoice to your email within one business day. Once payment is received, your appraisal will be underway.</p>
+            <p class="confirmation-detail">A confirmation has been sent to <strong id="confirmation-email"></strong>.</p>
+            <p class="confirmation-fallback">Questions? Email us at <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a></p>
+        </div>
     </div>
 </section>
 
@@ -463,6 +472,138 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
     if (!_lookupUsed) {
         btn.disabled = false;
         btn.textContent = "Look Up Property";
+    }
+});
+
+// --- Standard Order Submit ---
+document.getElementById("order-submit-btn").addEventListener("click", async function() {
+    var btn = this;
+    var form = document.getElementById("order-form");
+
+    // Basic HTML5 validation
+    var requiredFields = form.querySelectorAll("[required]");
+    var valid = true;
+    for (var i = 0; i < requiredFields.length; i++) {
+        var field = requiredFields[i];
+        // Skip fields inside hidden complex contact section
+        if (field.closest("#complex-contact-section")) continue;
+        // Skip fields inside hidden appraisal details
+        var section = field.closest(".form-section");
+        if (section && section.style.display === "none") continue;
+        if (!field.value) {
+            field.reportValidity();
+            valid = false;
+            break;
+        }
+    }
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.textContent = "Submitting\u2026";
+
+    var data = {
+        _formType: "order",
+        _ts: _pageLoadTs,
+        website: document.getElementById("website").value,
+        client_name: document.getElementById("client-name").value,
+        client_email: document.getElementById("client-email").value,
+        client_phone: document.getElementById("client-phone").value,
+        client_role: document.getElementById("client-role").value,
+        property_address: document.getElementById("property-address").value,
+        property_type: document.getElementById("property-type").value,
+        date_of_death: document.getElementById("date-of-death").value,
+        sqft: document.getElementById("sqft").value,
+        lot_size: document.getElementById("lot-size").value,
+        year_built: document.getElementById("year-built").value,
+        bedrooms: document.getElementById("bedrooms").value,
+        bathrooms: document.getElementById("bathrooms").value,
+        condition: document.getElementById("condition").value,
+        updates: document.getElementById("updates").value,
+        purpose: document.getElementById("purpose").value,
+        other_purpose: document.getElementById("other-purpose").value,
+        tier: document.getElementById("tier").value,
+        notes: document.getElementById("notes").value
+    };
+
+    try {
+        var resp = await fetch("/api/submit-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        var result = await resp.json();
+        if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
+
+        // Redirect to Square for payment
+        if (result.checkoutUrl) {
+            window.location.href = result.checkoutUrl;
+        } else {
+            // Fallback if no checkout URL returned
+            document.getElementById("order-form").style.display = "none";
+            var conf = document.getElementById("order-confirmation");
+            document.getElementById("confirmation-title").textContent = "Order Received!";
+            document.getElementById("confirmation-message").textContent = "Thank you for your order. We\u2019ll send payment instructions to your email shortly.";
+            document.getElementById("confirmation-email").textContent = data.client_email;
+            conf.style.display = "block";
+        }
+    } catch (err) {
+        btn.disabled = false;
+        btn.textContent = "Submit Order";
+        alert("There was a problem submitting your order. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
+    }
+});
+
+// --- Complex Contact Submit ---
+document.getElementById("contact-submit-btn").addEventListener("click", async function() {
+    var btn = this;
+
+    // Validate contact fields
+    var contactName = document.getElementById("contact-name");
+    var contactEmail = document.getElementById("contact-email");
+    if (!contactName.value) { contactName.reportValidity(); return; }
+    if (!contactEmail.value) { contactEmail.reportValidity(); return; }
+
+    btn.disabled = true;
+    btn.textContent = "Submitting\u2026";
+
+    var data = {
+        _formType: "contact",
+        _ts: _pageLoadTs,
+        website: document.getElementById("website").value,
+        contact_name: contactName.value,
+        contact_email: contactEmail.value,
+        contact_phone: document.getElementById("contact-phone").value,
+        contact_notes: document.getElementById("contact-notes").value,
+        property_address: document.getElementById("property-address").value,
+        complexity_reason: document.getElementById("complexity-reason").textContent,
+        sqft: document.getElementById("sqft").value,
+        lot_size: document.getElementById("lot-size").value,
+        year_built: document.getElementById("year-built").value,
+        bedrooms: document.getElementById("bedrooms").value,
+        bathrooms: document.getElementById("bathrooms").value
+    };
+
+    try {
+        var resp = await fetch("/api/submit-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        var result = await resp.json();
+        if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
+
+        // Show confirmation
+        document.getElementById("order-form").style.display = "none";
+        var conf = document.getElementById("order-confirmation");
+        document.getElementById("confirmation-title").textContent = "Quote Request Received!";
+        document.getElementById("confirmation-message").textContent = "Thank you for your inquiry. We\u2019ll review the property details and reach out within one business day with a custom quote and timeline.";
+        document.getElementById("confirmation-email").textContent = data.contact_email;
+        conf.style.display = "block";
+        window.scrollTo({ top: conf.offsetTop - 100, behavior: "smooth" });
+    } catch (err) {
+        btn.disabled = false;
+        btn.textContent = "Request Quote";
+        alert("There was a problem submitting your request. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
     }
 });
 </script>
