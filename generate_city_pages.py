@@ -1,1 +1,1 @@
-pbpaste > ~/www.date-of-death.com/generate_city_pages.py
+#!/usr/bin/env python3
