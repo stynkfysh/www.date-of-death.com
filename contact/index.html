@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Date-of-Death Appraisals</title>
-    <meta name="description" content="Have a question about a date-of-death appraisal? Reach out to us directly and we'll get back to you within one business day.">
+    <meta name="description" content="Have a question about a date-of-death appraisal? Reach out to us directly and we'll get back to you within 24 business hours.">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Contact Us | Date-of-Death Appraisals">
     <meta property="og:description" content="Have a question? Reach out to our team of certified appraisers.">
@@ -39,7 +39,7 @@
 <section class="hero hero-order">
     <div class="container">
         <h1>Contact Us</h1>
-        <p class="subtitle">Have a question about a date-of-death appraisal? Fill out the form below and we'll get back to you within one business day.</p>
+        <p class="subtitle">Have a question about a date-of-death appraisal? Fill out the form below and we'll get back to you within 24 business hours.</p>
     </div>
 </section>
 
@@ -64,24 +64,15 @@
                         <label for="contact-phone">Phone Number</label>
                         <input type="tel" id="contact-phone" name="contact_phone" autocomplete="tel">
                     </div>
-                    <div class="form-group form-group-toggle">
-                        <label>Texting OK?</label>
-                        <div class="toggle-row">
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="texting-ok" name="texting_ok">
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <span class="toggle-label" id="texting-label">No</span>
-                        </div>
-                    </div>
                 </div>
+                <div class="form-group"><label class="inline-checkbox"><input type="checkbox" id="texting-ok" name="texting_ok"> OK to text this number</label></div>
             </fieldset>
 
             <fieldset class="form-section">
                 <legend>Your Question</legend>
                 <div class="form-group full-width">
-                    <label for="appraisal-address">Appraisal Property Address</label>
-                    <input type="text" id="appraisal-address" name="appraisal_address" placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="off">
+                    <label for="property-addresses">Property Address(es)</label>
+                    <textarea id="property-addresses" name="property_addresses" rows="3" placeholder="Enter the address(es) of the property or properties you are contacting us about"></textarea>
                 </div>
                 <div class="form-group full-width">
                     <label for="question">How can we help? <span class="required">*</span></label>
@@ -102,7 +93,7 @@
         <div id="contact-confirmation" class="order-confirmation" style="display: none;">
             <div class="confirmation-icon">&#10004;</div>
             <h2>Message Sent!</h2>
-            <p>Thank you for reaching out. We'll review your question and get back to you within one business day.</p>
+            <p>Thank you for reaching out. We'll review your question and get back to you within 24 business hours.</p>
             <p class="confirmation-detail">A confirmation has been sent to <strong id="confirmation-email"></strong>.</p>
             <p class="confirmation-fallback">You can also reach us directly at <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a></p>
         </div>
@@ -137,11 +128,6 @@
 <script>
 var _pageLoadTs = Date.now();
 
-// Texting OK toggle label
-document.getElementById("texting-ok").addEventListener("change", function() {
-    document.getElementById("texting-label").textContent = this.checked ? "Yes" : "No";
-});
-
 // Submit handler
 document.getElementById("contact-submit-btn").addEventListener("click", async function() {
     var btn = this;
@@ -170,7 +156,7 @@ document.getElementById("contact-submit-btn").addEventListener("click", async fu
         contact_email: document.getElementById("contact-email").value,
         contact_phone: document.getElementById("contact-phone").value,
         texting_ok: document.getElementById("texting-ok").checked,
-        appraisal_address: document.getElementById("appraisal-address").value,
+        property_addresses: document.getElementById("property-addresses").value,
         question: document.getElementById("question").value
     };
 
