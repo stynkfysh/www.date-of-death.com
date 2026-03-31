@@ -455,7 +455,7 @@ def generate_page_html(loc):
         </div>
     </div>
     <div class="footer-bottom">
-        <span>&copy; {CURRENT_YEAR} Date-of-Death Appraisals. All rights reserved.</span>
+        <span>&copy; {CURRENT_YEAR} Brian Ward Appraisal. All rights reserved.</span>
         <span>California Certified Residential Appraiser &middot; License No. AR036053</span>
     </div>
 </footer>
