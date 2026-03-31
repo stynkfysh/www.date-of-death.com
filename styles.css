@@ -1151,3 +1151,10 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
     text-decoration: underline;
 }
 
+
+/* Community parent city label */
+.community-city {
+    font-weight: 400;
+    color: #888;
+    font-size: 0.85em;
+}
