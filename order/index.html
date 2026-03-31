@@ -103,6 +103,15 @@
                         <button type="button" id="lookup-btn" class="lookup-btn" disabled>Check Property</button>
                     </div>
                     <div id="lookup-status" class="lookup-status"></div>
+                    <!-- Full-screen loading overlay for property lookup -->
+                    <div id="lookup-overlay" class="lookup-overlay" style="display: none;">
+                        <div class="lookup-overlay-content">
+                            <div class="lookup-spinner"></div>
+                            <p id="lookup-overlay-msg" class="lookup-overlay-msg">Checking property&hellip;</p>
+                            <p class="lookup-overlay-sub">This may take up to 60 seconds while our AI searches public records and comparable sales data.</p>
+                            <div class="lookup-progress-bar"><div id="lookup-progress-fill" class="lookup-progress-fill"></div></div>
+                        </div>
+                    </div>
                     <!-- Honeypot: invisible to humans, bots will fill it -->
                     <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
                         <label for="website">Website</label>
@@ -136,12 +145,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="year-built">Year Built <span class="required">*</span></label>
-                        <input type="number" id="year-built" name="year_built" required min="1800" max="2026" placeholder="e.g. 1975">
+                        <label for="year-built">Year Built</label>
+                        <input type="number" id="year-built" name="year_built" min="1800" max="2026" placeholder="e.g. 1975">
                     </div>
                     <div class="form-group">
-                        <label for="bedrooms">Bedrooms <span class="required">*</span></label>
-                        <select id="bedrooms" name="bedrooms" required>
+                        <label for="bedrooms">Bedrooms</label>
+                        <select id="bedrooms" name="bedrooms">
                             <option value="">Select...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -154,8 +163,8 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="bathrooms">Bathrooms <span class="required">*</span></label>
-                        <select id="bathrooms" name="bathrooms" required>
+                        <label for="bathrooms">Bathrooms</label>
+                        <select id="bathrooms" name="bathrooms">
                             <option value="">Select...</option>
                             <option value="1">1</option>
                             <option value="1.5">1.5</option>
@@ -167,8 +176,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="condition">Condition at Effective Date <span class="required">*</span></label>
-                        <select id="condition" name="condition" required>
+                        <label for="condition">Condition at Effective Date</label>
+                        <select id="condition" name="condition">
                             <option value="">Select...</option>
                             <option value="excellent">Excellent &mdash; Fully updated</option>
                             <option value="good">Good &mdash; Well maintained</option>
@@ -395,22 +404,40 @@ function triggerComplexFlow(reason) {
     contactSection.style.display = "block";
 }
 
-// --- Animated lookup status messages ---
+// --- Animated lookup status messages with overlay ---
 var _statusInterval = null;
 function startLookupAnimation() {
     var status = document.getElementById("lookup-status");
+    var overlay = document.getElementById("lookup-overlay");
+    var overlayMsg = document.getElementById("lookup-overlay-msg");
+    var progressFill = document.getElementById("lookup-progress-fill");
     var messages = [
         { text: "Checking property\u2026", duration: 2000 },
         { text: "Looking for similar property 1\u2026", duration: 3000 },
-        { text: "Looking for similar property 2\u2026", duration: 3000 }
+        { text: "Looking for similar property 2\u2026", duration: 3000 },
+        { text: "Looking for similar property 3\u2026", duration: 3000 },
+        { text: "Looking for similar property 4\u2026", duration: 3000 },
+        { text: "Looking for similar property 5\u2026", duration: 3000 },
+        { text: "Looking for similar property 6\u2026", duration: 3000 },
+        { text: "Looking for similar property 7\u2026", duration: 3000 },
+        { text: "Looking for similar property 8\u2026", duration: 3000 },
+        { text: "Looking for similar property 9\u2026", duration: 3000 },
+        { text: "Looking for similar property 10\u2026", duration: 3000 }
     ];
     var idx = 0;
     status.textContent = messages[0].text;
     status.className = "lookup-status loading";
+    overlayMsg.textContent = messages[0].text;
+    overlay.style.display = "flex";
+    progressFill.style.width = "0%";
 
     function cycle() {
         idx = (idx + 1) % messages.length;
         status.textContent = messages[idx].text;
+        overlayMsg.textContent = messages[idx].text;
+        // Progress bar: step through proportionally
+        var pct = Math.min(100, Math.round((idx / (messages.length - 1)) * 95));
+        progressFill.style.width = pct + "%";
         _statusInterval = setTimeout(cycle, messages[idx].duration);
     }
     _statusInterval = setTimeout(cycle, messages[0].duration);
@@ -420,6 +447,10 @@ function stopLookupAnimation() {
         clearTimeout(_statusInterval);
         _statusInterval = null;
     }
+    var overlay = document.getElementById("lookup-overlay");
+    var progressFill = document.getElementById("lookup-progress-fill");
+    progressFill.style.width = "100%";
+    setTimeout(function() { overlay.style.display = "none"; }, 400);
 }
 
 // --- Property Lookup via AI ---
