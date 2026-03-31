@@ -745,84 +745,6 @@ section:nth-child(even) {
 }
 
 /* --- Page-Specific Hero Backgrounds --- */
-/* City/Community Landing Pages */
-.hero.hero-city {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), linear-gradient(135deg, #1a5276, #2e86c1);
-  padding: 100px 24px 88px;
-}
-.hero.hero-city h1, .hero.hero-city .subtitle { color: #fff; }
-.hero.hero-city .subtitle { opacity: 0.92; }
-
-.section-light { background: #fff; }
-.section-alt { background: #f8f9fa; }
-.section-light h2, .section-alt h2 {
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-  color: #111;
-}
-.section-light p, .section-alt p {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-.section-light p:last-child, .section-alt p:last-child { margin-bottom: 0; }
-.content-meta {
-  font-size: 0.85rem;
-  color: #888;
-  font-style: italic;
-  margin-top: 12px;
-}
-/* City page trust-grid used as 3-col process steps */
-.section-light .trust-grid {
-  grid-template-columns: repeat(3, 1fr);
-  text-align: left;
-  margin-bottom: 24px;
-}
-.trust-item h3 {
-  font-size: 1.05rem;
-  color: #1a5276;
-  margin-bottom: 8px;
-}
-.trust-item p {
-  font-size: 0.95rem;
-  color: #444;
-  line-height: 1.6;
-}
-/* City page FAQ uses button pattern */
-.faq-section .faq-item .faq-question {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 18px 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #222;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-}
-.faq-section .faq-item .faq-question:hover { color: #1a5276; }
-.faq-section .faq-item .faq-toggle {
-  font-size: 1.4rem;
-  font-weight: 300;
-  color: #999;
-  flex-shrink: 0;
-  margin-left: 16px;
-}
-.faq-section .faq-item .faq-answer {
-  display: none;
-  padding: 0 0 20px;
-}
-.faq-section .faq-item.open .faq-answer { display: block; }
-
-@media (max-width: 768px) {
-  .section-light .trust-grid { grid-template-columns: 1fr; }
-}
-
 .hero.hero-about {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url('/images/about-hero.jpg') center/cover no-repeat;
   padding: 100px 24px 88px;
@@ -847,18 +769,25 @@ section:nth-child(even) {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url('/images/order-hero.jpg') center/cover no-repeat;
   padding: 100px 24px 88px;
 }
+.hero.hero-contact {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url('/images/contact-hero.jpg') center/cover no-repeat;
+  padding: 100px 24px 88px;
+}
 .hero.hero-about h1, .hero.hero-about .subtitle, .hero.hero-about .sub-detail,
 .hero.hero-pricing h1, .hero.hero-pricing .subtitle, .hero.hero-pricing .sub-detail,
 .hero.hero-faq h1, .hero.hero-faq .subtitle, .hero.hero-faq .sub-detail,
 .hero.hero-howitworks h1, .hero.hero-howitworks .subtitle, .hero.hero-howitworks .sub-detail,
 .hero.hero-desktop h1, .hero.hero-desktop .subtitle, .hero.hero-desktop .sub-detail,
-.hero.hero-order h1, .hero.hero-order .subtitle, .hero.hero-order .sub-detail {
+.hero.hero-order h1, .hero.hero-order .subtitle, .hero.hero-order .sub-detail,
+.hero.hero-contact h1, .hero.hero-contact .subtitle, .hero.hero-contact .sub-detail {
   color: #fff;
 }
 .hero.hero-about .subtitle, .hero.hero-pricing .subtitle, .hero.hero-faq .subtitle,
-.hero.hero-howitworks .subtitle, .hero.hero-desktop .subtitle, .hero.hero-order .subtitle { opacity: 0.92; }
+.hero.hero-howitworks .subtitle, .hero.hero-desktop .subtitle, .hero.hero-order .subtitle,
+.hero.hero-contact .subtitle { opacity: 0.92; }
 .hero.hero-about .sub-detail, .hero.hero-pricing .sub-detail, .hero.hero-faq .sub-detail,
-.hero.hero-howitworks .sub-detail, .hero.hero-desktop .sub-detail, .hero.hero-order .sub-detail { opacity: 0.8; }
+.hero.hero-howitworks .sub-detail, .hero.hero-desktop .sub-detail, .hero.hero-order .sub-detail,
+.hero.hero-contact .sub-detail { opacity: 0.8; }
 
 /* --- Form Note --- */
 .form-note {
