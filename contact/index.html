@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Date-of-Death Appraisals</title>
+    <meta name="description" content="Have a question about a date-of-death appraisal? Reach out to us directly and we'll get back to you within one business day.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Contact Us | Date-of-Death Appraisals">
+    <meta property="og:description" content="Have a question? Reach out to our team of certified appraisers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://date-of-death.com/contact">
+    <link rel="canonical" href="https://date-of-death.com/contact">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="logo">Date-of-Death Appraisals</a>
+        <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.main-nav').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav">
+            <a href="/why-desktop">Why Desktop</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/faq">FAQ</a>
+            <a href="/about">About</a>
+            <a href="/order" class="nav-cta">Order Now</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero hero-order">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p class="subtitle">Have a question about a date-of-death appraisal? Fill out the form below and we'll get back to you within one business day.</p>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <form class="order-form" id="contact-form" action="#" method="POST">
+
+            <fieldset class="form-section">
+                <legend>Your Information</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="contact-name" name="contact_name" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="contact-email" name="contact_email" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact-phone">Phone Number</label>
+                        <input type="tel" id="contact-phone" name="contact_phone" autocomplete="tel">
+                    </div>
+                    <div class="form-group form-group-toggle">
+                        <label>Texting OK?</label>
+                        <div class="toggle-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="texting-ok" name="texting_ok">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label" id="texting-label">No</span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+                <legend>Your Question</legend>
+                <div class="form-group full-width">
+                    <label for="appraisal-address">Appraisal Property Address</label>
+                    <input type="text" id="appraisal-address" name="appraisal_address" placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="off">
+                </div>
+                <div class="form-group full-width">
+                    <label for="question">How can we help? <span class="required">*</span></label>
+                    <textarea id="question" name="question" rows="5" required placeholder="Tell us about your situation or ask us a question..."></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Honeypot: invisible to humans, bots will fill it -->
+            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
+            </div>
+
+            <button type="button" class="hero-cta form-submit" id="contact-submit-btn">Send Message</button>
+        </form>
+
+        <!-- Confirmation overlay -->
+        <div id="contact-confirmation" class="order-confirmation" style="display: none;">
+            <div class="confirmation-icon">&#10004;</div>
+            <h2>Message Sent!</h2>
+            <p>Thank you for reaching out. We'll review your question and get back to you within one business day.</p>
+            <p class="confirmation-detail">A confirmation has been sent to <strong id="confirmation-email"></strong>.</p>
+            <p class="confirmation-fallback">You can also reach us directly at <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a></p>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/pricing">Pricing</a>
+            <a href="/why-desktop">Why Desktop Appraisals</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/order">Order Now</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="/faq">FAQ</a>
+            <a href="/about">About &amp; Credentials</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 Date-of-Death Appraisals. All rights reserved.</span>
+        <span>California Certified Residential Appraiser &middot; License No. AR036053</span>
+    </div>
+</footer>
+
+<script>
+var _pageLoadTs = Date.now();
+
+// Texting OK toggle label
+document.getElementById("texting-ok").addEventListener("change", function() {
+    document.getElementById("texting-label").textContent = this.checked ? "Yes" : "No";
+});
+
+// Submit handler
+document.getElementById("contact-submit-btn").addEventListener("click", async function() {
+    var btn = this;
+    var form = document.getElementById("contact-form");
+
+    // Validate required fields
+    var requiredFields = form.querySelectorAll("[required]");
+    var valid = true;
+    for (var i = 0; i < requiredFields.length; i++) {
+        if (!requiredFields[i].value) {
+            requiredFields[i].reportValidity();
+            valid = false;
+            break;
+        }
+    }
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.textContent = "Sending\u2026";
+
+    var data = {
+        _formType: "general-contact",
+        _ts: _pageLoadTs,
+        website: document.getElementById("website").value,
+        contact_name: document.getElementById("contact-name").value,
+        contact_email: document.getElementById("contact-email").value,
+        contact_phone: document.getElementById("contact-phone").value,
+        texting_ok: document.getElementById("texting-ok").checked,
+        appraisal_address: document.getElementById("appraisal-address").value,
+        question: document.getElementById("question").value
+    };
+
+    try {
+        var resp = await fetch("/api/submit-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        var result = await resp.json();
+        if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
+
+        // Show confirmation
+        document.getElementById("contact-form").style.display = "none";
+        var conf = document.getElementById("contact-confirmation");
+        document.getElementById("confirmation-email").textContent = data.contact_email;
+        conf.style.display = "block";
+        window.scrollTo({ top: conf.offsetTop - 100, behavior: "smooth" });
+    } catch (err) {
+        btn.disabled = false;
+        btn.textContent = "Send Message";
+        alert("There was a problem sending your message. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
+    }
+});
+</script>
+</body>
+</html>

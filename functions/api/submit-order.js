@@ -84,7 +84,6 @@ function buildOrderEmail(data) {
     <tr><td style="padding: 6px 12px; font-weight: 600;">Bedrooms</td><td style="padding: 6px 12px;">${escapeHtml(data.bedrooms) || '—'}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Bathrooms</td><td style="padding: 6px 12px;">${escapeHtml(data.bathrooms) || '—'}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Condition</td><td style="padding: 6px 12px;">${escapeHtml(condition)}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Updates</td><td style="padding: 6px 12px;">${escapeHtml(data.updates) || '—'}</td></tr>
   </table>
 
   <h3 style="color: #555; margin-top: 24px;">Appraisal Details</h3>
@@ -136,6 +135,36 @@ function buildContactEmail(data) {
 </html>`;
 }
 
+function buildGeneralContactEmail(data) {
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+  <h2 style="color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px;">New Contact Form Inquiry</h2>
+
+  <h3 style="color: #555; margin-top: 24px;">Contact Information</h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Name</td><td style="padding: 6px 12px;">${escapeHtml(data.contact_name)}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Email</td><td style="padding: 6px 12px;"><a href="mailto:${escapeHtml(data.contact_email)}">${escapeHtml(data.contact_email)}</a></td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Phone</td><td style="padding: 6px 12px;">${escapeHtml(data.contact_phone) || '—'}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Texting OK</td><td style="padding: 6px 12px;">${data.texting_ok ? 'Yes' : 'No'}</td></tr>
+  </table>
+
+  <h3 style="color: #555; margin-top: 24px;">Appraisal Address</h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr><td style="padding: 6px 12px;">${escapeHtml(data.appraisal_address) || '—'}</td></tr>
+  </table>
+
+  <h3 style="color: #555; margin-top: 24px;">Question</h3>
+  <div style="padding: 12px; background: #f9f9f9; border-radius: 6px; white-space: pre-wrap;">${escapeHtml(data.question) || '—'}</div>
+
+  <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
+    Submitted from date-of-death.com — general contact form
+  </p>
+</body>
+</html>`;
+}
+
 // --- Create Square payment link ---
 async function createSquareCheckout(data, env) {
   const accessToken = env.SQUARE_ACCESS_TOKEN;
@@ -159,12 +188,14 @@ async function createSquareCheckout(data, env) {
     'Authorization': `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
-
   const requestBody = {
     idempotency_key: idempotencyKey,
     quick_pay: {
       name: `${itemName} — ${data.property_address}`,
-      price_money: { amount, currency: 'USD' },
+      price_money: {
+        amount: amount,
+        currency: 'USD',
+      },
       location_id: locationId,
     },
     checkout_options: {
@@ -183,11 +214,9 @@ async function createSquareCheckout(data, env) {
     body: JSON.stringify(requestBody),
   });
 
-  // If pre_populated_data caused an error, retry without it
   if (!resp.ok) {
     const errText = await resp.text();
     if (errText.includes('pre_populated_data')) {
-      console.log('Retrying Square checkout without pre_populated_data');
       delete requestBody.pre_populated_data;
       requestBody.idempotency_key = crypto.randomUUID();
       resp = await fetch('https://connect.squareup.com/v2/online-checkout/payment-links', {
@@ -248,7 +277,7 @@ export async function onRequestPost(context) {
     }
 
     const body = await context.request.json();
-    const formType = body._formType; // 'order' or 'contact'
+    const formType = body._formType; // 'order', 'contact', or 'general-contact'
 
     // Honeypot check
     if (body.website || body.company_url) {
@@ -274,7 +303,26 @@ export async function onRequestPost(context) {
       });
     }
 
-    if (formType === 'contact') {
+    if (formType === 'general-contact') {
+      // --- GENERAL CONTACT PAGE: email only ---
+      if (!body.contact_name || !body.contact_email) {
+        return new Response(JSON.stringify({ error: 'Name and email are required.' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      const subject = `Contact Inquiry — ${body.contact_name}`;
+      const html = buildGeneralContactEmail(body);
+
+      await sendEmail('orders@date-of-death.com', subject, html, body.contact_email, context.env);
+
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+
+    } else if (formType === 'contact') {
       // --- COMPLEX: email only, no payment ---
       if (!body.contact_name || !body.contact_email || !body.property_address) {
         return new Response(JSON.stringify({ error: 'Name, email, and property address are required.' }), {
@@ -320,7 +368,7 @@ export async function onRequestPost(context) {
 
   } catch (err) {
     console.error('Submit error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong. Please email us directly at orders@date-of-death.com.' }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong. Please email us directly at orders@date-of-death.com.', debug: err.message }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

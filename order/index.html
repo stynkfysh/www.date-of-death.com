@@ -81,10 +81,26 @@
             <fieldset class="form-section">
                 <legend>Property Information</legend>
                 <div class="form-group full-width">
-                    <label for="property-address">Property Address <span class="required">*</span></label>
+                    <label for="property-address">Street Address <span class="required">*</span></label>
+                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St" autocomplete="off">
+                </div>
+                <div class="form-row form-row-address">
+                    <div class="form-group">
+                        <label for="property-city">City <span class="required">*</span></label>
+                        <input type="text" id="property-city" name="property_city" required placeholder="e.g. Los Angeles" autocomplete="off">
+                    </div>
+                    <div class="form-group form-group-state">
+                        <label>State</label>
+                        <div class="state-display">CA</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="property-zip">Zip Code <span class="required">*</span></label>
+                        <input type="text" id="property-zip" name="property_zip" required placeholder="e.g. 90210" pattern="[0-9]{5}" maxlength="5" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group full-width">
                     <div class="address-lookup-row">
-                        <input type="text" id="property-address" name="property_address" required placeholder="Start typing an address..." autocomplete="off">
-                        <button type="button" id="lookup-btn" class="lookup-btn" disabled>Look Up Property</button>
+                        <button type="button" id="lookup-btn" class="lookup-btn" disabled>Check Property</button>
                     </div>
                     <div id="lookup-status" class="lookup-status"></div>
                     <!-- Honeypot: invisible to humans, bots will fill it -->
@@ -162,10 +178,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group full-width">
-                    <label for="updates">Notable Updates or Features</label>
-                    <textarea id="updates" name="updates" rows="3" placeholder="Remodeled kitchen (2018), new roof (2020), pool, ADU, etc."></textarea>
-                </div>
                 <div id="noncomplex-alert" class="noncomplex-alert" style="display: none;">
                     <div class="noncomplex-icon">&#10004;</div>
                     <div class="noncomplex-content">
@@ -214,7 +226,7 @@
                 </div>
                 <div class="form-group full-width">
                     <label for="notes">Additional Notes</label>
-                    <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know &mdash; special circumstances, multiple properties, rush request, etc."></textarea>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Additional Notes"></textarea>
                 </div>
             </fieldset>
 
@@ -331,23 +343,96 @@ document.getElementById("purpose").addEventListener("change", function() {
     }
 });
 
-// --- Address input: enable lookup button ---
-document.getElementById("property-address").addEventListener("input", function() {
-    document.getElementById("lookup-btn").disabled = this.value.trim().length < 10;
+// --- Address input: enable lookup button when street + city + zip are filled ---
+function checkAddressReady() {
+    var street = document.getElementById("property-address").value.trim();
+    var city = document.getElementById("property-city").value.trim();
+    var zip = document.getElementById("property-zip").value.trim();
+    document.getElementById("lookup-btn").disabled = !(street.length >= 5 && city.length >= 2 && zip.length === 5);
+}
+document.getElementById("property-address").addEventListener("input", checkAddressReady);
+document.getElementById("property-city").addEventListener("input", checkAddressReady);
+document.getElementById("property-zip").addEventListener("input", checkAddressReady);
+
+// --- Build full address string ---
+function getFullAddress() {
+    var street = document.getElementById("property-address").value.trim();
+    var city = document.getElementById("property-city").value.trim();
+    var zip = document.getElementById("property-zip").value.trim();
+    return street + ", " + city + ", CA " + zip;
+}
+
+// --- Condition change: treat "poor" as complex ---
+document.getElementById("condition").addEventListener("change", function() {
+    if (this.value === "poor" && _lookupUsed) {
+        triggerComplexFlow("Property condition is rated as Poor (significant deferred maintenance), which requires a manual review and custom quote.");
+    }
 });
+
+function triggerComplexFlow(reason) {
+    var complexAlert = document.getElementById("complexity-alert");
+    var noncomplexAlert = document.getElementById("noncomplex-alert");
+    var appraisalDetails = document.querySelectorAll(".form-section")[2];
+    var orderSummary = document.getElementById("order-summary");
+    var orderSubmitBtn = document.getElementById("order-submit-btn");
+    var contactSection = document.getElementById("complex-contact-section");
+
+    document.getElementById("complexity-reason").textContent = reason;
+    complexAlert.style.display = "flex";
+    noncomplexAlert.style.display = "none";
+
+    appraisalDetails.style.display = "none";
+    orderSummary.style.display = "none";
+    orderSubmitBtn.style.display = "none";
+
+    var nameVal = document.getElementById("client-name").value;
+    var emailVal = document.getElementById("client-email").value;
+    var phoneVal = document.getElementById("client-phone").value;
+    if (nameVal) document.getElementById("contact-name").value = nameVal;
+    if (emailVal) document.getElementById("contact-email").value = emailVal;
+    if (phoneVal) document.getElementById("contact-phone").value = phoneVal;
+
+    contactSection.style.display = "block";
+}
+
+// --- Animated lookup status messages ---
+var _statusInterval = null;
+function startLookupAnimation() {
+    var status = document.getElementById("lookup-status");
+    var messages = [
+        { text: "Checking property\u2026", duration: 2000 },
+        { text: "Looking for similar property 1\u2026", duration: 3000 },
+        { text: "Looking for similar property 2\u2026", duration: 3000 }
+    ];
+    var idx = 0;
+    status.textContent = messages[0].text;
+    status.className = "lookup-status loading";
+
+    function cycle() {
+        idx = (idx + 1) % messages.length;
+        status.textContent = messages[idx].text;
+        _statusInterval = setTimeout(cycle, messages[idx].duration);
+    }
+    _statusInterval = setTimeout(cycle, messages[0].duration);
+}
+function stopLookupAnimation() {
+    if (_statusInterval) {
+        clearTimeout(_statusInterval);
+        _statusInterval = null;
+    }
+}
 
 // --- Property Lookup via AI ---
 document.getElementById("lookup-btn").addEventListener("click", async function() {
     var btn = this;
-    var address = document.getElementById("property-address").value.trim();
+    var address = getFullAddress();
     var status = document.getElementById("lookup-status");
 
     if (!address || _lookupUsed) return;
 
     btn.disabled = true;
-    btn.textContent = "Looking up\u2026";
-    status.textContent = "Searching property records\u2026";
-    status.className = "lookup-status loading";
+    btn.textContent = "Checking\u2026";
+    startLookupAnimation();
 
     try {
         var honeypot = document.getElementById("website").value;
@@ -366,6 +451,8 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
 
         var data = await resp.json();
         if (data.error) throw new Error(data.error);
+
+        stopLookupAnimation();
 
         // Populate form fields
         if (data.sqft) document.getElementById("sqft").value = data.sqft;
@@ -398,7 +485,7 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
         // Show autofill note and lock lookup to one use
         document.getElementById("autofill-note").style.display = "block";
         _lookupUsed = true;
-        btn.textContent = "Lookup Complete";
+        btn.textContent = "Check Complete";
         btn.disabled = true;
 
         // Confidence indicator
@@ -422,27 +509,7 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
         var contactSection = document.getElementById("complex-contact-section");
 
         if (data.complexity && data.complexity.isComplex) {
-            // COMPLEX: show warning, hide order fields, show contact form
-            var reason = data.complexity.reason || "This property has been identified as complex based on our analysis.";
-            document.getElementById("complexity-reason").textContent = reason;
-            complexAlert.style.display = "flex";
-            noncomplexAlert.style.display = "none";
-
-            // Hide order-specific sections
-            appraisalDetails.style.display = "none";
-            orderSummary.style.display = "none";
-            orderSubmitBtn.style.display = "none";
-
-            // Pre-fill contact form from Contact Information section
-            var nameVal = document.getElementById("client-name").value;
-            var emailVal = document.getElementById("client-email").value;
-            var phoneVal = document.getElementById("client-phone").value;
-            if (nameVal) document.getElementById("contact-name").value = nameVal;
-            if (emailVal) document.getElementById("contact-email").value = emailVal;
-            if (phoneVal) document.getElementById("contact-phone").value = phoneVal;
-
-            // Show contact form
-            contactSection.style.display = "block";
+            triggerComplexFlow(data.complexity.reason || "This property has been identified as complex based on our analysis.");
         } else if (data.complexity && !data.complexity.isComplex) {
             // NON-COMPLEX: show success, keep order form visible
             noncomplexAlert.style.display = "flex";
@@ -460,6 +527,7 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
         }
 
     } catch (err) {
+        stopLookupAnimation();
         if (err.message === 'Rate limited') {
             status.textContent = "Too many lookups. Please wait 15 minutes or fill in the details manually.";
             status.className = "lookup-status warning";
@@ -471,7 +539,7 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
 
     if (!_lookupUsed) {
         btn.disabled = false;
-        btn.textContent = "Look Up Property";
+        btn.textContent = "Check Property";
     }
 });
 
@@ -479,6 +547,13 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
 document.getElementById("order-submit-btn").addEventListener("click", async function() {
     var btn = this;
     var form = document.getElementById("order-form");
+
+    // Check if condition is poor — treat as complex
+    var conditionVal = document.getElementById("condition").value;
+    if (conditionVal === "poor") {
+        triggerComplexFlow("Property condition is rated as Poor (significant deferred maintenance), which requires a manual review and custom quote.");
+        return;
+    }
 
     // Basic HTML5 validation
     var requiredFields = form.querySelectorAll("[required]");
@@ -509,7 +584,7 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         client_email: document.getElementById("client-email").value,
         client_phone: document.getElementById("client-phone").value,
         client_role: document.getElementById("client-role").value,
-        property_address: document.getElementById("property-address").value,
+        property_address: getFullAddress(),
         property_type: document.getElementById("property-type").value,
         date_of_death: document.getElementById("date-of-death").value,
         sqft: document.getElementById("sqft").value,
@@ -518,7 +593,6 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         bedrooms: document.getElementById("bedrooms").value,
         bathrooms: document.getElementById("bathrooms").value,
         condition: document.getElementById("condition").value,
-        updates: document.getElementById("updates").value,
         purpose: document.getElementById("purpose").value,
         other_purpose: document.getElementById("other-purpose").value,
         tier: document.getElementById("tier").value,
@@ -574,7 +648,7 @@ document.getElementById("contact-submit-btn").addEventListener("click", async fu
         contact_email: contactEmail.value,
         contact_phone: document.getElementById("contact-phone").value,
         contact_notes: document.getElementById("contact-notes").value,
-        property_address: document.getElementById("property-address").value,
+        property_address: getFullAddress(),
         complexity_reason: document.getElementById("complexity-reason").textContent,
         sqft: document.getElementById("sqft").value,
         lot_size: document.getElementById("lot-size").value,

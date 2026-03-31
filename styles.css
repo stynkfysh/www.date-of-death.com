@@ -965,3 +965,89 @@ section:nth-child(even) {
 .confirmation-fallback a {
   color: #1a5276;
 }
+
+/* --- Address Row (city / state / zip) --- */
+.form-row-address {
+  display: grid;
+  grid-template-columns: 2fr auto 1fr;
+  gap: 16px;
+}
+.form-group-state {
+  min-width: 60px;
+}
+.state-display {
+  background: #f4f4f5;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #444;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* --- Toggle Switch for Texting OK --- */
+.form-group-toggle label:first-child {
+  display: block;
+}
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  height: 44px;
+}
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #ccc;
+  border-radius: 26px;
+  transition: 0.3s;
+}
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.toggle-switch input:checked + .toggle-slider {
+  background: #1a5276;
+}
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+.toggle-label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+/* --- Lookup button full-width when alone --- */
+.address-lookup-row .lookup-btn:only-child {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .form-row-address {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
