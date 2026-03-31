@@ -359,19 +359,20 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
    CTA Banner
    ============================================================ */
 .cta-banner {
-  background: #1a5276;
+  background: #1a5276 !important;
   padding: 64px 24px;
   text-align: center;
-  color: #fff;
+  color: #fff !important;
 }
 .cta-banner h2 {
-  color: #fff;
+  color: #fff !important;
   font-size: 2rem;
   margin-bottom: 12px;
 }
 .cta-banner p {
   font-size: 1.1rem;
   opacity: 0.9;
+  color: #fff !important;
   margin-bottom: 28px;
   max-width: 560px;
   margin-left: auto;
