@@ -152,7 +152,7 @@ h1, h2, h3, h4 {
 section {
   padding: 72px 24px;
 }
-section:nth-child(even) {
+section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
   background: #f8f9fa;
 }
 .section-title {
@@ -1150,10 +1150,3 @@ section:nth-child(even) {
     text-decoration: underline;
 }
 
-/* Fix CTA banner override from section:nth-child(even) */
-section.cta-banner {
-  background: #1a5276 !important;
-  color: #fff;
-}
-section.cta-banner h2 { color: #fff; }
-section.cta-banner p { color: #fff; }

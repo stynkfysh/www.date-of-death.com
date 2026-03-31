@@ -452,7 +452,6 @@ def generate_page_html(loc):
         <div class="footer-col">
             <h4>Contact</h4>
             <a href="/contact">Contact Form</a>
-            <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a>
         </div>
     </div>
     <div class="footer-bottom">
