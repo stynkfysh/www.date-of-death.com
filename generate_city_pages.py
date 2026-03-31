@@ -1,0 +1,1 @@
+pbpaste > ~/www.date-of-death.com/generate_city_pages.py
