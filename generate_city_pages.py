@@ -293,7 +293,7 @@ def generate_page_html(loc):
     for faq in faq_items:
         faq_html += f"""
             <div class="faq-item">
-                <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                <button class="faq-question" >
                     {faq['q']}
                     <span class="faq-toggle">+</span>
                 </button>
@@ -352,6 +352,7 @@ def generate_page_html(loc):
             <a href="/pricing">Pricing</a>
             <a href="/faq">FAQ</a>
             <a href="/about">About</a>
+            <a href="/contact">Contact</a>
             <a href="/service-areas">Service Areas</a>
             <a href="/order" class="nav-cta">Order Now</a>
         </nav>
@@ -450,6 +451,7 @@ def generate_page_html(loc):
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
+            <a href="/contact">Contact Form</a>
             <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a>
         </div>
     </div>

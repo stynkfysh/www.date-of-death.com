@@ -1149,3 +1149,11 @@ section:nth-child(even) {
     color: #1a5276;
     text-decoration: underline;
 }
+
+/* Fix CTA banner override from section:nth-child(even) */
+section.cta-banner {
+  background: #1a5276 !important;
+  color: #fff;
+}
+section.cta-banner h2 { color: #fff; }
+section.cta-banner p { color: #fff; }
