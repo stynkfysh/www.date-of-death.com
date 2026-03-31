@@ -154,38 +154,53 @@ async function createSquareCheckout(data, env) {
 
   const idempotencyKey = crypto.randomUUID();
 
-  const resp = await fetch('https://connect.squareup.com/v2/online-checkout/payment-links', {
-    method: 'POST',
-    headers: {
-      'Square-Version': '2024-12-18',
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
+  const squareHeaders = {
+    'Square-Version': '2024-12-18',
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  const requestBody = {
+    idempotency_key: idempotencyKey,
+    quick_pay: {
+      name: `${itemName} — ${data.property_address}`,
+      price_money: { amount, currency: 'USD' },
+      location_id: locationId,
     },
-    body: JSON.stringify({
-      idempotency_key: idempotencyKey,
-      quick_pay: {
-        name: `${itemName} — ${data.property_address}`,
-        price_money: {
-          amount: amount,
-          currency: 'USD',
-        },
-        location_id: locationId,
-      },
-      checkout_options: {
-        redirect_url: 'https://date-of-death.com/order/thank-you',
-        ask_for_shipping_address: false,
-      },
-      pre_populated_data: {
-        buyer_email: data.client_email || undefined,
-        buyer_phone_number: data.client_phone || undefined,
-      },
-    }),
+    checkout_options: {
+      redirect_url: 'https://date-of-death.com/order/thank-you',
+      ask_for_shipping_address: false,
+    },
+    pre_populated_data: {
+      buyer_email: data.client_email || undefined,
+      buyer_phone_number: data.client_phone || undefined,
+    },
+  };
+
+  let resp = await fetch('https://connect.squareup.com/v2/online-checkout/payment-links', {
+    method: 'POST',
+    headers: squareHeaders,
+    body: JSON.stringify(requestBody),
   });
 
+  // If pre_populated_data caused an error, retry without it
   if (!resp.ok) {
     const errText = await resp.text();
-    console.error('Square API error:', errText);
-    throw new Error('Failed to create payment link: ' + errText);
+    if (errText.includes('pre_populated_data')) {
+      console.log('Retrying Square checkout without pre_populated_data');
+      delete requestBody.pre_populated_data;
+      requestBody.idempotency_key = crypto.randomUUID();
+      resp = await fetch('https://connect.squareup.com/v2/online-checkout/payment-links', {
+        method: 'POST',
+        headers: squareHeaders,
+        body: JSON.stringify(requestBody),
+      });
+    }
+    if (!resp.ok) {
+      const retryErr = await resp.text();
+      console.error('Square API error:', retryErr);
+      throw new Error('Failed to create payment link');
+    }
   }
 
   const result = await resp.json();
@@ -305,7 +320,7 @@ export async function onRequestPost(context) {
 
   } catch (err) {
     console.error('Submit error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong. Please email us directly at orders@date-of-death.com.', debug: err.message }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong. Please email us directly at orders@date-of-death.com.' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
