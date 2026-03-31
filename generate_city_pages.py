@@ -352,6 +352,7 @@ def generate_page_html(loc):
             <a href="/pricing">Pricing</a>
             <a href="/faq">FAQ</a>
             <a href="/about">About</a>
+            <a href="/service-areas">Service Areas</a>
             <a href="/order" class="nav-cta">Order Now</a>
         </nav>
     </div>
@@ -445,6 +446,7 @@ def generate_page_html(loc):
             <h4>Resources</h4>
             <a href="/faq">FAQ</a>
             <a href="/about">About &amp; Credentials</a>
+            <a href="/service-areas">Service Areas</a>
         </div>
         <div class="footer-col">
             <h4>Contact</h4>

@@ -1111,3 +1111,41 @@ section:nth-child(even) {
   border-radius: 4px;
   transition: width 0.4s ease;
 }
+
+/* Service Areas page */
+.county-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.county-group h3 {
+    color: #1a5276;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid #1a5276;
+    padding-bottom: 0.5rem;
+}
+.county-count {
+    font-weight: 400;
+    color: #666;
+    font-size: 0.9rem;
+}
+.area-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.area-list li {
+    margin-bottom: 0.4rem;
+}
+.area-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.area-list a:hover {
+    color: #1a5276;
+    text-decoration: underline;
+}
