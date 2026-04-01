@@ -1,0 +1,182 @@
+{
+  "lj-7569-caminito-avola": {
+    "slug": "lj-7569-caminito-avola",
+    "title": "Market Trends: La Jolla, Coastal South \u2014 April 2026",
+    "city": "La Jolla",
+    "market_area": "Coastal South",
+    "date_iso": "2026-04-01",
+    "date_display": "April 01, 2026",
+    "mod_time": "2026-04-01T07:02:11.199883",
+    "folder_name": "LJ 7569 Caminito Avola",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$3,550,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$1,377.08",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-0.85%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "4.3",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "34",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "98.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-30.1%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
+  "lj-8551-cliffridge-ave": {
+    "slug": "lj-8551-cliffridge-ave",
+    "title": "Market Trends: La Jolla, Coastal South \u2014 March 2026",
+    "city": "La Jolla",
+    "market_area": "Coastal South",
+    "date_iso": "2026-03-26",
+    "date_display": "March 26, 2026",
+    "mod_time": "2026-03-26T13:16:37.326610",
+    "folder_name": "LJ 8551 Cliffridge Ave",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$3,670,375",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$1,377.08",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+1.42%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.1",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "42",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-24.0%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "sd-6972-glidden-st": {
+    "slug": "sd-6972-glidden-st",
+    "title": "Market Trends: San Diego, Metro \u2014 March 2026",
+    "city": "San Diego",
+    "market_area": "Metro",
+    "date_iso": "2026-03-27",
+    "date_display": "March 27, 2026",
+    "mod_time": "2026-03-27T14:20:49.694738",
+    "folder_name": "SD 6972 Glidden St",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$636,625",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$486.51",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+14.30%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.7",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "12",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+34.8%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+  },
+  "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109": {
+    "slug": "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109",
+    "title": "Market Trends: San Diego, North County Inland \u2014 March 2026",
+    "city": "San Diego",
+    "market_area": "North County Inland",
+    "date_iso": "2026-03-31",
+    "date_display": "March 31, 2026",
+    "mod_time": "2026-03-31T14:27:32.397463",
+    "folder_name": "SD-18520-Bernardo-Trails-Dr-San-Diego-CA-92128-1109",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$1,100,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$643.38",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+0.15%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.9",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "17",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-17.0%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  }
+}
