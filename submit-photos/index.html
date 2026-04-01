@@ -41,21 +41,16 @@
         }
         .upload-section {
             background: #fff;
-            border: 2px dashed #ccd6dd;
             border-radius: 12px;
             padding: 40px 32px;
             text-align: center;
             margin-bottom: 32px;
-            transition: border-color 0.2s;
-        }
-        .upload-section:hover {
-            border-color: #1a5276;
         }
         .upload-section h3 {
             margin: 0 0 8px;
             color: #1a5276;
         }
-        .upload-section p {
+        .upload-section p.upload-hint {
             color: #666;
             margin: 0 0 20px;
         }
@@ -143,10 +138,6 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        /* Uploadcare widget styling overrides */
-        .uc-light .uc-btn-primary {
-            background-color: #1a5276;
-        }
     </style>
 </head>
 <body>
@@ -215,7 +206,7 @@
             <!-- Upload widget -->
             <div class="upload-section" id="upload-area">
                 <h3>Upload Your Photos</h3>
-                <p>Drag and drop photos here, or click to browse. JPEG, PNG, and HEIC accepted.</p>
+                <p class="upload-hint">Click the button below to select photos from your device. JPEG, PNG, and HEIC accepted.</p>
 
                 <uc-config
                     ctx-name="uploader"
@@ -304,19 +295,38 @@
     import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';
     UC.defineComponents(UC);
 
+    // Record page load time for anti-spam timestamp
+    var pageLoadTime = Date.now();
+
     // Track uploaded files
     var uploadedFiles = [];
     var ctxProvider = document.getElementById('uploader-ctx');
 
-    ctxProvider.addEventListener('data-output', function(e) {
-        if (e.detail) {
-            uploadedFiles = Array.isArray(e.detail) ? e.detail : [e.detail];
-            updateFileList();
+    // Listen for individual file upload successes
+    ctxProvider.addEventListener('file-upload-success', function(e) {
+        var file = e.detail;
+        // Avoid duplicates by uuid
+        if (!uploadedFiles.some(function(f) { return f.uuid === file.uuid; })) {
+            uploadedFiles.push(file);
         }
+        updateFileList();
     });
 
-    ctxProvider.addEventListener('done-flow', function() {
-        // Final state after upload flow completes
+    // Listen for when all uploads complete
+    ctxProvider.addEventListener('common-upload-success', function(e) {
+        var state = e.detail;
+        if (state.successEntries && state.successEntries.length > 0) {
+            uploadedFiles = state.successEntries;
+        }
+        updateFileList();
+    });
+
+    // Listen for Done button click (user closes the uploader)
+    ctxProvider.addEventListener('done-click', function(e) {
+        var state = e.detail;
+        if (state.successEntries && state.successEntries.length > 0) {
+            uploadedFiles = state.successEntries;
+        }
         updateFileList();
     });
 
@@ -333,7 +343,7 @@
                 var li = document.createElement('li');
                 var sizeMB = f.size ? (f.size / 1024 / 1024).toFixed(1) + ' MB' : '';
                 li.innerHTML = '<span class="file-icon">&#10004;</span>' +
-                    '<span class="file-name">' + (f.name || f.originalFilename || 'Photo') + '</span>' +
+                    '<span class="file-name">' + (f.name || 'Photo') + '</span>' +
                     '<span class="file-size">' + sizeMB + '</span>';
                 listEl.appendChild(li);
             });
@@ -365,13 +375,14 @@
             return {
                 uuid: f.uuid,
                 cdnUrl: f.cdnUrl,
-                name: f.name || f.originalFilename,
+                name: f.name || 'Photo',
                 size: f.size
             };
         });
 
         var data = {
             _formType: 'photo-submission',
+            _ts: pageLoadTime,
             email: email.value,
             property_address: address.value,
             notes: document.getElementById('photo-notes').value,
@@ -389,6 +400,7 @@
             if (!resp.ok || result.error) throw new Error(result.error || 'Submit failed');
 
             document.getElementById('photo-form').style.display = 'none';
+            document.querySelector('.alt-methods').style.display = 'none';
             document.getElementById('photo-success').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {

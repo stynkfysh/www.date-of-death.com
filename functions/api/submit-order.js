@@ -165,6 +165,37 @@ function buildGeneralContactEmail(data) {
 </html>`;
 }
 
+function buildPhotoSubmissionEmail(data) {
+  const photos = data.photos || [];
+  const photoRows = photos.map(function(p) {
+    const sizeMB = p.size ? (p.size / 1024 / 1024).toFixed(1) + ' MB' : '—';
+    const cdnLink = p.cdnUrl ? `<a href="${escapeHtml(p.cdnUrl)}" style="color: #1a5276;">${escapeHtml(p.name || 'Photo')}</a>` : escapeHtml(p.name || 'Photo');
+    return `<tr><td style="padding: 6px 12px;">${cdnLink}</td><td style="padding: 6px 12px; color: #888;">${sizeMB}</td></tr>`;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+  <h2 style="color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">Property Photos Submitted</h2>
+  <h3 style="color: #555; margin-top: 24px;">Order Reference</h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Email</td><td style="padding: 6px 12px;"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Property</td><td style="padding: 6px 12px;">${escapeHtml(data.property_address)}</td></tr>
+  </table>
+  <h3 style="color: #555; margin-top: 24px;">Photos (${photos.length})</h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr><td style="padding: 6px 12px; font-weight: 600;">File</td><td style="padding: 6px 12px; font-weight: 600;">Size</td></tr>
+    ${photoRows}
+  </table>
+  ${data.notes ? `<h3 style="color: #555; margin-top: 24px;">Notes</h3><div style="padding: 12px; background: #f9f9f9; border-radius: 6px; white-space: pre-wrap;">${escapeHtml(data.notes)}</div>` : ''}
+  <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
+    Submitted from date-of-death.com — photo upload form
+  </p>
+</body>
+</html>`;
+}
+
 // --- Create Square payment link ---
 async function createSquareCheckout(data, env) {
   const accessToken = env.SQUARE_ACCESS_TOKEN;
@@ -277,7 +308,7 @@ export async function onRequestPost(context) {
     }
 
     const body = await context.request.json();
-    const formType = body._formType; // 'order', 'contact', or 'general-contact'
+    const formType = body._formType; // 'order', 'contact', 'general-contact', or 'photo-submission'
 
     // Honeypot check
     if (body.website || body.company_url) {
@@ -303,7 +334,22 @@ export async function onRequestPost(context) {
       });
     }
 
-    if (formType === 'general-contact') {
+    if (formType === 'photo-submission') {
+      if (!body.email || !body.property_address) {
+        return new Response(JSON.stringify({ error: 'Email and property address are required.' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      const photoCount = body.photo_count || (body.photos ? body.photos.length : 0);
+      const subject = `Photos Received (${photoCount}) — ${body.property_address}`;
+      const html = buildPhotoSubmissionEmail(body);
+      await sendEmail('orders@date-of-death.com', subject, html, body.email, context.env);
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    } else if (formType === 'general-contact') {
       // --- GENERAL CONTACT PAGE: email only ---
       if (!body.contact_name || !body.contact_email) {
         return new Response(JSON.stringify({ error: 'Name and email are required.' }), {
