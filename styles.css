@@ -819,6 +819,8 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
   padding: 0 0 20px;
 }
 .faq-section .faq-item.open .faq-answer { display: block; }
+.faq-section details.faq-item .faq-answer { display: none; }
+.faq-section details.faq-item[open] .faq-answer { display: block; }
 
 @media (max-width: 768px) {
   .section-light .trust-grid { grid-template-columns: 1fr; }
