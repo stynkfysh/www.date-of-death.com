@@ -848,18 +848,22 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url('/images/order-hero.jpg') center/cover no-repeat;
   padding: 100px 24px 88px;
 }
+.hero.hero-submit-photos {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url('/images/submit-photos-hero.jpg') center/cover no-repeat;
+  padding: 100px 24px 88px;
+}
 .hero.hero-about h1, .hero.hero-about .subtitle, .hero.hero-about .sub-detail,
 .hero.hero-pricing h1, .hero.hero-pricing .subtitle, .hero.hero-pricing .sub-detail,
 .hero.hero-faq h1, .hero.hero-faq .subtitle, .hero.hero-faq .sub-detail,
 .hero.hero-howitworks h1, .hero.hero-howitworks .subtitle, .hero.hero-howitworks .sub-detail,
 .hero.hero-desktop h1, .hero.hero-desktop .subtitle, .hero.hero-desktop .sub-detail,
-.hero.hero-order h1, .hero.hero-order .subtitle, .hero.hero-order .sub-detail {
+.hero.hero-submit-photos h1, .hero.hero-order h1, .hero.hero-submit-photos .subtitle, .hero.hero-order .subtitle, .hero.hero-submit-photos .sub-detail, .hero.hero-order .sub-detail {
   color: #fff;
 }
 .hero.hero-about .subtitle, .hero.hero-pricing .subtitle, .hero.hero-faq .subtitle,
-.hero.hero-howitworks .subtitle, .hero.hero-desktop .subtitle, .hero.hero-order .subtitle { opacity: 0.92; }
+.hero.hero-howitworks .subtitle, .hero.hero-desktop .subtitle, .hero.hero-submit-photos .subtitle, .hero.hero-order .subtitle { opacity: 0.92; }
 .hero.hero-about .sub-detail, .hero.hero-pricing .sub-detail, .hero.hero-faq .sub-detail,
-.hero.hero-howitworks .sub-detail, .hero.hero-desktop .sub-detail, .hero.hero-order .sub-detail { opacity: 0.8; }
+.hero.hero-howitworks .sub-detail, .hero.hero-desktop .sub-detail, .hero.hero-submit-photos .sub-detail, .hero.hero-order .sub-detail { opacity: 0.8; }
 
 /* --- Form Note --- */
 .form-note {
