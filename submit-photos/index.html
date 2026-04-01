@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css?v=2">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css">
     <style>
         .photo-instructions {
             background: #f0f6fb;
@@ -216,7 +217,7 @@
                 <h3>Upload Your Photos</h3>
                 <p>Drag and drop photos here, or click to browse. JPEG, PNG, and HEIC accepted.</p>
 
-                <lr-config
+                <uc-config
                     ctx-name="uploader"
                     pubkey="d2321417e9f363a4cfdf"
                     multiple="true"
@@ -225,17 +226,16 @@
                     source-list="local, camera, gdrive, gphotos, dropbox, onedrive"
                     use-cloud-image-editor="true"
                     camera-mirror="false"
-                ></lr-config>
+                ></uc-config>
 
-                <lr-file-uploader-regular
+                <uc-file-uploader-regular
                     ctx-name="uploader"
-                    css-src="https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.50.4/web/lr-file-uploader-regular.min.css"
-                ></lr-file-uploader-regular>
+                ></uc-file-uploader-regular>
 
-                <lr-upload-ctx-provider
+                <uc-upload-ctx-provider
                     ctx-name="uploader"
                     id="uploader-ctx"
-                ></lr-upload-ctx-provider>
+                ></uc-upload-ctx-provider>
 
                 <div class="uploaded-files" id="uploaded-files" style="display: none;">
                     <h4>Uploaded Photos</h4>
@@ -301,7 +301,8 @@
 </footer>
 
 <script type="module">
-    import * as LR from 'https://cdn.jsdelivr.net/npm/@uploadcare/blocks@0.50.4/web/lr-file-uploader-regular.min.js';
+    import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';
+    UC.defineComponents(UC);
 
     // Track uploaded files
     var uploadedFiles = [];
