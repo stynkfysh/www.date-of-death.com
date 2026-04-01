@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css?v=2">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css">
     <style>
         .photo-instructions {
             background: #f0f6fb;
@@ -39,20 +38,131 @@
             color: #666;
             font-style: italic;
         }
+
+        /* Drop zone */
+        .drop-zone {
+            border: 2px dashed #c0d0e0;
+            border-radius: 12px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            margin-bottom: 16px;
+            background: #fafbfc;
+        }
+        .drop-zone:hover, .drop-zone.drag-over {
+            border-color: #1a5276;
+            background: #f0f6fb;
+        }
+        .drop-zone-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: #1a5276;
+        }
+        .drop-zone h3 {
+            margin: 0 0 8px;
+            color: #1a5276;
+            font-size: 1.15rem;
+        }
+        .drop-zone p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .drop-zone .browse-link {
+            color: #1a5276;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Thumbnail previews */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: #f0f0f0;
+        }
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            padding: 0;
+        }
+        .preview-item .remove-btn:hover {
+            background: rgba(200,0,0,0.8);
+        }
+        .preview-item .file-name-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .file-count {
+            text-align: center;
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        /* Progress bar */
+        .upload-progress {
+            display: none;
+            margin: 20px 0;
+        }
+        .progress-bar-outer {
+            background: #e8e8e8;
+            border-radius: 8px;
+            height: 16px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .progress-bar-inner {
+            background: linear-gradient(90deg, #1a5276, #27ae60);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 8px;
+        }
+        .progress-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
         .upload-section {
             background: #fff;
             border-radius: 12px;
-            padding: 40px 32px;
-            text-align: center;
+            padding: 32px;
             margin-bottom: 32px;
-        }
-        .upload-section h3 {
-            margin: 0 0 8px;
-            color: #1a5276;
-        }
-        .upload-section p.upload-hint {
-            color: #666;
-            margin: 0 0 20px;
         }
         .order-ref-section {
             margin-bottom: 32px;
@@ -64,40 +174,11 @@
         .order-ref-section .form-group {
             flex: 1;
         }
-        .uploaded-files {
-            margin-top: 24px;
-            text-align: left;
-        }
-        .uploaded-files h4 {
-            margin: 0 0 12px;
-            color: #1a5276;
-        }
-        .file-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .file-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-        }
-        .file-list li .file-icon {
-            color: #27ae60;
-            font-weight: bold;
-        }
-        .file-list li .file-name {
-            flex: 1;
-            color: #333;
-        }
-        .file-list li .file-size {
-            color: #888;
-            font-size: 0.85rem;
+        @media (max-width: 600px) {
+            .order-ref-section .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
         .submit-photos-btn {
             margin-top: 24px;
@@ -138,6 +219,16 @@
             font-size: 0.95rem;
             line-height: 1.6;
         }
+        .error-msg {
+            color: #c0392b;
+            background: #fdf0ef;
+            border: 1px solid #e6b0aa;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            display: none;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -171,7 +262,7 @@
 <section class="section-light">
     <div class="container" style="max-width: 720px;">
 
-        <!-- Order reference -->
+        <!-- Photo form -->
         <div id="photo-form">
             <fieldset class="form-section order-ref-section">
                 <legend>Your Order</legend>
@@ -203,34 +294,25 @@
                 <p class="photo-tip">Tip: Take photos in landscape orientation with good lighting. More photos are always better — we'll use what we need.</p>
             </div>
 
-            <!-- Upload widget -->
-            <div class="upload-section" id="upload-area">
-                <h3>Upload Your Photos</h3>
-                <p class="upload-hint">Click the button below to select photos from your device. JPEG, PNG, and HEIC accepted.</p>
+            <!-- Upload area -->
+            <div class="upload-section">
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-icon">&#128247;</div>
+                    <h3>Drag photos here</h3>
+                    <p>or <span class="browse-link">browse your device</span> to select photos</p>
+                    <p style="margin-top: 8px; font-size: 0.85rem; color: #999;">JPEG, PNG, and HEIC accepted &middot; up to 25 MB each</p>
+                    <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/heic,image/heif,.jpg,.jpeg,.png,.heic,.heif" style="display: none;">
+                </div>
 
-                <uc-config
-                    ctx-name="uploader"
-                    pubkey="d2321417e9f363a4cfdf"
-                    multiple="true"
-                    max-local-file-size-bytes="52428800"
-                    img-only="true"
-                    source-list="local, camera, gdrive, gphotos, dropbox, onedrive"
-                    use-cloud-image-editor="true"
-                    camera-mirror="false"
-                ></uc-config>
+                <div class="preview-grid" id="preview-grid"></div>
+                <p class="file-count" id="file-count" style="display: none;"></p>
 
-                <uc-file-uploader-regular
-                    ctx-name="uploader"
-                ></uc-file-uploader-regular>
-
-                <uc-upload-ctx-provider
-                    ctx-name="uploader"
-                    id="uploader-ctx"
-                ></uc-upload-ctx-provider>
-
-                <div class="uploaded-files" id="uploaded-files" style="display: none;">
-                    <h4>Uploaded Photos</h4>
-                    <ul class="file-list" id="file-list"></ul>
+                <!-- Upload progress -->
+                <div class="upload-progress" id="upload-progress">
+                    <div class="progress-bar-outer">
+                        <div class="progress-bar-inner" id="progress-bar"></div>
+                    </div>
+                    <p class="progress-text" id="progress-text">Uploading...</p>
                 </div>
             </div>
 
@@ -244,20 +326,21 @@
             </fieldset>
 
             <button type="button" class="hero-cta form-submit submit-photos-btn" id="submit-photos-btn" disabled>Submit Photos</button>
-            <p id="submit-status" style="text-align: center; margin-top: 12px; color: #888; font-size: 0.9rem;">Upload at least one photo to continue.</p>
+            <p id="submit-status" style="text-align: center; margin-top: 12px; color: #888; font-size: 0.9rem;">Select at least one photo to continue.</p>
+            <div class="error-msg" id="error-msg"></div>
         </div>
 
         <!-- Success message -->
         <div class="photo-success" id="photo-success">
             <div class="success-icon">&#10004;</div>
             <h2>Photos Received!</h2>
-            <p>We've received your property photos. Our appraiser will review them along with your order details.</p>
+            <p>Your property photos have been uploaded to our secure storage. Our appraiser will review them along with your order details.</p>
             <p>You'll receive an email confirmation shortly. If we need additional photos, we'll reach out to the email address you provided.</p>
             <p style="margin-top: 20px;"><a href="/" class="hero-cta" style="display: inline-block;">Return to Homepage</a></p>
         </div>
 
         <!-- Alternative methods -->
-        <div class="alt-methods">
+        <div class="alt-methods" id="alt-methods">
             <h3>Other Ways to Submit Photos</h3>
             <p>If you prefer, you can also submit photos by emailing them to <strong>orders@date-of-death.com</strong> with your property address in the subject line, or by texting them to the number provided in your confirmation email. You can also share a Google Drive, Dropbox, or iCloud link.</p>
         </div>
@@ -291,124 +374,220 @@
     </div>
 </footer>
 
-<script type="module">
-    import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';
-    UC.defineComponents(UC);
+<script>
+(function() {
+    var selectedFiles = [];
+    var dropZone = document.getElementById('drop-zone');
+    var fileInput = document.getElementById('file-input');
+    var previewGrid = document.getElementById('preview-grid');
+    var fileCount = document.getElementById('file-count');
+    var submitBtn = document.getElementById('submit-photos-btn');
+    var submitStatus = document.getElementById('submit-status');
+    var progressEl = document.getElementById('upload-progress');
+    var progressBar = document.getElementById('progress-bar');
+    var progressText = document.getElementById('progress-text');
+    var errorMsg = document.getElementById('error-msg');
 
-    // Record page load time for anti-spam timestamp
-    var pageLoadTime = Date.now();
+    var MAX_FILE_SIZE = 25 * 1024 * 1024; // 25 MB
 
-    // Track uploaded files
-    var uploadedFiles = [];
-    var ctxProvider = document.getElementById('uploader-ctx');
-
-    // Listen for individual file upload successes
-    ctxProvider.addEventListener('file-upload-success', function(e) {
-        var file = e.detail;
-        // Avoid duplicates by uuid
-        if (!uploadedFiles.some(function(f) { return f.uuid === file.uuid; })) {
-            uploadedFiles.push(file);
-        }
-        updateFileList();
+    // --- Drop zone events ---
+    dropZone.addEventListener('click', function() {
+        fileInput.click();
     });
 
-    // Listen for when all uploads complete
-    ctxProvider.addEventListener('common-upload-success', function(e) {
-        var state = e.detail;
-        if (state.successEntries && state.successEntries.length > 0) {
-            uploadedFiles = state.successEntries;
-        }
-        updateFileList();
+    dropZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
     });
 
-    // Listen for Done button click (user closes the uploader)
-    ctxProvider.addEventListener('done-click', function(e) {
-        var state = e.detail;
-        if (state.successEntries && state.successEntries.length > 0) {
-            uploadedFiles = state.successEntries;
-        }
-        updateFileList();
+    dropZone.addEventListener('dragleave', function() {
+        dropZone.classList.remove('drag-over');
     });
 
-    function updateFileList() {
-        var listEl = document.getElementById('file-list');
-        var containerEl = document.getElementById('uploaded-files');
-        var btn = document.getElementById('submit-photos-btn');
-        var status = document.getElementById('submit-status');
+    dropZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+        addFiles(e.dataTransfer.files);
+    });
 
-        if (uploadedFiles.length > 0) {
-            containerEl.style.display = 'block';
-            listEl.innerHTML = '';
-            uploadedFiles.forEach(function(f) {
-                var li = document.createElement('li');
-                var sizeMB = f.size ? (f.size / 1024 / 1024).toFixed(1) + ' MB' : '';
-                li.innerHTML = '<span class="file-icon">&#10004;</span>' +
-                    '<span class="file-name">' + (f.name || 'Photo') + '</span>' +
-                    '<span class="file-size">' + sizeMB + '</span>';
-                listEl.appendChild(li);
+    fileInput.addEventListener('change', function() {
+        addFiles(fileInput.files);
+        fileInput.value = ''; // reset so same file can be re-added
+    });
+
+    function addFiles(fileList) {
+        var skipped = [];
+        for (var i = 0; i < fileList.length; i++) {
+            var f = fileList[i];
+            // Check type
+            if (!f.type.match(/^image\//)) {
+                skipped.push(f.name + ' (not an image)');
+                continue;
+            }
+            // Check size
+            if (f.size > MAX_FILE_SIZE) {
+                skipped.push(f.name + ' (over 25 MB)');
+                continue;
+            }
+            // Avoid exact duplicates by name+size
+            var isDupe = selectedFiles.some(function(existing) {
+                return existing.name === f.name && existing.size === f.size;
             });
-            btn.disabled = false;
-            status.textContent = uploadedFiles.length + ' photo' + (uploadedFiles.length > 1 ? 's' : '') + ' ready to submit.';
-            status.style.color = '#27ae60';
-        } else {
-            containerEl.style.display = 'none';
-            btn.disabled = true;
-            status.textContent = 'Upload at least one photo to continue.';
-            status.style.color = '#888';
+            if (!isDupe) {
+                selectedFiles.push(f);
+            }
         }
+        if (skipped.length > 0) {
+            showError('Skipped: ' + skipped.join(', '));
+        }
+        renderPreviews();
     }
 
-    // Submit handler
-    document.getElementById('submit-photos-btn').addEventListener('click', async function() {
-        var btn = this;
+    function removeFile(index) {
+        selectedFiles.splice(index, 1);
+        renderPreviews();
+    }
+
+    function renderPreviews() {
+        previewGrid.innerHTML = '';
+        selectedFiles.forEach(function(f, idx) {
+            var item = document.createElement('div');
+            item.className = 'preview-item';
+
+            var img = document.createElement('img');
+            img.src = URL.createObjectURL(f);
+            img.alt = f.name;
+            item.appendChild(img);
+
+            var removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.innerHTML = '&times;';
+            removeBtn.title = 'Remove';
+            removeBtn.setAttribute('data-idx', idx);
+            removeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                removeFile(parseInt(this.getAttribute('data-idx')));
+            });
+            item.appendChild(removeBtn);
+
+            var label = document.createElement('div');
+            label.className = 'file-name-label';
+            label.textContent = f.name;
+            item.appendChild(label);
+
+            previewGrid.appendChild(item);
+        });
+
+        if (selectedFiles.length > 0) {
+            fileCount.style.display = 'block';
+            var totalMB = selectedFiles.reduce(function(sum, f) { return sum + f.size; }, 0) / 1024 / 1024;
+            fileCount.textContent = selectedFiles.length + ' photo' + (selectedFiles.length > 1 ? 's' : '') + ' selected (' + totalMB.toFixed(1) + ' MB)';
+            submitBtn.disabled = false;
+            submitStatus.textContent = 'Ready to upload.';
+            submitStatus.style.color = '#27ae60';
+        } else {
+            fileCount.style.display = 'none';
+            submitBtn.disabled = true;
+            submitStatus.textContent = 'Select at least one photo to continue.';
+            submitStatus.style.color = '#888';
+        }
+        hideError();
+    }
+
+    function showError(msg) {
+        errorMsg.textContent = msg;
+        errorMsg.style.display = 'block';
+    }
+    function hideError() {
+        errorMsg.style.display = 'none';
+    }
+
+    // --- Submit handler ---
+    submitBtn.addEventListener('click', async function() {
         var email = document.getElementById('ref-email');
         var address = document.getElementById('ref-address');
 
         if (!email.value) { email.reportValidity(); return; }
         if (!address.value) { address.reportValidity(); return; }
-        if (uploadedFiles.length === 0) { alert('Please upload at least one photo.'); return; }
+        if (selectedFiles.length === 0) { showError('Please select at least one photo.'); return; }
 
-        btn.disabled = true;
-        btn.textContent = 'Submitting\u2026';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Uploading\u2026';
+        hideError();
+        progressEl.style.display = 'block';
+        progressBar.style.width = '0%';
 
-        var fileUrls = uploadedFiles.map(function(f) {
-            return {
-                uuid: f.uuid,
-                cdnUrl: f.cdnUrl,
-                name: f.name || 'Photo',
-                size: f.size
-            };
-        });
+        var folderId = '';
+        var totalFiles = selectedFiles.length;
+        var uploaded = 0;
+        var failed = [];
 
-        var data = {
-            _formType: 'photo-submission',
-            _ts: pageLoadTime,
-            email: email.value,
-            property_address: address.value,
-            notes: document.getElementById('photo-notes').value,
-            photos: fileUrls,
-            photo_count: fileUrls.length
-        };
+        for (var i = 0; i < totalFiles; i++) {
+            var file = selectedFiles[i];
+            var isLast = (i === totalFiles - 1);
 
-        try {
-            var resp = await fetch('/api/submit-order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            var result = await resp.json();
-            if (!resp.ok || result.error) throw new Error(result.error || 'Submit failed');
+            progressText.textContent = 'Uploading ' + (i + 1) + ' of ' + totalFiles + ': ' + file.name;
+            progressBar.style.width = Math.round(((i) / totalFiles) * 100) + '%';
 
-            document.getElementById('photo-form').style.display = 'none';
-            document.querySelector('.alt-methods').style.display = 'none';
-            document.getElementById('photo-success').style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (err) {
-            btn.disabled = false;
-            btn.textContent = 'Submit Photos';
-            alert('There was a problem submitting your photos. Please try again, or email them to orders@date-of-death.com.\n\n' + (err.message || ''));
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('email', email.value);
+            formData.append('property_address', address.value);
+            if (folderId) formData.append('folder_id', folderId);
+            if (isLast) {
+                formData.append('is_last', 'true');
+                formData.append('notes', document.getElementById('photo-notes').value);
+                formData.append('total_count', String(totalFiles));
+            }
+
+            try {
+                var resp = await fetch('/api/upload-photos', {
+                    method: 'POST',
+                    body: formData,
+                });
+                var result = await resp.json();
+
+                if (!resp.ok || result.error) {
+                    failed.push(file.name + ': ' + (result.error || 'Upload failed'));
+                    continue;
+                }
+
+                if (result.folderId) folderId = result.folderId;
+                uploaded++;
+            } catch (err) {
+                failed.push(file.name + ': ' + (err.message || 'Network error'));
+            }
+
+            progressBar.style.width = Math.round(((i + 1) / totalFiles) * 100) + '%';
+        }
+
+        if (uploaded === totalFiles) {
+            // All succeeded
+            progressText.textContent = 'All photos uploaded!';
+            progressBar.style.width = '100%';
+
+            setTimeout(function() {
+                document.getElementById('photo-form').style.display = 'none';
+                document.getElementById('alt-methods').style.display = 'none';
+                document.getElementById('photo-success').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 800);
+        } else if (uploaded > 0) {
+            // Partial success
+            progressText.textContent = uploaded + ' of ' + totalFiles + ' photos uploaded.';
+            showError('Some photos failed to upload: ' + failed.join('; ') + '\n\nThe rest were uploaded successfully. You can email the remaining photos to orders@date-of-death.com.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Retry Failed Photos';
+        } else {
+            // All failed
+            progressText.textContent = 'Upload failed.';
+            showError('Unable to upload photos. Please try again, or email them to orders@date-of-death.com.\n\n' + failed[0]);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Photos';
+            progressEl.style.display = 'none';
         }
     });
+})();
 </script>
 
 </body>
