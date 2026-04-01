@@ -56,7 +56,8 @@ Date-of-death.com is a statewide California desktop real estate appraisal servic
 - /how-it-works: Step-by-step ordering process
 - /pricing: Service tier comparison and interactive guide
 - /order: Property details form and checkout
+- /submit-photos: Photo upload portal for clients to submit property photos
 - /faq: Frequently asked questions about DOD appraisals
 - /about: Company and appraiser credentials
-- /blog: Educational content about step-up in basis, estate valuations, and California real estate
-- /status: Order tracking and report delivery portal
+- /contact: Contact form for inquiries
+- /service-areas: California service area coverage with city-specific pages
