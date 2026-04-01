@@ -1160,9 +1160,13 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
 }
 
 /* Hero background images */
-.hero-contact {
+.hero.hero-contact {
     background: linear-gradient(rgba(26, 82, 118, 0.55), rgba(26, 82, 118, 0.55)), url('/images/Contact_Hero.jpg') center/cover no-repeat;
 }
-.hero-service-areas {
+.hero.hero-service-areas {
     background: linear-gradient(rgba(26, 82, 118, 0.55), rgba(26, 82, 118, 0.55)), url('/images/service_areas_hero.jpg') center/cover no-repeat;
 }
+.hero.hero-contact h1, .hero.hero-contact .subtitle { color: #fff; }
+.hero.hero-contact .subtitle { opacity: 0.92; }
+.hero.hero-service-areas h1, .hero.hero-service-areas .subtitle { color: #fff; }
+.hero.hero-service-areas .subtitle { opacity: 0.92; }
