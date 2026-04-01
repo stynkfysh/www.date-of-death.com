@@ -1,8 +1,11 @@
 {
   "lj-7569-caminito-avola": {
     "slug": "lj-7569-caminito-avola",
-    "title": "Market Trends: La Jolla, Coastal South \u2014 April 2026",
+    "title": "Market Trends: La Jolla 92037 \u2014 April 2026",
     "city": "La Jolla",
+    "zip_codes": [
+      "92037"
+    ],
     "market_area": "Coastal South",
     "date_iso": "2026-04-01",
     "date_display": "April 01, 2026",
@@ -46,8 +49,11 @@
   },
   "lj-8551-cliffridge-ave": {
     "slug": "lj-8551-cliffridge-ave",
-    "title": "Market Trends: La Jolla, Coastal South \u2014 March 2026",
+    "title": "Market Trends: La Jolla 92037 \u2014 March 2026",
     "city": "La Jolla",
+    "zip_codes": [
+      "92037"
+    ],
     "market_area": "Coastal South",
     "date_iso": "2026-03-26",
     "date_display": "March 26, 2026",
@@ -91,8 +97,11 @@
   },
   "sd-6972-glidden-st": {
     "slug": "sd-6972-glidden-st",
-    "title": "Market Trends: San Diego, Metro \u2014 March 2026",
+    "title": "Market Trends: San Diego 92111 \u2014 March 2026",
     "city": "San Diego",
+    "zip_codes": [
+      "92111"
+    ],
     "market_area": "Metro",
     "date_iso": "2026-03-27",
     "date_display": "March 27, 2026",
@@ -136,8 +145,11 @@
   },
   "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109": {
     "slug": "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109",
-    "title": "Market Trends: San Diego, North County Inland \u2014 March 2026",
+    "title": "Market Trends: San Diego 92128 \u2014 March 2026",
     "city": "San Diego",
+    "zip_codes": [
+      "92128"
+    ],
     "market_area": "North County Inland",
     "date_iso": "2026-03-31",
     "date_display": "March 31, 2026",

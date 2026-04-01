@@ -49,26 +49,50 @@ def slug_from_folder(folder_name):
     return s
 
 
-def extract_city_from_csv(folder_path):
-    """Try to get city and market area from CSV files in the folder."""
-    city = None
+def extract_location_from_csv(folder_path):
+    """Extract city, zip codes, and market area from CSV files in the folder."""
+    cities = {}  # city name (normalized) -> count
+    zips = set()
     market_area = None
-    for csv_file in glob.glob(os.path.join(folder_path, "*.csv")):
+
+    # Prefer Property_System_Grid CSVs (the MLS data) over other CSV types
+    csv_files = sorted(glob.glob(os.path.join(folder_path, "Property_System_Grid*.csv")))
+    if not csv_files:
+        csv_files = sorted(glob.glob(os.path.join(folder_path, "*.csv")))
+
+    for csv_file in csv_files:
         try:
             with open(csv_file, 'r', errors='ignore') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    if not city:
-                        city = row.get('City', row.get('city', ''))
+                    raw_city = row.get('City', row.get('city', '')).strip()
+                    if raw_city:
+                        # Normalize: title case, strip extra spaces
+                        norm = raw_city.strip().title()
+                        # Fix common MLS quirks
+                        norm = re.sub(r'\s+', ' ', norm)
+                        cities[norm] = cities.get(norm, 0) + 1
+                    z = row.get('Zip', row.get('Zip Code', '')).strip()
+                    if z:
+                        # Keep just the 5-digit zip
+                        z = z[:5] if len(z) >= 5 else z
+                        zips.add(z)
                     if not market_area:
-                        market_area = row.get('Market Area', row.get('Area', row.get('Master Area', '')))
-                    if city:
-                        break
+                        ma = row.get('Market Area', row.get('Area', row.get('Master Area', '')))
+                        if ma and ma.strip():
+                            market_area = ma.strip()
         except Exception:
             continue
-        if city:
-            break
-    return city.strip() if city else None, market_area.strip() if market_area else None
+        if cities:
+            break  # Use first good CSV
+
+    # Determine primary city by frequency (most common normalized name)
+    primary_city = None
+    if cities:
+        # Group case variations and pick the most common
+        primary_city = max(cities, key=cities.get)
+
+    return primary_city, sorted(zips), market_area
 
 
 def extract_address_from_folder(folder_name):
@@ -152,9 +176,12 @@ def generate_blog_entry_html(entry):
         for p in data['narrative'][:2]:
             summary_html += f"<p>{p}</p>\n"
 
-    location_label = f"{city}"
-    if market_area:
-        location_label += f" ({market_area})"
+    zip_codes = entry.get('zip_codes', [])
+    zip_label = ", ".join(zip_codes) if zip_codes else ""
+    if zip_label:
+        location_label = f"{city} {zip_label}"
+    else:
+        location_label = city
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -289,9 +316,12 @@ def generate_index_page(entries, page_num, total_pages):
 
     cards_html = ""
     for entry in entries:
-        location = entry['city']
-        if entry['market_area']:
-            location += f" ({entry['market_area']})"
+        zip_codes = entry.get('zip_codes', [])
+        zip_label = ", ".join(zip_codes) if zip_codes else ""
+        if zip_label:
+            location = f"{entry['city']} {zip_label}"
+        else:
+            location = entry['city']
 
         # Short summary for the card
         summary_text = ""
@@ -488,8 +518,8 @@ def main():
                 print(f"  SKIP (already published): {folder_name}")
                 continue
 
-        # Extract city and market area from CSV
-        city, market_area = extract_city_from_csv(folder_path)
+        # Extract city, zip codes, and market area from CSV
+        city, zip_codes, market_area = extract_location_from_csv(folder_path)
         if not city:
             # Try to parse from folder name
             addr = extract_address_from_folder(folder_name)
@@ -502,6 +532,10 @@ def main():
             }
             prefix = folder_name[:2]
             city = abbrevs.get(prefix, addr.split()[0] if addr else 'California')
+        if not zip_codes:
+            # Try to extract zip from folder name (e.g. "SD-18520-...-CA-92128-1109")
+            folder_zips = re.findall(r'\b9[0-9]{4}\b', folder_name)
+            zip_codes = sorted(set(folder_zips))
 
         # Parse the report
         try:
@@ -514,16 +548,18 @@ def main():
             print(f"  SKIP (no metrics): {folder_name}")
             continue
 
-        # Build title
-        title = f"Market Trends: {city}"
-        if market_area:
-            title += f", {market_area}"
-        title += f" — {mod_time.strftime('%B %Y')}"
+        # Build title with city and zip codes
+        zip_label = ", ".join(zip_codes) if zip_codes else ""
+        if zip_label:
+            title = f"Market Trends: {city} {zip_label} — {mod_time.strftime('%B %Y')}"
+        else:
+            title = f"Market Trends: {city} — {mod_time.strftime('%B %Y')}"
 
         entry = {
             'slug': entry_key,
             'title': title,
             'city': city,
+            'zip_codes': zip_codes,
             'market_area': market_area or '',
             'date_iso': mod_time.strftime('%Y-%m-%d'),
             'date_display': mod_time.strftime('%B %d, %Y'),
@@ -555,6 +591,7 @@ def main():
             'slug': entry['slug'],
             'title': entry['title'],
             'city': entry['city'],
+            'zip_codes': entry.get('zip_codes', []),
             'market_area': entry['market_area'],
             'date_iso': entry['date_iso'],
             'date_display': entry['date_display'],
@@ -589,6 +626,7 @@ def main():
                 'slug': slug,
                 'title': meta['title'],
                 'city': meta['city'],
+                'zip_codes': meta.get('zip_codes', []),
                 'market_area': meta.get('market_area', ''),
                 'date_iso': meta['date_iso'],
                 'date_display': meta['date_display'],
