@@ -342,7 +342,7 @@
         <!-- Alternative methods -->
         <div class="alt-methods" id="alt-methods">
             <h3>Other Ways to Submit Photos</h3>
-            <p>If you prefer, you can also submit photos by emailing them to <strong>orders@date-of-death.com</strong> with your property address in the subject line, or by texting them to the number provided in your confirmation email. You can also share a Google Drive, Dropbox, or iCloud link.</p>
+            <p>If you prefer, you can also submit photos by emailing them to <strong>photos@date-of-death.com</strong> with your property address in the subject line, or by texting them to <strong>(858) 215-3954</strong>. You can also share a Google Drive, Dropbox, or iCloud link.</p>
         </div>
 
     </div>
@@ -575,13 +575,13 @@
         } else if (uploaded > 0) {
             // Partial success
             progressText.textContent = uploaded + ' of ' + totalFiles + ' photos uploaded.';
-            showError('Some photos failed to upload: ' + failed.join('; ') + '\n\nThe rest were uploaded successfully. You can email the remaining photos to orders@date-of-death.com.');
+            showError('Some photos failed to upload: ' + failed.join('; ') + '\n\nThe rest were uploaded successfully. You can email the remaining photos to photos@date-of-death.com.');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Retry Failed Photos';
         } else {
             // All failed
             progressText.textContent = 'Upload failed.';
-            showError('Unable to upload photos. Please try again, or email them to orders@date-of-death.com.\n\n' + failed[0]);
+            showError('Unable to upload photos. Please try again, or email them to photos@date-of-death.com.\n\n' + failed[0]);
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit Photos';
             progressEl.style.display = 'none';

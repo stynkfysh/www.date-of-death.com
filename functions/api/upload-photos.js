@@ -275,7 +275,7 @@ export async function onRequestPost(context) {
   } catch (err) {
     console.error('Upload error:', err);
     return new Response(
-      JSON.stringify({ error: 'Upload failed. Please try again or email photos to orders@date-of-death.com.', debug: err.message }),
+      JSON.stringify({ error: 'Upload failed. Please try again or email photos to photos@date-of-death.com.', debug: err.message }),
       {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
