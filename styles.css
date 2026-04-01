@@ -1161,8 +1161,8 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
 
 /* Hero background images */
 .hero-contact {
-    background: linear-gradient(rgba(26, 82, 118, 0.75), rgba(26, 82, 118, 0.75)), url('/images/Contact_Hero.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(26, 82, 118, 0.55), rgba(26, 82, 118, 0.55)), url('/images/Contact_Hero.jpg') center/cover no-repeat;
 }
 .hero-service-areas {
-    background: linear-gradient(rgba(26, 82, 118, 0.75), rgba(26, 82, 118, 0.75)), url('/images/service_areas_hero.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(26, 82, 118, 0.55), rgba(26, 82, 118, 0.55)), url('/images/service_areas_hero.jpg') center/cover no-repeat;
 }
