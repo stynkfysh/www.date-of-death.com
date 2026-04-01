@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Property Photos | Date-of-Death Appraisals</title>
+    <meta name="description" content="Upload property photos for your date-of-death appraisal order. Secure, easy photo submission.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=2">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/uc-file-uploader-regular.min.css">
+    <style>
+        .photo-instructions {
+            background: #f0f6fb;
+            border: 1px solid #d0e3f0;
+            border-radius: 10px;
+            padding: 28px 32px;
+            margin-bottom: 32px;
+        }
+        .photo-instructions h3 {
+            margin: 0 0 12px;
+            font-size: 1.1rem;
+            color: #1a5276;
+        }
+        .photo-instructions ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #444;
+            line-height: 1.8;
+        }
+        .photo-instructions ul li {
+            margin-bottom: 4px;
+        }
+        .photo-instructions .photo-tip {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        .upload-section {
+            background: #fff;
+            border: 2px dashed #ccd6dd;
+            border-radius: 12px;
+            padding: 40px 32px;
+            text-align: center;
+            margin-bottom: 32px;
+            transition: border-color 0.2s;
+        }
+        .upload-section:hover {
+            border-color: #1a5276;
+        }
+        .upload-section h3 {
+            margin: 0 0 8px;
+            color: #1a5276;
+        }
+        .upload-section p {
+            color: #666;
+            margin: 0 0 20px;
+        }
+        .order-ref-section {
+            margin-bottom: 32px;
+        }
+        .order-ref-section .form-row {
+            display: flex;
+            gap: 16px;
+        }
+        .order-ref-section .form-group {
+            flex: 1;
+        }
+        .uploaded-files {
+            margin-top: 24px;
+            text-align: left;
+        }
+        .uploaded-files h4 {
+            margin: 0 0 12px;
+            color: #1a5276;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .file-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        .file-list li .file-icon {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .file-list li .file-name {
+            flex: 1;
+            color: #333;
+        }
+        .file-list li .file-size {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .submit-photos-btn {
+            margin-top: 24px;
+        }
+        .photo-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .photo-success .success-icon {
+            font-size: 3rem;
+            color: #27ae60;
+            margin-bottom: 16px;
+        }
+        .photo-success h2 {
+            margin: 0 0 12px;
+            color: #1a5276;
+        }
+        .photo-success p {
+            color: #555;
+            max-width: 500px;
+            margin: 0 auto 8px;
+        }
+        .alt-methods {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 24px 32px;
+            margin-top: 32px;
+        }
+        .alt-methods h3 {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            color: #1a5276;
+        }
+        .alt-methods p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        /* Uploadcare widget styling overrides */
+        .uc-light .uc-btn-primary {
+            background-color: #1a5276;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="logo">Date-of-Death Appraisals</a>
+        <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.main-nav').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="main-nav">
+            <a href="/why-desktop">Why Desktop</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/faq">FAQ</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/service-areas">Service Areas</a>
+            <a href="/order" class="nav-cta">Order Now</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero hero-city">
+    <div class="container">
+        <h1>Submit Property Photos</h1>
+        <p class="subtitle">Upload photos of the property for your appraisal. The more photos you provide, the more accurate your appraisal will be.</p>
+    </div>
+</section>
+
+<section class="section-light">
+    <div class="container" style="max-width: 720px;">
+
+        <!-- Order reference -->
+        <div id="photo-form">
+            <fieldset class="form-section order-ref-section">
+                <legend>Your Order</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ref-email">Email Address Used for Order <span class="required">*</span></label>
+                        <input type="email" id="ref-email" name="ref_email" required placeholder="you@example.com" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="ref-address">Property Address <span class="required">*</span></label>
+                        <input type="text" id="ref-address" name="ref_address" required placeholder="e.g. 123 Main St, Los Angeles">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Photo instructions -->
+            <div class="photo-instructions">
+                <h3>What Photos Do We Need?</h3>
+                <ul>
+                    <li><strong>Front of home</strong> — straight-on view from the street</li>
+                    <li><strong>Street scene</strong> — view looking down the street in each direction</li>
+                    <li><strong>Backyard</strong> — showing the yard and any structures (pool, patio, ADU)</li>
+                    <li><strong>Kitchen</strong> — showing countertops, cabinets, and appliances</li>
+                    <li><strong>Bathrooms</strong> — at least the primary bathroom</li>
+                    <li><strong>Living areas</strong> — living room, family room, dining room</li>
+                    <li><strong>Any recent upgrades</strong> — new flooring, roof, HVAC, windows, solar panels</li>
+                    <li><strong>Any condition issues</strong> — deferred maintenance, damage, needed repairs</li>
+                </ul>
+                <p class="photo-tip">Tip: Take photos in landscape orientation with good lighting. More photos are always better — we'll use what we need.</p>
+            </div>
+
+            <!-- Upload widget -->
+            <div class="upload-section" id="upload-area">
+                <h3>Upload Your Photos</h3>
+                <p>Drag and drop photos here, or click to browse. JPEG, PNG, and HEIC accepted.</p>
+
+                <uc-config
+                    ctx-name="uploader"
+                    pubkey="d2321417e9f363a4cfdf"
+                    multiple="true"
+                    max-local-file-size-bytes="52428800"
+                    img-only="true"
+                    source-list="local, camera, gdrive, gphotos, dropbox, onedrive"
+                    use-cloud-image-editor="true"
+                    camera-mirror="false"
+                ></uc-config>
+
+                <uc-file-uploader-regular
+                    ctx-name="uploader"
+                ></uc-file-uploader-regular>
+
+                <uc-upload-ctx-provider
+                    ctx-name="uploader"
+                    id="uploader-ctx"
+                ></uc-upload-ctx-provider>
+
+                <div class="uploaded-files" id="uploaded-files" style="display: none;">
+                    <h4>Uploaded Photos</h4>
+                    <ul class="file-list" id="file-list"></ul>
+                </div>
+            </div>
+
+            <!-- Notes -->
+            <fieldset class="form-section">
+                <legend>Additional Notes</legend>
+                <div class="form-group full-width">
+                    <label for="photo-notes">Anything we should know about the photos or property condition?</label>
+                    <textarea id="photo-notes" name="photo_notes" rows="3" placeholder="e.g., Photos are from 2024, kitchen was remodeled in 2020, roof replaced in 2018..."></textarea>
+                </div>
+            </fieldset>
+
+            <button type="button" class="hero-cta form-submit submit-photos-btn" id="submit-photos-btn" disabled>Submit Photos</button>
+            <p id="submit-status" style="text-align: center; margin-top: 12px; color: #888; font-size: 0.9rem;">Upload at least one photo to continue.</p>
+        </div>
+
+        <!-- Success message -->
+        <div class="photo-success" id="photo-success">
+            <div class="success-icon">&#10004;</div>
+            <h2>Photos Received!</h2>
+            <p>We've received your property photos. Our appraiser will review them along with your order details.</p>
+            <p>You'll receive an email confirmation shortly. If we need additional photos, we'll reach out to the email address you provided.</p>
+            <p style="margin-top: 20px;"><a href="/" class="hero-cta" style="display: inline-block;">Return to Homepage</a></p>
+        </div>
+
+        <!-- Alternative methods -->
+        <div class="alt-methods">
+            <h3>Other Ways to Submit Photos</h3>
+            <p>If you prefer, you can also submit photos by emailing them to <strong>orders@date-of-death.com</strong> with your property address in the subject line, or by texting them to the number provided in your confirmation email. You can also share a Google Drive, Dropbox, or iCloud link.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/pricing">Pricing</a>
+            <a href="/why-desktop">Why Desktop Appraisals</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/order">Order Now</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="/faq">FAQ</a>
+            <a href="/about">About &amp; Credentials</a>
+            <a href="/service-areas">Service Areas</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="/contact">Contact Form</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 Brian Ward Appraisal. All rights reserved.</span>
+        <span>California Certified Residential Appraiser &middot; License No. AR036053</span>
+    </div>
+</footer>
+
+<script type="module">
+    import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@v1/web/file-uploader.min.js';
+    UC.defineComponents(UC);
+
+    // Track uploaded files
+    var uploadedFiles = [];
+    var ctxProvider = document.getElementById('uploader-ctx');
+
+    ctxProvider.addEventListener('data-output', function(e) {
+        if (e.detail) {
+            uploadedFiles = Array.isArray(e.detail) ? e.detail : [e.detail];
+            updateFileList();
+        }
+    });
+
+    ctxProvider.addEventListener('done-flow', function() {
+        // Final state after upload flow completes
+        updateFileList();
+    });
+
+    function updateFileList() {
+        var listEl = document.getElementById('file-list');
+        var containerEl = document.getElementById('uploaded-files');
+        var btn = document.getElementById('submit-photos-btn');
+        var status = document.getElementById('submit-status');
+
+        if (uploadedFiles.length > 0) {
+            containerEl.style.display = 'block';
+            listEl.innerHTML = '';
+            uploadedFiles.forEach(function(f) {
+                var li = document.createElement('li');
+                var sizeMB = f.size ? (f.size / 1024 / 1024).toFixed(1) + ' MB' : '';
+                li.innerHTML = '<span class="file-icon">&#10004;</span>' +
+                    '<span class="file-name">' + (f.name || f.originalFilename || 'Photo') + '</span>' +
+                    '<span class="file-size">' + sizeMB + '</span>';
+                listEl.appendChild(li);
+            });
+            btn.disabled = false;
+            status.textContent = uploadedFiles.length + ' photo' + (uploadedFiles.length > 1 ? 's' : '') + ' ready to submit.';
+            status.style.color = '#27ae60';
+        } else {
+            containerEl.style.display = 'none';
+            btn.disabled = true;
+            status.textContent = 'Upload at least one photo to continue.';
+            status.style.color = '#888';
+        }
+    }
+
+    // Submit handler
+    document.getElementById('submit-photos-btn').addEventListener('click', async function() {
+        var btn = this;
+        var email = document.getElementById('ref-email');
+        var address = document.getElementById('ref-address');
+
+        if (!email.value) { email.reportValidity(); return; }
+        if (!address.value) { address.reportValidity(); return; }
+        if (uploadedFiles.length === 0) { alert('Please upload at least one photo.'); return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting\u2026';
+
+        var fileUrls = uploadedFiles.map(function(f) {
+            return {
+                uuid: f.uuid,
+                cdnUrl: f.cdnUrl,
+                name: f.name || f.originalFilename,
+                size: f.size
+            };
+        });
+
+        var data = {
+            _formType: 'photo-submission',
+            email: email.value,
+            property_address: address.value,
+            notes: document.getElementById('photo-notes').value,
+            photos: fileUrls,
+            photo_count: fileUrls.length
+        };
+
+        try {
+            var resp = await fetch('/api/submit-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            var result = await resp.json();
+            if (!resp.ok || result.error) throw new Error(result.error || 'Submit failed');
+
+            document.getElementById('photo-form').style.display = 'none';
+            document.getElementById('photo-success').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (err) {
+            btn.disabled = false;
+            btn.textContent = 'Submit Photos';
+            alert('There was a problem submitting your photos. Please try again, or email them to orders@date-of-death.com.\n\n' + (err.message || ''));
+        }
+    });
+</script>
+
+</body>
+</html>
