@@ -1296,7 +1296,7 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
 
 /* --- Reviews Page Hero --- */
 .hero.hero-reviews {
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url(/images/about-hero.jpg) center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), url(/images/reviews-hero.jpg) center/cover no-repeat;
   padding: 100px 24px 88px;
 }
 .hero.hero-reviews h1, .hero.hero-reviews .subtitle { color: #fff; }
