@@ -1,4 +1,151 @@
 {
+  "da-752-anderson-rd": {
+    "slug": "da-752-anderson-rd",
+    "title": "Market Trends: 752 95616 \u2014 April 2026",
+    "city": "752",
+    "zip_codes": [
+      "95616"
+    ],
+    "market_area": "",
+    "date_iso": "2026-04-02",
+    "date_display": "April 02, 2026",
+    "mod_time": "2026-04-02T10:42:16.276112",
+    "folder_name": "DA 752 Anderson Rd",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$747,500",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$462.73",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-10.71%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "1.6",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "43",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "98.6%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-37.5%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "en-1151-53-hermes-ave-encinitas-ca-92024": {
+    "slug": "en-1151-53-hermes-ave-encinitas-ca-92024",
+    "title": "Market Trends: Encinitas 91911, 92007, 92024 \u2014 February 2026",
+    "city": "Encinitas",
+    "zip_codes": [
+      "91911",
+      "92007",
+      "92024"
+    ],
+    "market_area": "Coastal North",
+    "date_iso": "2026-02-26",
+    "date_display": "February 26, 2026",
+    "mod_time": "2026-02-26T08:19:50.533187",
+    "folder_name": "EN-1151-53-Hermes-Ave-Encinitas-CA-92024",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$1,899,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$957.07",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-5.34%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "3.1",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "19",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-42.2%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "A notable feature of the current market is the divergence between median sale price trends and price-per-square-foot trends. While the median sale price declined -15.7% quarter over quarter, the median $/SF changed by only -1.2%. This gap suggests a compositional shift in the sales mix: recent trans"
+  },
+  "fb-363-tumble-creek-ln": {
+    "slug": "fb-363-tumble-creek-ln",
+    "title": "Market Trends: Fallbrook 92026, 92028 \u2014 March 2026",
+    "city": "Fallbrook",
+    "zip_codes": [
+      "92026",
+      "92028"
+    ],
+    "market_area": "North County",
+    "date_iso": "2026-03-19",
+    "date_display": "March 19, 2026",
+    "mod_time": "2026-03-19T20:09:37.320342",
+    "folder_name": "FB 363 Tumble Creek Ln",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$952,375",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$442.49",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "5.00%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.2",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "50",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "17.2%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate"
+      }
+    },
+    "summary_text": "The Fallbrook residential market presents a coherent picture of modest, broad-based appreciation. Both the median sale price and the median price per square foot have increased on a year-over-year basis, with 12-month linear trends of +3.45% and +5.00% respectively. The near-parallel movement of the"
+  },
   "lj-7569-caminito-avola": {
     "slug": "lj-7569-caminito-avola",
     "title": "Market Trends: La Jolla 92037 \u2014 April 2026",
@@ -95,149 +242,155 @@
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   },
-  "sd-6972-glidden-st": {
-    "slug": "sd-6972-glidden-st",
-    "title": "Market Trends: San Diego 92111 \u2014 March 2026",
-    "city": "San Diego",
+  "lm-4258-summit-dr-la-mesa-ca-91941-7841": {
+    "slug": "lm-4258-summit-dr-la-mesa-ca-91941-7841",
+    "title": "Market Trends: La Mesa 91941, 91942, 91977 \u2014 March 2026",
+    "city": "La Mesa",
     "zip_codes": [
-      "92111"
+      "91941",
+      "91942",
+      "91977"
     ],
-    "market_area": "Metro",
-    "date_iso": "2026-03-27",
-    "date_display": "March 27, 2026",
-    "mod_time": "2026-03-27T14:20:49.694738",
-    "folder_name": "SD 6972 Glidden St",
+    "market_area": "East County",
+    "date_iso": "2026-03-02",
+    "date_display": "March 02, 2026",
+    "mod_time": "2026-03-02T13:23:48.639210",
+    "folder_name": "LM-4258-Summit-Dr-La-Mesa-CA-91941-7841",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
-        "value": "$636,625",
-        "trend": "Stable"
+        "value": "$890,000",
+        "trend": "Declining"
       },
       "Median $/SF (0-3 Mo)": {
-        "value": "$486.51",
-        "trend": "Increasing"
+        "value": "$585.00",
+        "trend": "Stable"
       },
       "12-Mo Linear $/SF Change": {
-        "value": "+14.30%",
-        "trend": "Positive"
+        "value": "-1.06%",
+        "trend": "Negative"
       },
       "Months of Inventory": {
-        "value": "1.7",
+        "value": "2.3",
         "trend": "Tight supply"
       },
       "Median Days on Market": {
-        "value": "12",
-        "trend": "Worsening"
+        "value": "19",
+        "trend": "Improving"
       },
       "SP/LP Ratio": {
         "value": "100.0%",
         "trend": "Stable"
       },
       "Sales Volume Change (Qtr)": {
-        "value": "+34.8%",
-        "trend": "Increasing"
+        "value": "-15.5%",
+        "trend": "Decreasing"
       },
       "Anticipated Marketing Time": {
         "value": "30-60 days",
         "trend": "Active market"
       }
     },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+    "summary_text": "The divergence between median sale prices and price per square foot merits close attention. While the 12-month linear trend for median sale prices shows a 10.11% decline, the median $/SF has only declined 1.06% over the same period. This suggests that much of the apparent price decline is compositio"
   },
-  "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109": {
-    "slug": "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109",
-    "title": "Market Trends: San Diego 92128 \u2014 March 2026",
-    "city": "San Diego",
+  "oc-815-wisconsin-ave": {
+    "slug": "oc-815-wisconsin-ave",
+    "title": "Market Trends: Oceanside 92054, 92056, 92057, 92058, 92507 \u2014 March 2026",
+    "city": "Oceanside",
     "zip_codes": [
-      "92128"
+      "92054",
+      "92056",
+      "92057",
+      "92058",
+      "92507"
     ],
-    "market_area": "North County Inland",
-    "date_iso": "2026-03-31",
-    "date_display": "March 31, 2026",
-    "mod_time": "2026-03-31T14:27:32.397463",
-    "folder_name": "SD-18520-Bernardo-Trails-Dr-San-Diego-CA-92128-1109",
+    "market_area": "Coastal North",
+    "date_iso": "2026-03-24",
+    "date_display": "March 24, 2026",
+    "mod_time": "2026-03-24T22:41:36.386745",
+    "folder_name": "OC 815 Wisconsin Ave",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
-        "value": "$1,100,000",
-        "trend": "Declining"
+        "value": "$950,000",
+        "trend": "Relatively Stable"
       },
       "Median $/SF (0-3 Mo)": {
-        "value": "$643.38",
-        "trend": "Stable"
+        "value": "$533.79",
+        "trend": "Declining"
       },
       "12-Mo Linear $/SF Change": {
-        "value": "+0.15%",
+        "value": "+3.79%",
         "trend": "Positive"
       },
       "Months of Inventory": {
-        "value": "1.9",
+        "value": "2.3",
         "trend": "Tight supply"
       },
       "Median Days on Market": {
-        "value": "17",
+        "value": "26",
         "trend": "Improving"
       },
       "SP/LP Ratio": {
-        "value": "99.0%",
-        "trend": "Strengthening"
+        "value": "100.0%",
+        "trend": "Stable"
       },
       "Sales Volume Change (Qtr)": {
-        "value": "-17.0%",
-        "trend": "Decreasing"
+        "value": "+2.1%",
+        "trend": "Stable"
       },
       "Anticipated Marketing Time": {
         "value": "30-60 days",
         "trend": "Active market"
       }
     },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+    "summary_text": "The divergence between the 12-month linear sale price trend (\u22123.84%) and the 12-month linear $/SF trend (+3.79%) is best understood through the lens of compositional mix shift. When median $/SF appreciates while median sale price softens, it typically indicates that a larger share of recent transact"
   },
-  "da-752-anderson-rd": {
-    "slug": "da-752-anderson-rd",
-    "title": "Market Trends: 752 95616 \u2014 April 2026",
-    "city": "752",
+  "rm-3-clancy-ln-s-rancho-mirage-ca-92270-4501": {
+    "slug": "rm-3-clancy-ln-s-rancho-mirage-ca-92270-4501",
+    "title": "Market Trends: Rancho Mirage 92270 \u2014 February 2026",
+    "city": "Rancho Mirage",
     "zip_codes": [
-      "95616"
+      "92270"
     ],
-    "market_area": "",
-    "date_iso": "2026-04-02",
-    "date_display": "April 02, 2026",
-    "mod_time": "2026-04-02T10:42:16.276112",
-    "folder_name": "DA 752 Anderson Rd",
+    "market_area": "Rancho Mirage",
+    "date_iso": "2026-02-25",
+    "date_display": "February 25, 2026",
+    "mod_time": "2026-02-25T08:42:46.280000",
+    "folder_name": "RM-3-Clancy-Ln-S-Rancho-Mirage-CA-92270-4501",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
-        "value": "$747,500",
-        "trend": "Declining"
+        "value": "$1,177,000",
+        "trend": "Stable to slightly increasing"
       },
       "Median $/SF (0-3 Mo)": {
-        "value": "$462.73",
-        "trend": "Stable"
+        "value": "$446.59",
+        "trend": "Slight decline from prior quarter"
       },
       "12-Mo Linear $/SF Change": {
-        "value": "-10.71%",
-        "trend": "Negative"
+        "value": "+14.30%",
+        "trend": "Positive annual trend"
       },
       "Months of Inventory": {
-        "value": "1.6",
-        "trend": "Tight supply"
+        "value": "4.9",
+        "trend": "Upper range of balanced market"
       },
       "Median Days on Market": {
-        "value": "43",
-        "trend": "Stable"
+        "value": "54",
+        "trend": "Increasing from prior quarter"
       },
       "SP/LP Ratio": {
-        "value": "98.6%",
-        "trend": "Strengthening"
+        "value": "97%",
+        "trend": "Stable"
       },
       "Sales Volume Change (Qtr)": {
-        "value": "-37.5%",
-        "trend": "Decreasing"
+        "value": "+58.7%",
+        "trend": "Significantly increasing"
       },
       "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
+        "value": "25-103 days",
+        "trend": "Moderately active market"
       }
     },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+    "summary_text": "The divergence between the median sale price trend (+1.9% quarter-over-quarter) and the median $/SF trend (-2.1%) in the most recent quarter is best explained by a compositional shift in the sales mix. When larger homes represent a greater share of closed transactions, the overall median price can r"
   },
   "sd-10895-camino-ruiz-unit-72": {
     "slug": "sd-10895-camino-ruiz-unit-72",
@@ -287,6 +440,54 @@
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   },
+  "sd-13394-pantera-rd": {
+    "slug": "sd-13394-pantera-rd",
+    "title": "Market Trends: San Diego 92130 \u2014 March 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92130"
+    ],
+    "market_area": "Coastal North",
+    "date_iso": "2026-03-19",
+    "date_display": "March 19, 2026",
+    "mod_time": "2026-03-19T13:38:36.643818",
+    "folder_name": "SD 13394 Pantera Rd",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$900,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$392.55",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-5.70%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "4.6",
+        "trend": "Balanced supply"
+      },
+      "Median Days on Market": {
+        "value": "28",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-35.1%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The divergence between median sale prices and median price per square foot warrants careful interpretation. The 12-month linear trend shows median sale prices essentially flat (+0.38%) while $/SF declined more meaningfully (\u22125.70%). This pattern is characteristic of a compositional mix shift: as lar"
+  },
   "sd-3915-corte-mar-de-hierba": {
     "slug": "sd-3915-corte-mar-de-hierba",
     "title": "Market Trends: San Diego 92130 \u2014 April 2026",
@@ -334,5 +535,162 @@
       }
     },
     "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
+  "sd-6972-glidden-st": {
+    "slug": "sd-6972-glidden-st",
+    "title": "Market Trends: San Diego 92111 \u2014 March 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92111"
+    ],
+    "market_area": "Metro",
+    "date_iso": "2026-03-27",
+    "date_display": "March 27, 2026",
+    "mod_time": "2026-03-27T14:20:49.694738",
+    "folder_name": "SD 6972 Glidden St",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$636,625",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$486.51",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+14.30%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.7",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "12",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+34.8%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+  },
+  "sd-7755-via-francesco-unit-6": {
+    "slug": "sd-7755-via-francesco-unit-6",
+    "title": "Market Trends: San Diego 92014, 92037, 92064, 92067, 92075, 92091, 92121, 92122, 92126, 92127, 92128, 92129, 92130, 92131 \u2014 March 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92014",
+      "92037",
+      "92064",
+      "92067",
+      "92075",
+      "92091",
+      "92121",
+      "92122",
+      "92126",
+      "92127",
+      "92128",
+      "92129",
+      "92130",
+      "92131"
+    ],
+    "market_area": "North County Inland",
+    "date_iso": "2026-03-23",
+    "date_display": "March 23, 2026",
+    "mod_time": "2026-03-23T20:04:10",
+    "folder_name": "SD 7755 Via Francesco Unit 6",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$610,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$648.14",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "2.42%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "3.9",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "16",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.5%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-39.3%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The divergence between declining median sale prices and rising median $/SF warrants careful interpretation. When overall prices fall while per-square-foot values rise, the most likely explanation is a compositional mix shift\u2014that is, a greater proportion of recent sales involve smaller or lower-pric"
+  },
+  "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109": {
+    "slug": "sd-18520-bernardo-trails-dr-san-diego-ca-92128-1109",
+    "title": "Market Trends: San Diego 92128 \u2014 March 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92128"
+    ],
+    "market_area": "North County Inland",
+    "date_iso": "2026-03-31",
+    "date_display": "March 31, 2026",
+    "mod_time": "2026-03-31T14:27:32.397463",
+    "folder_name": "SD-18520-Bernardo-Trails-Dr-San-Diego-CA-92128-1109",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$1,100,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$643.38",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+0.15%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.9",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "17",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-17.0%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   }
 }
