@@ -1323,7 +1323,8 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
   border-bottom: 2px solid #e5e5e5;
 }
 .review-card {
-  padding: 20px 0;
+  padding: 28px 0;
+  margin-bottom: 8px;
   border-bottom: 1px solid #eee;
 }
 .review-card:last-child { border-bottom: none; }
