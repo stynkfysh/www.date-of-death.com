@@ -61,5 +61,6 @@ Date-of-death.com is a statewide California desktop real estate appraisal servic
 - /about: Company and appraiser credentials
 - /contact: Contact form for inquiries
 - /service-areas: California service area coverage with city-specific pages
+- /step-up-in-basis: Comprehensive guide to the step-up in basis under IRC §1014, including gift vs inheritance, California's double step-up, IRS forms, audit risk, and Proposition 19
 - /blog: Market trends analysis from our appraisal practice across California
 - /reviews: Verified client reviews from Google and Yelp
