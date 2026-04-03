@@ -293,6 +293,7 @@ def generate_blog_entry_html(entry):
             <a href="/about">About &amp; Credentials</a>
             <a href="/service-areas">Service Areas</a>
             <a href="/blog">Market Trends</a>
+            <a href="/reviews">Reviews</a>
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
@@ -446,6 +447,7 @@ def generate_index_page(entries, page_num, total_pages):
             <a href="/about">About &amp; Credentials</a>
             <a href="/service-areas">Service Areas</a>
             <a href="/blog">Market Trends</a>
+            <a href="/reviews">Reviews</a>
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
