@@ -1318,15 +1318,16 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
 .reviews-source-heading {
   font-size: 1.15rem;
   color: #1a3a52;
-  margin: 36px 0 20px;
+  margin: 56px 0 32px;
   padding-bottom: 8px;
   border-bottom: 2px solid #e5e5e5;
 }
+.reviews-source-heading:first-of-type { margin-top: 40px; }
 .review-card {
-  padding: 32px 0 36px;
+  padding: 36px 0 40px;
   border-bottom: 1px solid #ddd;
 }
-.review-card:first-child { padding-top: 0; }
+.review-card:first-child { padding-top: 12px; }
 .review-card:last-child { border-bottom: none; }
 .review-header {
   display: flex;
