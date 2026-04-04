@@ -692,5 +692,53 @@
       }
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "sd-12209-casero-pl": {
+    "slug": "sd-12209-casero-pl",
+    "title": "Market Trends: San Diego 92128 \u2014 April 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92128"
+    ],
+    "market_area": "North County Inland",
+    "date_iso": "2026-04-03",
+    "date_display": "April 03, 2026",
+    "mod_time": "2026-04-03T12:52:54.880253",
+    "folder_name": "SD 12209 Casero Pl",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$585,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$316.61",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+6.84%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.4",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "63",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "97.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+24.5%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
   }
 }
