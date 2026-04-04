@@ -532,7 +532,7 @@ def main():
                 'LJ': 'La Jolla', 'SD': 'San Diego', 'OC': 'Oceanside',
                 'EN': 'Encinitas', 'FB': 'Fallbrook', 'LM': 'La Mesa',
                 'RM': 'Rancho Mirage', 'CV': 'Chula Vista', 'RB': 'Rancho Bernardo',
-                'SC': 'Santa Clarita', 'SM': 'San Marcos', 'PS': 'Palm Springs',
+                'SC': 'Santa Clarita', 'SM': 'San Marcos', 'PS': 'Palm Springs', 'DA': 'Davis',
             }
             prefix = folder_name[:2]
             city = abbrevs.get(prefix, addr.split()[0] if addr else 'California')
