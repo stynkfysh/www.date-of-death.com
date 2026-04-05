@@ -740,5 +740,106 @@
       }
     },
     "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
+  "cv-305-inkopah-st": {
+    "slug": "cv-305-inkopah-st",
+    "title": "Market Trends: Chula Vista 91910, 91911, 91913, 91914, 91915, 92154 \u2014 April 2026",
+    "city": "Chula Vista",
+    "zip_codes": [
+      "91910",
+      "91911",
+      "91913",
+      "91914",
+      "91915",
+      "92154"
+    ],
+    "market_area": "South Bay",
+    "date_iso": "2026-04-04",
+    "date_display": "April 04, 2026",
+    "mod_time": "2026-04-04T10:10:28.193687",
+    "folder_name": "CV 305 Inkopah St",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$910,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$488.24",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+2.83%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.7",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "15",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-31.1%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
+  "sd-16139-41-cayenne-creek-rd": {
+    "slug": "sd-16139-41-cayenne-creek-rd",
+    "title": "Market Trends: San Diego 92127 \u2014 April 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92127"
+    ],
+    "market_area": "North County Inland",
+    "date_iso": "2026-04-05",
+    "date_display": "April 05, 2026",
+    "mod_time": "2026-04-05T13:20:45.831782",
+    "folder_name": "SD 16139-41 Cayenne Creek Rd",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$2,270,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$729.17",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-7.35%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.2",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "17",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+44.4%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
   }
 }
