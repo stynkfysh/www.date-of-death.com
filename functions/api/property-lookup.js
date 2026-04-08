@@ -125,11 +125,6 @@ export async function onRequestPost(context) {
       });
     }
 
-    // Parse address components for better search targeting
-    const addressParts = cleanAddress.split(',').map(s => s.trim());
-    const streetAddr = addressParts[0] || cleanAddress;
-    const cityState = addressParts.slice(1).join(', ').trim() || 'California';
-
     const prompt = `I need you to look up a specific property and analyze it. The property is:
 
 ADDRESS: ${cleanAddress}
@@ -137,10 +132,10 @@ ADDRESS: ${cleanAddress}
 YOUR FIRST AND MOST IMPORTANT TASK: Search for this property's details.
 
 Try these searches IN ORDER until you find the property:
-1. Search: "${streetAddr} ${cityState} zillow"
-2. Search: "${streetAddr} ${cityState} redfin"
-3. Search: "${streetAddr} ${cityState} realtor.com"
-4. Search: "${streetAddr} ${cityState} county assessor property details"
+1. Search: "${cleanAddress} zillow"
+2. Search: "${cleanAddress} redfin"
+3. Search: "${cleanAddress} realtor.com"
+4. Search: "${cleanAddress} county assessor property details"
 5. Search: "${cleanAddress} property records bedrooms bathrooms square feet"
 
 From the search results, find these details for the SUBJECT PROPERTY at ${cleanAddress}:

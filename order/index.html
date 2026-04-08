@@ -106,22 +106,8 @@
             <fieldset class="form-section">
                 <legend>Property Information</legend>
                 <div class="form-group full-width">
-                    <label for="property-address">Street Address <span class="required">*</span></label>
-                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St" autocomplete="off">
-                </div>
-                <div class="form-row form-row-address">
-                    <div class="form-group">
-                        <label for="property-city">City <span class="required">*</span></label>
-                        <input type="text" id="property-city" name="property_city" required placeholder="e.g. Los Angeles" autocomplete="off">
-                    </div>
-                    <div class="form-group form-group-state">
-                        <label>State</label>
-                        <div class="state-display">CA</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="property-zip">Zip Code <span class="required">*</span></label>
-                        <input type="text" id="property-zip" name="property_zip" required placeholder="e.g. 90210" pattern="[0-9]{5}" maxlength="5" autocomplete="off">
-                    </div>
+                    <label for="property-address">Property Address <span class="required">*</span></label>
+                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="off">
                 </div>
                 <div class="form-group full-width">
                     <div class="address-lookup-row">
@@ -381,23 +367,17 @@ document.getElementById("purpose").addEventListener("change", function() {
     }
 });
 
-// --- Address input: enable lookup button when street + city + zip are filled ---
+// --- Address input: enable lookup button when address looks complete ---
 function checkAddressReady() {
-    var street = document.getElementById("property-address").value.trim();
-    var city = document.getElementById("property-city").value.trim();
-    var zip = document.getElementById("property-zip").value.trim();
-    document.getElementById("lookup-btn").disabled = !(street.length >= 5 && city.length >= 2 && zip.length === 5);
+    var addr = document.getElementById("property-address").value.trim();
+    // Require at least a street number, some text, and a CA zip or city
+    document.getElementById("lookup-btn").disabled = addr.length < 10;
 }
 document.getElementById("property-address").addEventListener("input", checkAddressReady);
-document.getElementById("property-city").addEventListener("input", checkAddressReady);
-document.getElementById("property-zip").addEventListener("input", checkAddressReady);
 
 // --- Build full address string ---
 function getFullAddress() {
-    var street = document.getElementById("property-address").value.trim();
-    var city = document.getElementById("property-city").value.trim();
-    var zip = document.getElementById("property-zip").value.trim();
-    return street + ", " + city + ", CA " + zip;
+    return document.getElementById("property-address").value.trim();
 }
 
 // --- Condition change: treat "poor" as complex ---
