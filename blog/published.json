@@ -756,7 +756,7 @@
     "market_area": "South Bay",
     "date_iso": "2026-04-04",
     "date_display": "April 04, 2026",
-    "mod_time": "2026-04-04T10:10:28.193687",
+    "mod_time": "2026-04-04T13:20:49.321000",
     "folder_name": "CV 305 Inkopah St",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -841,5 +841,55 @@
       }
     },
     "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
+  "sa-11041-summit-ave": {
+    "slug": "sa-11041-summit-ave",
+    "title": "Market Trends: Santee 92071, 92128, 92171 \u2014 April 2026",
+    "city": "Santee",
+    "zip_codes": [
+      "92071",
+      "92128",
+      "92171"
+    ],
+    "market_area": "East County",
+    "date_iso": "2026-04-07",
+    "date_display": "April 07, 2026",
+    "mod_time": "2026-04-07T15:11:35.581427",
+    "folder_name": "SA 11041 Summit Ave",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$865,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$564.37",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-1.89%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.2",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "20",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+31.8%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   }
 }
