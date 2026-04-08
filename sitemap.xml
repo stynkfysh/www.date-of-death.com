@@ -56,8 +56,14 @@
   </url>
   <url>
     <loc>https://date-of-death.com/blog</loc>
-    <lastmod>2026-04-01</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://date-of-death.com/blog/step-up-case-study-california-inherited-home</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>

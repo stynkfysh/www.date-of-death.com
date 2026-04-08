@@ -46,6 +46,23 @@ Date-of-death.com is a statewide California desktop real estate appraisal servic
 - If a market factor affects value, it appears in the sales data
 - Revision assurance if condition, quality, or features are misinterpreted
 
+## Common Misconceptions About Date-of-Death Appraisals
+
+**Misconception: A physical property inspection is legally required for an IRS-accepted appraisal.**
+Reality: The IRS requires a "qualified appraisal" by a "qualified appraiser" under 26 CFR §1.170A-17. The regulations define qualifications for the appraiser and content standards for the report — they do not mandate a physical inspection or specify an appraisal methodology. Desktop appraisals that meet USPAP standards and are prepared by a state-certified appraiser satisfy IRS requirements. The analytical core of any appraisal — selecting comparable sales, making adjustments, and developing a value opinion — is performed remotely regardless of whether the appraiser physically visits the subject property.
+
+**Misconception: Desktop appraisals are less accurate or reliable than traditional appraisals.**
+Reality: The only difference between a desktop appraisal and a traditional appraisal is how the subject property's physical characteristics are documented. In a desktop appraisal, the client provides photos and descriptions; in a traditional appraisal, the appraiser visits. The comparable sales used to derive the value are always analyzed remotely — appraisers never physically inspect the comparables in any type of appraisal. For retrospective date-of-death valuations, the property's current physical state is often irrelevant since the appraisal must reflect conditions at the date of death.
+
+**Misconception: You need a local appraiser who is physically near the property.**
+Reality: Under USPAP, geographic competency means the appraiser has the knowledge and research ability to analyze a market — not that they must live nearby. Desktop appraisals use MLS data, county assessor records, and market databases that are accessible statewide. A certified appraiser with experience in California markets and access to comprehensive data sources can produce equally accurate valuations whether they are 5 miles or 500 miles from the property.
+
+**Misconception: A Zillow Zestimate or real estate agent's CMA can substitute for a date-of-death appraisal.**
+Reality: Automated Valuation Models (Zillow, Redfin) and Broker Price Opinions (BPOs) do not meet IRS requirements for a "qualified appraisal." They are not USPAP-compliant, not signed by a qualified appraiser, and cannot establish a defensible cost basis. If the IRS challenges a stepped-up basis claim, only a qualified appraisal provides legal protection.
+
+**Misconception: A date-of-death appraisal is only needed for large estates subject to estate tax.**
+Reality: The vast majority of estates fall below the federal estate tax exemption (~$13 million). For these estates, no Form 706 is filed and no government record establishes the property's date-of-death value. When the heir eventually sells, the date-of-death appraisal is the sole documentation supporting the stepped-up basis claimed on the tax return. Without it, the IRS can deny the step-up and assess capital gains tax on the full historical appreciation.
+
 ## Contact
 - Website: https://date-of-death.com
 - All orders placed online — no phone interaction required

@@ -47,6 +47,47 @@ COMMUNITY_FLAVORS = {
     "hills": ["hillside properties", "panoramic views", "canyon settings", "elevated terrain"],
 }
 
+# County-specific assessor and tax context (unique per county)
+COUNTY_ASSESSOR_NOTES = {
+    "Los Angeles": "Los Angeles County, the largest assessor's office in the nation, reassesses inherited property under Proposition 19 using the date-of-death value reported on the Change in Ownership Statement (PCOR). The county's sheer volume of transfers means processing delays are common — having a completed appraisal ready expedites the reassessment process.",
+    "San Diego": "San Diego County's Assessor processes parent-to-child exclusion claims under Proposition 19 through Form BOE-19-P. The county's diverse micro-markets — from La Jolla oceanfront to East County ranch properties — mean that date-of-death valuations require neighborhood-level expertise, not just county-wide data.",
+    "Riverside": "Riverside County spans from the pass communities near Banning to the Coachella Valley resort cities, creating some of the widest price variation of any California county. The Assessor-County Clerk-Recorder handles Prop 19 exclusion claims, and the county's rapid growth since the 1990s means many inherited properties have experienced dramatic appreciation.",
+    "San Bernardino": "San Bernardino County, the largest county by area in the contiguous United States, includes mountain resort communities, high desert cities, and Inland Empire suburbs with very different market dynamics. The county assessor's office processes a high volume of Prop 13 base-year transfers, making accurate date-of-death valuations essential for property tax outcomes.",
+    "Orange": "Orange County's assessor maintains some of the most detailed property records in the state, with Mello-Roos districts and HOA-governed communities adding layers of complexity to valuations. The county's proximity to employment centers in Los Angeles and its own job base create persistent demand that supports property values.",
+    "Ventura": "Ventura County's mix of agricultural land, coastal communities, and suburban cities creates distinct micro-markets. The county assessor processes Prop 19 claims through the Clerk-Recorder's office, and properties near the coast or in communities like Thousand Oaks and Simi Valley often have significantly different value trajectories than nearby areas.",
+    "Santa Barbara": "Santa Barbara County's strict zoning, including the city's architectural review standards and height limitations, constrains housing supply and supports values in ways that don't always show up in county-wide statistics. The assessor's office handles a relatively small but high-value transaction volume.",
+    "Alameda": "Alameda County's diverse housing stock — from Oakland Victorians to Fremont tract homes — requires careful comparable selection for date-of-death valuations. The county assessor's office sees heavy transfer volume due to the region's tech-driven economy and generational turnover in post-war neighborhoods.",
+    "Contra Costa": "Contra Costa County ranges from affluent Lamorinda communities to more affordable eastern cities like Antioch and Pittsburg. The county assessor's Prop 19 processing timelines can vary, and the wide price range across the county means neighborhood-specific comparable analysis is critical.",
+    "San Joaquin": "San Joaquin County's real estate market has historically been driven by Bay Area spillover demand, with cities like Tracy and Manteca seeing significant commuter-driven growth. The county assessor handles a growing volume of property transfers as generational turnover increases in the Central Valley.",
+    "Sacramento": "Sacramento County's market reflects its role as California's capital region, with a mix of historic neighborhoods near downtown and rapidly expanding suburban areas in Elk Grove and Rancho Cordova. The county assessor processes one of the highest volumes of property transfers in Northern California.",
+    "Fresno": "Fresno County, the agricultural heartland of California, features a real estate market shaped by its proximity to farming operations and the Central Valley's affordability. The county assessor handles Prop 19 claims for a growing number of inherited rural and suburban properties.",
+    "Stanislaus": "Stanislaus County's Modesto-centered market has seen significant appreciation driven by Bay Area migration. The county assessor's records reflect a housing stock that ranges from century-old downtown properties to modern subdivisions, each requiring different approaches to retrospective valuation.",
+}
+
+# Location-specific landmarks and historical context
+LOCATION_LANDMARKS = {
+    "Glendale": "home to the historic Brand Park and the Americana at Brand, with neighborhoods ranging from the Verdugo Woodlands estates to the urban core along Brand Boulevard",
+    "Santa Clarita": "encompassing the established communities of Valencia, Newhall, Saugus, and Canyon Country, with a housing stock that grew dramatically after the 1960s",
+    "Fremont": "anchored by the historic Mission San José district and encompassing Niles Canyon, with a housing boom that transformed former orchards into one of the Bay Area's largest suburbs",
+    "Oceanside": "stretching from the Camp Pendleton border to the pier district, with a mix of military-connected housing and established beach neighborhoods",
+    "Pasadena": "known for its Craftsman bungalow heritage, the Rose Bowl, and Caltech corridor, with historic neighborhoods like Bungalow Heaven carrying architectural preservation overlays",
+    "Long Beach": "California's fifth-largest city, with oil-era wealth reflected in the Bluff Park and Belmont Shore neighborhoods and a downtown that has undergone substantial revitalization",
+    "Los Angeles": "the nation's second-largest city, with hyper-local micro-markets where property values can shift dramatically within a few blocks",
+    "San Diego": "California's second-largest city, with neighborhoods ranging from the beach communities of Pacific Beach and La Jolla to the urban core of downtown and the family-oriented suburbs of Scripps Ranch and Rancho Peñasquitos",
+    "San Francisco": "defined by its iconic Victorian and Edwardian housing stock, micro-neighborhood pricing, and some of the highest per-square-foot values in the nation",
+    "San Jose": "the heart of Silicon Valley, where tech industry employment has driven sustained appreciation and where mid-century ranch homes in neighborhoods like Willow Glen command premium prices",
+    "Sacramento": "California's capital city, with tree-canopied neighborhoods like Land Park and East Sacramento featuring pre-war homes alongside rapid suburban growth in Natomas and Pocket",
+    "Riverside": "home to the historic Mission Inn district and the UCR campus, with neighborhoods ranging from the Wood Streets historic district to newer developments in the Alessandro corridor",
+    "Huntington Beach": "known as Surf City USA, with beachfront properties along Pacific Coast Highway commanding premium values and established inland neighborhoods offering more moderate pricing",
+    "Palm Springs": "a mid-century modern architectural destination in the Coachella Valley, where seasonal demand and resort-style living create unique valuation considerations",
+    "Santa Monica": "one of Southern California's most desirable coastal cities, where strict rent control ordinances and building height limits create persistent supply constraints",
+    "Torrance": "anchored by the Del Amo Fashion Center and South Bay aerospace employers, with Old Torrance's charming downtown and the Riviera's hillside homes representing distinct sub-markets",
+    "Modesto": "the county seat of Stanislaus County, where Central Valley affordability has attracted Bay Area transplants and where neighborhoods like College Area and Village One represent different eras of development",
+    "Elk Grove": "one of Sacramento County's fastest-growing cities, with master-planned communities built primarily since the 1990s and a relatively homogeneous housing stock well-suited to desktop analysis",
+    "Corona": "a rapidly grown Inland Empire city where the transition from citrus groves to residential development created waves of construction from the 1980s through the 2000s",
+    "Chula Vista": "San Diego County's second-largest city, with established neighborhoods in western Chula Vista and newer master-planned communities like Otay Ranch in the east",
+}
+
 def slugify(name):
     s = name.lower().strip()
     s = re.sub(r'[^a-z0-9]+', '-', s)
@@ -131,6 +172,10 @@ def generate_content(loc):
         prop_mix = "single-family homes, condominiums, and planned developments"
         common_type = "single-family residences and condominiums"
 
+    # Local landmark/history flavor (unique per location)
+    landmark_text = LOCATION_LANDMARKS.get(name, "")
+    assessor_text = COUNTY_ASSESSOR_NOTES.get(county, "")
+
     # Why section — unique reasons per area
     why_reasons = []
     if hu > 50000:
@@ -152,8 +197,13 @@ def generate_content(loc):
     elif character == "inland":
         why_reasons.append(f"The {flavors[0]} common {in_label} typically feature standardized construction and uniform lot sizes, which are well-suited for desktop appraisal analysis.")
 
+    # Add county assessor context if available
+    if assessor_text:
+        why_reasons.append(assessor_text)
+
     # Market snapshot
-    market_text = f"""The {name} real estate market currently shows a median home value of approximately {format_number(local_median)}, with prices trending {('up' if local_trend > 0 else 'down')} {abs(local_trend)}% year-over-year. The average price per square foot in the area is around ${local_ppsf:,}, and homes are spending an average of {local_dom} days on market before going under contract. The housing stock {in_label} consists primarily of {prop_mix}."""
+    landmark_intro = f" — {landmark_text} —" if landmark_text else ""
+    market_text = f"""{name}{landmark_intro} currently shows a median home value of approximately {format_number(local_median)}, with prices trending {('up' if local_trend > 0 else 'down')} {abs(local_trend)}% year-over-year. The average price per square foot in the area is around ${local_ppsf:,}, and homes are spending an average of {local_dom} days on market before going under contract. The housing stock {in_label} consists primarily of {prop_mix}."""
 
     # When needed section
     when_needed_scenarios = [
@@ -259,17 +309,47 @@ def generate_page_html(loc):
     schema_service = json.dumps({
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": f"Date-of-Death Appraisal — {cl}",
+        "name": f"Desktop Date-of-Death Appraisal — {cl}",
         "provider": {
             "@type": "LocalBusiness",
-            "name": "Date-of-Death Appraisals"
+            "name": "Date-of-Death Appraisals",
+            "url": "https://date-of-death.com"
         },
-        "areaServed": {
-            "@type": "City",
-            "name": city
+        "areaServed": [
+            {
+                "@type": "City",
+                "name": city,
+                "containedInPlace": {
+                    "@type": "AdministrativeArea",
+                    "name": f"{county} County, California"
+                }
+            },
+            {
+                "@type": "State",
+                "name": "California",
+                "sameAs": "https://en.wikipedia.org/wiki/California"
+            }
+        ],
+        "description": f"Remote desktop date-of-death property appraisal for estates {il}. USPAP-compliant, IRS-accepted. No property visit required — performed entirely remotely using MLS data, public records, and market analysis.",
+        "serviceType": "Desktop Real Estate Appraisal",
+        "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceType": "Remote / Desktop",
+            "serviceUrl": "https://date-of-death.com/order",
+            "availableLanguage": ["English", "Spanish"]
         },
-        "description": f"Desktop date-of-death property appraisal for estates {il}. USPAP-compliant, IRS-accepted.",
-        "serviceType": "Real Estate Appraisal"
+        "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "299",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "USD",
+                "price": "299",
+                "description": "Starting price for Basic Desktop Appraisal"
+            }
+        },
+        "termsOfService": "https://date-of-death.com/faq"
     }, indent=2)
 
     faq_items = content["faqs"]

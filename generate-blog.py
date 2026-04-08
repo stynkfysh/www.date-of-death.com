@@ -35,9 +35,91 @@ SITE_DIR = os.environ.get(
 )
 BLOG_DIR = os.path.join(SITE_DIR, "blog")
 PUBLISHED_FILE = os.path.join(BLOG_DIR, "published.json")
+LOCATIONS_FILE = os.path.join(SITE_DIR, "locations_118.json")
 ENTRIES_PER_PAGE = 5
 MAX_REPORT_AGE_DAYS = 7       # Only process reports generated in past N days
 MAX_EFFECTIVE_AGE_DAYS = 60   # Only include if effective date within N days
+
+# ── City Page Mapping (for internal links from blog → city pages) ──
+def load_city_slug_map():
+    """Load a mapping of city name → slug from the locations JSON."""
+    city_map = {}
+    if os.path.exists(LOCATIONS_FILE):
+        try:
+            with open(LOCATIONS_FILE, 'r') as f:
+                locations = json.load(f)
+            for loc in locations:
+                name = loc.get('name', '')
+                slug = re.sub(r'[^a-z0-9]+', '-', name.lower().strip()).strip('-')
+                city_name = loc.get('city', name)
+                # Map both the location name and city name to the slug
+                city_map[name.lower()] = slug
+                city_map[city_name.lower()] = slug
+        except Exception:
+            pass
+    return city_map
+
+CITY_SLUG_MAP = load_city_slug_map()
+
+
+def get_city_link(city_name):
+    """Return an HTML link to the city landing page if one exists."""
+    slug = CITY_SLUG_MAP.get(city_name.lower(), '')
+    if slug:
+        return f'<a href="/{slug}">{city_name} real estate</a>'
+    return f'{city_name} real estate'
+
+
+# ── Appraiser's Take Commentary ──────────────────────────────────
+def generate_appraisers_take(metrics, city):
+    """Generate a brief 'Appraiser's Take' paragraph based on key metrics."""
+    lines = []
+
+    # Analyze inventory
+    inv_val = metrics.get('Months of Inventory', {}).get('value', '')
+    try:
+        inv = float(inv_val)
+        if inv < 2:
+            lines.append(f"Inventory remains extremely tight at {inv_val} months of supply, which continues to support prices even as affordability pressures build.")
+        elif inv < 4:
+            lines.append(f"At {inv_val} months of inventory, the market is balanced but still favors sellers — a pattern we're seeing across much of California heading into mid-2026.")
+        else:
+            lines.append(f"With {inv_val} months of inventory on the market, buyers have more negotiating power than we've seen in recent years.")
+    except (ValueError, TypeError):
+        pass
+
+    # Analyze price trend
+    trend_val = metrics.get('12-Mo Linear $/SF Change', {}).get('value', '')
+    if trend_val:
+        try:
+            pct = float(trend_val.replace('%', '').replace('+', ''))
+            if pct > 3:
+                lines.append("Year-over-year per-square-foot appreciation is still running hot, which means date-of-death valuations from even 6–12 months ago may look materially different from today's market.")
+            elif pct > 0:
+                lines.append("Modest per-square-foot gains suggest a market that is stabilizing after the rapid appreciation of recent years — a pattern that makes recent comparable sales particularly reliable for retrospective valuations.")
+            elif pct > -5:
+                lines.append("Slight softening in per-square-foot values is consistent with the broader rate-sensitivity we're observing statewide. For estates with recent dates of death, this underscores the importance of using sales data tightly bracketed around the valuation date.")
+            else:
+                lines.append("The notable decline in per-square-foot values is a signal that appraisers need to be especially careful about adjustment direction when selecting comparables that sold at different points over the past 12 months.")
+        except (ValueError, TypeError):
+            pass
+
+    # Analyze SP/LP ratio
+    splp_val = metrics.get('SP/LP Ratio', {}).get('value', '')
+    if splp_val:
+        try:
+            splp = float(splp_val.replace('%', ''))
+            if splp > 100:
+                lines.append(f"A sale-to-list ratio of {splp_val} tells us that list prices are still being used as starting points rather than ceilings — something I account for when reconciling comparable sales in appraisal reports.")
+            elif splp > 97:
+                lines.append(f"The {splp_val} sale-to-list ratio indicates a healthy, competitive market where properties are selling close to asking price.")
+        except (ValueError, TypeError):
+            pass
+
+    if not lines:
+        lines.append(f"Current conditions in the {city} market reflect broader California trends: persistent demand against limited supply, with interest rate movements continuing to shape both buyer activity and seller decisions.")
+
+    return " ".join(lines[:2])  # Use at most 2 sentences
 
 # ── Helpers ────────────────────────────────────────────────────────
 
@@ -183,6 +265,10 @@ def generate_blog_entry_html(entry):
     else:
         location_label = city
 
+    # Generate city link and appraiser's take
+    city_link_html = get_city_link(city)
+    appraisers_take = generate_appraisers_take(data['metrics'], city)
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,6 +281,7 @@ def generate_blog_entry_html(entry):
     <meta property="og:description" content="Real estate market trends for {location_label} &mdash; key metrics for estate valuations.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://date-of-death.com/blog/{slug}">
+    <meta property="og:image" content="https://date-of-death.com/images/og-market-trends.jpg">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{title}">
     <meta name="twitter:description" content="Real estate market trends for {location_label} &mdash; key metrics for estate valuations.">
@@ -209,15 +296,32 @@ def generate_blog_entry_html(entry):
         "@type": "Article",
         "headline": "{title}",
         "datePublished": "{entry['date_iso']}",
+        "image": {{
+            "@type": "ImageObject",
+            "url": "https://date-of-death.com/images/og-market-trends.jpg",
+            "width": 1200,
+            "height": 630
+        }},
         "author": {{
             "@type": "Person",
             "name": "Brian Ward",
-            "jobTitle": "California Certified Residential Appraiser"
+            "jobTitle": "California Certified Residential Appraiser",
+            "url": "https://date-of-death.com/about"
         }},
         "publisher": {{
             "@type": "Organization",
             "name": "Date-of-Death Appraisals",
-            "url": "https://date-of-death.com"
+            "url": "https://date-of-death.com",
+            "logo": {{
+                "@type": "ImageObject",
+                "url": "https://date-of-death.com/images/logo.png",
+                "width": 300,
+                "height": 60
+            }}
+        }},
+        "mainEntityOfPage": {{
+            "@type": "WebPage",
+            "@id": "https://date-of-death.com/blog/{slug}"
         }}
     }}
     </script>
@@ -252,7 +356,7 @@ def generate_blog_entry_html(entry):
 
 <section>
     <div class="container blog-content">
-        <p class="blog-meta"><a href="/blog">&larr; All Posts</a> &nbsp;&middot;&nbsp; {date_str} &nbsp;&middot;&nbsp; {location_label}, California</p>
+        <p class="blog-meta"><a href="/blog">&larr; All Posts</a> &nbsp;&middot;&nbsp; {date_str} &nbsp;&middot;&nbsp; {location_label}, California &nbsp;&middot;&nbsp; {city_link_html}</p>
         <h2>{title}</h2>
 
         <div class="blog-metrics-table">
@@ -269,6 +373,13 @@ def generate_blog_entry_html(entry):
 
         <h3>Analysis</h3>
         {summary_html}
+
+        <div class="blog-appraisers-take" style="background:#f5f7fa; border-left:4px solid #1a5276; padding:16px 20px; margin:28px 0; border-radius:4px;">
+            <h3 style="margin:0 0 8px; font-size:1rem; color:#1a5276;">Appraiser&rsquo;s Take</h3>
+            <p style="margin:0; font-size:0.95rem;">{appraisers_take}</p>
+        </div>
+
+        <p class="blog-city-link" style="margin:20px 0; font-size:0.95rem;">Looking for a date-of-death appraisal in this area? Learn more about our {city_link_html} appraisal services.</p>
 
         <div class="blog-cta-box">
             <h3>Need a Date-of-Death Appraisal?</h3>
