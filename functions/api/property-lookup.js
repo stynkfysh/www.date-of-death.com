@@ -125,57 +125,51 @@ export async function onRequestPost(context) {
       });
     }
 
-    const prompt = `I need you to look up a specific property and analyze it. The property is:
+    const prompt = `Search for property details and perform a complexity analysis for: ${cleanAddress}
 
-ADDRESS: ${cleanAddress}
-
-YOUR FIRST AND MOST IMPORTANT TASK: Search for this property's details.
-
-Try these searches IN ORDER until you find the property:
-1. Search: "${cleanAddress} zillow"
-2. Search: "${cleanAddress} redfin"
-3. Search: "${cleanAddress} realtor.com"
-4. Search: "${cleanAddress} county assessor property details"
-5. Search: "${cleanAddress} property records bedrooms bathrooms square feet"
-
-From the search results, find these details for the SUBJECT PROPERTY at ${cleanAddress}:
+STEP 1: LOOK UP THE SUBJECT PROPERTY
+Search Zillow, Redfin, Realtor.com, or county assessor records to find:
 - Property type (single-family residence, condominium, townhouse, duplex, etc.)
-- Living area in square feet
+- Living area (square feet)
 - Year built
-- Lot size in square feet (SFR only; skip for condos/townhouses)
+- Site size (lot size in square feet) — SFR only; skip for condos and townhouses
 - Number of bedrooms
 - Number of bathrooms
 
-This is the most critical step. You MUST search for and find the actual property data before proceeding. Do not guess or estimate — use real data from your search results.
-
 STEP 2: CHECK IF AUTOMATICALLY COMPLEX
-After finding the property details, check if any of these apply:
+The following are AUTOMATICALLY COMPLEX — skip paired sales analysis entirely:
 - Small income property (2–4 units, duplex, triplex, fourplex)
-- Commercial, manufactured, mobile home, apartment building (5+ units)
-- Any type that is NOT single-family residence, condominium, or townhouse
-- Any SFR with a lot size of 15,000 square feet or greater
+- Commercial property
+- Manufactured home or mobile home
+- Apartment building (5+ units)
+- Any property type that is NOT single-family residence, condominium, or townhouse (e.g., agricultural, industrial, mixed-use, vacant land, co-op)
+- Any SFR with a site size of 15,000 square feet or greater
 
-If any apply, mark as complex and skip to the JSON output.
+If automatically complex, return a JSON code block with the result immediately.
 
 STEP 3: PAIRED SALES ANALYSIS (only for SFR, condo, or townhouse with lot < 15,000 SF)
-Search for comparable sales within 1 mile that closed within the last 12 months. Same property type only.
+Search for comparable sales within 1 mile of the subject that closed within the last 12 months. Same property type only (SFR comps for SFR subject, condo comps for condo subject, townhouse comps for townhouse subject).
 
 You need at least 3 comps that COLLECTIVELY satisfy ALL of these brackets:
 
-1. Living Area (±25%): Each comp within ±25% of subject. Among 3 comps, need at least one larger AND one smaller (or one equal within ±1-2%).
+1. Living Area (±25%): Each comp must have living area within ±25% of the subject. Among the 3 comps, at least one must equal the subject's living area (within ±1-2%), OR there must be at least one larger AND at least one smaller.
 
-2. Site Size (±100%) — SFR only: Each comp between 50% and 200% of subject lot. Need at least one larger AND one smaller (or one equal within ±1-2%).
+2. Site Size (±100%) — SFR only, skip for condos/townhouses: Each comp must have site size between 50% and 200% of the subject's lot. Among the 3 comps, at least one must equal the subject's site size (within ±1-2%), OR there must be at least one larger AND at least one smaller.
 
-3. Year Built: Age (A) = 2026 − Year Built. Age Spread (S) = (0.1786 × A) + 8.214. Range = Year Built ± S (rounded). Each comp within range. Need one older AND one newer (or one equal).
+3. Year Built: Calculate the range using this formula:
+   Age (A) = 2026 − Year Built
+   Age Spread (S) = (0.1786 × A) + 8.214
+   Search Range = Year Built ± S (rounded to nearest whole year)
+   Each comp must fall within this range. Among the 3 comps, at least one must have the same year built as the subject, OR there must be at least one older AND at least one newer.
 
-4. Bedrooms: At least one comp with same bedroom count.
+4. Bedrooms: Among the 3 comps, at least one must have the same number of bedrooms as the subject.
 
-5. Bathrooms: At least one comp with same count, OR one with fewer AND one with more.
+5. Bathrooms: Among the 3 comps, at least one must have the same number of bathrooms as the subject, OR there must be at least one with fewer AND at least one with more bathrooms.
 
 If you cannot find 3 qualifying comps within 1 mile, the property is COMPLEX.
 
-STEP 4: RETURN JSON
-Return ONLY a JSON code block with this format:
+STEP 4: RETURN RESULTS
+After completing your analysis, provide the results as a JSON code block with this exact format:
 
 \`\`\`json
 {
@@ -215,9 +209,9 @@ Return ONLY a JSON code block with this format:
 }
 \`\`\`
 
-confidence: "high" = found exact property on Zillow/Redfin/assessor, "medium" = less direct source, "low" = could not find this specific property.
+For confidence: use "high" if you found the exact property data from a reliable source, "medium" if data is from a less direct source, "low" if you could not find this specific property.
 
-IMPORTANT: Do not fabricate data. If you cannot find the property or comps, say so and default to complex.`;
+IMPORTANT: Do not fabricate comparable sales. If data is unavailable or unreliable, say so and default to complex. Always show real comps you actually found via search.`;
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -227,12 +221,12 @@ IMPORTANT: Do not fabricate data. If you cannot find the property or comps, say 
         body: JSON.stringify({
           systemInstruction: {
             parts: [{
-              text: 'You are a California real estate property data researcher. Your PRIMARY job is to search Google for specific property details (square footage, bedrooms, bathrooms, year built, lot size, property type) using real estate websites like Zillow, Redfin, Realtor.com, and county assessor/tax records. You MUST use Google Search for EVERY property lookup — never guess or rely on training data. Search multiple times with different queries if the first search does not return the property page. When you find a property page on Zillow, Redfin, or a county assessor site, extract the exact property characteristics from that page. If you truly cannot find the property after multiple searches, set confidence to "low" and return nulls for the fields you could not find. After finding the subject property, search for nearby comparable sales. Report only real data from search results.'
+              text: 'You are a California real estate appraisal complexity analyst. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first for the subject property, then search for comparable sales nearby. Report only real data you found via search. If you cannot find sufficient data, default to complex.'
             }]
           },
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
-            temperature: 0.1,
+            temperature: 0,
           },
           tools: [{ google_search: {} }],
         }),
