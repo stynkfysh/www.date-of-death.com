@@ -548,9 +548,12 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
         btn.textContent = "Check Complete";
         btn.disabled = true;
 
+        // Check if we actually got useful property data back
+        var hasPropertyData = data.sqft || data.yearBuilt || data.bedrooms || data.bathrooms;
+
         // Confidence indicator
-        if (data.confidence === "low") {
-            status.textContent = "Property found, but data confidence is low. Please verify all fields carefully.";
+        if (!hasPropertyData || data.confidence === "low") {
+            status.textContent = "We couldn\u2019t find detailed records for this property. Please fill in the property details manually below.";
             status.className = "lookup-status warning";
         } else if (data.confidence === "medium") {
             status.textContent = "Property found. Please verify the details below.";
