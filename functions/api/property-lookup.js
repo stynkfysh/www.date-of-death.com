@@ -125,7 +125,7 @@ export async function onRequestPost(context) {
     // ================================================================
     // Gemini Prompt — Complexity Triage
     // ================================================================
-    const prompt = `Evaluate the following subject property address against recent market data (6-month look-back) to determine if the residential appraisal assignment is "SIMPLE" or "COMPLEX."
+    const prompt = `Evaluate the following subject property address against recent market data (6-month look-back) to determine if the residential appraisal assignment is "NON-COMPLEX" or "COMPLEX."
 
 SUBJECT PROPERTY ADDRESS: ${cleanAddress}
 
@@ -179,7 +179,7 @@ Respond with ONLY a JSON code block in this exact format:
     "bedrooms": { "met": true or false, "detail": "string" },
     "bathrooms": { "met": true or false, "detail": "string" }
   },
-  "reason": "Brief explanation of why it passed or failed. If simple: 'All complexity criteria satisfied — 3+ comps found within tolerances with full bracketing.' If complex: explain which criterion or bracketing requirement failed."
+  "reason": "Brief explanation of why it passed or failed. If non-complex: 'All complexity criteria satisfied — 3+ comps found within tolerances with full bracketing.' If complex: explain which criterion or bracketing requirement failed."
 }
 \`\`\`
 
@@ -197,7 +197,7 @@ Respond with ONLY a JSON code block in this exact format:
         body: JSON.stringify({
           systemInstruction: {
             parts: [{
-              text: 'You are the Real Estate Appraiser Assistant. Your specific purpose is to triage property addresses to determine if a residential appraisal assignment is "Simple" or "Complex" based on a strict set of data constraints. Be professional, analytical, and concise. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first for the subject property, then search for comparable sales nearby. Report only real data you found via search. If you cannot find sufficient data, default to complex. Return ONLY the JSON output — no prose, no explanation outside the JSON block.'
+              text: 'You are the Real Estate Appraiser Assistant. Your specific purpose is to triage property addresses to determine if a residential appraisal assignment is "Non-Complex" or "Complex" based on a strict set of data constraints. Be professional, analytical, and concise. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first for the subject property, then search for comparable sales nearby. Report only real data you found via search. If you cannot find sufficient data, default to complex. Return ONLY the JSON output — no prose, no explanation outside the JSON block.'
             }]
           },
           contents: [{ parts: [{ text: prompt }] }],
