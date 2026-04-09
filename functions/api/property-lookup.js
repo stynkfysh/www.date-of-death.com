@@ -123,77 +123,81 @@ export async function onRequestPost(context) {
     }
 
     // ================================================================
-    // Gemini Prompt — Complexity Check Only
+    // Gemini Prompt — Complexity Triage
     // ================================================================
-    const prompt = `Determine whether the following residential property is Complex or Non-Complex based on specific paired sales criteria.
+    const prompt = `Evaluate the following subject property address against recent market data (6-month look-back) to determine if the residential appraisal assignment is "SIMPLE" or "COMPLEX."
 
-PROPERTY ADDRESS: ${cleanAddress}
+SUBJECT PROPERTY ADDRESS: ${cleanAddress}
 
-WORKFLOW:
+# Evaluation Criteria (The "Complexity Test")
 
-STEP 1 — IDENTIFY SUBJECT ATTRIBUTES
-Search Zillow, Redfin, Realtor.com, or county assessor records to find:
-- Property Type (SFR, Condo, Townhouse, Duplex, Triplex, Fourplex, Manufactured/Mobile, Commercial, Apartment, Vacant Land, Agricultural, etc.)
-- Living Area (square feet)
-- Year Built
-- Site Size / Lot Size (square feet) — SFR only; skip for condos and townhouses
-- Number of Bedrooms
-- Number of Bathrooms
+For a property to be "SIMPLE," you must find at least 3 comparable sales that meet ALL of the following:
+1. **Recency:** Sold within the last 6 months.
+2. **Distance:** Located within 1 mile of the subject.
+3. **GLA (Size):** Living area must be within ±20% of the subject's living area.
+4. **Age:** Built within ±10 years of the subject's year built.
 
-STEP 2 — FILTER PROPERTY TYPE (AUTOMATICALLY COMPLEX)
-If the property is any of the following, classify immediately as COMPLEX and skip Steps 3–4:
-- Small income property (2–4 units: duplex, triplex, fourplex)
-- Commercial property
-- Manufactured home or mobile home
-- Apartment building (5+ units)
-- Agricultural, industrial, mixed-use, vacant land, co-op
-- ANY property type that is NOT single-family residence, condominium, or townhouse
-- Any SFR with a site size >= 15,000 square feet
+# Bracketing Requirements
 
-STEP 3 — SEARCH & COMPARE (only for SFR, Condo, or Townhouse with lot < 15,000 SF)
-Search for at least 3 comparable sales of the same property type within 1 mile that closed in the last 6 months.
+Even if 3 sales are found, you must confirm the following bracketing exists within those 3+ sales:
+- **Size Bracketing:** At least 1 sale with EQUAL living area, OR 1 sale that is LARGER and 1 sale that is SMALLER.
+- **Age Bracketing:** At least 1 sale with the SAME year built, OR 1 sale that is NEWER and 1 sale that is OLDER.
+- **Bedrooms:** At least 1 sale with the SAME number of bedrooms.
+- **Bathrooms:** At least 1 sale with the SAME number of bathrooms, OR 1 sale with MORE and 1 sale with FEWER bathrooms.
 
-STEP 4 — VALIDATE BRACKETS
-Check if the 3+ comps collectively satisfy ALL of these:
+# Response Format
 
-1. Living Area: Each comp within ±25% of subject. Must bracket (one larger, one smaller) or have one equal.
-2. Site Size (SFR only): Each comp between 50% and 200% of subject lot. Must bracket or have one equal.
-3. Age: Calculate the range:
-   Age (A) = 2026 − Year Built
-   Age Spread (S) = (0.1786 × A) + 8.214
-   Range = Year Built ± S (rounded to nearest whole year)
-   Each comp must fall within this range. Must bracket (one older, one newer) or have one equal.
-4. Bedrooms: At least one comp must match the subject exactly.
-5. Bathrooms: Must bracket (one with more, one with fewer) or have one equal.
-
-If ANY bracket criterion is not met, or if fewer than 3 qualifying comps exist within 1 mile and 6 months, the property is COMPLEX.
-
-STEP 5 — OUTPUT
-Return ONLY a JSON code block with this exact format:
+Respond with ONLY a JSON code block in this exact format:
 
 \`\`\`json
 {
   "address": "the full address as identified",
-  "propertyType": "SFR" or "Condo" or "Townhouse" or "Duplex" or "Manufactured" or "Commercial" or "Other",
+  "propertyType": "SFR" or "Condo" or "Townhouse" or "Other",
   "isComplex": true or false,
-  "reason": "One-sentence explanation. If non-complex: 'All paired sales criteria satisfied.' If complex: explain which criterion failed (e.g., 'Insufficient comparable sales to satisfy bathroom bracketing.' or 'Property type is duplex — automatically complex.' or 'SFR lot size is 18,500 SF (>= 15,000 SF) — automatically complex.')"
+  "subjectProfile": {
+    "livingArea": number or null,
+    "livingAreaRange": { "min": number, "max": number },
+    "yearBuilt": number or null,
+    "yearBuiltRange": { "min": number, "max": number },
+    "bedrooms": number or null,
+    "bathrooms": number or null
+  },
+  "comparableSales": [
+    {
+      "address": "string",
+      "saleDate": "YYYY-MM-DD",
+      "gla": number,
+      "yearBuilt": number,
+      "bedrooms": number,
+      "bathrooms": number,
+      "distance": "string (e.g. 0.4 mi)"
+    }
+  ],
+  "bracketingCheck": {
+    "size": { "met": true or false, "detail": "string" },
+    "age": { "met": true or false, "detail": "string" },
+    "bedrooms": { "met": true or false, "detail": "string" },
+    "bathrooms": { "met": true or false, "detail": "string" }
+  },
+  "reason": "Brief explanation of why it passed or failed. If simple: 'All complexity criteria satisfied — 3+ comps found within tolerances with full bracketing.' If complex: explain which criterion or bracketing requirement failed."
 }
 \`\`\`
 
-IMPORTANT:
-- Do NOT fabricate comparable sales. If data is unavailable or unreliable, default to COMPLEX with reason "Unable to verify sufficient comparable sales data."
+# Important Rules
+- Do NOT fabricate comparable sales. If data is unavailable or unreliable, state "Data Unavailable" for that field and mark the criteria as failed.
 - Always search first — never guess from training data alone.
+- If you cannot find sufficient data, default to COMPLEX with reason explaining what was inconclusive.
 - Return ONLY the JSON code block, nothing else.`;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           systemInstruction: {
             parts: [{
-              text: 'You are a California real estate appraisal complexity analyst. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first. Report only real data you found via search. If you cannot find sufficient data, default to complex. Return ONLY the JSON output — no prose, no explanation outside the JSON block.'
+              text: 'You are the Real Estate Appraiser Assistant. Your specific purpose is to triage property addresses to determine if a residential appraisal assignment is "Simple" or "Complex" based on a strict set of data constraints. Be professional, analytical, and concise. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first for the subject property, then search for comparable sales nearby. Report only real data you found via search. If you cannot find sufficient data, default to complex. Return ONLY the JSON output — no prose, no explanation outside the JSON block.'
             }]
           },
           contents: [{ parts: [{ text: prompt }] }],

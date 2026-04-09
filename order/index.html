@@ -100,11 +100,11 @@
                 </div>
             </div>
 
-            <!-- NON-COMPLEX result -->
+            <!-- SIMPLE result -->
             <div id="result-noncomplex" class="noncomplex-alert" style="display: none;">
                 <div class="noncomplex-icon">&#10004;</div>
                 <div class="noncomplex-content">
-                    <strong>Standard Property &mdash; Qualifies for Flat-Rate Appraisal</strong>
+                    <strong>Simple Property &mdash; Qualifies for Flat-Rate Appraisal</strong>
                     <p id="noncomplex-reason"></p>
                     <p class="result-address-echo"></p>
                 </div>
@@ -371,17 +371,16 @@ function startLookupAnimation() {
     var overlayMsg = document.getElementById("lookup-overlay-msg");
     var progressFill = document.getElementById("lookup-progress-fill");
     var messages = [
-        { text: "Identifying property type\u2026", duration: 3000 },
-        { text: "Looking up property characteristics\u2026", duration: 4000 },
-        { text: "Checking for automatically complex features\u2026", duration: 3000 },
-        { text: "Searching for comparable sale 1\u2026", duration: 4000 },
-        { text: "Searching for comparable sale 2\u2026", duration: 4000 },
-        { text: "Searching for comparable sale 3\u2026", duration: 4000 },
-        { text: "Validating paired sales brackets\u2026", duration: 3000 },
-        { text: "Checking living area brackets\u2026", duration: 3000 },
-        { text: "Checking site size brackets\u2026", duration: 3000 },
-        { text: "Checking age, bedroom, and bathroom brackets\u2026", duration: 3000 },
-        { text: "Finalizing analysis\u2026", duration: 5000 }
+        { text: "Identifying subject property\u2026", duration: 3000 },
+        { text: "Looking up living area and year built\u2026", duration: 4000 },
+        { text: "Searching for comparable sales within 1 mile\u2026", duration: 4000 },
+        { text: "Filtering sales from the last 6 months\u2026", duration: 4000 },
+        { text: "Checking GLA (size) tolerance \u00b120%\u2026", duration: 3000 },
+        { text: "Checking age tolerance \u00b110 years\u2026", duration: 3000 },
+        { text: "Validating size bracketing\u2026", duration: 3000 },
+        { text: "Validating age bracketing\u2026", duration: 3000 },
+        { text: "Checking bedroom and bathroom bracketing\u2026", duration: 3000 },
+        { text: "Compiling complexity verdict\u2026", duration: 5000 }
     ];
     var idx = 0;
     overlayMsg.textContent = messages[0].text;
@@ -470,7 +469,7 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
             document.getElementById("result-noncomplex").style.display = "flex";
             document.getElementById("step-order").style.display = "block";
             document.getElementById("step-order").scrollIntoView({ behavior: "smooth", block: "start" });
-            status.textContent = "Property qualifies for standard flat-rate appraisal.";
+            status.textContent = "Simple property \u2014 qualifies for standard flat-rate appraisal.";
             status.className = "lookup-status success";
         }
 
