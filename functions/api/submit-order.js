@@ -41,24 +41,15 @@ function buildOrderEmail(data) {
     cpa: 'CPA / Tax Professional',
     other: 'Other',
   };
-  const conditionLabels = {
-    excellent: 'Excellent — Fully updated',
-    good: 'Good — Well maintained',
-    average: 'Average — Normal wear',
-    fair: 'Fair — Needs some work',
-    poor: 'Poor — Significant deferred maintenance',
-  };
-  const propertyTypeLabels = {
-    sfr: 'Single-Family Residence',
-    condo: 'Condominium',
-    pud: 'PUD',
-  };
 
   const tier = tierLabels[data.tier] || data.tier || 'Not selected';
   const purpose = purposeLabels[data.purpose] || data.purpose || 'Not selected';
   const role = roleLabels[data.client_role] || data.client_role || 'Not specified';
-  const condition = conditionLabels[data.condition] || data.condition || 'Not specified';
-  const propertyType = propertyTypeLabels[data.property_type] || data.property_type || 'Not specified';
+  const propertyType = data.property_type || 'Not specified';
+
+  // Extract AI complexity check info if available
+  const complexityCheck = data.complexity_check || {};
+  const aiReason = complexityCheck.reason || '—';
 
   return `<!DOCTYPE html>
 <html>
@@ -77,13 +68,9 @@ function buildOrderEmail(data) {
   <h3 style="color: #555; margin-top: 24px;">Property Information</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Address</td><td style="padding: 6px 12px;">${escapeHtml(data.property_address)}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Type</td><td style="padding: 6px 12px;">${escapeHtml(propertyType)}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Sq Ft</td><td style="padding: 6px 12px;">${escapeHtml(data.sqft) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Lot Size</td><td style="padding: 6px 12px;">${escapeHtml(data.lot_size) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Year Built</td><td style="padding: 6px 12px;">${escapeHtml(data.year_built) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Bedrooms</td><td style="padding: 6px 12px;">${escapeHtml(data.bedrooms) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Bathrooms</td><td style="padding: 6px 12px;">${escapeHtml(data.bathrooms) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Condition</td><td style="padding: 6px 12px;">${escapeHtml(condition)}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Type (AI)</td><td style="padding: 6px 12px;">${escapeHtml(propertyType)}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Complexity</td><td style="padding: 6px 12px; color: #1a7a3a;">Non-Complex</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">AI Reason</td><td style="padding: 6px 12px;">${escapeHtml(aiReason)}</td></tr>
   </table>
 
   <h3 style="color: #555; margin-top: 24px;">Appraisal Details</h3>
@@ -103,6 +90,18 @@ function buildOrderEmail(data) {
 }
 
 function buildContactEmail(data) {
+  const roleLabels = {
+    heir: 'Heir / Beneficiary',
+    trustee: 'Trustee',
+    executor: 'Executor / Administrator',
+    attorney: 'Attorney',
+    cpa: 'CPA / Tax Professional',
+    other: 'Other',
+  };
+  const role = roleLabels[data.contact_role] || data.contact_role || '—';
+  const complexityCheck = data.complexity_check || {};
+  const propertyType = complexityCheck.propertyType || '—';
+
   return `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
@@ -114,17 +113,14 @@ function buildContactEmail(data) {
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Name</td><td style="padding: 6px 12px;">${escapeHtml(data.contact_name)}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Email</td><td style="padding: 6px 12px;"><a href="mailto:${escapeHtml(data.contact_email)}">${escapeHtml(data.contact_email)}</a></td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Phone</td><td style="padding: 6px 12px;">${escapeHtml(data.contact_phone) || '—'}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Role</td><td style="padding: 6px 12px;">${escapeHtml(role)}</td></tr>
   </table>
 
   <h3 style="color: #555; margin-top: 24px;">Property Information</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Address</td><td style="padding: 6px 12px;">${escapeHtml(data.property_address)}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Complexity</td><td style="padding: 6px 12px; color: #b8860b;">${escapeHtml(data.complexity_reason) || 'Identified as complex'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Sq Ft</td><td style="padding: 6px 12px;">${escapeHtml(data.sqft) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Lot Size</td><td style="padding: 6px 12px;">${escapeHtml(data.lot_size) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Year Built</td><td style="padding: 6px 12px;">${escapeHtml(data.year_built) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Bedrooms</td><td style="padding: 6px 12px;">${escapeHtml(data.bedrooms) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Bathrooms</td><td style="padding: 6px 12px;">${escapeHtml(data.bathrooms) || '—'}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Type (AI)</td><td style="padding: 6px 12px;">${escapeHtml(propertyType)}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Complexity Reason</td><td style="padding: 6px 12px; color: #b8860b;">${escapeHtml(data.complexity_reason) || 'Identified as complex'}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Notes</td><td style="padding: 6px 12px;">${escapeHtml(data.contact_notes) || '—'}</td></tr>
   </table>
 

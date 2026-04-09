@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order a Date-of-Death Appraisal Online | Date-of-Death Appraisals</title>
-    <meta name="description" content="Order your California desktop date-of-death appraisal online. Enter property details, select your tier, and pay securely. Fast and simple process.">
+    <meta name="description" content="Order your California desktop date-of-death appraisal online. Enter a property address, get an instant AI complexity check, and pay securely.">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Order a Date-of-Death Appraisal Online">
-    <meta property="og:description" content="Order your California desktop date-of-death appraisal in minutes. Simple flat-rate pricing, fast turnaround.">
+    <meta property="og:description" content="Order your California desktop date-of-death appraisal in minutes. AI-powered complexity check, flat-rate pricing, fast turnaround.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://date-of-death.com/order">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Order a Date-of-Death Appraisal Online">
-    <meta name="twitter:description" content="Order your California desktop date-of-death appraisal in minutes. Simple flat-rate pricing, fast turnaround.">
+    <meta name="twitter:description" content="Order your California desktop date-of-death appraisal in minutes. Flat-rate pricing, fast turnaround.">
     <link rel="canonical" href="https://date-of-death.com/order">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -63,14 +63,72 @@
 <section class="hero hero-order">
     <div class="container">
         <h1>Order Your Appraisal</h1>
-        <p class="subtitle">Fill out the form below with your property details. All orders are reviewed by a certified appraiser before acceptance.</p>
+        <p class="subtitle">Enter the property address below to check if your property qualifies for our standard flat-rate desktop appraisal.</p>
     </div>
 </section>
 
-<section>
+<!-- ============================================================
+     STEP 1: Address Entry + AI Complexity Check
+     ============================================================ -->
+<section id="step-address" class="order-step">
+    <div class="container">
+        <div class="order-form">
+            <fieldset class="form-section">
+                <legend>Property Address</legend>
+                <div class="form-group full-width">
+                    <label for="property-address">Full Property Address <span class="required">*</span></label>
+                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="off">
+                </div>
+                <div class="form-group full-width" style="margin-bottom: 0;">
+                    <button type="button" id="lookup-btn" class="lookup-btn" disabled style="width:100%;">Check Property</button>
+                    <div id="lookup-status" class="lookup-status"></div>
+                </div>
+                <!-- Honeypot -->
+                <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+                    <label for="website">Website</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
+                </div>
+            </fieldset>
+
+            <!-- Full-screen loading overlay -->
+            <div id="lookup-overlay" class="lookup-overlay" style="display: none;">
+                <div class="lookup-overlay-content">
+                    <div class="lookup-spinner"></div>
+                    <p id="lookup-overlay-msg" class="lookup-overlay-msg">Analyzing property&hellip;</p>
+                    <p class="lookup-overlay-sub">Our AI is checking property type, characteristics, and comparable sales availability. This usually takes 30&ndash;60 seconds.</p>
+                    <div class="lookup-progress-bar"><div id="lookup-progress-fill" class="lookup-progress-fill"></div></div>
+                </div>
+            </div>
+
+            <!-- NON-COMPLEX result -->
+            <div id="result-noncomplex" class="noncomplex-alert" style="display: none;">
+                <div class="noncomplex-icon">&#10004;</div>
+                <div class="noncomplex-content">
+                    <strong>Standard Property &mdash; Qualifies for Flat-Rate Appraisal</strong>
+                    <p id="noncomplex-reason"></p>
+                    <p class="result-address-echo"></p>
+                </div>
+            </div>
+
+            <!-- COMPLEX result -->
+            <div id="result-complex" class="complexity-alert" style="display: none;">
+                <div class="complexity-icon">&#9888;</div>
+                <div class="complexity-content">
+                    <strong>Complex Property</strong>
+                    <p id="complex-reason"></p>
+                    <p class="complexity-note">This property requires a manual review before we can provide a quote. Please fill out the form below and we'll get back to you within one business day.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     STEP 2a: Non-Complex — Contact Info + Pay
+     ============================================================ -->
+<section id="step-order" class="order-step" style="display: none;">
     <div class="container">
         <form class="order-form" id="order-form" action="#" method="POST">
-
             <fieldset class="form-section">
                 <legend>Contact Information</legend>
                 <div class="form-row">
@@ -104,119 +162,6 @@
             </fieldset>
 
             <fieldset class="form-section">
-                <legend>Property Information</legend>
-                <div class="form-group full-width">
-                    <label for="property-address">Property Address <span class="required">*</span></label>
-                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="off">
-                </div>
-                <div class="form-group full-width">
-                    <div class="address-lookup-row">
-                        <button type="button" id="lookup-btn" class="lookup-btn" disabled>Check Property</button>
-                    </div>
-                    <div id="lookup-status" class="lookup-status"></div>
-                    <!-- Full-screen loading overlay for property lookup -->
-                    <div id="lookup-overlay" class="lookup-overlay" style="display: none;">
-                        <div class="lookup-overlay-content">
-                            <div class="lookup-spinner"></div>
-                            <p id="lookup-overlay-msg" class="lookup-overlay-msg">Checking property&hellip;</p>
-                            <p class="lookup-overlay-sub">This may take up to 60 seconds while our AI searches public records and comparable sales data.</p>
-                            <div class="lookup-progress-bar"><div id="lookup-progress-fill" class="lookup-progress-fill"></div></div>
-                        </div>
-                    </div>
-                    <!-- Honeypot: invisible to humans, bots will fill it -->
-                    <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
-                        <label for="website">Website</label>
-                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="property-type">Property Type <span class="required">*</span></label>
-                        <select id="property-type" name="property_type" required>
-                            <option value="">Select...</option>
-                            <option value="sfr">Single-Family Residence</option>
-                            <option value="condo">Condominium</option>
-                            <option value="pud">PUD</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="date-of-death">Date of Death / Effective Date</label>
-                        <input type="date" id="date-of-death" name="date_of_death">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="sqft">Approx. Square Footage <span class="required">*</span></label>
-                        <input type="number" id="sqft" name="sqft" required min="100" placeholder="e.g. 1850">
-                    </div>
-                    <div class="form-group">
-                        <label for="lot-size">Lot Size (sq ft)</label>
-                        <input type="number" id="lot-size" name="lot_size" min="0" placeholder="e.g. 6500">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="year-built">Year Built</label>
-                        <input type="number" id="year-built" name="year_built" min="1800" max="2026" placeholder="e.g. 1975">
-                    </div>
-                    <div class="form-group">
-                        <label for="bedrooms">Bedrooms</label>
-                        <select id="bedrooms" name="bedrooms">
-                            <option value="">Select...</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6+">6+</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="bathrooms">Bathrooms</label>
-                        <select id="bathrooms" name="bathrooms">
-                            <option value="">Select...</option>
-                            <option value="1">1</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2">2</option>
-                            <option value="2.5">2.5</option>
-                            <option value="3">3</option>
-                            <option value="3.5">3.5</option>
-                            <option value="4+">4+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="condition">Condition at Effective Date</label>
-                        <select id="condition" name="condition">
-                            <option value="">Select...</option>
-                            <option value="excellent">Excellent &mdash; Fully updated</option>
-                            <option value="good">Good &mdash; Well maintained</option>
-                            <option value="average">Average &mdash; Normal wear</option>
-                            <option value="fair">Fair &mdash; Needs some work</option>
-                            <option value="poor">Poor &mdash; Significant deferred maintenance</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="noncomplex-alert" class="noncomplex-alert" style="display: none;">
-                    <div class="noncomplex-icon">&#10004;</div>
-                    <div class="noncomplex-content">
-                        <strong>Standard Property</strong>
-                        <p>This property qualifies for our desktop appraisal services. Please verify the details above and complete the order below.</p>
-                    </div>
-                </div>
-                <div id="complexity-alert" class="complexity-alert" style="display: none;">
-                    <div class="complexity-icon">&#9888;</div>
-                    <div class="complexity-content">
-                        <strong>Complex Property</strong>
-                        <p id="complexity-reason"></p>
-                        <p class="complexity-note">This property requires a manual review before we can provide a quote. Please use the contact form below and we'll get back to you within one business day.</p>
-                    </div>
-                </div>
-                <p id="autofill-note" class="form-note" style="display: none;">Property details auto-filled from public records &mdash; please verify and correct as needed.</p>
-            </fieldset>
-
-            <fieldset class="form-section">
                 <legend>Appraisal Details</legend>
                 <div class="form-row">
                     <div class="form-group">
@@ -231,6 +176,17 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="date-of-death">Date of Death / Effective Date</label>
+                        <input type="date" id="date-of-death" name="date_of_death">
+                    </div>
+                </div>
+                <div class="form-group full-width" id="other-purpose-group" style="display: none;">
+                    <label for="other-purpose">Please describe the purpose of your appraisal</label>
+                    <input type="text" id="other-purpose" name="other_purpose" placeholder="e.g., bankruptcy, immigration, divorce, etc.">
+                    <p class="form-note">Our expertise is date-of-death valuations and the IRS step-up in basis. For other purposes, please confirm with your attorney or the requesting party that a desktop appraisal will be accepted.</p>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
                         <label for="tier">Report Tier <span class="required">*</span></label>
                         <select id="tier" name="tier" required>
                             <option value="">Select...</option>
@@ -239,71 +195,99 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group full-width" id="other-purpose-group" style="display: none;">
-                    <label for="other-purpose">Please describe the purpose of your appraisal</label>
-                    <input type="text" id="other-purpose" name="other_purpose" placeholder="e.g., bankruptcy, immigration, divorce, etc.">
-                    <p class="form-note">Our expertise is date-of-death valuations and the IRS step-up in basis. For other purposes, please confirm with your attorney or the requesting party that a desktop appraisal will be accepted.</p>
-                </div>
                 <div class="form-group full-width">
                     <label for="notes">Additional Notes</label>
-                    <textarea id="notes" name="notes" rows="3" placeholder="Additional Notes"></textarea>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know about the property or assignment..."></textarea>
                 </div>
             </fieldset>
 
             <div class="form-summary" id="order-summary">
-                <p>All orders are reviewed by a certified appraiser before acceptance. You'll receive a confirmation email with instructions for submitting property photos and completing payment.</p>
+                <p>You'll be redirected to Square for secure payment after submitting. Your appraisal will begin immediately upon receipt of payment.</p>
             </div>
 
-            <button type="button" class="hero-cta form-submit" id="order-submit-btn">Submit Order</button>
-
-            <!-- Contact Me form for complex properties -->
-            <div id="complex-contact-section" class="complex-contact-form" style="display: none;">
-                <h3>Request a Custom Quote</h3>
-                <p class="complex-subtitle">Complex properties require additional analysis. Fill in your details below and we'll reach out within one business day with a custom quote and timeline.</p>
-                <div class="form-group">
-                    <label for="contact-name">Full Name <span class="required">*</span></label>
-                    <input type="text" id="contact-name" name="contact_name" required autocomplete="name">
-                </div>
-                <div class="form-group">
-                    <label for="contact-email">Email Address <span class="required">*</span></label>
-                    <input type="email" id="contact-email" name="contact_email" required autocomplete="email">
-                </div>
-                <div class="form-group">
-                    <label for="contact-phone">Phone Number</label>
-                    <input type="tel" id="contact-phone" name="contact_phone" autocomplete="tel">
-                </div>
-                <div class="form-group">
-                    <label for="contact-notes">Additional Details</label>
-                    <textarea id="contact-notes" name="contact_notes" rows="3" placeholder="Any details that might help us assess your property..."></textarea>
-                </div>
-                <button type="button" id="contact-submit-btn" class="hero-cta form-submit">Request Quote</button>
-            </div>
+            <button type="button" class="hero-cta form-submit" id="order-submit-btn">Continue to Payment</button>
         </form>
+    </div>
+</section>
 
-        <!-- Confirmation overlay (shown after successful submit) -->
-        <div id="order-confirmation" class="order-confirmation" style="display: none;">
+<!-- ============================================================
+     STEP 2b: Complex — Custom Quote Request
+     ============================================================ -->
+<section id="step-complex" class="order-step" style="display: none;">
+    <div class="container">
+        <form class="order-form" id="complex-form" action="#" method="POST">
+            <fieldset class="form-section complex-contact-form-section">
+                <legend>Request a Custom Quote</legend>
+                <p class="complex-subtitle">Complex properties require additional analysis. Fill in your details below and we'll reach out within one business day with a custom quote and timeline.</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact-name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="contact-name" name="contact_name" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="contact-email" name="contact_email" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact-phone">Phone Number</label>
+                        <input type="tel" id="contact-phone" name="contact_phone" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-role">Your Role</label>
+                        <select id="contact-role" name="contact_role">
+                            <option value="">Select...</option>
+                            <option value="heir">Heir / Beneficiary</option>
+                            <option value="trustee">Trustee</option>
+                            <option value="executor">Executor / Administrator</option>
+                            <option value="attorney">Attorney</option>
+                            <option value="cpa">CPA / Tax Professional</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="contact-notes">Additional Details</label>
+                    <textarea id="contact-notes" name="contact_notes" rows="3" placeholder="Any details that might help us assess your property (date of death, renovations, unique features, etc.)..."></textarea>
+                </div>
+            </fieldset>
+            <button type="button" id="contact-submit-btn" class="hero-cta form-submit">Request Quote</button>
+        </form>
+    </div>
+</section>
+
+<!-- ============================================================
+     Confirmation (shown after successful submit)
+     ============================================================ -->
+<div id="order-confirmation" class="order-step" style="display: none;">
+    <div class="container">
+        <div class="order-confirmation">
             <div class="confirmation-icon">&#10004;</div>
             <h2 id="confirmation-title">Order Received!</h2>
-            <p id="confirmation-message">Thank you for your order. We'll review your details and send a Square invoice to your email within one business day. Once payment is received, your appraisal will be underway.</p>
+            <p id="confirmation-message">Thank you for your order.</p>
             <p class="confirmation-detail">A confirmation has been sent to <strong id="confirmation-email"></strong>.</p>
             <p class="confirmation-fallback">Questions? Email us at <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a></p>
         </div>
     </div>
-</section>
+</div>
 
+<!-- ============================================================
+     What Happens Next
+     ============================================================ -->
 <section>
     <div class="container">
         <h2 class="section-title">What Happens Next</h2>
         <div class="steps-grid">
             <div class="step-card">
                 <span class="step-number">1</span>
-                <h3>Order Review</h3>
-                <p>We review your order details and confirm acceptance within one business day.</p>
+                <h3>Property Check</h3>
+                <p>Enter the property address and our AI checks whether it qualifies for a standard flat-rate appraisal.</p>
             </div>
             <div class="step-card">
                 <span class="step-number">2</span>
-                <h3>Payment</h3>
-                <p>Pay securely online after your order is confirmed and accepted.</p>
+                <h3>Order &amp; Pay</h3>
+                <p>Fill in your contact details, select your tier, and pay securely through Square.</p>
             </div>
             <div class="step-card">
                 <span class="step-number">3</span>
@@ -351,7 +335,20 @@
 <script>
 // --- Anti-bot: record page load time ---
 var _pageLoadTs = Date.now();
-var _lookupUsed = false;
+
+// --- Address input: enable lookup button when address looks complete ---
+document.getElementById("property-address").addEventListener("input", function() {
+    document.getElementById("lookup-btn").disabled = this.value.trim().length < 10;
+});
+
+// Allow Enter key to trigger lookup
+document.getElementById("property-address").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        var btn = document.getElementById("lookup-btn");
+        if (!btn.disabled) btn.click();
+    }
+});
 
 // --- Purpose dropdown logic ---
 document.getElementById("purpose").addEventListener("change", function() {
@@ -367,111 +364,73 @@ document.getElementById("purpose").addEventListener("change", function() {
     }
 });
 
-// --- Address input: enable lookup button when address looks complete ---
-function checkAddressReady() {
-    var addr = document.getElementById("property-address").value.trim();
-    // Require at least a street number, some text, and a CA zip or city
-    document.getElementById("lookup-btn").disabled = addr.length < 10;
-}
-document.getElementById("property-address").addEventListener("input", checkAddressReady);
-
-// --- Build full address string ---
-function getFullAddress() {
-    return document.getElementById("property-address").value.trim();
-}
-
-// --- Condition change: treat "poor" as complex ---
-document.getElementById("condition").addEventListener("change", function() {
-    if (this.value === "poor" && _lookupUsed) {
-        triggerComplexFlow("Property condition is rated as Poor (significant deferred maintenance), which requires a manual review and custom quote.");
-    }
-});
-
-function triggerComplexFlow(reason) {
-    var complexAlert = document.getElementById("complexity-alert");
-    var noncomplexAlert = document.getElementById("noncomplex-alert");
-    var appraisalDetails = document.querySelectorAll(".form-section")[2];
-    var orderSummary = document.getElementById("order-summary");
-    var orderSubmitBtn = document.getElementById("order-submit-btn");
-    var contactSection = document.getElementById("complex-contact-section");
-
-    document.getElementById("complexity-reason").textContent = reason;
-    complexAlert.style.display = "flex";
-    noncomplexAlert.style.display = "none";
-
-    appraisalDetails.style.display = "none";
-    orderSummary.style.display = "none";
-    orderSubmitBtn.style.display = "none";
-
-    var nameVal = document.getElementById("client-name").value;
-    var emailVal = document.getElementById("client-email").value;
-    var phoneVal = document.getElementById("client-phone").value;
-    if (nameVal) document.getElementById("contact-name").value = nameVal;
-    if (emailVal) document.getElementById("contact-email").value = emailVal;
-    if (phoneVal) document.getElementById("contact-phone").value = phoneVal;
-
-    contactSection.style.display = "block";
-}
-
-// --- Animated lookup status messages with overlay ---
+// --- Animated lookup overlay ---
 var _statusInterval = null;
 function startLookupAnimation() {
-    var status = document.getElementById("lookup-status");
     var overlay = document.getElementById("lookup-overlay");
     var overlayMsg = document.getElementById("lookup-overlay-msg");
     var progressFill = document.getElementById("lookup-progress-fill");
     var messages = [
-        { text: "Checking property\u2026", duration: 2000 },
-        { text: "Looking for similar property 1\u2026", duration: 3000 },
-        { text: "Looking for similar property 2\u2026", duration: 3000 },
-        { text: "Looking for similar property 3\u2026", duration: 3000 },
-        { text: "Looking for similar property 4\u2026", duration: 3000 },
-        { text: "Looking for similar property 5\u2026", duration: 3000 },
-        { text: "Looking for similar property 6\u2026", duration: 3000 },
-        { text: "Looking for similar property 7\u2026", duration: 3000 },
-        { text: "Looking for similar property 8\u2026", duration: 3000 },
-        { text: "Looking for similar property 9\u2026", duration: 3000 },
-        { text: "Looking for similar property 10\u2026", duration: 3000 }
+        { text: "Identifying property type\u2026", duration: 3000 },
+        { text: "Looking up property characteristics\u2026", duration: 4000 },
+        { text: "Checking for automatically complex features\u2026", duration: 3000 },
+        { text: "Searching for comparable sale 1\u2026", duration: 4000 },
+        { text: "Searching for comparable sale 2\u2026", duration: 4000 },
+        { text: "Searching for comparable sale 3\u2026", duration: 4000 },
+        { text: "Validating paired sales brackets\u2026", duration: 3000 },
+        { text: "Checking living area brackets\u2026", duration: 3000 },
+        { text: "Checking site size brackets\u2026", duration: 3000 },
+        { text: "Checking age, bedroom, and bathroom brackets\u2026", duration: 3000 },
+        { text: "Finalizing analysis\u2026", duration: 5000 }
     ];
     var idx = 0;
-    status.textContent = messages[0].text;
-    status.className = "lookup-status loading";
     overlayMsg.textContent = messages[0].text;
     overlay.style.display = "flex";
     progressFill.style.width = "0%";
 
     function cycle() {
-        idx = (idx + 1) % messages.length;
-        status.textContent = messages[idx].text;
+        idx++;
+        if (idx >= messages.length) idx = messages.length - 1;
         overlayMsg.textContent = messages[idx].text;
-        // Progress bar: step through proportionally
-        var pct = Math.min(100, Math.round((idx / (messages.length - 1)) * 95));
+        var pct = Math.min(95, Math.round((idx / (messages.length - 1)) * 95));
         progressFill.style.width = pct + "%";
-        _statusInterval = setTimeout(cycle, messages[idx].duration);
+        if (idx < messages.length - 1) {
+            _statusInterval = setTimeout(cycle, messages[idx].duration);
+        }
     }
     _statusInterval = setTimeout(cycle, messages[0].duration);
 }
 function stopLookupAnimation() {
-    if (_statusInterval) {
-        clearTimeout(_statusInterval);
-        _statusInterval = null;
-    }
+    if (_statusInterval) { clearTimeout(_statusInterval); _statusInterval = null; }
     var overlay = document.getElementById("lookup-overlay");
     var progressFill = document.getElementById("lookup-progress-fill");
     progressFill.style.width = "100%";
     setTimeout(function() { overlay.style.display = "none"; }, 400);
 }
 
+// --- Store result for form submission ---
+var _complexityResult = null;
+var _checkedAddress = "";
+
 // --- Property Lookup via AI ---
 document.getElementById("lookup-btn").addEventListener("click", async function() {
     var btn = this;
-    var address = getFullAddress();
+    var address = document.getElementById("property-address").value.trim();
     var status = document.getElementById("lookup-status");
 
-    if (!address || _lookupUsed) return;
+    if (!address) return;
 
     btn.disabled = true;
     btn.textContent = "Checking\u2026";
+    status.textContent = "";
+    status.className = "lookup-status";
+
+    // Hide any previous results
+    document.getElementById("result-noncomplex").style.display = "none";
+    document.getElementById("result-complex").style.display = "none";
+    document.getElementById("step-order").style.display = "none";
+    document.getElementById("step-complex").style.display = "none";
+
     startLookupAnimation();
 
     try {
@@ -494,95 +453,42 @@ document.getElementById("lookup-btn").addEventListener("click", async function()
 
         stopLookupAnimation();
 
-        // Populate form fields
-        if (data.sqft) document.getElementById("sqft").value = data.sqft;
-        if (data.lotSize) document.getElementById("lot-size").value = data.lotSize;
-        if (data.yearBuilt) document.getElementById("year-built").value = data.yearBuilt;
+        _checkedAddress = address;
+        _complexityResult = data;
 
-        if (data.bedrooms) {
-            var bedSel = document.getElementById("bedrooms");
-            var bedVal = data.bedrooms >= 6 ? "6+" : String(data.bedrooms);
-            for (var i = 0; i < bedSel.options.length; i++) {
-                if (bedSel.options[i].value === bedVal) { bedSel.selectedIndex = i; break; }
-            }
-        }
-
-        if (data.bathrooms) {
-            var bathSel = document.getElementById("bathrooms");
-            var bathVal = data.bathrooms >= 4 ? "4+" : String(data.bathrooms);
-            for (var i = 0; i < bathSel.options.length; i++) {
-                if (bathSel.options[i].value === bathVal) { bathSel.selectedIndex = i; break; }
-            }
-        }
-
-        if (data.propertyType) {
-            var typeSel = document.getElementById("property-type");
-            for (var i = 0; i < typeSel.options.length; i++) {
-                if (typeSel.options[i].value === data.propertyType) { typeSel.selectedIndex = i; break; }
-            }
-        }
-
-        // Show autofill note and lock lookup to one use
-        document.getElementById("autofill-note").style.display = "block";
-        _lookupUsed = true;
-        btn.textContent = "Check Complete";
-        btn.disabled = true;
-
-        // Check if we actually got useful property data back
-        var hasPropertyData = data.sqft || data.yearBuilt || data.bedrooms || data.bathrooms;
-
-        // Confidence indicator
-        if (!hasPropertyData || data.confidence === "low") {
-            status.textContent = "We couldn\u2019t find detailed records for this property. Please fill in the property details manually below.";
+        if (data.isComplex) {
+            // --- COMPLEX ---
+            document.getElementById("complex-reason").textContent = data.reason || "This property has been identified as complex based on our analysis.";
+            document.getElementById("result-complex").style.display = "flex";
+            document.getElementById("step-complex").style.display = "block";
+            document.getElementById("step-complex").scrollIntoView({ behavior: "smooth", block: "start" });
+            status.textContent = "Complex property \u2014 custom quote required.";
             status.className = "lookup-status warning";
-        } else if (data.confidence === "medium") {
-            status.textContent = "Property found. Please verify the details below.";
-            status.className = "lookup-status success";
         } else {
-            status.textContent = "Property found. Details auto-filled below.";
+            // --- NON-COMPLEX ---
+            document.getElementById("noncomplex-reason").textContent = data.reason || "All paired sales criteria satisfied.";
+            document.getElementById("result-noncomplex").style.display = "flex";
+            document.getElementById("step-order").style.display = "block";
+            document.getElementById("step-order").scrollIntoView({ behavior: "smooth", block: "start" });
+            status.textContent = "Property qualifies for standard flat-rate appraisal.";
             status.className = "lookup-status success";
         }
 
-        // Complexity assessment — switch form mode
-        var complexAlert = document.getElementById("complexity-alert");
-        var noncomplexAlert = document.getElementById("noncomplex-alert");
-        var appraisalDetails = document.querySelectorAll(".form-section")[2]; // Appraisal Details fieldset
-        var orderSummary = document.getElementById("order-summary");
-        var orderSubmitBtn = document.getElementById("order-submit-btn");
-        var contactSection = document.getElementById("complex-contact-section");
-
-        if (data.complexity && data.complexity.isComplex) {
-            triggerComplexFlow(data.complexity.reason || "This property has been identified as complex based on our analysis.");
-        } else if (data.complexity && !data.complexity.isComplex) {
-            // NON-COMPLEX: show success, keep order form visible
-            noncomplexAlert.style.display = "flex";
-            complexAlert.style.display = "none";
-
-            // Make sure order sections are visible
-            appraisalDetails.style.display = "";
-            orderSummary.style.display = "";
-            orderSubmitBtn.style.display = "";
-            contactSection.style.display = "none";
-        } else {
-            // No complexity data — keep defaults
-            complexAlert.style.display = "none";
-            noncomplexAlert.style.display = "none";
-        }
+        // Allow re-check with a different address
+        btn.textContent = "Check Again";
+        btn.disabled = false;
 
     } catch (err) {
         stopLookupAnimation();
-        if (err.message === 'Rate limited') {
-            status.textContent = "Too many lookups. Please wait 15 minutes or fill in the details manually.";
+        if (err.message === "Rate limited") {
+            status.textContent = "Too many lookups. Please wait 15 minutes or contact us directly.";
             status.className = "lookup-status warning";
         } else {
-            status.textContent = "Could not look up property. Please fill in the details manually.";
+            status.textContent = "Could not check this property. Please try again, or email us at orders@date-of-death.com for assistance.";
             status.className = "lookup-status error";
         }
-    }
-
-    if (!_lookupUsed) {
-        btn.disabled = false;
         btn.textContent = "Check Property";
+        btn.disabled = false;
     }
 });
 
@@ -591,25 +497,12 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
     var btn = this;
     var form = document.getElementById("order-form");
 
-    // Check if condition is poor — treat as complex
-    var conditionVal = document.getElementById("condition").value;
-    if (conditionVal === "poor") {
-        triggerComplexFlow("Property condition is rated as Poor (significant deferred maintenance), which requires a manual review and custom quote.");
-        return;
-    }
-
-    // Basic HTML5 validation
+    // Validate required fields
     var requiredFields = form.querySelectorAll("[required]");
     var valid = true;
     for (var i = 0; i < requiredFields.length; i++) {
-        var field = requiredFields[i];
-        // Skip fields inside hidden complex contact section
-        if (field.closest("#complex-contact-section")) continue;
-        // Skip fields inside hidden appraisal details
-        var section = field.closest(".form-section");
-        if (section && section.style.display === "none") continue;
-        if (!field.value) {
-            field.reportValidity();
+        if (!requiredFields[i].value) {
+            requiredFields[i].reportValidity();
             valid = false;
             break;
         }
@@ -627,19 +520,14 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         client_email: document.getElementById("client-email").value,
         client_phone: document.getElementById("client-phone").value,
         client_role: document.getElementById("client-role").value,
-        property_address: getFullAddress(),
-        property_type: document.getElementById("property-type").value,
+        property_address: _checkedAddress,
+        property_type: _complexityResult ? _complexityResult.propertyType : "",
         date_of_death: document.getElementById("date-of-death").value,
-        sqft: document.getElementById("sqft").value,
-        lot_size: document.getElementById("lot-size").value,
-        year_built: document.getElementById("year-built").value,
-        bedrooms: document.getElementById("bedrooms").value,
-        bathrooms: document.getElementById("bathrooms").value,
-        condition: document.getElementById("condition").value,
         purpose: document.getElementById("purpose").value,
-        other_purpose: document.getElementById("other-purpose").value,
+        other_purpose: document.getElementById("other-purpose") ? document.getElementById("other-purpose").value : "",
         tier: document.getElementById("tier").value,
-        notes: document.getElementById("notes").value
+        notes: document.getElementById("notes").value,
+        complexity_check: _complexityResult
     };
 
     try {
@@ -651,21 +539,22 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         var result = await resp.json();
         if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
 
-        // Redirect to Square for payment
         if (result.checkoutUrl) {
             window.location.href = result.checkoutUrl;
         } else {
-            // Fallback if no checkout URL returned
-            document.getElementById("order-form").style.display = "none";
+            // Fallback
+            document.getElementById("step-address").style.display = "none";
+            document.getElementById("step-order").style.display = "none";
             var conf = document.getElementById("order-confirmation");
             document.getElementById("confirmation-title").textContent = "Order Received!";
             document.getElementById("confirmation-message").textContent = "Thank you for your order. We\u2019ll send payment instructions to your email shortly.";
             document.getElementById("confirmation-email").textContent = data.client_email;
             conf.style.display = "block";
+            conf.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     } catch (err) {
         btn.disabled = false;
-        btn.textContent = "Submit Order";
+        btn.textContent = "Continue to Payment";
         alert("There was a problem submitting your order. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
     }
 });
@@ -674,7 +563,6 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
 document.getElementById("contact-submit-btn").addEventListener("click", async function() {
     var btn = this;
 
-    // Validate contact fields
     var contactName = document.getElementById("contact-name");
     var contactEmail = document.getElementById("contact-email");
     if (!contactName.value) { contactName.reportValidity(); return; }
@@ -690,14 +578,11 @@ document.getElementById("contact-submit-btn").addEventListener("click", async fu
         contact_name: contactName.value,
         contact_email: contactEmail.value,
         contact_phone: document.getElementById("contact-phone").value,
+        contact_role: document.getElementById("contact-role").value,
         contact_notes: document.getElementById("contact-notes").value,
-        property_address: getFullAddress(),
-        complexity_reason: document.getElementById("complexity-reason").textContent,
-        sqft: document.getElementById("sqft").value,
-        lot_size: document.getElementById("lot-size").value,
-        year_built: document.getElementById("year-built").value,
-        bedrooms: document.getElementById("bedrooms").value,
-        bathrooms: document.getElementById("bathrooms").value
+        property_address: _checkedAddress,
+        complexity_reason: document.getElementById("complex-reason").textContent,
+        complexity_check: _complexityResult
     };
 
     try {
@@ -709,14 +594,14 @@ document.getElementById("contact-submit-btn").addEventListener("click", async fu
         var result = await resp.json();
         if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
 
-        // Show confirmation
-        document.getElementById("order-form").style.display = "none";
+        document.getElementById("step-address").style.display = "none";
+        document.getElementById("step-complex").style.display = "none";
         var conf = document.getElementById("order-confirmation");
         document.getElementById("confirmation-title").textContent = "Quote Request Received!";
         document.getElementById("confirmation-message").textContent = "Thank you for your inquiry. We\u2019ll review the property details and reach out within one business day with a custom quote and timeline.";
         document.getElementById("confirmation-email").textContent = data.contact_email;
         conf.style.display = "block";
-        window.scrollTo({ top: conf.offsetTop - 100, behavior: "smooth" });
+        conf.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
         btn.disabled = false;
         btn.textContent = "Request Quote";

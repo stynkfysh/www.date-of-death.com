@@ -7,7 +7,7 @@ function isRateLimited(ip) {
   const now = Date.now();
   const entry = rateLimitMap.get(ip);
 
-  // Clean old entries periodically (every 100 checks)
+  // Clean old entries periodically
   if (Math.random() < 0.01) {
     for (const [key, val] of rateLimitMap) {
       if (now - val.windowStart > RATE_LIMIT_WINDOW) rateLimitMap.delete(key);
@@ -69,11 +69,11 @@ export async function onRequestPost(context) {
 
     // --- Security Layer 3: Honeypot ---
     if (body.website || body.company_url) {
-      // Bot filled the hidden field — silently return a fake success
       return new Response(JSON.stringify({
-        sqft: null, lotSize: null, yearBuilt: null, bedrooms: null, bathrooms: null,
-        propertyType: null, confidence: 'low',
-        complexity: { isComplex: false, reason: 'Unable to determine', compsFound: 0 }
+        isComplex: false,
+        reason: 'Unable to determine.',
+        propertyType: null,
+        address: body.address || '',
       }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -84,14 +84,12 @@ export async function onRequestPost(context) {
     if (body._ts) {
       const elapsed = Date.now() - Number(body._ts);
       if (elapsed < 3000 || elapsed > 3600000) {
-        // Too fast (bot) or token older than 1 hour (replay)
         return new Response(JSON.stringify({ error: 'Invalid request. Please reload and try again.' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
     } else {
-      // No timestamp — reject
       return new Response(JSON.stringify({ error: 'Invalid request format.' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -109,7 +107,6 @@ export async function onRequestPost(context) {
 
     const cleanAddress = address.trim();
 
-    // Basic format check — should contain at least one digit and one letter
     if (!/\d/.test(cleanAddress) || !/[a-zA-Z]/.test(cleanAddress)) {
       return new Response(JSON.stringify({ error: 'Please enter a valid street address.' }), {
         status: 400,
@@ -125,93 +122,68 @@ export async function onRequestPost(context) {
       });
     }
 
-    const prompt = `Search for property details and perform a complexity analysis for: ${cleanAddress}
+    // ================================================================
+    // Gemini Prompt — Complexity Check Only
+    // ================================================================
+    const prompt = `Determine whether the following residential property is Complex or Non-Complex based on specific paired sales criteria.
 
-STEP 1: LOOK UP THE SUBJECT PROPERTY
+PROPERTY ADDRESS: ${cleanAddress}
+
+WORKFLOW:
+
+STEP 1 — IDENTIFY SUBJECT ATTRIBUTES
 Search Zillow, Redfin, Realtor.com, or county assessor records to find:
-- Property type (single-family residence, condominium, townhouse, duplex, etc.)
-- Living area (square feet)
-- Year built
-- Site size (lot size in square feet) — SFR only; skip for condos and townhouses
-- Number of bedrooms
-- Number of bathrooms
+- Property Type (SFR, Condo, Townhouse, Duplex, Triplex, Fourplex, Manufactured/Mobile, Commercial, Apartment, Vacant Land, Agricultural, etc.)
+- Living Area (square feet)
+- Year Built
+- Site Size / Lot Size (square feet) — SFR only; skip for condos and townhouses
+- Number of Bedrooms
+- Number of Bathrooms
 
-STEP 2: CHECK IF AUTOMATICALLY COMPLEX
-The following are AUTOMATICALLY COMPLEX — skip paired sales analysis entirely:
-- Small income property (2–4 units, duplex, triplex, fourplex)
+STEP 2 — FILTER PROPERTY TYPE (AUTOMATICALLY COMPLEX)
+If the property is any of the following, classify immediately as COMPLEX and skip Steps 3–4:
+- Small income property (2–4 units: duplex, triplex, fourplex)
 - Commercial property
 - Manufactured home or mobile home
 - Apartment building (5+ units)
-- Any property type that is NOT single-family residence, condominium, or townhouse (e.g., agricultural, industrial, mixed-use, vacant land, co-op)
-- Any SFR with a site size of 15,000 square feet or greater
+- Agricultural, industrial, mixed-use, vacant land, co-op
+- ANY property type that is NOT single-family residence, condominium, or townhouse
+- Any SFR with a site size >= 15,000 square feet
 
-If automatically complex, return a JSON code block with the result immediately.
+STEP 3 — SEARCH & COMPARE (only for SFR, Condo, or Townhouse with lot < 15,000 SF)
+Search for at least 3 comparable sales of the same property type within 1 mile that closed in the last 6 months.
 
-STEP 3: PAIRED SALES ANALYSIS (only for SFR, condo, or townhouse with lot < 15,000 SF)
-Search for comparable sales within 1 mile of the subject that closed within the last 12 months. Same property type only (SFR comps for SFR subject, condo comps for condo subject, townhouse comps for townhouse subject).
+STEP 4 — VALIDATE BRACKETS
+Check if the 3+ comps collectively satisfy ALL of these:
 
-You need at least 3 comps that COLLECTIVELY satisfy ALL of these brackets:
-
-1. Living Area (±25%): Each comp must have living area within ±25% of the subject. Among the 3 comps, at least one must equal the subject's living area (within ±1-2%), OR there must be at least one larger AND at least one smaller.
-
-2. Site Size (±100%) — SFR only, skip for condos/townhouses: Each comp must have site size between 50% and 200% of the subject's lot. Among the 3 comps, at least one must equal the subject's site size (within ±1-2%), OR there must be at least one larger AND at least one smaller.
-
-3. Year Built: Calculate the range using this formula:
+1. Living Area: Each comp within ±25% of subject. Must bracket (one larger, one smaller) or have one equal.
+2. Site Size (SFR only): Each comp between 50% and 200% of subject lot. Must bracket or have one equal.
+3. Age: Calculate the range:
    Age (A) = 2026 − Year Built
    Age Spread (S) = (0.1786 × A) + 8.214
-   Search Range = Year Built ± S (rounded to nearest whole year)
-   Each comp must fall within this range. Among the 3 comps, at least one must have the same year built as the subject, OR there must be at least one older AND at least one newer.
+   Range = Year Built ± S (rounded to nearest whole year)
+   Each comp must fall within this range. Must bracket (one older, one newer) or have one equal.
+4. Bedrooms: At least one comp must match the subject exactly.
+5. Bathrooms: Must bracket (one with more, one with fewer) or have one equal.
 
-4. Bedrooms: Among the 3 comps, at least one must have the same number of bedrooms as the subject.
+If ANY bracket criterion is not met, or if fewer than 3 qualifying comps exist within 1 mile and 6 months, the property is COMPLEX.
 
-5. Bathrooms: Among the 3 comps, at least one must have the same number of bathrooms as the subject, OR there must be at least one with fewer AND at least one with more bathrooms.
-
-If you cannot find 3 qualifying comps within 1 mile, the property is COMPLEX.
-
-STEP 4: RETURN RESULTS
-After completing your analysis, provide the results as a JSON code block with this exact format:
+STEP 5 — OUTPUT
+Return ONLY a JSON code block with this exact format:
 
 \`\`\`json
 {
-  "sqft": number or null,
-  "lotSize": number or null,
-  "yearBuilt": number or null,
-  "bedrooms": number or null,
-  "bathrooms": number or null,
-  "propertyType": "sfr" or "condo" or "townhouse" or "duplex" or "triplex" or "fourplex" or "manufactured" or "mobile" or "commercial" or "other" or null,
-  "confidence": "high" or "medium" or "low",
-  "complexity": {
-    "isComplex": true or false,
-    "reason": "string explaining why complex or non-complex",
-    "autoComplex": true or false,
-    "autoComplexReason": "string or null — only if auto-complex",
-    "compsFound": number,
-    "comps": [
-      {
-        "address": "string",
-        "sqft": number,
-        "lotSize": number or null,
-        "yearBuilt": number,
-        "bedrooms": number,
-        "bathrooms": number,
-        "saleDate": "YYYY-MM-DD",
-        "salePrice": number
-      }
-    ],
-    "bracketAnalysis": {
-      "livingArea": { "met": true or false, "detail": "string" },
-      "siteSize": { "met": true or false or "N/A", "detail": "string" },
-      "yearBuilt": { "met": true or false, "detail": "string" },
-      "bedrooms": { "met": true or false, "detail": "string" },
-      "bathrooms": { "met": true or false, "detail": "string" }
-    }
-  }
+  "address": "the full address as identified",
+  "propertyType": "SFR" or "Condo" or "Townhouse" or "Duplex" or "Manufactured" or "Commercial" or "Other",
+  "isComplex": true or false,
+  "reason": "One-sentence explanation. If non-complex: 'All paired sales criteria satisfied.' If complex: explain which criterion failed (e.g., 'Insufficient comparable sales to satisfy bathroom bracketing.' or 'Property type is duplex — automatically complex.' or 'SFR lot size is 18,500 SF (>= 15,000 SF) — automatically complex.')"
 }
 \`\`\`
 
-For confidence: use "high" if you found the exact property data from a reliable source, "medium" if data is from a less direct source, "low" if you could not find this specific property.
-
-IMPORTANT: Do not fabricate comparable sales. If data is unavailable or unreliable, say so and default to complex. Always show real comps you actually found via search.`;
+IMPORTANT:
+- Do NOT fabricate comparable sales. If data is unavailable or unreliable, default to COMPLEX with reason "Unable to verify sufficient comparable sales data."
+- Always search first — never guess from training data alone.
+- Return ONLY the JSON code block, nothing else.`;
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -221,7 +193,7 @@ IMPORTANT: Do not fabricate comparable sales. If data is unavailable or unreliab
         body: JSON.stringify({
           systemInstruction: {
             parts: [{
-              text: 'You are a California real estate appraisal complexity analyst. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first for the subject property, then search for comparable sales nearby. Report only real data you found via search. If you cannot find sufficient data, default to complex.'
+              text: 'You are a California real estate appraisal complexity analyst. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first. Report only real data you found via search. If you cannot find sufficient data, default to complex. Return ONLY the JSON output — no prose, no explanation outside the JSON block.'
             }]
           },
           contents: [{ parts: [{ text: prompt }] }],
@@ -244,7 +216,7 @@ IMPORTANT: Do not fabricate comparable sales. If data is unavailable or unreliab
 
     const result = await response.json();
 
-    // Gemini with tools returns multiple parts - find the text parts and combine them
+    // Gemini with tools returns multiple parts — find and combine text parts
     const parts = result.candidates?.[0]?.content?.parts || [];
     let fullText = '';
     for (const part of parts) {
@@ -270,23 +242,25 @@ IMPORTANT: Do not fabricate comparable sales. If data is unavailable or unreliab
       if (jsonMatch) {
         jsonStr = jsonMatch[1];
       } else {
-        // Try to find raw JSON object
         const braceMatch = fullText.match(/\{[\s\S]*\}/);
         jsonStr = braceMatch ? braceMatch[0] : fullText;
       }
       propertyData = JSON.parse(jsonStr);
     } catch (e) {
       console.error('Failed to parse Gemini response:', fullText.substring(0, 500));
-      return new Response(JSON.stringify({ error: 'Could not parse property data' }), {
-        status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+      // Default to complex if we can't parse
+      propertyData = {
+        address: cleanAddress,
+        propertyType: null,
+        isComplex: true,
+        reason: 'Unable to verify property data. Please contact us for a manual review.',
+      };
     }
 
-    // If all core property fields are null, mark confidence as low so the UI
-    // tells the user to fill in details manually rather than showing empty fields
-    if (!propertyData.sqft && !propertyData.yearBuilt && !propertyData.bedrooms && !propertyData.bathrooms) {
-      propertyData.confidence = 'low';
+    // Ensure required fields exist
+    if (typeof propertyData.isComplex !== 'boolean') {
+      propertyData.isComplex = true;
+      propertyData.reason = propertyData.reason || 'Unable to determine complexity. Please contact us for a manual review.';
     }
 
     return new Response(JSON.stringify(propertyData), {
