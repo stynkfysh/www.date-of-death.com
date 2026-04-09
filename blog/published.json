@@ -703,7 +703,7 @@
     "market_area": "North County Inland",
     "date_iso": "2026-04-03",
     "date_display": "April 03, 2026",
-    "mod_time": "2026-04-03T12:52:54.880253",
+    "mod_time": "2026-04-03T19:52:54.880000",
     "folder_name": "SD 12209 Casero Pl",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -756,7 +756,7 @@
     "market_area": "South Bay",
     "date_iso": "2026-04-04",
     "date_display": "April 04, 2026",
-    "mod_time": "2026-04-04T13:20:49.321000",
+    "mod_time": "2026-04-04T20:20:49.321000",
     "folder_name": "CV 305 Inkopah St",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -804,7 +804,7 @@
     "market_area": "North County Inland",
     "date_iso": "2026-04-05",
     "date_display": "April 05, 2026",
-    "mod_time": "2026-04-05T13:20:45.831782",
+    "mod_time": "2026-04-05T20:20:45.831000",
     "folder_name": "SD 16139-41 Cayenne Creek Rd",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -844,17 +844,15 @@
   },
   "sa-11041-summit-ave": {
     "slug": "sa-11041-summit-ave",
-    "title": "Market Trends: Santee 92071, 92128, 92171 \u2014 April 2026",
+    "title": "Market Trends: Santee 92071 \u2014 April 2026",
     "city": "Santee",
     "zip_codes": [
-      "92071",
-      "92128",
-      "92171"
+      "92071"
     ],
-    "market_area": "East County",
+    "market_area": "",
     "date_iso": "2026-04-07",
     "date_display": "April 07, 2026",
-    "mod_time": "2026-04-07T15:11:35.581427",
+    "mod_time": "2026-04-07T22:11:35.581427",
     "folder_name": "SA 11041 Summit Ave",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -891,5 +889,54 @@
       }
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "fa-108-350-19-00-mission-ridge-ln": {
+    "slug": "fa-108-350-19-00-mission-ridge-ln",
+    "title": "Market Trends: Fallbrook 92026, 92028 \u2014 April 2026",
+    "city": "Fallbrook",
+    "zip_codes": [
+      "92026",
+      "92028"
+    ],
+    "market_area": "North County",
+    "date_iso": "2026-04-09",
+    "date_display": "April 09, 2026",
+    "mod_time": "2026-04-09T18:07:05.895000",
+    "folder_name": "FA 108-350-19-00 Mission Ridge Ln",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$867,500",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$437.14",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+7.84%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.5",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "40",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-25.5%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
   }
 }
