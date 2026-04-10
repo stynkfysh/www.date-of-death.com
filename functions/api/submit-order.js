@@ -21,11 +21,7 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-function buildOrderEmail(data) {
-  const tierLabels = {
-    standard: 'Standard Desktop — $449',
-    basic: 'Basic Desktop — $299',
-  };
+function buildOrderRequestEmail(data) {
   const purposeLabels = {
     'step-up': 'Step-Up in Basis (Date of Death)',
     trust: 'Trust Valuation',
@@ -42,20 +38,14 @@ function buildOrderEmail(data) {
     other: 'Other',
   };
 
-  const tier = tierLabels[data.tier] || data.tier || 'Not selected';
   const purpose = purposeLabels[data.purpose] || data.purpose || 'Not selected';
   const role = roleLabels[data.client_role] || data.client_role || 'Not specified';
-  const propertyType = data.property_type || 'Not specified';
-
-  // Extract AI complexity check info if available
-  const complexityCheck = data.complexity_check || {};
-  const aiReason = complexityCheck.reason || '—';
 
   return `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
-  <h2 style="color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px;">New Appraisal Order</h2>
+  <h2 style="color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px;">New Appraisal Request</h2>
 
   <h3 style="color: #555; margin-top: 24px;">Contact Information</h3>
   <table style="width: 100%; border-collapse: collapse;">
@@ -65,25 +55,17 @@ function buildOrderEmail(data) {
     <tr><td style="padding: 6px 12px; font-weight: 600;">Role</td><td style="padding: 6px 12px;">${escapeHtml(role)}</td></tr>
   </table>
 
-  <h3 style="color: #555; margin-top: 24px;">Property Information</h3>
+  <h3 style="color: #555; margin-top: 24px;">Property &amp; Appraisal Details</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Address</td><td style="padding: 6px 12px;">${escapeHtml(data.property_address)}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Type (AI)</td><td style="padding: 6px 12px;">${escapeHtml(propertyType)}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Complexity</td><td style="padding: 6px 12px; color: #1a7a3a;">Non-Complex</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">AI Reason</td><td style="padding: 6px 12px;">${escapeHtml(aiReason)}</td></tr>
-  </table>
-
-  <h3 style="color: #555; margin-top: 24px;">Appraisal Details</h3>
-  <table style="width: 100%; border-collapse: collapse;">
-    <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Purpose</td><td style="padding: 6px 12px;">${escapeHtml(purpose)}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Purpose</td><td style="padding: 6px 12px;">${escapeHtml(purpose)}</td></tr>
     ${data.purpose === 'other' && data.other_purpose ? `<tr><td style="padding: 6px 12px; font-weight: 600;">Other Purpose</td><td style="padding: 6px 12px;">${escapeHtml(data.other_purpose)}</td></tr>` : ''}
     <tr><td style="padding: 6px 12px; font-weight: 600;">Date of Death</td><td style="padding: 6px 12px;">${escapeHtml(data.date_of_death) || '—'}</td></tr>
-    <tr><td style="padding: 6px 12px; font-weight: 600;">Tier</td><td style="padding: 6px 12px; font-weight: 700; color: #1a5276;">${escapeHtml(tier)}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Notes</td><td style="padding: 6px 12px;">${escapeHtml(data.notes) || '—'}</td></tr>
   </table>
 
   <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
-    Submitted from date-of-death.com order form — customer redirected to Square for payment.
+    Submitted from date-of-death.com — pending your review and invoice.
   </p>
 </body>
 </html>`;
@@ -392,27 +374,29 @@ export async function onRequestPost(context) {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
 
-    } else {
-      // --- STANDARD ORDER: email + Square payment link ---
-      if (!body.client_name || !body.client_email || !body.property_address || !body.tier) {
+    } else if (formType === 'order-request') {
+      // --- NEW: Appraisal request — email only, you review and send invoice manually ---
+      if (!body.client_name || !body.client_email || !body.property_address || !body.purpose) {
         return new Response(JSON.stringify({ error: 'Required fields are missing.' }), {
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
 
-      // Create Square payment link and send email in parallel
-      const tierPrice = body.tier === 'standard' ? '$449' : body.tier === 'basic' ? '$299' : '';
-      const subject = `New Order ${tierPrice} — ${body.property_address}`;
-      const html = buildOrderEmail(body);
+      const subject = `New Appraisal Request — ${body.property_address}`;
+      const html = buildOrderRequestEmail(body);
 
-      const [checkoutUrl] = await Promise.all([
-        createSquareCheckout(body, context.env),
-        sendEmail('orders@date-of-death.com', subject, html, body.client_email, context.env),
-      ]);
+      await sendEmail('orders@date-of-death.com', subject, html, body.client_email, context.env);
 
-      return new Response(JSON.stringify({ success: true, checkoutUrl: checkoutUrl }), {
+      return new Response(JSON.stringify({ success: true }), {
         status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+
+    } else {
+      // --- Fallback for unknown form types ---
+      return new Response(JSON.stringify({ error: 'Unknown form type.' }), {
+        status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }

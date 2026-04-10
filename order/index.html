@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order a Date-of-Death Appraisal Online | Date-of-Death Appraisals</title>
-    <meta name="description" content="Order your California desktop date-of-death appraisal online. Enter a property address, get an instant AI complexity check, and pay securely.">
+    <meta name="description" content="Request a California desktop date-of-death appraisal. Submit your property address and contact details — we'll review and send an invoice within one business day.">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Order a Date-of-Death Appraisal Online">
-    <meta property="og:description" content="Order your California desktop date-of-death appraisal in minutes. AI-powered complexity check, flat-rate pricing, fast turnaround.">
+    <meta property="og:description" content="Request a California desktop date-of-death appraisal. Submit your details and receive a quote within one business day.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://date-of-death.com/order">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Order a Date-of-Death Appraisal Online">
-    <meta name="twitter:description" content="Order your California desktop date-of-death appraisal in minutes. Flat-rate pricing, fast turnaround.">
+    <meta name="twitter:description" content="Request a California desktop date-of-death appraisal. Submit your details and receive a quote within one business day.">
     <link rel="canonical" href="https://date-of-death.com/order">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css?v=9">
+    <link rel="stylesheet" href="/styles.css?v=10">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -62,26 +62,20 @@
 
 <section class="hero hero-order">
     <div class="container">
-        <h1>Order Your Appraisal</h1>
-        <p class="subtitle">Enter the property address below to check if your property qualifies for our standard flat-rate desktop appraisal.</p>
+        <h1>Request an Appraisal</h1>
+        <p class="subtitle">Submit the property address and your contact details below. We'll review your request and send a confirmation with an invoice within one business day.</p>
     </div>
 </section>
 
-<!-- ============================================================
-     STEP 1: Address Entry + AI Complexity Check
-     ============================================================ -->
-<section id="step-address" class="order-step">
+<section>
     <div class="container">
-        <div class="order-form">
+        <form class="order-form" id="order-form" action="#" method="POST">
+
             <fieldset class="form-section">
-                <legend>Property Address</legend>
+                <legend>Property Information</legend>
                 <div class="form-group full-width">
-                    <label for="property-address">Full Property Address <span class="required">*</span></label>
-                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="off">
-                </div>
-                <div class="form-group full-width" style="margin-bottom: 0;">
-                    <button type="button" id="lookup-btn" class="lookup-btn" disabled style="width:100%;">Check Property</button>
-                    <div id="lookup-status" class="lookup-status"></div>
+                    <label for="property-address">Property Address <span class="required">*</span></label>
+                    <input type="text" id="property-address" name="property_address" required placeholder="e.g. 123 Main St, Los Angeles, CA 90210" autocomplete="street-address">
                 </div>
                 <!-- Honeypot -->
                 <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
@@ -90,45 +84,6 @@
                 </div>
             </fieldset>
 
-            <!-- Full-screen loading overlay -->
-            <div id="lookup-overlay" class="lookup-overlay" style="display: none;">
-                <div class="lookup-overlay-content">
-                    <div class="lookup-spinner"></div>
-                    <p id="lookup-overlay-msg" class="lookup-overlay-msg">Analyzing property&hellip;</p>
-                    <p class="lookup-overlay-sub">Our AI is checking property type, characteristics, and comparable sales availability. This usually takes 30&ndash;60 seconds.</p>
-                    <div class="lookup-progress-bar"><div id="lookup-progress-fill" class="lookup-progress-fill"></div></div>
-                </div>
-            </div>
-
-            <!-- SIMPLE result -->
-            <div id="result-noncomplex" class="noncomplex-alert" style="display: none;">
-                <div class="noncomplex-icon">&#10004;</div>
-                <div class="noncomplex-content">
-                    <strong>Non-Complex Property &mdash; Qualifies for Flat-Rate Appraisal</strong>
-                    <p id="noncomplex-reason"></p>
-                    <p class="result-address-echo"></p>
-                </div>
-            </div>
-
-            <!-- COMPLEX result -->
-            <div id="result-complex" class="complexity-alert" style="display: none;">
-                <div class="complexity-icon">&#9888;</div>
-                <div class="complexity-content">
-                    <strong>Complex Property</strong>
-                    <p id="complex-reason"></p>
-                    <p class="complexity-note">This property requires a manual review before we can provide a quote. Please fill out the form below and we'll get back to you within one business day.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ============================================================
-     STEP 2a: Non-Complex — Contact Info + Pay
-     ============================================================ -->
-<section id="step-order" class="order-step" style="display: none;">
-    <div class="container">
-        <form class="order-form" id="order-form" action="#" method="POST">
             <fieldset class="form-section">
                 <legend>Contact Information</legend>
                 <div class="form-row">
@@ -185,119 +140,53 @@
                     <input type="text" id="other-purpose" name="other_purpose" placeholder="e.g., bankruptcy, immigration, divorce, etc.">
                     <p class="form-note">Our expertise is date-of-death valuations and the IRS step-up in basis. For other purposes, please confirm with your attorney or the requesting party that a desktop appraisal will be accepted.</p>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tier">Report Tier <span class="required">*</span></label>
-                        <select id="tier" name="tier" required>
-                            <option value="">Select...</option>
-                            <option value="standard">Standard Desktop &mdash; $449</option>
-                            <option value="basic">Basic Desktop &mdash; $299</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="form-group full-width">
                     <label for="notes">Additional Notes</label>
                     <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know about the property or assignment..."></textarea>
                 </div>
             </fieldset>
 
-            <div class="form-summary" id="order-summary">
-                <p>You'll be redirected to Square for secure payment after submitting. Your appraisal will begin immediately upon receipt of payment.</p>
+            <div class="form-summary">
+                <p>We'll review your request and send a confirmation with an invoice within one business day. Once payment is received, your appraisal will begin immediately.</p>
             </div>
 
-            <button type="button" class="hero-cta form-submit" id="order-submit-btn">Continue to Payment</button>
+            <button type="button" class="hero-cta form-submit" id="order-submit-btn">Submit Request</button>
         </form>
-    </div>
-</section>
 
-<!-- ============================================================
-     STEP 2b: Complex — Custom Quote Request
-     ============================================================ -->
-<section id="step-complex" class="order-step" style="display: none;">
-    <div class="container">
-        <form class="order-form" id="complex-form" action="#" method="POST">
-            <fieldset class="form-section complex-contact-form-section">
-                <legend>Request a Custom Quote</legend>
-                <p class="complex-subtitle">Complex properties require additional analysis. Fill in your details below and we'll reach out within one business day with a custom quote and timeline.</p>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="contact-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="contact-name" name="contact_name" required autocomplete="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="contact-email" name="contact_email" required autocomplete="email">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="contact-phone">Phone Number</label>
-                        <input type="tel" id="contact-phone" name="contact_phone" autocomplete="tel">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-role">Your Role</label>
-                        <select id="contact-role" name="contact_role">
-                            <option value="">Select...</option>
-                            <option value="heir">Heir / Beneficiary</option>
-                            <option value="trustee">Trustee</option>
-                            <option value="executor">Executor / Administrator</option>
-                            <option value="attorney">Attorney</option>
-                            <option value="cpa">CPA / Tax Professional</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group full-width">
-                    <label for="contact-notes">Additional Details</label>
-                    <textarea id="contact-notes" name="contact_notes" rows="3" placeholder="Any details that might help us assess your property (date of death, renovations, unique features, etc.)..."></textarea>
-                </div>
-            </fieldset>
-            <button type="button" id="contact-submit-btn" class="hero-cta form-submit">Request Quote</button>
-        </form>
-    </div>
-</section>
-
-<!-- ============================================================
-     Confirmation (shown after successful submit)
-     ============================================================ -->
-<div id="order-confirmation" class="order-step" style="display: none;">
-    <div class="container">
-        <div class="order-confirmation">
+        <!-- Confirmation (shown after successful submit) -->
+        <div id="order-confirmation" class="order-confirmation" style="display: none;">
             <div class="confirmation-icon">&#10004;</div>
-            <h2 id="confirmation-title">Order Received!</h2>
-            <p id="confirmation-message">Thank you for your order.</p>
+            <h2>Request Received!</h2>
+            <p>Thank you for your submission. We'll review the property details and send you a confirmation with an invoice within one business day.</p>
             <p class="confirmation-detail">A confirmation has been sent to <strong id="confirmation-email"></strong>.</p>
             <p class="confirmation-fallback">Questions? Email us at <a href="mailto:orders@date-of-death.com">orders@date-of-death.com</a></p>
         </div>
     </div>
-</div>
+</section>
 
-<!-- ============================================================
-     What Happens Next
-     ============================================================ -->
 <section>
     <div class="container">
-        <h2 class="section-title">What Happens Next</h2>
+        <h2 class="section-title">How It Works</h2>
         <div class="steps-grid">
             <div class="step-card">
                 <span class="step-number">1</span>
-                <h3>Property Check</h3>
-                <p>Enter the property address and our AI checks whether it qualifies for a standard flat-rate appraisal.</p>
+                <h3>Submit Request</h3>
+                <p>Provide the property address, your contact details, and the reason for the appraisal.</p>
             </div>
             <div class="step-card">
                 <span class="step-number">2</span>
-                <h3>Order &amp; Pay</h3>
-                <p>Fill in your contact details, select your tier, and pay securely through Square.</p>
+                <h3>Review &amp; Invoice</h3>
+                <p>We review your request and send a confirmation with a secure Square invoice within one business day.</p>
             </div>
             <div class="step-card">
                 <span class="step-number">3</span>
-                <h3>Submit Photos</h3>
-                <p>Upload property photos that reflect the home's condition at the date of death.</p>
+                <h3>Pay &amp; Upload Photos</h3>
+                <p>Pay the invoice online, then upload property photos that reflect the home's condition at the date of death.</p>
             </div>
             <div class="step-card">
                 <span class="step-number">4</span>
                 <h3>Delivery</h3>
-                <p>Receive your completed appraisal via secure download link within 5&ndash;7 business days.</p>
+                <p>Receive your completed appraisal via secure download link within 5&ndash;7 business days of payment.</p>
             </div>
         </div>
     </div>
@@ -333,24 +222,9 @@
 </footer>
 
 <script>
-// --- Anti-bot: record page load time ---
 var _pageLoadTs = Date.now();
 
-// --- Address input: enable lookup button when address looks complete ---
-document.getElementById("property-address").addEventListener("input", function() {
-    document.getElementById("lookup-btn").disabled = this.value.trim().length < 10;
-});
-
-// Allow Enter key to trigger lookup
-document.getElementById("property-address").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        var btn = document.getElementById("lookup-btn");
-        if (!btn.disabled) btn.click();
-    }
-});
-
-// --- Purpose dropdown logic ---
+// Purpose dropdown logic
 document.getElementById("purpose").addEventListener("change", function() {
     var otherGroup = document.getElementById("other-purpose-group");
     var dodField = document.getElementById("date-of-death");
@@ -364,134 +238,7 @@ document.getElementById("purpose").addEventListener("change", function() {
     }
 });
 
-// --- Animated lookup overlay ---
-var _statusInterval = null;
-function startLookupAnimation() {
-    var overlay = document.getElementById("lookup-overlay");
-    var overlayMsg = document.getElementById("lookup-overlay-msg");
-    var progressFill = document.getElementById("lookup-progress-fill");
-    var messages = [
-        { text: "Identifying subject property\u2026", duration: 3000 },
-        { text: "Looking up living area and year built\u2026", duration: 4000 },
-        { text: "Searching for comparable sales within 1 mile\u2026", duration: 4000 },
-        { text: "Filtering sales from the last 6 months\u2026", duration: 4000 },
-        { text: "Checking GLA (size) tolerance \u00b120%\u2026", duration: 3000 },
-        { text: "Checking age tolerance \u00b110 years\u2026", duration: 3000 },
-        { text: "Validating size bracketing\u2026", duration: 3000 },
-        { text: "Validating age bracketing\u2026", duration: 3000 },
-        { text: "Checking bedroom and bathroom bracketing\u2026", duration: 3000 },
-        { text: "Compiling complexity verdict\u2026", duration: 5000 }
-    ];
-    var idx = 0;
-    overlayMsg.textContent = messages[0].text;
-    overlay.style.display = "flex";
-    progressFill.style.width = "0%";
-
-    function cycle() {
-        idx++;
-        if (idx >= messages.length) idx = messages.length - 1;
-        overlayMsg.textContent = messages[idx].text;
-        var pct = Math.min(95, Math.round((idx / (messages.length - 1)) * 95));
-        progressFill.style.width = pct + "%";
-        if (idx < messages.length - 1) {
-            _statusInterval = setTimeout(cycle, messages[idx].duration);
-        }
-    }
-    _statusInterval = setTimeout(cycle, messages[0].duration);
-}
-function stopLookupAnimation() {
-    if (_statusInterval) { clearTimeout(_statusInterval); _statusInterval = null; }
-    var overlay = document.getElementById("lookup-overlay");
-    var progressFill = document.getElementById("lookup-progress-fill");
-    progressFill.style.width = "100%";
-    setTimeout(function() { overlay.style.display = "none"; }, 400);
-}
-
-// --- Store result for form submission ---
-var _complexityResult = null;
-var _checkedAddress = "";
-
-// --- Property Lookup via AI ---
-document.getElementById("lookup-btn").addEventListener("click", async function() {
-    var btn = this;
-    var address = document.getElementById("property-address").value.trim();
-    var status = document.getElementById("lookup-status");
-
-    if (!address) return;
-
-    btn.disabled = true;
-    btn.textContent = "Checking\u2026";
-    status.textContent = "";
-    status.className = "lookup-status";
-
-    // Hide any previous results
-    document.getElementById("result-noncomplex").style.display = "none";
-    document.getElementById("result-complex").style.display = "none";
-    document.getElementById("step-order").style.display = "none";
-    document.getElementById("step-complex").style.display = "none";
-
-    startLookupAnimation();
-
-    try {
-        var honeypot = document.getElementById("website").value;
-        var resp = await fetch("/api/property-lookup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                address: address,
-                website: honeypot,
-                _ts: _pageLoadTs
-            })
-        });
-
-        if (resp.status === 429) throw new Error("Rate limited");
-        if (!resp.ok) throw new Error("Lookup failed");
-
-        var data = await resp.json();
-        if (data.error) throw new Error(data.error);
-
-        stopLookupAnimation();
-
-        _checkedAddress = address;
-        _complexityResult = data;
-
-        if (data.isComplex) {
-            // --- COMPLEX ---
-            document.getElementById("complex-reason").textContent = data.reason || "This property has been identified as complex based on our analysis.";
-            document.getElementById("result-complex").style.display = "flex";
-            document.getElementById("step-complex").style.display = "block";
-            document.getElementById("step-complex").scrollIntoView({ behavior: "smooth", block: "start" });
-            status.textContent = "Complex property \u2014 custom quote required.";
-            status.className = "lookup-status warning";
-        } else {
-            // --- NON-COMPLEX ---
-            document.getElementById("noncomplex-reason").textContent = data.reason || "All paired sales criteria satisfied.";
-            document.getElementById("result-noncomplex").style.display = "flex";
-            document.getElementById("step-order").style.display = "block";
-            document.getElementById("step-order").scrollIntoView({ behavior: "smooth", block: "start" });
-            status.textContent = "Non-complex property \u2014 qualifies for standard flat-rate appraisal.";
-            status.className = "lookup-status success";
-        }
-
-        // Allow re-check with a different address
-        btn.textContent = "Check Again";
-        btn.disabled = false;
-
-    } catch (err) {
-        stopLookupAnimation();
-        if (err.message === "Rate limited") {
-            status.textContent = "Too many lookups. Please wait 15 minutes or contact us directly.";
-            status.className = "lookup-status warning";
-        } else {
-            status.textContent = "Could not check this property. Please try again, or email us at orders@date-of-death.com for assistance.";
-            status.className = "lookup-status error";
-        }
-        btn.textContent = "Check Property";
-        btn.disabled = false;
-    }
-});
-
-// --- Standard Order Submit ---
+// Submit
 document.getElementById("order-submit-btn").addEventListener("click", async function() {
     var btn = this;
     var form = document.getElementById("order-form");
@@ -512,21 +259,18 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
     btn.textContent = "Submitting\u2026";
 
     var data = {
-        _formType: "order",
+        _formType: "order-request",
         _ts: _pageLoadTs,
         website: document.getElementById("website").value,
         client_name: document.getElementById("client-name").value,
         client_email: document.getElementById("client-email").value,
         client_phone: document.getElementById("client-phone").value,
         client_role: document.getElementById("client-role").value,
-        property_address: _checkedAddress,
-        property_type: _complexityResult ? _complexityResult.propertyType : "",
-        date_of_death: document.getElementById("date-of-death").value,
+        property_address: document.getElementById("property-address").value.trim(),
         purpose: document.getElementById("purpose").value,
         other_purpose: document.getElementById("other-purpose") ? document.getElementById("other-purpose").value : "",
-        tier: document.getElementById("tier").value,
-        notes: document.getElementById("notes").value,
-        complexity_check: _complexityResult
+        date_of_death: document.getElementById("date-of-death").value,
+        notes: document.getElementById("notes").value
     };
 
     try {
@@ -538,72 +282,14 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         var result = await resp.json();
         if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
 
-        if (result.checkoutUrl) {
-            window.location.href = result.checkoutUrl;
-        } else {
-            // Fallback
-            document.getElementById("step-address").style.display = "none";
-            document.getElementById("step-order").style.display = "none";
-            var conf = document.getElementById("order-confirmation");
-            document.getElementById("confirmation-title").textContent = "Order Received!";
-            document.getElementById("confirmation-message").textContent = "Thank you for your order. We\u2019ll send payment instructions to your email shortly.";
-            document.getElementById("confirmation-email").textContent = data.client_email;
-            conf.style.display = "block";
-            conf.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-    } catch (err) {
-        btn.disabled = false;
-        btn.textContent = "Continue to Payment";
-        alert("There was a problem submitting your order. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
-    }
-});
-
-// --- Complex Contact Submit ---
-document.getElementById("contact-submit-btn").addEventListener("click", async function() {
-    var btn = this;
-
-    var contactName = document.getElementById("contact-name");
-    var contactEmail = document.getElementById("contact-email");
-    if (!contactName.value) { contactName.reportValidity(); return; }
-    if (!contactEmail.value) { contactEmail.reportValidity(); return; }
-
-    btn.disabled = true;
-    btn.textContent = "Submitting\u2026";
-
-    var data = {
-        _formType: "contact",
-        _ts: _pageLoadTs,
-        website: document.getElementById("website").value,
-        contact_name: contactName.value,
-        contact_email: contactEmail.value,
-        contact_phone: document.getElementById("contact-phone").value,
-        contact_role: document.getElementById("contact-role").value,
-        contact_notes: document.getElementById("contact-notes").value,
-        property_address: _checkedAddress,
-        complexity_reason: document.getElementById("complex-reason").textContent,
-        complexity_check: _complexityResult
-    };
-
-    try {
-        var resp = await fetch("/api/submit-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-        var result = await resp.json();
-        if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
-
-        document.getElementById("step-address").style.display = "none";
-        document.getElementById("step-complex").style.display = "none";
+        form.style.display = "none";
         var conf = document.getElementById("order-confirmation");
-        document.getElementById("confirmation-title").textContent = "Quote Request Received!";
-        document.getElementById("confirmation-message").textContent = "Thank you for your inquiry. We\u2019ll review the property details and reach out within one business day with a custom quote and timeline.";
-        document.getElementById("confirmation-email").textContent = data.contact_email;
+        document.getElementById("confirmation-email").textContent = data.client_email;
         conf.style.display = "block";
         conf.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
         btn.disabled = false;
-        btn.textContent = "Request Quote";
+        btn.textContent = "Submit Request";
         alert("There was a problem submitting your request. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
     }
 });
