@@ -38,8 +38,15 @@ function buildOrderRequestEmail(data) {
     other: 'Other',
   };
 
+  const tierLabels = {
+    standard: 'Standard Desktop — $449',
+    basic: 'Basic Desktop — $299',
+    unsure: 'Not Sure — needs recommendation',
+  };
+
   const purpose = purposeLabels[data.purpose] || data.purpose || 'Not selected';
   const role = roleLabels[data.client_role] || data.client_role || 'Not specified';
+  const tier = tierLabels[data.tier] || data.tier || 'Not selected';
 
   return `<!DOCTYPE html>
 <html>
@@ -58,6 +65,7 @@ function buildOrderRequestEmail(data) {
   <h3 style="color: #555; margin-top: 24px;">Property &amp; Appraisal Details</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Address</td><td style="padding: 6px 12px;">${escapeHtml(data.property_address)}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">Report Type</td><td style="padding: 6px 12px; font-weight: 700; color: #1a5276;">${escapeHtml(tier)}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Purpose</td><td style="padding: 6px 12px;">${escapeHtml(purpose)}</td></tr>
     ${data.purpose === 'other' && data.other_purpose ? `<tr><td style="padding: 6px 12px; font-weight: 600;">Other Purpose</td><td style="padding: 6px 12px;">${escapeHtml(data.other_purpose)}</td></tr>` : ''}
     <tr><td style="padding: 6px 12px; font-weight: 600;">Date of Death</td><td style="padding: 6px 12px;">${escapeHtml(data.date_of_death) || '—'}</td></tr>

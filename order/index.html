@@ -118,6 +118,41 @@
 
             <fieldset class="form-section">
                 <legend>Appraisal Details</legend>
+                <div class="form-group full-width">
+                    <label>Report Type <span class="required">*</span></label>
+                    <div class="tier-selector">
+                        <label class="tier-option" for="tier-standard">
+                            <input type="radio" id="tier-standard" name="tier" value="standard" required>
+                            <div class="tier-option-content">
+                                <div class="tier-option-header">
+                                    <strong>Standard Desktop</strong>
+                                    <span class="tier-option-price">$449</span>
+                                </div>
+                                <p>Comprehensive report with maps, comp photos, and market conditions analysis. Best for CPA filings, trusts, and third-party review.</p>
+                            </div>
+                        </label>
+                        <label class="tier-option" for="tier-basic">
+                            <input type="radio" id="tier-basic" name="tier" value="basic" required>
+                            <div class="tier-option-content">
+                                <div class="tier-option-header">
+                                    <strong>Basic Desktop</strong>
+                                    <span class="tier-option-price">$299</span>
+                                </div>
+                                <p>Same analytical methodology in a streamlined format. Good for simple estates and personal records.</p>
+                            </div>
+                        </label>
+                        <label class="tier-option" for="tier-unsure">
+                            <input type="radio" id="tier-unsure" name="tier" value="unsure" required>
+                            <div class="tier-option-content">
+                                <div class="tier-option-header">
+                                    <strong>Not Sure</strong>
+                                </div>
+                                <p>We'll recommend the right option based on your situation.</p>
+                            </div>
+                        </label>
+                    </div>
+                    <p class="form-note">Both tiers are USPAP-compliant and meet IRS valuation standards. <a href="/pricing" target="_blank">Compare tiers in detail &rarr;</a></p>
+                </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="purpose">Purpose <span class="required">*</span></label>
@@ -267,6 +302,7 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         client_phone: document.getElementById("client-phone").value,
         client_role: document.getElementById("client-role").value,
         property_address: document.getElementById("property-address").value.trim(),
+        tier: document.querySelector('input[name="tier"]:checked') ? document.querySelector('input[name="tier"]:checked').value : "",
         purpose: document.getElementById("purpose").value,
         other_purpose: document.getElementById("other-purpose") ? document.getElementById("other-purpose").value : "",
         date_of_death: document.getElementById("date-of-death").value,

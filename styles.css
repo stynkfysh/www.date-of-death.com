@@ -987,6 +987,69 @@ section:nth-child(even):not(.cta-banner):not(.hero):not(.faq-section) {
   margin-top: 6px;
   line-height: 1.5;
 }
+.form-note a {
+  color: #1a5276;
+  font-weight: 500;
+}
+
+/* --- Tier Selector (Radio Cards) --- */
+.tier-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tier-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 2px solid #dde4ea;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.tier-option:hover {
+  border-color: #a0b4c8;
+  background: #f8fafc;
+}
+.tier-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: #1a5276;
+}
+.tier-option input[type="radio"]:checked ~ .tier-option-content {
+  color: #111;
+}
+.tier-option:has(input:checked) {
+  border-color: #1a5276;
+  background: #f0f6fb;
+}
+.tier-option-content {
+  flex: 1;
+}
+.tier-option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.tier-option-header strong {
+  font-size: 0.95rem;
+  color: #111;
+}
+.tier-option-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a5276;
+}
+.tier-option-content p {
+  font-size: 0.84rem;
+  color: #555;
+  line-height: 1.45;
+  margin: 0;
+}
 
 /* --- Address Lookup --- */
 .address-lookup-row {
