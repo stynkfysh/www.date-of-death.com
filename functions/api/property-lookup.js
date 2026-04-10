@@ -123,15 +123,17 @@ export async function onRequestPost(context) {
     }
 
     // ================================================================
-    // Gemini Prompt — Complexity Triage
+    // Gemini Prompt — Complexity Triage (natural response format)
+    // Uses the same instructions that work in Gemini web UI.
+    // We parse the VERDICT from the natural-language response.
     // ================================================================
-    const prompt = `Evaluate the following subject property address against recent market data (6-month look-back) to determine if the residential appraisal assignment is "NON-COMPLEX" or "COMPLEX."
+    const prompt = `Evaluate the following subject property address against recent market data (6-month look-back) to see if it meets the requirements for a non-complex assignment.
 
 SUBJECT PROPERTY ADDRESS: ${cleanAddress}
 
 # Evaluation Criteria (The "Complexity Test")
 
-For a property to be "SIMPLE," you must find at least 3 comparable sales that meet ALL of the following:
+For a property to be "NON-COMPLEX," you must find at least 3 comparable sales that meet ALL of the following:
 1. **Recency:** Sold within the last 6 months.
 2. **Distance:** Located within 1 mile of the subject.
 3. **GLA (Size):** Living area must be within ±20% of the subject's living area.
@@ -147,47 +149,23 @@ Even if 3 sales are found, you must confirm the following bracketing exists with
 
 # Response Format
 
-Respond with ONLY a JSON code block in this exact format:
+For every address provided, format your response as follows:
 
-\`\`\`json
-{
-  "address": "the full address as identified",
-  "propertyType": "SFR" or "Condo" or "Townhouse" or "Other",
-  "isComplex": true or false,
-  "subjectProfile": {
-    "livingArea": number or null,
-    "livingAreaRange": { "min": number, "max": number },
-    "yearBuilt": number or null,
-    "yearBuiltRange": { "min": number, "max": number },
-    "bedrooms": number or null,
-    "bathrooms": number or null
-  },
-  "comparableSales": [
-    {
-      "address": "string",
-      "saleDate": "YYYY-MM-DD",
-      "gla": number,
-      "yearBuilt": number,
-      "bedrooms": number,
-      "bathrooms": number,
-      "distance": "string (e.g. 0.4 mi)"
-    }
-  ],
-  "bracketingCheck": {
-    "size": { "met": true or false, "detail": "string" },
-    "age": { "met": true or false, "detail": "string" },
-    "bedrooms": { "met": true or false, "detail": "string" },
-    "bathrooms": { "met": true or false, "detail": "string" }
-  },
-  "reason": "Brief explanation of why it passed or failed. If non-complex: 'All complexity criteria satisfied — 3+ comps found within tolerances with full bracketing.' If complex: explain which criterion or bracketing requirement failed."
-}
-\`\`\`
+## 1. Subject Profile
+* **Living Area:** [Sq Ft] (Range: [Min] - [Max])
+* **Year Built:** [Year] (Range: [Min] - [Max])
+* **Bed/Bath:** [Count]
 
-# Important Rules
-- Do NOT fabricate comparable sales. If data is unavailable or unreliable, state "Data Unavailable" for that field and mark the criteria as failed.
-- Always search first — never guess from training data alone.
-- If you cannot find sufficient data, default to COMPLEX with reason explaining what was inconclusive.
-- Return ONLY the JSON code block, nothing else.`;
+## 2. Comparable Sales Table
+Create a table showing the top candidates found within 1 mile and 6 months. Include: Address, Sale Date, GLA, Year Built, Beds, Baths, and Distance.
+
+## 3. Complexity Verdict
+* **VERDICT:** [NON-COMPLEX or COMPLEX]
+* **RATIONALE:** Briefly explain why it passed or failed.
+* **BRACKETING CHECK:** Explicitly state if Size, Age, Bed, and Bath bracketing requirements were met.
+
+# Tone & Style
+Be professional, analytical, and concise. If data is missing for a specific field, state "Data Unavailable" and mark that specific criteria as "Inconclusive."`;
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
@@ -197,7 +175,7 @@ Respond with ONLY a JSON code block in this exact format:
         body: JSON.stringify({
           systemInstruction: {
             parts: [{
-              text: 'You are the Real Estate Appraiser Assistant. Your specific purpose is to triage property addresses to determine if a residential appraisal assignment is "Non-Complex" or "Complex" based on a strict set of data constraints. Be professional, analytical, and concise. You MUST use Google Search to look up actual property data and recent comparable sales from public records, Zillow, Redfin, Realtor.com, county assessor sites, or any other reliable source. Never guess or use training data alone. Always search first for the subject property, then search for comparable sales nearby. Report only real data you found via search. If you cannot find sufficient data, default to complex. Return ONLY the JSON output — no prose, no explanation outside the JSON block.'
+              text: 'You are the Real Estate Appraiser Assistant. Your specific purpose is to triage property addresses to determine if a residential appraisal assignment is "Non-Complex" or "Complex" based on a strict set of data constraints. Be professional, analytical, and concise. Use Google Search to look up actual property data and recent comparable sales. Never guess or use training data alone — always search first.'
             }]
           },
           contents: [{ parts: [{ text: prompt }] }],
@@ -238,34 +216,39 @@ Respond with ONLY a JSON code block in this exact format:
       });
     }
 
-    let propertyData;
-    try {
-      // Extract JSON from markdown code block or raw JSON
-      const jsonMatch = fullText.match(/```json\s*([\s\S]*?)\s*```/);
-      let jsonStr;
-      if (jsonMatch) {
-        jsonStr = jsonMatch[1];
-      } else {
-        const braceMatch = fullText.match(/\{[\s\S]*\}/);
-        jsonStr = braceMatch ? braceMatch[0] : fullText;
-      }
-      propertyData = JSON.parse(jsonStr);
-    } catch (e) {
-      console.error('Failed to parse Gemini response:', fullText.substring(0, 500));
-      // Default to complex if we can't parse
-      propertyData = {
-        address: cleanAddress,
-        propertyType: null,
-        isComplex: true,
-        reason: 'Unable to verify property data. Please contact us for a manual review.',
-      };
+    // --- Parse the natural-language response to extract verdict ---
+    // The model responds with markdown sections. We look for the verdict line.
+    const textUpper = fullText.toUpperCase();
+
+    // Extract VERDICT: look for "VERDICT:" followed by NON-COMPLEX or COMPLEX
+    let isComplex = true; // default to complex if we can't determine
+    let reason = 'Unable to determine complexity from AI response. Please contact us for a manual review.';
+
+    const verdictMatch = fullText.match(/\*?\*?VERDICT\*?\*?:\s*\*?\*?(NON-COMPLEX|COMPLEX)\*?\*?/i);
+    if (verdictMatch) {
+      isComplex = verdictMatch[1].toUpperCase() === 'COMPLEX';
     }
 
-    // Ensure required fields exist
-    if (typeof propertyData.isComplex !== 'boolean') {
-      propertyData.isComplex = true;
-      propertyData.reason = propertyData.reason || 'Unable to determine complexity. Please contact us for a manual review.';
+    // Extract RATIONALE
+    const rationaleMatch = fullText.match(/\*?\*?RATIONALE\*?\*?:\s*(.+?)(?:\n|$)/i);
+    if (rationaleMatch) {
+      reason = rationaleMatch[1].trim();
     }
+
+    // Extract property type from Subject Profile if present
+    let propertyType = null;
+    // Try common patterns in the response
+    if (/\bcondo(minium)?\b/i.test(fullText)) propertyType = 'Condo';
+    else if (/\btownhouse\b/i.test(fullText)) propertyType = 'Townhouse';
+    else if (/\bsingle.?family\b|SFR/i.test(fullText)) propertyType = 'SFR';
+
+    const propertyData = {
+      address: cleanAddress,
+      propertyType: propertyType,
+      isComplex: isComplex,
+      reason: reason,
+      fullAnalysis: fullText, // include the full response for the email notification
+    };
 
     return new Response(JSON.stringify(propertyData), {
       status: 200,
