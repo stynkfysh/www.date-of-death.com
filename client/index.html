@@ -593,17 +593,6 @@
         <p class="tip-note">Take photos in landscape with good lighting. More photos are always better — we'll use what we need.</p>
     </div>
 
-    <!-- ═══════ Payment ═══════ -->
-    <div class="card" id="payment-card">
-        <div class="card-title"><span class="icon">&#128179;</span> Payment</div>
-        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 14px;">
-            If you haven't already paid, you can complete payment using the link in your invoice email from Square.
-        </p>
-        <a href="https://squareup.com/pay-invoice" target="_blank" rel="noopener" class="btn-outline" id="payment-link">
-            Pay Invoice on Square &rarr;
-        </a>
-    </div>
-
     <!-- ═══════ Contact ═══════ -->
     <div class="card">
         <div class="card-title"><span class="icon">&#128222;</span> Contact Your Appraiser</div>
@@ -632,16 +621,8 @@
         <div class="card-title"><span class="icon">&#128196;</span> What to Expect</div>
         <ul class="info-list">
             <li>
-                <span class="li-icon">&#128197;</span>
-                <span>Turnaround is typically <strong>5–7 business days</strong> after photos and payment are received.</span>
-            </li>
-            <li>
                 <span class="li-icon">&#128274;</span>
-                <span>Your appraisal report will be delivered as a <strong>secure PDF</strong> via email.</span>
-            </li>
-            <li>
-                <span class="li-icon">&#128260;</span>
-                <span>One free revision is included if adjustments are needed.</span>
+                <span>Your appraisal report will be delivered as a <strong>PDF</strong> via email.</span>
             </li>
             <li>
                 <span class="li-icon">&#9993;</span>
@@ -665,7 +646,6 @@
     var params = new URLSearchParams(window.location.search);
     var paramEmail = params.get('email') || '';
     var paramAddress = params.get('address') || '';
-    var paramPayment = params.get('payment') || '';
     var paramName = params.get('name') || '';
 
     // Pre-fill fields
@@ -688,11 +668,6 @@
     // Update header greeting
     if (paramName) {
         document.querySelector('.header-title').textContent = 'Hi ' + paramName + ', here\u2019s your appraisal order';
-    }
-
-    // Update payment link if provided
-    if (paramPayment) {
-        document.getElementById('payment-link').href = paramPayment;
     }
 
     // ── Photo upload logic ──
