@@ -480,6 +480,41 @@
             margin-top: 8px;
         }
         .submit-status.ready { color: var(--green); }
+
+        /* ── Screen-on warning ── */
+        .screen-warning {
+            background: #fff8e6;
+            border: 1px solid #f0d060;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.88rem;
+            color: #7a6100;
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .screen-warning strong { color: #5a4800; }
+
+        /* ── Upload result banner ── */
+        .upload-result {
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 14px;
+            display: none;
+            line-height: 1.5;
+        }
+        .upload-result.success {
+            background: #eafaf1;
+            border: 1px solid #82e0aa;
+            color: #1e7e34;
+        }
+        .upload-result.failure {
+            background: #fdf0ef;
+            border: 1px solid #e6b0aa;
+            color: #c0392b;
+        }
     </style>
 </head>
 <body>
@@ -544,7 +579,7 @@
                 <h3>Tap to add photos</h3>
                 <p>or <span class="browse-link">browse files</span></p>
                 <p class="upload-hint">JPEG, PNG, HEIC &middot; up to 25 MB each</p>
-                <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/heic,image/heif,.jpg,.jpeg,.png,.heic,.heif" style="display:none;">
+                <input type="file" id="file-input" multiple accept="image/*,.jpg,.jpeg,.png,.heic,.heif" style="display:none;">
             </div>
 
             <div class="preview-grid" id="preview-grid"></div>
@@ -563,9 +598,14 @@
                 <textarea id="photo-notes" rows="2" placeholder="e.g., Kitchen remodeled 2020, roof replaced 2018..."></textarea>
             </div>
 
+            <div class="screen-warning" id="screen-warning" style="display: none;">
+                <strong>Keep your screen on</strong> while photos upload. Do not lock your phone or switch apps until the upload is complete.
+            </div>
+
             <button type="button" class="btn-primary" id="submit-btn" disabled>Submit Photos</button>
             <p class="submit-status" id="submit-status">Add at least one photo to continue</p>
             <div class="error-msg" id="error-msg"></div>
+            <div class="upload-result" id="upload-result"></div>
         </div>
 
         <!-- Success -->
@@ -690,6 +730,8 @@
     var progressText = document.getElementById('progress-text');
     var errorMsg = document.getElementById('error-msg');
 
+    var screenWarning = document.getElementById('screen-warning');
+    var uploadResult = document.getElementById('upload-result');
     var MAX_FILE_SIZE = 25 * 1024 * 1024;
 
     dropZone.addEventListener('click', function() { fileInput.click(); });
@@ -745,11 +787,13 @@
             submitBtn.disabled = false;
             submitStatus.textContent = 'Ready to upload';
             submitStatus.className = 'submit-status ready';
+            screenWarning.style.display = 'block';
         } else {
             fileCount.style.display = 'none';
             submitBtn.disabled = true;
             submitStatus.textContent = 'Add at least one photo to continue';
             submitStatus.className = 'submit-status';
+            screenWarning.style.display = 'none';
         }
         hideError();
     }
@@ -769,6 +813,7 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Uploading\u2026';
         hideError();
+        uploadResult.style.display = 'none';
         progressEl.style.display = 'block';
         progressBar.style.width = '0%';
 
@@ -807,8 +852,15 @@
         }
 
         if (uploaded === total) {
-            progressText.textContent = 'All photos uploaded!';
+            progressText.textContent = 'All ' + total + ' photos uploaded successfully!';
             progressBar.style.width = '100%';
+            screenWarning.style.display = 'none';
+
+            // Show success banner
+            uploadResult.className = 'upload-result success';
+            uploadResult.innerHTML = '<strong>Upload complete!</strong> All ' + total + ' photo' + (total > 1 ? 's were' : ' was') + ' uploaded successfully.';
+            uploadResult.style.display = 'block';
+
             // Update status tracker
             document.getElementById('step-photos').className = 'status-step completed';
             document.getElementById('step-photos').querySelector('.status-dot').innerHTML = '&#10003;';
@@ -820,15 +872,27 @@
                 document.getElementById('photo-success').style.display = 'block';
                 document.getElementById('tips-card').style.display = 'none';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 800);
+            }, 1500);
         } else if (uploaded > 0) {
             progressText.textContent = uploaded + ' of ' + total + ' uploaded';
-            showError('Some photos failed: ' + failed.join('; ') + '\n\nYou can email the rest to photos@date-of-death.com.');
+            screenWarning.style.display = 'none';
+
+            // Show partial failure banner
+            uploadResult.className = 'upload-result failure';
+            uploadResult.innerHTML = '<strong>' + uploaded + ' of ' + total + ' photos uploaded.</strong> Some failed: ' + failed.join('; ') + '<br>You can retry or email the rest to photos@date-of-death.com.';
+            uploadResult.style.display = 'block';
+
             submitBtn.disabled = false;
             submitBtn.textContent = 'Retry';
         } else {
             progressText.textContent = 'Upload failed';
-            showError('Unable to upload. Try again or email to photos@date-of-death.com.\n\n' + failed[0]);
+            screenWarning.style.display = 'none';
+
+            // Show failure banner
+            uploadResult.className = 'upload-result failure';
+            uploadResult.innerHTML = '<strong>Upload failed.</strong> Please try again or email photos to photos@date-of-death.com.<br>' + failed[0];
+            uploadResult.style.display = 'block';
+
             submitBtn.disabled = false;
             submitBtn.textContent = 'Try Again';
             progressEl.style.display = 'none';
