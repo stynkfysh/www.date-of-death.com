@@ -547,6 +547,17 @@
             margin-top: 12px;
             text-align: center;
         }
+        .lightbox-tip {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.82rem;
+            font-weight: 400;
+            margin-top: 6px;
+            text-align: center;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
         .lightbox-close {
             position: absolute;
             top: 16px;
@@ -792,6 +803,7 @@
         <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
         <img class="lightbox-img" id="lightbox-img" src="" alt="">
         <div class="lightbox-caption" id="lightbox-caption"></div>
+        <div class="lightbox-tip" id="lightbox-tip"></div>
     </div>
 
     <!-- ═══════ Contact ═══════ -->
@@ -1079,26 +1091,28 @@
 
 // ── Lightbox ──
 var lbPhotos = [
-    { src: '/images/house-front.jpeg', caption: 'Front of Home' },
-    { src: '/images/house-rear.jpeg', caption: 'Rear of Home' },
-    { src: '/images/rear-yard.jpeg', caption: 'Rear Yard' },
-    { src: '/images/kitchen.jpg', caption: 'Kitchen' },
-    { src: '/images/bathroom.jpeg', caption: 'Bathroom' },
-    { src: '/images/bedroom.jpeg', caption: 'Bedroom' },
-    { src: '/images/living-room.jpeg', caption: 'Living Room' },
-    { src: '/images/view.jpeg', caption: 'View (Through Window)' },
-    { src: '/images/view2.jpeg', caption: 'View (From Yard)' },
+    { src: '/images/house-front.jpeg', caption: 'Front of Home', tip: 'A straight-on view from the street. We\u2019re looking at the overall style, roof, exterior materials, garage, and curb appeal.' },
+    { src: '/images/house-rear.jpeg', caption: 'Rear of Home', tip: 'Shows the back of the house \u2014 exterior condition, siding, windows, and any additions or covered patios.' },
+    { src: '/images/rear-yard.jpeg', caption: 'Rear Yard', tip: 'Captures the yard, pool, patio, deck, ADU, or other outdoor structures. Helps us understand lot use and outdoor living space.' },
+    { src: '/images/kitchen.jpg', caption: 'Kitchen', tip: 'We\u2019re looking at countertops, cabinets, appliances, flooring, and overall quality of finishes.' },
+    { src: '/images/bathroom.jpeg', caption: 'Bathroom', tip: 'Countertops, fixtures, tile work, flooring, and condition. At least the primary bathroom \u2014 additional bathrooms are helpful too.' },
+    { src: '/images/bedroom.jpeg', caption: 'Bedroom', tip: 'Flooring, size, natural light, and general condition. The primary bedroom is most important.' },
+    { src: '/images/living-room.jpeg', caption: 'Living Room', tip: 'Flooring, built-ins, fireplace, ceiling height, and overall condition and quality of the main living spaces.' },
+    { src: '/images/view.jpeg', caption: 'View (Through Window)', tip: 'Show the view with context \u2014 include the window frame so we can tell where the view is from and what it looks like from inside.' },
+    { src: '/images/view2.jpeg', caption: 'View (From Yard)', tip: 'A view from the yard or deck. Including the yard or deck in the photo gives context for where the view is enjoyed.' },
 ];
 var lbIndex = 0;
 var lbOverlay = document.getElementById('lightbox');
 var lbImg = document.getElementById('lightbox-img');
 var lbCaption = document.getElementById('lightbox-caption');
+var lbTip = document.getElementById('lightbox-tip');
 
 function openLightbox(i) {
     lbIndex = i;
     lbImg.src = lbPhotos[i].src;
     lbImg.alt = lbPhotos[i].caption;
     lbCaption.textContent = lbPhotos[i].caption + ' (' + (i + 1) + ' of ' + lbPhotos.length + ')';
+    lbTip.textContent = lbPhotos[i].tip || '';
     lbOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 }
@@ -1113,6 +1127,7 @@ function navLightbox(dir) {
     lbImg.src = lbPhotos[lbIndex].src;
     lbImg.alt = lbPhotos[lbIndex].caption;
     lbCaption.textContent = lbPhotos[lbIndex].caption + ' (' + (lbIndex + 1) + ' of ' + lbPhotos.length + ')';
+    lbTip.textContent = lbPhotos[lbIndex].tip || '';
 }
 
 // Close on overlay click (not on image/buttons)
