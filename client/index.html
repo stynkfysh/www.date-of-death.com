@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Your Appraisal | Brian Ward Appraisal</title>
-    <meta name="description" content="View your appraisal order status, submit property photos, and contact your appraiser.">
+    <title>Photo Uploader | Brian Ward Appraisal</title>
+    <meta name="description" content="Upload property photos for your desktop appraisal order.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -331,7 +331,7 @@
             border-color: var(--navy);
             box-shadow: 0 0 0 3px rgba(26,82,118,0.1);
         }
-        .form-group textarea { resize: vertical; }
+        .form-group textarea { resize: vertical; overflow: hidden; }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -487,9 +487,9 @@
 <!-- ═══════ Header ═══════ -->
 <div class="header">
     <div class="header-logo">Brian Ward Appraisal</div>
-    <div class="header-title">Your Appraisal Order</div>
+    <div class="header-title">Photo Uploader for</div>
     <div class="header-address" id="header-address"></div>
-    <div class="header-badge">Date-of-Death Valuation</div>
+    <div class="header-badge">Desktop Appraisal</div>
 </div>
 
 <div class="main">
@@ -580,14 +580,14 @@
     <!-- ═══════ What Photos We Need ═══════ -->
     <div class="card" id="tips-card">
         <div class="card-title"><span class="icon">&#128161;</span> What Photos Do We Need?</div>
+        <p style="font-size: 0.9rem; color: var(--text); margin-bottom: 12px;">We're looking for photos that give a good general understanding of the overall condition, quality, and features of the property. Any photos that help show that are welcome.</p>
         <ul class="photo-tips">
             <li>Front of home — straight-on view from the street</li>
-            <li>Street scene — looking down the street each direction</li>
+            <li>Rear of home — showing the back of the house</li>
             <li>Backyard — yard, pool, patio, ADU, or other structures</li>
             <li>Kitchen — countertops, cabinets, and appliances</li>
             <li>Bathrooms — at least the primary bathroom</li>
             <li>Living areas — living room, family room, dining room</li>
-            <li>Any recent upgrades — flooring, roof, HVAC, windows, solar</li>
             <li>Any condition issues — deferred maintenance, damage, repairs</li>
         </ul>
         <p class="tip-note">Take photos in landscape with good lighting. More photos are always better — we'll use what we need.</p>
@@ -669,6 +669,13 @@
     if (paramName) {
         document.querySelector('.header-title').textContent = 'Hi ' + paramName + ', here\u2019s your appraisal order';
     }
+
+    // ── Auto-expand notes textarea ──
+    var notesArea = document.getElementById('photo-notes');
+    notesArea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    });
 
     // ── Photo upload logic ──
     var selectedFiles = [];
