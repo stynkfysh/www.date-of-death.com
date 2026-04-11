@@ -562,14 +562,20 @@
 
         <div id="photo-form">
             <!-- Hidden fields pre-filled from URL -->
-            <div class="form-row" id="manual-fields" style="display: none;">
+            <div id="manual-fields" style="display: none;">
                 <div class="form-group">
-                    <label>Email <span class="required">*</span></label>
-                    <input type="email" id="ref-email" placeholder="you@example.com">
+                    <label>Your Name <span class="required">*</span></label>
+                    <input type="text" id="ref-name" placeholder="Jane Smith">
                 </div>
-                <div class="form-group">
-                    <label>Property Address <span class="required">*</span></label>
-                    <input type="text" id="ref-address" placeholder="123 Main St, City">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" id="ref-email" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Property Address <span class="required">*</span></label>
+                        <input type="text" id="ref-address" placeholder="123 Main St, City">
+                    </div>
                 </div>
             </div>
 
@@ -689,25 +695,27 @@
     var paramName = params.get('name') || '';
 
     // Pre-fill fields
+    var nameInput = document.getElementById('ref-name');
     var emailInput = document.getElementById('ref-email');
     var addressInput = document.getElementById('ref-address');
     var manualFields = document.getElementById('manual-fields');
     var headerAddr = document.getElementById('header-address');
 
+    if (paramName) nameInput.value = paramName;
     if (paramEmail) emailInput.value = paramEmail;
     if (paramAddress) {
         addressInput.value = paramAddress;
         headerAddr.textContent = paramAddress;
     }
 
-    // Show manual fields only if NOT pre-filled
-    if (!paramEmail || !paramAddress) {
+    // Show manual fields if any are missing
+    if (!paramName || !paramEmail || !paramAddress) {
         manualFields.style.display = '';
     }
 
     // Update header greeting
     if (paramName) {
-        document.querySelector('.header-title').textContent = 'Hi ' + paramName + ', here\u2019s your appraisal order';
+        document.querySelector('.header-title').textContent = 'Photo Uploader for ' + paramName;
     }
 
     // ── Auto-expand notes textarea ──
@@ -803,9 +811,11 @@
 
     // ── Submit handler ──
     submitBtn.addEventListener('click', async function() {
+        var name = nameInput.value || paramName;
         var email = emailInput.value || paramEmail;
         var address = addressInput.value || paramAddress;
 
+        if (!name) { showError('Please enter your name.'); return; }
         if (!email) { showError('Please enter your email address.'); return; }
         if (!address) { showError('Please enter the property address.'); return; }
         if (!selectedFiles.length) { showError('Please add at least one photo.'); return; }
