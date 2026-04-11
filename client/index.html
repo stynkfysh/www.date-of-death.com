@@ -481,6 +481,107 @@
         }
         .submit-status.ready { color: var(--green); }
 
+        /* ── Example photos grid ── */
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .example-thumb {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            background: #eee;
+        }
+        .example-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .example-thumb:hover img { transform: scale(1.05); }
+        .example-thumb .thumb-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 0.62rem;
+            font-weight: 600;
+            padding: 3px 6px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ── Lightbox ── */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .lightbox-overlay.open {
+            display: flex;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        .lightbox-caption {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 12px;
+            text-align: center;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 1.6rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            line-height: 44px;
+            text-align: center;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-prev { left: 12px; }
+        .lightbox-next { right: 12px; }
+
         /* ── Screen-on warning ── */
         .screen-warning {
             background: #fff8e6;
@@ -638,6 +739,59 @@
             <li>Any condition issues — deferred maintenance, damage, repairs</li>
         </ul>
         <p class="tip-note">Take photos horizontally (landscape) — they tend to capture more of the room and surroundings. Good lighting helps too. If your phone has a wide-angle camera, use it — it captures more in a single shot. More photos are always better — we'll use what we need. If some photos aren't possible (for example, the rear of a condominium), that's okay — just send what you can.</p>
+    </div>
+
+    <!-- ═══════ Example Photos ═══════ -->
+    <div class="card" id="examples-card">
+        <div class="card-title"><span class="icon">&#128248;</span> Example Photos</div>
+        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 12px;">Tap any photo to view it larger. These are the types of photos that work well for a desktop appraisal.</p>
+        <div class="example-grid">
+            <div class="example-thumb" onclick="openLightbox(0)">
+                <img src="/images/house-front.jpeg" alt="Front of home" loading="lazy">
+                <div class="thumb-label">Front of Home</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(1)">
+                <img src="/images/house-rear.jpeg" alt="Rear of home" loading="lazy">
+                <div class="thumb-label">Rear of Home</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(2)">
+                <img src="/images/rear-yard.jpeg" alt="Rear yard" loading="lazy">
+                <div class="thumb-label">Rear Yard</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(3)">
+                <img src="/images/kitchen.jpg" alt="Kitchen" loading="lazy">
+                <div class="thumb-label">Kitchen</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(4)">
+                <img src="/images/bathroom.jpeg" alt="Bathroom" loading="lazy">
+                <div class="thumb-label">Bathroom</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(5)">
+                <img src="/images/bedroom.jpeg" alt="Bedroom" loading="lazy">
+                <div class="thumb-label">Bedroom</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(6)">
+                <img src="/images/living-room.jpeg" alt="Living room" loading="lazy">
+                <div class="thumb-label">Living Room</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(7)">
+                <img src="/images/view.jpeg" alt="View with context" loading="lazy">
+                <div class="thumb-label">View (Window)</div>
+            </div>
+            <div class="example-thumb" onclick="openLightbox(8)">
+                <img src="/images/view2.jpeg" alt="View from yard" loading="lazy">
+                <div class="thumb-label">View (Yard)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ Lightbox ═══════ -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+        <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 
     <!-- ═══════ Contact ═══════ -->
@@ -890,6 +1044,7 @@
                 document.getElementById('photo-form').style.display = 'none';
                 document.getElementById('photo-success').style.display = 'block';
                 document.getElementById('tips-card').style.display = 'none';
+                document.getElementById('examples-card').style.display = 'none';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 1500);
         } else if (uploaded > 0) {
@@ -920,6 +1075,67 @@
 
     // ── Initialize status tracker fill ──
     document.getElementById('status-fill').style.width = '16%';
+})();
+
+// ── Lightbox ──
+var lbPhotos = [
+    { src: '/images/house-front.jpeg', caption: 'Front of Home' },
+    { src: '/images/house-rear.jpeg', caption: 'Rear of Home' },
+    { src: '/images/rear-yard.jpeg', caption: 'Rear Yard' },
+    { src: '/images/kitchen.jpg', caption: 'Kitchen' },
+    { src: '/images/bathroom.jpeg', caption: 'Bathroom' },
+    { src: '/images/bedroom.jpeg', caption: 'Bedroom' },
+    { src: '/images/living-room.jpeg', caption: 'Living Room' },
+    { src: '/images/view.jpeg', caption: 'View (Through Window)' },
+    { src: '/images/view2.jpeg', caption: 'View (From Yard)' },
+];
+var lbIndex = 0;
+var lbOverlay = document.getElementById('lightbox');
+var lbImg = document.getElementById('lightbox-img');
+var lbCaption = document.getElementById('lightbox-caption');
+
+function openLightbox(i) {
+    lbIndex = i;
+    lbImg.src = lbPhotos[i].src;
+    lbImg.alt = lbPhotos[i].caption;
+    lbCaption.textContent = lbPhotos[i].caption + ' (' + (i + 1) + ' of ' + lbPhotos.length + ')';
+    lbOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lbOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function navLightbox(dir) {
+    lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+    lbImg.src = lbPhotos[lbIndex].src;
+    lbImg.alt = lbPhotos[lbIndex].caption;
+    lbCaption.textContent = lbPhotos[lbIndex].caption + ' (' + (lbIndex + 1) + ' of ' + lbPhotos.length + ')';
+}
+
+// Close on overlay click (not on image/buttons)
+lbOverlay.addEventListener('click', function(e) {
+    if (e.target === lbOverlay) closeLightbox();
+});
+
+// Keyboard nav
+document.addEventListener('keydown', function(e) {
+    if (!lbOverlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+});
+
+// Swipe support for mobile
+(function() {
+    var startX = 0;
+    lbOverlay.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    lbOverlay.addEventListener('touchend', function(e) {
+        var diff = e.changedTouches[0].clientX - startX;
+        if (Math.abs(diff) > 50) navLightbox(diff > 0 ? -1 : 1);
+    }, { passive: true });
 })();
 </script>
 
