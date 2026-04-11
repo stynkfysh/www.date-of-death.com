@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Your Appraisal | Brian Ward Appraisal</title>
+    <meta name="description" content="View your appraisal order status, submit property photos, and contact your appraiser.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1a1a1a;
+            background: #f5f7f9;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+        a { color: #1a5276; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ── Brand colors ── */
+        :root {
+            --navy: #1a5276;
+            --navy-dark: #154360;
+            --green: #27ae60;
+            --green-dark: #219a52;
+            --light-blue: #f0f6fb;
+            --border-blue: #d0e3f0;
+            --bg: #f5f7f9;
+            --card: #ffffff;
+            --text: #333;
+            --text-light: #666;
+            --text-muted: #999;
+            --danger: #c0392b;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: var(--navy);
+            color: #fff;
+            padding: 20px 20px 24px;
+            text-align: center;
+        }
+        .header-logo {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-top: 12px;
+            line-height: 1.2;
+        }
+        .header-address {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-top: 6px;
+        }
+        .header-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-top: 12px;
+        }
+
+        /* ── Main ── */
+        .main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px 16px 40px;
+        }
+
+        /* ── Cards ── */
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title .icon {
+            font-size: 1.15rem;
+        }
+
+        /* ── Status Tracker ── */
+        .status-steps {
+            display: flex;
+            gap: 0;
+            position: relative;
+        }
+        .status-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding-top: 36px;
+        }
+        .status-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #dde4ea;
+            border: 3px solid #dde4ea;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .status-step.completed .status-dot {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        .status-step.active .status-dot {
+            background: var(--navy);
+            border-color: var(--navy);
+            box-shadow: 0 0 0 4px rgba(26, 82, 118, 0.2);
+        }
+        .status-step.active .status-dot::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .status-line {
+            position: absolute;
+            top: 13px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #dde4ea;
+            z-index: 1;
+        }
+        .status-line-fill {
+            position: absolute;
+            top: 13px;
+            left: 0;
+            height: 3px;
+            background: var(--green);
+            z-index: 1;
+            transition: width 0.4s ease;
+        }
+        .status-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+        .status-step.completed .status-label,
+        .status-step.active .status-label {
+            color: var(--text);
+        }
+
+        /* ── Photo Upload ── */
+        .upload-area {
+            border: 2px dashed var(--border-blue);
+            border-radius: 10px;
+            padding: 28px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            background: var(--light-blue);
+        }
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: var(--navy);
+            background: #e6eff7;
+        }
+        .upload-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+        .upload-area h3 {
+            font-size: 1rem;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        .upload-area p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        .upload-area .browse-link {
+            color: var(--navy);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        .upload-hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* Thumbnail grid */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: #eee;
+        }
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 22px;
+            height: 22px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 22px;
+            text-align: center;
+            padding: 0;
+        }
+        .preview-remove:hover { background: rgba(192,57,43,0.85); }
+        .preview-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .file-count {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        /* Progress */
+        .progress-wrap {
+            display: none;
+            margin-top: 16px;
+        }
+        .progress-bar-outer {
+            background: #e8e8e8;
+            border-radius: 6px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-inner {
+            background: linear-gradient(90deg, var(--navy), var(--green));
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 6px;
+        }
+        .progress-text {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        /* ── Form inputs ── */
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #222;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--navy);
+            box-shadow: 0 0 0 3px rgba(26,82,118,0.1);
+        }
+        .form-group textarea { resize: vertical; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 480px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+        .required { color: var(--danger); }
+
+        /* ── Buttons ── */
+        .btn-primary {
+            display: block;
+            width: 100%;
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            text-align: center;
+        }
+        .btn-primary:hover { background: var(--navy-dark); transform: translateY(-1px); }
+        .btn-primary:disabled {
+            background: #b0b0b0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-outline {
+            display: block;
+            width: 100%;
+            background: transparent;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            padding: 12px 20px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-outline:hover { background: var(--navy); color: #fff; text-decoration: none; }
+
+        /* ── Info list ── */
+        .info-list {
+            list-style: none;
+        }
+        .info-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list .li-icon {
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .info-list a { font-weight: 600; }
+
+        /* ── Photo tip list ── */
+        .photo-tips {
+            list-style: none;
+        }
+        .photo-tips li {
+            padding: 5px 0;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+        }
+        .photo-tips li::before {
+            content: '\2713';
+            color: var(--green);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        .tip-note {
+            font-size: 0.82rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* ── Error ── */
+        .error-msg {
+            color: var(--danger);
+            background: #fdf0ef;
+            border: 1px solid #e6b0aa;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        /* ── Success overlay ── */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 40px 16px;
+        }
+        .success-icon { font-size: 3.5rem; margin-bottom: 16px; }
+        .success-screen h2 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        .success-screen p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            max-width: 400px;
+            margin: 0 auto 8px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 24px 20px 32px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .footer a { color: var(--text-muted); text-decoration: underline; }
+        .footer .license {
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ── Submit status ── */
+        .submit-status {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        .submit-status.ready { color: var(--green); }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ Header ═══════ -->
+<div class="header">
+    <div class="header-logo">Brian Ward Appraisal</div>
+    <div class="header-title">Your Appraisal Order</div>
+    <div class="header-address" id="header-address"></div>
+    <div class="header-badge">Date-of-Death Valuation</div>
+</div>
+
+<div class="main">
+
+    <!-- ═══════ Status Tracker ═══════ -->
+    <div class="card">
+        <div class="card-title"><span class="icon">&#9776;</span> Order Status</div>
+        <div style="position: relative;">
+            <div class="status-line"></div>
+            <div class="status-line-fill" id="status-fill" style="width: 0%;"></div>
+            <div class="status-steps" id="status-steps">
+                <div class="status-step completed">
+                    <div class="status-dot">&#10003;</div>
+                    <div class="status-label">Order<br>Received</div>
+                </div>
+                <div class="status-step active" id="step-photos">
+                    <div class="status-dot"></div>
+                    <div class="status-label">Submit<br>Photos</div>
+                </div>
+                <div class="status-step" id="step-progress">
+                    <div class="status-dot"></div>
+                    <div class="status-label">In<br>Progress</div>
+                </div>
+                <div class="status-step" id="step-delivered">
+                    <div class="status-dot"></div>
+                    <div class="status-label">Report<br>Delivered</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ Photo Upload ═══════ -->
+    <div class="card" id="photo-card">
+        <div class="card-title"><span class="icon">&#128247;</span> Property Photos</div>
+
+        <div id="photo-form">
+            <!-- Hidden fields pre-filled from URL -->
+            <div class="form-row" id="manual-fields" style="display: none;">
+                <div class="form-group">
+                    <label>Email <span class="required">*</span></label>
+                    <input type="email" id="ref-email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Property Address <span class="required">*</span></label>
+                    <input type="text" id="ref-address" placeholder="123 Main St, City">
+                </div>
+            </div>
+
+            <!-- Upload area -->
+            <div class="upload-area" id="drop-zone">
+                <div class="upload-icon">&#128247;</div>
+                <h3>Tap to add photos</h3>
+                <p>or <span class="browse-link">browse files</span></p>
+                <p class="upload-hint">JPEG, PNG, HEIC &middot; up to 25 MB each</p>
+                <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/heic,image/heif,.jpg,.jpeg,.png,.heic,.heif" style="display:none;">
+            </div>
+
+            <div class="preview-grid" id="preview-grid"></div>
+            <p class="file-count" id="file-count" style="display:none;"></p>
+
+            <div class="progress-wrap" id="upload-progress">
+                <div class="progress-bar-outer">
+                    <div class="progress-bar-inner" id="progress-bar"></div>
+                </div>
+                <p class="progress-text" id="progress-text">Uploading...</p>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-group" style="margin-top: 14px;">
+                <label>Notes (optional)</label>
+                <textarea id="photo-notes" rows="2" placeholder="e.g., Kitchen remodeled 2020, roof replaced 2018..."></textarea>
+            </div>
+
+            <button type="button" class="btn-primary" id="submit-btn" disabled>Submit Photos</button>
+            <p class="submit-status" id="submit-status">Add at least one photo to continue</p>
+            <div class="error-msg" id="error-msg"></div>
+        </div>
+
+        <!-- Success -->
+        <div class="success-screen" id="photo-success">
+            <div class="success-icon">&#9989;</div>
+            <h2>Photos Received!</h2>
+            <p>Your property photos have been uploaded securely. Our appraiser will review them with your order.</p>
+            <p style="font-size: 0.88rem;">If we need additional photos, we'll reach out to you directly.</p>
+        </div>
+    </div>
+
+    <!-- ═══════ What Photos We Need ═══════ -->
+    <div class="card" id="tips-card">
+        <div class="card-title"><span class="icon">&#128161;</span> What Photos Do We Need?</div>
+        <ul class="photo-tips">
+            <li>Front of home — straight-on view from the street</li>
+            <li>Street scene — looking down the street each direction</li>
+            <li>Backyard — yard, pool, patio, ADU, or other structures</li>
+            <li>Kitchen — countertops, cabinets, and appliances</li>
+            <li>Bathrooms — at least the primary bathroom</li>
+            <li>Living areas — living room, family room, dining room</li>
+            <li>Any recent upgrades — flooring, roof, HVAC, windows, solar</li>
+            <li>Any condition issues — deferred maintenance, damage, repairs</li>
+        </ul>
+        <p class="tip-note">Take photos in landscape with good lighting. More photos are always better — we'll use what we need.</p>
+    </div>
+
+    <!-- ═══════ Payment ═══════ -->
+    <div class="card" id="payment-card">
+        <div class="card-title"><span class="icon">&#128179;</span> Payment</div>
+        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 14px;">
+            If you haven't already paid, you can complete payment using the link in your invoice email from Square.
+        </p>
+        <a href="https://squareup.com/pay-invoice" target="_blank" rel="noopener" class="btn-outline" id="payment-link">
+            Pay Invoice on Square &rarr;
+        </a>
+    </div>
+
+    <!-- ═══════ Contact ═══════ -->
+    <div class="card">
+        <div class="card-title"><span class="icon">&#128222;</span> Contact Your Appraiser</div>
+        <ul class="info-list">
+            <li>
+                <span class="li-icon">&#128100;</span>
+                <span><strong>Brian Ward</strong><br>Certified Residential Appraiser</span>
+            </li>
+            <li>
+                <span class="li-icon">&#128231;</span>
+                <span>Email: <a href="mailto:b@appraiser.llc">b@appraiser.llc</a></span>
+            </li>
+            <li>
+                <span class="li-icon">&#128241;</span>
+                <span>Call/Text: <a href="tel:+18582153954">(858) 215-3954</a></span>
+            </li>
+            <li>
+                <span class="li-icon">&#128247;</span>
+                <span>Photos by email: <a href="mailto:photos@date-of-death.com">photos@date-of-death.com</a></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ═══════ What to Expect ═══════ -->
+    <div class="card">
+        <div class="card-title"><span class="icon">&#128196;</span> What to Expect</div>
+        <ul class="info-list">
+            <li>
+                <span class="li-icon">&#128197;</span>
+                <span>Turnaround is typically <strong>5–7 business days</strong> after photos and payment are received.</span>
+            </li>
+            <li>
+                <span class="li-icon">&#128274;</span>
+                <span>Your appraisal report will be delivered as a <strong>secure PDF</strong> via email.</span>
+            </li>
+            <li>
+                <span class="li-icon">&#128260;</span>
+                <span>One free revision is included if adjustments are needed.</span>
+            </li>
+            <li>
+                <span class="li-icon">&#9993;</span>
+                <span>Questions? Reply to any email or text us anytime.</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- ═══════ Footer ═══════ -->
+<div class="footer">
+    &copy; 2026 Brian Ward Appraisal. All rights reserved.
+    <span class="license">California Certified Residential Appraiser &middot; License No. AR036053</span>
+    <span style="display: block; margin-top: 4px;"><a href="https://www.date-of-death.com">date-of-death.com</a></span>
+</div>
+
+<script>
+(function() {
+    // ── Parse URL params ──
+    var params = new URLSearchParams(window.location.search);
+    var paramEmail = params.get('email') || '';
+    var paramAddress = params.get('address') || '';
+    var paramPayment = params.get('payment') || '';
+    var paramName = params.get('name') || '';
+
+    // Pre-fill fields
+    var emailInput = document.getElementById('ref-email');
+    var addressInput = document.getElementById('ref-address');
+    var manualFields = document.getElementById('manual-fields');
+    var headerAddr = document.getElementById('header-address');
+
+    if (paramEmail) emailInput.value = paramEmail;
+    if (paramAddress) {
+        addressInput.value = paramAddress;
+        headerAddr.textContent = paramAddress;
+    }
+
+    // Show manual fields only if NOT pre-filled
+    if (!paramEmail || !paramAddress) {
+        manualFields.style.display = '';
+    }
+
+    // Update header greeting
+    if (paramName) {
+        document.querySelector('.header-title').textContent = 'Hi ' + paramName + ', here\u2019s your appraisal order';
+    }
+
+    // Update payment link if provided
+    if (paramPayment) {
+        document.getElementById('payment-link').href = paramPayment;
+    }
+
+    // ── Photo upload logic ──
+    var selectedFiles = [];
+    var dropZone = document.getElementById('drop-zone');
+    var fileInput = document.getElementById('file-input');
+    var previewGrid = document.getElementById('preview-grid');
+    var fileCount = document.getElementById('file-count');
+    var submitBtn = document.getElementById('submit-btn');
+    var submitStatus = document.getElementById('submit-status');
+    var progressEl = document.getElementById('upload-progress');
+    var progressBar = document.getElementById('progress-bar');
+    var progressText = document.getElementById('progress-text');
+    var errorMsg = document.getElementById('error-msg');
+
+    var MAX_FILE_SIZE = 25 * 1024 * 1024;
+
+    dropZone.addEventListener('click', function() { fileInput.click(); });
+    dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', function() { dropZone.classList.remove('drag-over'); });
+    dropZone.addEventListener('drop', function(e) { e.preventDefault(); dropZone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+    fileInput.addEventListener('change', function() { addFiles(fileInput.files); fileInput.value = ''; });
+
+    function addFiles(fileList) {
+        var skipped = [];
+        for (var i = 0; i < fileList.length; i++) {
+            var f = fileList[i];
+            if (!f.type.match(/^image\//)) { skipped.push(f.name + ' (not an image)'); continue; }
+            if (f.size > MAX_FILE_SIZE) { skipped.push(f.name + ' (over 25 MB)'); continue; }
+            var isDupe = selectedFiles.some(function(ex) { return ex.name === f.name && ex.size === f.size; });
+            if (!isDupe) selectedFiles.push(f);
+        }
+        if (skipped.length) showError('Skipped: ' + skipped.join(', '));
+        renderPreviews();
+    }
+
+    function removeFile(idx) { selectedFiles.splice(idx, 1); renderPreviews(); }
+
+    function renderPreviews() {
+        previewGrid.innerHTML = '';
+        selectedFiles.forEach(function(f, idx) {
+            var item = document.createElement('div');
+            item.className = 'preview-item';
+            var img = document.createElement('img');
+            img.src = URL.createObjectURL(f);
+            img.alt = f.name;
+            item.appendChild(img);
+
+            var rmBtn = document.createElement('button');
+            rmBtn.className = 'preview-remove';
+            rmBtn.innerHTML = '&times;';
+            rmBtn.setAttribute('data-idx', idx);
+            rmBtn.addEventListener('click', function(e) { e.stopPropagation(); removeFile(parseInt(this.getAttribute('data-idx'))); });
+            item.appendChild(rmBtn);
+
+            var lbl = document.createElement('div');
+            lbl.className = 'preview-label';
+            lbl.textContent = f.name;
+            item.appendChild(lbl);
+
+            previewGrid.appendChild(item);
+        });
+
+        if (selectedFiles.length > 0) {
+            fileCount.style.display = 'block';
+            var mb = selectedFiles.reduce(function(s, f) { return s + f.size; }, 0) / 1024 / 1024;
+            fileCount.textContent = selectedFiles.length + ' photo' + (selectedFiles.length > 1 ? 's' : '') + ' (' + mb.toFixed(1) + ' MB)';
+            submitBtn.disabled = false;
+            submitStatus.textContent = 'Ready to upload';
+            submitStatus.className = 'submit-status ready';
+        } else {
+            fileCount.style.display = 'none';
+            submitBtn.disabled = true;
+            submitStatus.textContent = 'Add at least one photo to continue';
+            submitStatus.className = 'submit-status';
+        }
+        hideError();
+    }
+
+    function showError(msg) { errorMsg.textContent = msg; errorMsg.style.display = 'block'; }
+    function hideError() { errorMsg.style.display = 'none'; }
+
+    // ── Submit handler ──
+    submitBtn.addEventListener('click', async function() {
+        var email = emailInput.value || paramEmail;
+        var address = addressInput.value || paramAddress;
+
+        if (!email) { showError('Please enter your email address.'); return; }
+        if (!address) { showError('Please enter the property address.'); return; }
+        if (!selectedFiles.length) { showError('Please add at least one photo.'); return; }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Uploading\u2026';
+        hideError();
+        progressEl.style.display = 'block';
+        progressBar.style.width = '0%';
+
+        var folderId = '';
+        var total = selectedFiles.length;
+        var uploaded = 0;
+        var failed = [];
+
+        for (var i = 0; i < total; i++) {
+            var file = selectedFiles[i];
+            var isLast = (i === total - 1);
+            progressText.textContent = 'Uploading ' + (i + 1) + ' of ' + total + ': ' + file.name;
+            progressBar.style.width = Math.round((i / total) * 100) + '%';
+
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('email', email);
+            formData.append('property_address', address);
+            if (folderId) formData.append('folder_id', folderId);
+            if (isLast) {
+                formData.append('is_last', 'true');
+                formData.append('notes', document.getElementById('photo-notes').value);
+                formData.append('total_count', String(total));
+            }
+
+            try {
+                var resp = await fetch('/api/upload-photos', { method: 'POST', body: formData });
+                var result = await resp.json();
+                if (!resp.ok || result.error) { failed.push(file.name + ': ' + (result.error || 'failed')); continue; }
+                if (result.folderId) folderId = result.folderId;
+                uploaded++;
+            } catch (err) {
+                failed.push(file.name + ': ' + (err.message || 'Network error'));
+            }
+            progressBar.style.width = Math.round(((i + 1) / total) * 100) + '%';
+        }
+
+        if (uploaded === total) {
+            progressText.textContent = 'All photos uploaded!';
+            progressBar.style.width = '100%';
+            // Update status tracker
+            document.getElementById('step-photos').className = 'status-step completed';
+            document.getElementById('step-photos').querySelector('.status-dot').innerHTML = '&#10003;';
+            document.getElementById('step-progress').className = 'status-step active';
+            document.getElementById('status-fill').style.width = '50%';
+
+            setTimeout(function() {
+                document.getElementById('photo-form').style.display = 'none';
+                document.getElementById('photo-success').style.display = 'block';
+                document.getElementById('tips-card').style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 800);
+        } else if (uploaded > 0) {
+            progressText.textContent = uploaded + ' of ' + total + ' uploaded';
+            showError('Some photos failed: ' + failed.join('; ') + '\n\nYou can email the rest to photos@date-of-death.com.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Retry';
+        } else {
+            progressText.textContent = 'Upload failed';
+            showError('Unable to upload. Try again or email to photos@date-of-death.com.\n\n' + failed[0]);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Try Again';
+            progressEl.style.display = 'none';
+        }
+    });
+
+    // ── Initialize status tracker fill ──
+    document.getElementById('status-fill').style.width = '16%';
+})();
+</script>
+
+</body>
+</html>
