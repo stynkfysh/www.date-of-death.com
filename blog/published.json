@@ -938,5 +938,53 @@
       }
     },
     "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
+  "6126-la-flecha-a-rancho-santa-fe-ca-92067": {
+    "slug": "6126-la-flecha-a-rancho-santa-fe-ca-92067",
+    "title": "Market Trends: Rancho Santa Fe 92067 \u2014 April 2026",
+    "city": "Rancho Santa Fe",
+    "zip_codes": [
+      "92067"
+    ],
+    "market_area": "Coastal North",
+    "date_iso": "2026-04-13",
+    "date_display": "April 13, 2026",
+    "mod_time": "2026-04-13T20:40:40.529000",
+    "folder_name": "6126 La Flecha A, Rancho Santa Fe CA 92067",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$4,050,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$810.92",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+18.49%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.4",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "61",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-24.2%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
   }
 }
