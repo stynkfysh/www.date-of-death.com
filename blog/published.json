@@ -1132,5 +1132,103 @@
       }
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "ps-2001-e-camino-parocela-unit-l84": {
+    "slug": "ps-2001-e-camino-parocela-unit-l84",
+    "title": "Market Trends: Palm Springs 92264 \u2014 April 2026",
+    "city": "Palm Springs",
+    "zip_codes": [
+      "92264"
+    ],
+    "market_area": "Palm Springs South End",
+    "date_iso": "2026-04-15",
+    "date_display": "April 15, 2026",
+    "mod_time": "2026-04-15T13:40:28.719000",
+    "folder_name": "PS 2001 E Camino Parocela Unit L84",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$410,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$355.93",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-0.79%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "19.8",
+        "trend": "Loose supply"
+      },
+      "Median Days on Market": {
+        "value": "77",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "97.8%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-24.3%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "180+ days",
+        "trend": "Slow market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "sa-8821-prestwick-way": {
+    "slug": "sa-8821-prestwick-way",
+    "title": "Market Trends: Santee 92071, 92128, 92171 \u2014 April 2026",
+    "city": "Santee",
+    "zip_codes": [
+      "92071",
+      "92128",
+      "92171"
+    ],
+    "market_area": "East County",
+    "date_iso": "2026-04-15",
+    "date_display": "April 15, 2026",
+    "mod_time": "2026-04-15T20:04:36.466000",
+    "folder_name": "SA 8821 Prestwick Way",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$850,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$576.71",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+1.29%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "2.0",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "12",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "101.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-41.5%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
   }
 }
