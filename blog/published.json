@@ -1,15 +1,262 @@
 {
+  "1253-san-pablo-dr": {
+    "slug": "1253-san-pablo-dr",
+    "title": "Market Trends: San Marcos 92068, 92069, 92078 \u2014 August 2022",
+    "city": "San Marcos",
+    "zip_codes": [
+      "92068",
+      "92069",
+      "92078"
+    ],
+    "market_area": "North County",
+    "date_iso": "2022-08-20",
+    "date_display": "August 20, 2022",
+    "mod_time": "2026-04-14T16:22:21.963000",
+    "folder_name": "1253 San Pablo Dr",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$1,055,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$538.94",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+22.87%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.9",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "26",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-5.7%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+  },
+  "1364-miraflores-gln-escondido-ca-92026": {
+    "slug": "1364-miraflores-gln-escondido-ca-92026",
+    "title": "Market Trends: 1364 92026 \u2014 March 2026",
+    "city": "1364",
+    "zip_codes": [
+      "92026"
+    ],
+    "market_area": "",
+    "date_iso": "2026-03-21",
+    "date_display": "March 21, 2026",
+    "mod_time": "2026-04-17T19:29:50.027000",
+    "folder_name": "1364 Miraflores Gln, Escondido, CA 92026",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$820,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$473.49",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-7.28%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.6",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "23",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-19.1%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
+  "1908-las-montanas-ct-brentwood-ca-94513": {
+    "slug": "1908-las-montanas-ct-brentwood-ca-94513",
+    "title": "Market Trends: 1908 94513 \u2014 August 2022",
+    "city": "1908",
+    "zip_codes": [
+      "94513"
+    ],
+    "market_area": "",
+    "date_iso": "2022-08-20",
+    "date_display": "August 20, 2022",
+    "mod_time": "2026-04-14T17:17:47.736000",
+    "folder_name": "1908 Las Montanas Ct, Brentwood, CA 94513",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$860,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$382.51",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+7.62%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "5.0",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "34",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "N/A",
+        "trend": "N/A"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-2.2%",
+        "trend": "Stable"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
+  "3411-celinda-dr-carlsbad-ca-92008": {
+    "slug": "3411-celinda-dr-carlsbad-ca-92008",
+    "title": "Market Trends: 3411 92008 \u2014 August 2022",
+    "city": "3411",
+    "zip_codes": [
+      "92008"
+    ],
+    "market_area": "",
+    "date_iso": "2022-08-20",
+    "date_display": "August 20, 2022",
+    "mod_time": "2026-04-14T01:30:04.455000",
+    "folder_name": "3411 Celinda Dr, Carlsbad, CA 92008",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$1,849,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$698.06",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+24.43%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "2.1",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "28",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "101.0%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-1.0%",
+        "trend": "Stable"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "cv-305-inkopah-st": {
+    "slug": "cv-305-inkopah-st",
+    "title": "Market Trends: Chula Vista 91910, 91911, 91913, 91914, 91915, 92154 \u2014 March 2026",
+    "city": "Chula Vista",
+    "zip_codes": [
+      "91910",
+      "91911",
+      "91913",
+      "91914",
+      "91915",
+      "92154"
+    ],
+    "market_area": "South Bay",
+    "date_iso": "2026-03-17",
+    "date_display": "March 17, 2026",
+    "mod_time": "2026-04-04T20:20:49.321000",
+    "folder_name": "CV 305 Inkopah St",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$910,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$488.24",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+2.83%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.7",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "15",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-31.1%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
   "da-752-anderson-rd": {
     "slug": "da-752-anderson-rd",
-    "title": "Market Trends: 752 95616 \u2014 April 2026",
-    "city": "752",
+    "title": "Market Trends: Davis 95616 \u2014 February 2026",
+    "city": "Davis",
     "zip_codes": [
       "95616"
     ],
     "market_area": "",
-    "date_iso": "2026-04-02",
-    "date_display": "April 02, 2026",
-    "mod_time": "2026-04-02T10:42:16.276112",
+    "date_iso": "2026-02-08",
+    "date_display": "February 08, 2026",
+    "mod_time": "2026-04-02T17:42:16.276000",
     "folder_name": "DA 752 Anderson Rd",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -47,6 +294,56 @@
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   },
+  "ec-1219-hidden-mountain-dr": {
+    "slug": "ec-1219-hidden-mountain-dr",
+    "title": "Market Trends: El Cajon 92019, 92020, 92021 \u2014 November 2025",
+    "city": "El Cajon",
+    "zip_codes": [
+      "92019",
+      "92020",
+      "92021"
+    ],
+    "market_area": "East County",
+    "date_iso": "2025-11-10",
+    "date_display": "November 10, 2025",
+    "mod_time": "2026-04-16T23:16:20.522000",
+    "folder_name": "EC 1219 Hidden Mountain Dr",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$850,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$508.26",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-0.08%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.1",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "22",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-14.0%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
   "en-1151-53-hermes-ave-encinitas-ca-92024": {
     "slug": "en-1151-53-hermes-ave-encinitas-ca-92024",
     "title": "Market Trends: Encinitas 91911, 92007, 92024 \u2014 February 2026",
@@ -57,9 +354,9 @@
       "92024"
     ],
     "market_area": "Coastal North",
-    "date_iso": "2026-02-26",
-    "date_display": "February 26, 2026",
-    "mod_time": "2026-02-26T08:19:50.533187",
+    "date_iso": "2026-02-13",
+    "date_display": "February 13, 2026",
+    "mod_time": "2026-02-26T16:19:58.408000",
     "folder_name": "EN-1151-53-Hermes-Ave-Encinitas-CA-92024",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -97,18 +394,67 @@
     },
     "summary_text": "A notable feature of the current market is the divergence between median sale price trends and price-per-square-foot trends. While the median sale price declined -15.7% quarter over quarter, the median $/SF changed by only -1.2%. This gap suggests a compositional shift in the sales mix: recent trans"
   },
-  "fb-363-tumble-creek-ln": {
-    "slug": "fb-363-tumble-creek-ln",
-    "title": "Market Trends: Fallbrook 92026, 92028 \u2014 March 2026",
+  "fa-108-350-19-00-mission-ridge-ln": {
+    "slug": "fa-108-350-19-00-mission-ridge-ln",
+    "title": "Market Trends: Fallbrook 92026, 92028 \u2014 November 2024",
     "city": "Fallbrook",
     "zip_codes": [
       "92026",
       "92028"
     ],
     "market_area": "North County",
-    "date_iso": "2026-03-19",
-    "date_display": "March 19, 2026",
-    "mod_time": "2026-03-19T20:09:37.320342",
+    "date_iso": "2024-11-15",
+    "date_display": "November 15, 2024",
+    "mod_time": "2026-04-09T18:07:05.895000",
+    "folder_name": "FA 108-350-19-00 Mission Ridge Ln",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$867,500",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$437.14",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+7.84%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.5",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "40",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-25.5%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
+  "fb-363-tumble-creek-ln": {
+    "slug": "fb-363-tumble-creek-ln",
+    "title": "Market Trends: Fallbrook 92026, 92028 \u2014 June 2025",
+    "city": "Fallbrook",
+    "zip_codes": [
+      "92026",
+      "92028"
+    ],
+    "market_area": "North County",
+    "date_iso": "2025-06-26",
+    "date_display": "June 26, 2025",
+    "mod_time": "2026-03-20T03:09:37.320000",
     "folder_name": "FB 363 Tumble Creek Ln",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -148,15 +494,15 @@
   },
   "lj-7569-caminito-avola": {
     "slug": "lj-7569-caminito-avola",
-    "title": "Market Trends: La Jolla 92037 \u2014 April 2026",
+    "title": "Market Trends: La Jolla 92037 \u2014 March 2026",
     "city": "La Jolla",
     "zip_codes": [
       "92037"
     ],
     "market_area": "Coastal South",
-    "date_iso": "2026-04-01",
-    "date_display": "April 01, 2026",
-    "mod_time": "2026-04-01T07:02:11.199883",
+    "date_iso": "2026-03-05",
+    "date_display": "March 05, 2026",
+    "mod_time": "2026-04-01T14:02:11.199000",
     "folder_name": "LJ 7569 Caminito Avola",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -196,15 +542,15 @@
   },
   "lj-8551-cliffridge-ave": {
     "slug": "lj-8551-cliffridge-ave",
-    "title": "Market Trends: La Jolla 92037 \u2014 March 2026",
+    "title": "Market Trends: La Jolla 92037 \u2014 January 2026",
     "city": "La Jolla",
     "zip_codes": [
       "92037"
     ],
     "market_area": "Coastal South",
-    "date_iso": "2026-03-26",
-    "date_display": "March 26, 2026",
-    "mod_time": "2026-03-26T13:16:37.326610",
+    "date_iso": "2026-01-27",
+    "date_display": "January 27, 2026",
+    "mod_time": "2026-03-26T20:16:37.326000",
     "folder_name": "LJ 8551 Cliffridge Ave",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -244,7 +590,7 @@
   },
   "lm-4258-summit-dr-la-mesa-ca-91941-7841": {
     "slug": "lm-4258-summit-dr-la-mesa-ca-91941-7841",
-    "title": "Market Trends: La Mesa 91941, 91942, 91977 \u2014 March 2026",
+    "title": "Market Trends: La Mesa 91941, 91942, 91977 \u2014 February 2025",
     "city": "La Mesa",
     "zip_codes": [
       "91941",
@@ -252,9 +598,9 @@
       "91977"
     ],
     "market_area": "East County",
-    "date_iso": "2026-03-02",
-    "date_display": "March 02, 2026",
-    "mod_time": "2026-03-02T13:23:48.639210",
+    "date_iso": "2025-02-25",
+    "date_display": "February 25, 2025",
+    "mod_time": "2026-03-02T21:23:48.639000",
     "folder_name": "LM-4258-Summit-Dr-La-Mesa-CA-91941-7841",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -294,7 +640,7 @@
   },
   "oc-815-wisconsin-ave": {
     "slug": "oc-815-wisconsin-ave",
-    "title": "Market Trends: Oceanside 92054, 92056, 92057, 92058, 92507 \u2014 March 2026",
+    "title": "Market Trends: Oceanside 92054, 92056, 92057, 92058, 92507 \u2014 September 2025",
     "city": "Oceanside",
     "zip_codes": [
       "92054",
@@ -304,9 +650,9 @@
       "92507"
     ],
     "market_area": "Coastal North",
-    "date_iso": "2026-03-24",
-    "date_display": "March 24, 2026",
-    "mod_time": "2026-03-24T22:41:36.386745",
+    "date_iso": "2025-09-29",
+    "date_display": "September 29, 2025",
+    "mod_time": "2026-03-25T05:41:44.923000",
     "folder_name": "OC 815 Wisconsin Ave",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -344,17 +690,65 @@
     },
     "summary_text": "The divergence between the 12-month linear sale price trend (\u22123.84%) and the 12-month linear $/SF trend (+3.79%) is best understood through the lens of compositional mix shift. When median $/SF appreciates while median sale price softens, it typically indicates that a larger share of recent transact"
   },
+  "ps-2001-e-camino-parocela-unit-l84": {
+    "slug": "ps-2001-e-camino-parocela-unit-l84",
+    "title": "Market Trends: Palm Springs 92264 \u2014 August 2025",
+    "city": "Palm Springs",
+    "zip_codes": [
+      "92264"
+    ],
+    "market_area": "Palm Springs South End",
+    "date_iso": "2025-08-11",
+    "date_display": "August 11, 2025",
+    "mod_time": "2026-04-15T13:40:28.719000",
+    "folder_name": "PS 2001 E Camino Parocela Unit L84",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$410,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$355.93",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-0.79%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "19.8",
+        "trend": "Loose supply"
+      },
+      "Median Days on Market": {
+        "value": "77",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "97.8%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-24.3%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "180+ days",
+        "trend": "Slow market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
   "rm-3-clancy-ln-s-rancho-mirage-ca-92270-4501": {
     "slug": "rm-3-clancy-ln-s-rancho-mirage-ca-92270-4501",
-    "title": "Market Trends: Rancho Mirage 92270 \u2014 February 2026",
+    "title": "Market Trends: Rancho Mirage 92270 \u2014 May 2024",
     "city": "Rancho Mirage",
     "zip_codes": [
       "92270"
     ],
     "market_area": "Rancho Mirage",
-    "date_iso": "2026-02-25",
-    "date_display": "February 25, 2026",
-    "mod_time": "2026-02-25T08:42:46.280000",
+    "date_iso": "2024-05-01",
+    "date_display": "May 01, 2024",
+    "mod_time": "2026-02-25T16:42:54.414000",
     "folder_name": "RM-3-Clancy-Ln-S-Rancho-Mirage-CA-92270-4501",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -392,17 +786,163 @@
     },
     "summary_text": "The divergence between the median sale price trend (+1.9% quarter-over-quarter) and the median $/SF trend (-2.1%) in the most recent quarter is best explained by a compositional shift in the sales mix. When larger homes represent a greater share of closed transactions, the overall median price can r"
   },
+  "6126-la-flecha-a-rancho-santa-fe-ca-92067": {
+    "slug": "6126-la-flecha-a-rancho-santa-fe-ca-92067",
+    "title": "Market Trends: Rancho Santa Fe 92067 \u2014 August 2022",
+    "city": "Rancho Santa Fe",
+    "zip_codes": [
+      "92067"
+    ],
+    "market_area": "Coastal North",
+    "date_iso": "2022-08-20",
+    "date_display": "August 20, 2022",
+    "mod_time": "2026-04-13T20:40:40.529000",
+    "folder_name": "6126 La Flecha A, Rancho Santa Fe CA 92067",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$4,050,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$810.92",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+18.49%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.4",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "61",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-24.2%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+  },
+  "sa-11041-summit-ave": {
+    "slug": "sa-11041-summit-ave",
+    "title": "Market Trends: Santee 92071 \u2014 June 2025",
+    "city": "Santee",
+    "zip_codes": [
+      "92071"
+    ],
+    "market_area": "",
+    "date_iso": "2025-06-19",
+    "date_display": "June 19, 2025",
+    "mod_time": "2026-04-07T22:11:35.581427",
+    "folder_name": "SA 11041 Summit Ave",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$865,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$564.37",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-1.89%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.2",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "20",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+31.8%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "sa-8821-prestwick-way": {
+    "slug": "sa-8821-prestwick-way",
+    "title": "Market Trends: Santee 92071, 92128, 92171 \u2014 March 2026",
+    "city": "Santee",
+    "zip_codes": [
+      "92071",
+      "92128",
+      "92171"
+    ],
+    "market_area": "East County",
+    "date_iso": "2026-03-25",
+    "date_display": "March 25, 2026",
+    "mod_time": "2026-04-15T20:04:36.466000",
+    "folder_name": "SA 8821 Prestwick Way",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$850,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$576.71",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+1.29%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "2.0",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "12",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "101.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-41.5%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
   "sd-10895-camino-ruiz-unit-72": {
     "slug": "sd-10895-camino-ruiz-unit-72",
-    "title": "Market Trends: San Diego 92126 \u2014 April 2026",
+    "title": "Market Trends: San Diego 92126 \u2014 February 2026",
     "city": "San Diego",
     "zip_codes": [
       "92126"
     ],
     "market_area": "North County Inland",
-    "date_iso": "2026-04-02",
-    "date_display": "April 02, 2026",
-    "mod_time": "2026-04-02T13:51:13.147023",
+    "date_iso": "2026-02-08",
+    "date_display": "February 08, 2026",
+    "mod_time": "2026-04-02T20:51:13.147000",
     "folder_name": "SD 10895 Camino Ruiz Unit 72",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -440,17 +980,65 @@
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   },
+  "sd-12209-casero-pl": {
+    "slug": "sd-12209-casero-pl",
+    "title": "Market Trends: San Diego 92128 \u2014 May 2007",
+    "city": "San Diego",
+    "zip_codes": [
+      "92128"
+    ],
+    "market_area": "North County Inland",
+    "date_iso": "2007-05-09",
+    "date_display": "May 09, 2007",
+    "mod_time": "2026-04-03T19:52:54.880000",
+    "folder_name": "SD 12209 Casero Pl",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$585,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$316.61",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+6.84%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "4.4",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "63",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "97.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+24.5%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
   "sd-13394-pantera-rd": {
     "slug": "sd-13394-pantera-rd",
-    "title": "Market Trends: San Diego 92130 \u2014 March 2026",
+    "title": "Market Trends: San Diego 92130 \u2014 February 2026",
     "city": "San Diego",
     "zip_codes": [
       "92130"
     ],
     "market_area": "Coastal North",
-    "date_iso": "2026-03-19",
-    "date_display": "March 19, 2026",
-    "mod_time": "2026-03-19T13:38:36.643818",
+    "date_iso": "2026-02-26",
+    "date_display": "February 26, 2026",
+    "mod_time": "2026-03-19T20:38:36.643000",
     "folder_name": "SD 13394 Pantera Rd",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -488,17 +1076,65 @@
     },
     "summary_text": "The divergence between median sale prices and median price per square foot warrants careful interpretation. The 12-month linear trend shows median sale prices essentially flat (+0.38%) while $/SF declined more meaningfully (\u22125.70%). This pattern is characteristic of a compositional mix shift: as lar"
   },
+  "sd-16139-41-cayenne-creek-rd": {
+    "slug": "sd-16139-41-cayenne-creek-rd",
+    "title": "Market Trends: San Diego 92127 \u2014 March 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92127"
+    ],
+    "market_area": "North County Inland",
+    "date_iso": "2026-03-30",
+    "date_display": "March 30, 2026",
+    "mod_time": "2026-04-05T20:20:45.831000",
+    "folder_name": "SD 16139-41 Cayenne Creek Rd",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$2,270,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$729.17",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-7.35%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.2",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "17",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+44.4%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30-60 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
+  },
   "sd-3915-corte-mar-de-hierba": {
     "slug": "sd-3915-corte-mar-de-hierba",
-    "title": "Market Trends: San Diego 92130 \u2014 April 2026",
+    "title": "Market Trends: San Diego 92130 \u2014 February 2026",
     "city": "San Diego",
     "zip_codes": [
       "92130"
     ],
     "market_area": "Coastal North",
-    "date_iso": "2026-04-02",
-    "date_display": "April 02, 2026",
-    "mod_time": "2026-04-02T14:29:08.707315",
+    "date_iso": "2026-02-08",
+    "date_display": "February 08, 2026",
+    "mod_time": "2026-04-02T21:29:08.707000",
     "folder_name": "SD 3915 Corte Mar De Hierba",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -538,15 +1174,15 @@
   },
   "sd-6972-glidden-st": {
     "slug": "sd-6972-glidden-st",
-    "title": "Market Trends: San Diego 92111 \u2014 March 2026",
+    "title": "Market Trends: San Diego 92111 \u2014 July 2018",
     "city": "San Diego",
     "zip_codes": [
       "92111"
     ],
     "market_area": "Metro",
-    "date_iso": "2026-03-27",
-    "date_display": "March 27, 2026",
-    "mod_time": "2026-03-27T14:20:49.694738",
+    "date_iso": "2018-07-16",
+    "date_display": "July 16, 2018",
+    "mod_time": "2026-03-27T21:20:49.694000",
     "folder_name": "SD 6972 Glidden St",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -605,9 +1241,9 @@
       "92131"
     ],
     "market_area": "North County Inland",
-    "date_iso": "2026-03-23",
-    "date_display": "March 23, 2026",
-    "mod_time": "2026-03-23T20:04:10",
+    "date_iso": "2026-03-20",
+    "date_display": "March 20, 2026",
+    "mod_time": "2026-03-24T03:04:10",
     "folder_name": "SD 7755 Via Francesco Unit 6",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -655,7 +1291,7 @@
     "market_area": "North County Inland",
     "date_iso": "2026-03-31",
     "date_display": "March 31, 2026",
-    "mod_time": "2026-03-31T14:27:32.397463",
+    "mod_time": "2026-03-31T21:27:32.397000",
     "folder_name": "SD-18520-Bernardo-Trails-Dr-San-Diego-CA-92128-1109",
     "metrics_summary": {
       "Median Sale Price (0-3 Mo)": {
@@ -692,543 +1328,5 @@
       }
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
-  },
-  "sd-12209-casero-pl": {
-    "slug": "sd-12209-casero-pl",
-    "title": "Market Trends: San Diego 92128 \u2014 April 2026",
-    "city": "San Diego",
-    "zip_codes": [
-      "92128"
-    ],
-    "market_area": "North County Inland",
-    "date_iso": "2026-04-03",
-    "date_display": "April 03, 2026",
-    "mod_time": "2026-04-03T19:52:54.880000",
-    "folder_name": "SD 12209 Casero Pl",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$585,000",
-        "trend": "Increasing"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$316.61",
-        "trend": "Increasing"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+6.84%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "4.4",
-        "trend": "Balanced"
-      },
-      "Median Days on Market": {
-        "value": "63",
-        "trend": "Stable"
-      },
-      "SP/LP Ratio": {
-        "value": "97.0%",
-        "trend": "Strengthening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "+24.5%",
-        "trend": "Increasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "60-90 days",
-        "trend": "Moderate market"
-      }
-    },
-    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
-  },
-  "cv-305-inkopah-st": {
-    "slug": "cv-305-inkopah-st",
-    "title": "Market Trends: Chula Vista 91910, 91911, 91913, 91914, 91915, 92154 \u2014 April 2026",
-    "city": "Chula Vista",
-    "zip_codes": [
-      "91910",
-      "91911",
-      "91913",
-      "91914",
-      "91915",
-      "92154"
-    ],
-    "market_area": "South Bay",
-    "date_iso": "2026-04-04",
-    "date_display": "April 04, 2026",
-    "mod_time": "2026-04-04T20:20:49.321000",
-    "folder_name": "CV 305 Inkopah St",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$910,000",
-        "trend": "Stable"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$488.24",
-        "trend": "Increasing"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+2.83%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "1.7",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "15",
-        "trend": "Improving"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Stable"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-31.1%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
-  },
-  "sd-16139-41-cayenne-creek-rd": {
-    "slug": "sd-16139-41-cayenne-creek-rd",
-    "title": "Market Trends: San Diego 92127 \u2014 April 2026",
-    "city": "San Diego",
-    "zip_codes": [
-      "92127"
-    ],
-    "market_area": "North County Inland",
-    "date_iso": "2026-04-05",
-    "date_display": "April 05, 2026",
-    "mod_time": "2026-04-05T20:20:45.831000",
-    "folder_name": "SD 16139-41 Cayenne Creek Rd",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$2,270,000",
-        "trend": "Increasing"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$729.17",
-        "trend": "Increasing"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "-7.35%",
-        "trend": "Negative"
-      },
-      "Months of Inventory": {
-        "value": "2.2",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "17",
-        "trend": "Improving"
-      },
-      "SP/LP Ratio": {
-        "value": "99.0%",
-        "trend": "Strengthening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "+44.4%",
-        "trend": "Increasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
-  },
-  "sa-11041-summit-ave": {
-    "slug": "sa-11041-summit-ave",
-    "title": "Market Trends: Santee 92071 \u2014 April 2026",
-    "city": "Santee",
-    "zip_codes": [
-      "92071"
-    ],
-    "market_area": "",
-    "date_iso": "2026-04-07",
-    "date_display": "April 07, 2026",
-    "mod_time": "2026-04-07T22:11:35.581427",
-    "folder_name": "SA 11041 Summit Ave",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$865,000",
-        "trend": "Increasing"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$564.37",
-        "trend": "Declining"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "-1.89%",
-        "trend": "Negative"
-      },
-      "Months of Inventory": {
-        "value": "2.2",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "20",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Stable"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "+31.8%",
-        "trend": "Increasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
-  },
-  "fa-108-350-19-00-mission-ridge-ln": {
-    "slug": "fa-108-350-19-00-mission-ridge-ln",
-    "title": "Market Trends: Fallbrook 92026, 92028 \u2014 April 2026",
-    "city": "Fallbrook",
-    "zip_codes": [
-      "92026",
-      "92028"
-    ],
-    "market_area": "North County",
-    "date_iso": "2026-04-09",
-    "date_display": "April 09, 2026",
-    "mod_time": "2026-04-09T18:07:05.895000",
-    "folder_name": "FA 108-350-19-00 Mission Ridge Ln",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$867,500",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$437.14",
-        "trend": "Increasing"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+7.84%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "4.5",
-        "trend": "Balanced"
-      },
-      "Median Days on Market": {
-        "value": "40",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Stable"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-25.5%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "60-90 days",
-        "trend": "Moderate market"
-      }
-    },
-    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
-  },
-  "6126-la-flecha-a-rancho-santa-fe-ca-92067": {
-    "slug": "6126-la-flecha-a-rancho-santa-fe-ca-92067",
-    "title": "Market Trends: Rancho Santa Fe 92067 \u2014 April 2026",
-    "city": "Rancho Santa Fe",
-    "zip_codes": [
-      "92067"
-    ],
-    "market_area": "Coastal North",
-    "date_iso": "2026-04-13",
-    "date_display": "April 13, 2026",
-    "mod_time": "2026-04-13T20:40:40.529000",
-    "folder_name": "6126 La Flecha A, Rancho Santa Fe CA 92067",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$4,050,000",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$810.92",
-        "trend": "Stable"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+18.49%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "4.4",
-        "trend": "Balanced"
-      },
-      "Median Days on Market": {
-        "value": "61",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Slight softening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-24.2%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "60-90 days",
-        "trend": "Moderate market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
-  },
-  "1253-san-pablo-dr": {
-    "slug": "1253-san-pablo-dr",
-    "title": "Market Trends: San Marcos 92068, 92069, 92078 \u2014 April 2026",
-    "city": "San Marcos",
-    "zip_codes": [
-      "92068",
-      "92069",
-      "92078"
-    ],
-    "market_area": "North County",
-    "date_iso": "2026-04-14",
-    "date_display": "April 14, 2026",
-    "mod_time": "2026-04-14T16:22:21.963000",
-    "folder_name": "1253 San Pablo Dr",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$1,055,000",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$538.94",
-        "trend": "Declining"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+22.87%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "1.9",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "26",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Slight softening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-5.7%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
-  },
-  "1908-las-montanas-ct-brentwood-ca-94513": {
-    "slug": "1908-las-montanas-ct-brentwood-ca-94513",
-    "title": "Market Trends: 1908 94513 \u2014 April 2026",
-    "city": "1908",
-    "zip_codes": [
-      "94513"
-    ],
-    "market_area": "",
-    "date_iso": "2026-04-14",
-    "date_display": "April 14, 2026",
-    "mod_time": "2026-04-14T17:17:47.736000",
-    "folder_name": "1908 Las Montanas Ct, Brentwood, CA 94513",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$860,000",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$382.51",
-        "trend": "Stable"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+7.62%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "5.0",
-        "trend": "Balanced"
-      },
-      "Median Days on Market": {
-        "value": "34",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "N/A",
-        "trend": "N/A"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-2.2%",
-        "trend": "Stable"
-      },
-      "Anticipated Marketing Time": {
-        "value": "60-90 days",
-        "trend": "Moderate market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
-  },
-  "3411-celinda-dr-carlsbad-ca-92008": {
-    "slug": "3411-celinda-dr-carlsbad-ca-92008",
-    "title": "Market Trends: 3411 92008 \u2014 April 2026",
-    "city": "3411",
-    "zip_codes": [
-      "92008"
-    ],
-    "market_area": "",
-    "date_iso": "2026-04-14",
-    "date_display": "April 14, 2026",
-    "mod_time": "2026-04-14T01:30:04.455000",
-    "folder_name": "3411 Celinda Dr, Carlsbad, CA 92008",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$1,849,000",
-        "trend": "Stable"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$698.06",
-        "trend": "Declining"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+24.43%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "2.1",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "28",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "101.0%",
-        "trend": "Slight softening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-1.0%",
-        "trend": "Stable"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
-  },
-  "ps-2001-e-camino-parocela-unit-l84": {
-    "slug": "ps-2001-e-camino-parocela-unit-l84",
-    "title": "Market Trends: Palm Springs 92264 \u2014 April 2026",
-    "city": "Palm Springs",
-    "zip_codes": [
-      "92264"
-    ],
-    "market_area": "Palm Springs South End",
-    "date_iso": "2026-04-15",
-    "date_display": "April 15, 2026",
-    "mod_time": "2026-04-15T13:40:28.719000",
-    "folder_name": "PS 2001 E Camino Parocela Unit L84",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$410,000",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$355.93",
-        "trend": "Stable"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "-0.79%",
-        "trend": "Negative"
-      },
-      "Months of Inventory": {
-        "value": "19.8",
-        "trend": "Loose supply"
-      },
-      "Median Days on Market": {
-        "value": "77",
-        "trend": "Stable"
-      },
-      "SP/LP Ratio": {
-        "value": "97.8%",
-        "trend": "Stable"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-24.3%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "180+ days",
-        "trend": "Slow market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
-  },
-  "sa-8821-prestwick-way": {
-    "slug": "sa-8821-prestwick-way",
-    "title": "Market Trends: Santee 92071, 92128, 92171 \u2014 April 2026",
-    "city": "Santee",
-    "zip_codes": [
-      "92071",
-      "92128",
-      "92171"
-    ],
-    "market_area": "East County",
-    "date_iso": "2026-04-15",
-    "date_display": "April 15, 2026",
-    "mod_time": "2026-04-15T20:04:36.466000",
-    "folder_name": "SA 8821 Prestwick Way",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$850,000",
-        "trend": "Stable"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$576.71",
-        "trend": "Increasing"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+1.29%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "2.0",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "12",
-        "trend": "Improving"
-      },
-      "SP/LP Ratio": {
-        "value": "101.0%",
-        "trend": "Strengthening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-41.5%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
   }
 }
