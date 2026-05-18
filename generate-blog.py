@@ -220,14 +220,19 @@ def parse_report(docx_path):
             if not in_summary and p != paragraphs[0]:
                 narrative.append(p)
 
-    # Extract key metrics from table
+    # Extract key metrics from table — find by header ['Key Metric','Value','Trend']
+    # (its index varies by report format: sometimes tables[1], sometimes [0] or [2])
     metrics = {}
-    if len(doc.tables) >= 2:
-        table = doc.tables[1]
-        for row in table.rows[1:]:  # Skip header
-            cells = [c.text.strip() for c in row.cells]
-            if len(cells) >= 3:
-                metrics[cells[0]] = {'value': cells[1], 'trend': cells[2]}
+    for table in doc.tables:
+        if not table.rows:
+            continue
+        hdr = [c.text.strip().lower() for c in table.rows[0].cells]
+        if 'key metric' in hdr and 'value' in hdr and 'trend' in hdr:
+            for row in table.rows[1:]:
+                cells = [c.text.strip() for c in row.cells]
+                if len(cells) >= 3 and cells[0]:
+                    metrics[cells[0]] = {'value': cells[1], 'trend': cells[2]}
+            break
 
     return {
         'narrative': narrative,

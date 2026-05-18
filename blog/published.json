@@ -1328,5 +1328,101 @@
       }
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
+  },
+  "12170-rockcrest-rd-lakeside-ca-92040": {
+    "slug": "12170-rockcrest-rd-lakeside-ca-92040",
+    "title": "Market Trends: 12170 92040 \u2014 March 2026",
+    "city": "12170",
+    "zip_codes": [
+      "92040"
+    ],
+    "market_area": "",
+    "date_iso": "2026-03-22",
+    "date_display": "March 22, 2026",
+    "mod_time": "2026-05-13T07:21:28.928429",
+    "folder_name": "12170 Rockcrest Rd, Lakeside, CA 92040",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$737,500",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$451.87",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-3.32%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "4.3",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "32",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-23.9%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+  },
+  "sd-4575-dwight-st": {
+    "slug": "sd-4575-dwight-st",
+    "title": "Market Trends: San Diego 92105 \u2014 May 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92105"
+    ],
+    "market_area": "Metro Uptown",
+    "date_iso": "2026-05-01",
+    "date_display": "May 01, 2026",
+    "mod_time": "2026-05-17T21:50:19.207060",
+    "folder_name": "SD 4575 Dwight St",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$920,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$800.59",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+0.9%",
+        "trend": "Stable"
+      },
+      "Months of Inventory": {
+        "value": "2.1",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "16",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+7.1%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+6.3%), paired with a positive 12-month linear $/SF change (+0.9%), indicates that recent activity has firmed valu"
   }
 }
