@@ -104,6 +104,53 @@ def extract_address_from_folder(folder_name):
     return name
 
 
+# Street-suffix tokens that mark the end of the street name (and therefore
+# the start of the city). Common USPS suffixes plus a few extras.
+_STREET_SUFFIXES = {
+    'st', 'street', 'rd', 'road', 'dr', 'drive', 'ln', 'lane', 'ave',
+    'avenue', 'blvd', 'boulevard', 'ct', 'court', 'cir', 'circle', 'pl',
+    'place', 'way', 'ter', 'terrace', 'pkwy', 'parkway', 'trl', 'trail',
+    'hwy', 'highway', 'cv', 'cove', 'pt', 'point', 'sq', 'square', 'row',
+}
+
+
+def parse_city_from_folder(folder_name):
+    """Extract a city name from a folder like
+       '12170 Rockcrest Rd, Lakeside, CA 92040'  -> 'Lakeside'
+       'SD-18520-Bernardo-Trails-Dr-San-Diego-CA-92128-1109' -> 'San Diego'
+       '6126 La Flecha A, Rancho Santa Fe CA 92067' -> 'Rancho Santa Fe'.
+    Returns None if no city can be confidently identified."""
+    # Strategy 1: comma-separated form — city sits between two commas before 'CA'
+    m = re.search(r',\s*([^,]+?)\s*,\s*CA\b', folder_name, re.IGNORECASE)
+    if m:
+        return m.group(1).strip().title()
+    # Strategy 1b: ', City CA' (no comma between city and state)
+    m = re.search(r',\s*([^,]+?)\s+CA\b', folder_name, re.IGNORECASE)
+    if m:
+        return m.group(1).strip().title()
+    # Strategy 2: dash/space separated — tokens before 'CA' are the city
+    tokens = folder_name.replace('-', ' ').replace(',', ' ').split()
+    upper_tokens = [t.upper() for t in tokens]
+    if 'CA' in upper_tokens:
+        idx = upper_tokens.index('CA')
+        # Walk backward from CA, collecting up to 3 alphabetic tokens (city words)
+        city_words = []
+        i = idx - 1
+        while i >= 0 and len(city_words) < 3:
+            tok = tokens[i]
+            # Stop if we hit a number or a street suffix
+            if tok.isdigit() or tok.lower().rstrip('.') in _STREET_SUFFIXES:
+                break
+            # Must be alphabetic (letters only, hyphens/apostrophes ok)
+            if not re.fullmatch(r"[A-Za-z][A-Za-z'.-]*", tok):
+                break
+            city_words.insert(0, tok)
+            i -= 1
+        if city_words:
+            return ' '.join(w.title() for w in city_words)
+    return None
+
+
 def _parse_date_str(date_str):
     """Try to parse a date string in common formats. Returns datetime or None."""
     for fmt in ('%m/%d/%Y', '%Y-%m-%d', '%B %d, %Y', '%B %d %Y'):
@@ -627,17 +674,26 @@ def main():
         # Extract city, zip codes, and market area from CSV
         city, zip_codes, market_area = extract_location_from_csv(folder_path)
         if not city:
-            # Try to parse from folder name
-            addr = extract_address_from_folder(folder_name)
-            # Common abbreviations
+            # Common abbreviations (used when folder begins with a known 2-letter prefix)
             abbrevs = {
                 'LJ': 'La Jolla', 'SD': 'San Diego', 'OC': 'Oceanside',
                 'EN': 'Encinitas', 'FB': 'Fallbrook', 'LM': 'La Mesa',
                 'RM': 'Rancho Mirage', 'CV': 'Chula Vista', 'RB': 'Rancho Bernardo',
-                'SC': 'Santa Clarita', 'SM': 'San Marcos', 'PS': 'Palm Springs', 'DA': 'Davis',
+                'SC': 'Santa Clarita', 'SM': 'San Marcos', 'PS': 'Palm Springs',
+                'DA': 'Davis', 'SA': 'Santee', 'FA': 'Fallbrook',
             }
-            prefix = folder_name[:2]
-            city = abbrevs.get(prefix, addr.split()[0] if addr else 'California')
+            # Try to parse the city from the folder name itself (handles
+            # comma-separated and dash-separated forms with embedded "CA").
+            parsed_city = parse_city_from_folder(folder_name)
+            if parsed_city:
+                city = parsed_city
+            else:
+                # Fall back to a known 2-letter prefix, or generic
+                prefix_match = re.match(r'^([A-Z]{2})\b', folder_name)
+                if prefix_match and prefix_match.group(1) in abbrevs:
+                    city = abbrevs[prefix_match.group(1)]
+                else:
+                    city = 'California'
         if not zip_codes:
             # Try to extract zip from folder name (e.g. "SD-18520-...-CA-92128-1109")
             folder_zips = re.findall(r'\b9[0-9]{4}\b', folder_name)

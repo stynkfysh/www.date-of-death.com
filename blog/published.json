@@ -49,150 +49,6 @@
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
   },
-  "1364-miraflores-gln-escondido-ca-92026": {
-    "slug": "1364-miraflores-gln-escondido-ca-92026",
-    "title": "Market Trends: 1364 92026 \u2014 March 2026",
-    "city": "1364",
-    "zip_codes": [
-      "92026"
-    ],
-    "market_area": "",
-    "date_iso": "2026-03-21",
-    "date_display": "March 21, 2026",
-    "mod_time": "2026-04-17T19:29:50.027000",
-    "folder_name": "1364 Miraflores Gln, Escondido, CA 92026",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$820,000",
-        "trend": "Stable"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$473.49",
-        "trend": "Stable"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "-7.28%",
-        "trend": "Negative"
-      },
-      "Months of Inventory": {
-        "value": "2.6",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "23",
-        "trend": "Improving"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Strengthening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-19.1%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
-  },
-  "1908-las-montanas-ct-brentwood-ca-94513": {
-    "slug": "1908-las-montanas-ct-brentwood-ca-94513",
-    "title": "Market Trends: 1908 94513 \u2014 August 2022",
-    "city": "1908",
-    "zip_codes": [
-      "94513"
-    ],
-    "market_area": "",
-    "date_iso": "2022-08-20",
-    "date_display": "August 20, 2022",
-    "mod_time": "2026-04-14T17:17:47.736000",
-    "folder_name": "1908 Las Montanas Ct, Brentwood, CA 94513",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$860,000",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$382.51",
-        "trend": "Stable"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+7.62%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "5.0",
-        "trend": "Balanced"
-      },
-      "Median Days on Market": {
-        "value": "34",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "N/A",
-        "trend": "N/A"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-2.2%",
-        "trend": "Stable"
-      },
-      "Anticipated Marketing Time": {
-        "value": "60-90 days",
-        "trend": "Moderate market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The stronger performance in overall median prices relative to $/SF suggests larger or higher-end properties are making up a greater share of recent transactions."
-  },
-  "3411-celinda-dr-carlsbad-ca-92008": {
-    "slug": "3411-celinda-dr-carlsbad-ca-92008",
-    "title": "Market Trends: 3411 92008 \u2014 August 2022",
-    "city": "3411",
-    "zip_codes": [
-      "92008"
-    ],
-    "market_area": "",
-    "date_iso": "2022-08-20",
-    "date_display": "August 20, 2022",
-    "mod_time": "2026-04-14T01:30:04.455000",
-    "folder_name": "3411 Celinda Dr, Carlsbad, CA 92008",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$1,849,000",
-        "trend": "Stable"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$698.06",
-        "trend": "Declining"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "+24.43%",
-        "trend": "Positive"
-      },
-      "Months of Inventory": {
-        "value": "2.1",
-        "trend": "Tight supply"
-      },
-      "Median Days on Market": {
-        "value": "28",
-        "trend": "Worsening"
-      },
-      "SP/LP Ratio": {
-        "value": "101.0%",
-        "trend": "Slight softening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-1.0%",
-        "trend": "Stable"
-      },
-      "Anticipated Marketing Time": {
-        "value": "30-60 days",
-        "trend": "Active market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
-  },
   "cv-305-inkopah-st": {
     "slug": "cv-305-inkopah-st",
     "title": "Market Trends: Chula Vista 91910, 91911, 91913, 91914, 91915, 92154 \u2014 March 2026",
@@ -1329,54 +1185,6 @@
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. This consistency suggests the market is moving uniformly across property size segments without significant compositional shifts in the sales mix."
   },
-  "12170-rockcrest-rd-lakeside-ca-92040": {
-    "slug": "12170-rockcrest-rd-lakeside-ca-92040",
-    "title": "Market Trends: 12170 92040 \u2014 March 2026",
-    "city": "12170",
-    "zip_codes": [
-      "92040"
-    ],
-    "market_area": "",
-    "date_iso": "2026-03-22",
-    "date_display": "March 22, 2026",
-    "mod_time": "2026-05-13T07:21:28.928429",
-    "folder_name": "12170 Rockcrest Rd, Lakeside, CA 92040",
-    "metrics_summary": {
-      "Median Sale Price (0-3 Mo)": {
-        "value": "$737,500",
-        "trend": "Declining"
-      },
-      "Median $/SF (0-3 Mo)": {
-        "value": "$451.87",
-        "trend": "Declining"
-      },
-      "12-Mo Linear $/SF Change": {
-        "value": "-3.32%",
-        "trend": "Negative"
-      },
-      "Months of Inventory": {
-        "value": "4.3",
-        "trend": "Balanced"
-      },
-      "Median Days on Market": {
-        "value": "32",
-        "trend": "Improving"
-      },
-      "SP/LP Ratio": {
-        "value": "100.0%",
-        "trend": "Strengthening"
-      },
-      "Sales Volume Change (Qtr)": {
-        "value": "-23.9%",
-        "trend": "Decreasing"
-      },
-      "Anticipated Marketing Time": {
-        "value": "60-90 days",
-        "trend": "Moderate market"
-      }
-    },
-    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
-  },
   "sd-4575-dwight-st": {
     "slug": "sd-4575-dwight-st",
     "title": "Market Trends: San Diego 92105 \u2014 May 2026",
@@ -1424,5 +1232,53 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+6.3%), paired with a positive 12-month linear $/SF change (+0.9%), indicates that recent activity has firmed valu"
+  },
+  "12170-rockcrest-rd-lakeside-ca-92040": {
+    "slug": "12170-rockcrest-rd-lakeside-ca-92040",
+    "title": "Market Trends: Lakeside 92040 \u2014 March 2026",
+    "city": "Lakeside",
+    "zip_codes": [
+      "92040"
+    ],
+    "market_area": "",
+    "date_iso": "2026-03-22",
+    "date_display": "March 22, 2026",
+    "mod_time": "2026-05-13T07:21:28.928429",
+    "folder_name": "12170 Rockcrest Rd, Lakeside, CA 92040",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$737,500",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$451.87",
+        "trend": "Declining"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-3.32%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "4.3",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "32",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-23.9%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Moderate market"
+      }
+    },
+    "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
   }
 }
