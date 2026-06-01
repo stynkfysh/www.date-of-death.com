@@ -1280,5 +1280,63 @@
       }
     },
     "summary_text": "The data reveals broadly consistent movement between overall prices and per-square-foot metrics. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values p"
+  },
+  "po-277-020-32-00-apn": {
+    "slug": "po-277-020-32-00-apn",
+    "title": "Market Trends: Poway 92025, 92040, 92064 \u2014 April 2026",
+    "city": "Poway",
+    "zip_codes": [
+      "92025",
+      "92040",
+      "92064"
+    ],
+    "market_area": "",
+    "date_iso": "2026-04-29",
+    "date_display": "April 29, 2026",
+    "mod_time": "2026-05-26T15:13:41.462320",
+    "folder_name": "PO 277-020-32-00 APN",
+    "metrics_summary": {
+      "Median Sale Price, Rural-Res >=1 ac (0-12 Mo)": {
+        "value": "$225,000",
+        "trend": "Decreasing"
+      },
+      "Median Sale Price, Rural-Res >=1 ac (0-24 Mo)": {
+        "value": "$388,000",
+        "trend": "Decreasing"
+      },
+      "Median Sale Price, Rural-Res >=1 ac (0-36 Mo)": {
+        "value": "$475,000",
+        "trend": "Decreasing"
+      },
+      "Median Sale $/Acre, >=1 ac (0-12 Mo)": {
+        "value": "$52,966",
+        "trend": "Decreasing"
+      },
+      "Median Sale $/Acre, >=1 ac (0-36 Mo)": {
+        "value": "$58,000",
+        "trend": "Decreasing"
+      },
+      "Months of Inventory (All Land)": {
+        "value": "19.5",
+        "trend": "Buyer's market"
+      },
+      "Median DOMLS (All Land, 0-12 Mo)": {
+        "value": "154 days",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio (All Land, 0-12 Mo)": {
+        "value": "66.0%",
+        "trend": "Weakening"
+      },
+      "Active Listings, Rural-Res (Current)": {
+        "value": "10",
+        "trend": "Elevated supply"
+      },
+      "Anticipated Marketing Time": {
+        "value": "180+ days",
+        "trend": "Buyer's market"
+      }
+    },
+    "summary_text": "The Poway 92064 vacant-land market is softening as of the 04/29/2026 effective date. The rural-residential (>=1 acre) cohort that brackets the subject's 9.4-acre site shows a stepped-down median sale price across the 36-, 24-, and 12-month windows ($475,000 - $388,000 - $225,000); median $/acre acro"
   }
 }
