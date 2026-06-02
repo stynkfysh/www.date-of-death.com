@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css?v=2">
+    <link rel="stylesheet" href="/styles.css">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,17 +45,50 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Date-of-Death Appraisal \u2014 Modesto, California",
+  "name": "Desktop Date-of-Death Appraisal \u2014 Modesto, California",
   "provider": {
     "@type": "LocalBusiness",
-    "name": "Date-of-Death Appraisals"
+    "name": "Date-of-Death Appraisals",
+    "url": "https://date-of-death.com"
   },
-  "areaServed": {
-    "@type": "City",
-    "name": "Modesto"
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Modesto",
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": "Stanislaus County, California"
+      }
+    },
+    {
+      "@type": "State",
+      "name": "California",
+      "sameAs": "https://en.wikipedia.org/wiki/California"
+    }
+  ],
+  "description": "Remote desktop date-of-death property appraisal for estates in Modesto. USPAP-compliant, IRS-accepted. No property visit required \u2014 performed entirely remotely using MLS data, public records, and market analysis.",
+  "serviceType": "Desktop Real Estate Appraisal",
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceType": "Remote / Desktop",
+    "serviceUrl": "https://date-of-death.com/order",
+    "availableLanguage": [
+      "English",
+      "Spanish"
+    ]
   },
-  "description": "Desktop date-of-death property appraisal for estates in Modesto. USPAP-compliant, IRS-accepted.",
-  "serviceType": "Real Estate Appraisal"
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "299",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "USD",
+      "price": "299",
+      "description": "Starting price for Basic Desktop Appraisal"
+    }
+  },
+  "termsOfService": "https://date-of-death.com/faq"
 }
     </script>
     <script type="application/ld+json">
@@ -154,9 +187,9 @@
 <section class="section-alt">
     <div class="container">
         <h2>Modesto Real Estate Market Overview</h2>
-        <p>The Modesto real estate market currently shows a median home value of approximately $327,860, with prices trending up 4.3% year-over-year. The average price per square foot in the area is around $288, and homes are spending an average of 26 days on market before going under contract. The housing stock in Modesto consists primarily of condominiums, townhomes, and multi-family residences.</p>
+        <p>Modesto — the county seat of Stanislaus County, where Central Valley affordability has attracted Bay Area transplants and where neighborhoods like College Area and Village One represent different eras of development — currently shows a median home value of approximately $327,860, with prices trending up 4.3% year-over-year. The average price per square foot in the area is around $288, and homes are spending an average of 26 days on market before going under contract. The housing stock in Modesto consists primarily of condominiums, townhomes, and multi-family residences.</p>
         <p>These market dynamics directly affect date-of-death valuations. Whether the date of death was recent or years ago, understanding Modesto's market conditions at that specific point in time is critical to establishing an accurate and defensible value.</p>
-        <p class="content-meta">Market data reflects Stanislaus County trends as of March 2026. Values are approximate and vary by neighborhood and property type.</p>
+        <p class="content-meta">Market data reflects Stanislaus County trends as of June 2026. Values are approximate and vary by neighborhood and property type.</p>
     </div>
 </section>
 
@@ -167,6 +200,7 @@
                     <div class='content-card'><p>With over 78,000 housing units, Modesto is one of the largest residential markets in Stanislaus County, giving appraisers a deep pool of comparable sales data.</p></div>
                     <div class='content-card'><p>Properties in this area typically sell within 26 days, reflecting an active market with current transaction data readily available.</p></div>
                     <div class='content-card'><p>The vibrant downtown of Modesto creates a dense market with many recent transactions, ideal for desktop appraisal methodology.</p></div>
+                    <div class='content-card'><p>Stanislaus County's Modesto-centered market has seen significant appreciation driven by Bay Area migration. The county assessor's records reflect a housing stock that ranges from century-old downtown properties to modern subdivisions, each requiring different approaches to retrospective valuation.</p></div>
         </div>
     </div>
 </section>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dod_navy">#1A5276</color>
+    <color name="dod_green">#27AE60</color>
+    <color name="dod_light_blue">#F0F6FB</color>
+    <color name="dod_border_blue">#D0E3F0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FAFBFC</color>
+</resources>
