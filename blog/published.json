@@ -1338,5 +1338,103 @@
       }
     },
     "summary_text": "The Poway 92064 vacant-land market is softening as of the 04/29/2026 effective date. The rural-residential (>=1 acre) cohort that brackets the subject's 9.4-acre site shows a stepped-down median sale price across the 36-, 24-, and 12-month windows ($475,000 - $388,000 - $225,000); median $/acre acro"
+  },
+  "3533-lomacitas-ln": {
+    "slug": "3533-lomacitas-ln",
+    "title": "Market Trends: Bonita 91902, 91910, 91950 \u2014 May 2026",
+    "city": "Bonita",
+    "zip_codes": [
+      "91902",
+      "91910",
+      "91950"
+    ],
+    "market_area": "South Bay",
+    "date_iso": "2026-05-20",
+    "date_display": "May 20, 2026",
+    "mod_time": "2026-06-05T11:05:05.206020",
+    "folder_name": "3533 Lomacitas Ln",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$1,225,000",
+        "trend": "Decreasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$531.31",
+        "trend": "Decreasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+4.7%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "2.1",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "22",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "101.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+28.6%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.0%), paired with a positive 12-month linear $/SF change (+4.7%), indicates that recent activity ha"
+  },
+  "sd-819-wilbur-ave": {
+    "slug": "sd-819-wilbur-ave",
+    "title": "Market Trends: San Diego 92109 \u2014 May 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92109"
+    ],
+    "market_area": "Coastal South",
+    "date_iso": "2026-05-20",
+    "date_display": "May 20, 2026",
+    "mod_time": "2026-06-05T10:59:24.070706",
+    "folder_name": "SD 819 Wilbur Ave",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$2,375,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$1,235.01",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+2.5%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "2.6",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "28",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "97.0%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+37.9%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+16.3%), paired with a positive 12-month linear $/SF change (+2.5%), indicates that recent activity h"
   }
 }
