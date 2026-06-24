@@ -1779,5 +1779,53 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+9.2%), paired with a positive 12-month linear $/SF change (+9.0%), indicates that recent activity ha"
+  },
+  "pd-38501-brandywine-ave": {
+    "slug": "pd-38501-brandywine-ave",
+    "title": "Market Trends: Palm Desert 92211 \u2014 June 2026",
+    "city": "Palm Desert",
+    "zip_codes": [
+      "92211"
+    ],
+    "market_area": "",
+    "date_iso": "2026-06-13",
+    "date_display": "June 13, 2026",
+    "mod_time": "2026-06-24T13:27:05.975290",
+    "folder_name": "PD 38501 Brandywine Ave",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$534,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$285.54",
+        "trend": "Decreasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+2.8%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "2.8",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "\u2014",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "98.1%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+30.0%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The negative 6-month $/SF trend (-8.7%), paired with a positive 12-month linear $/SF change (+2.8%), indicates that recent activity ha"
   }
 }
