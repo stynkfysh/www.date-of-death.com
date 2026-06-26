@@ -1875,5 +1875,51 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+1.4%), paired with a slightly negative 12-month linear $/SF change (-0.5%), indicates that recent activity has fi"
+  },
+  "ec-1475-honey-hill-rd": {
+    "slug": "ec-1475-honey-hill-rd",
+    "title": "Market Trends: California \u2014 June 2026",
+    "city": "California",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-06-10",
+    "date_display": "June 10, 2026",
+    "mod_time": "2026-06-26T22:19:56.594617",
+    "folder_name": "EC 1475 Honey Hill Rd",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$953,167",
+        "trend": "Decreasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$522.39",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-1.0%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "2.5",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "17",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+12.0%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.0%), paired with a slightly negative 12-month linear $/SF change (-1.0%), indicates that recent activity has fi"
   }
 }
