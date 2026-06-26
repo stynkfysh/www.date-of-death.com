@@ -1827,5 +1827,53 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The negative 6-month $/SF trend (-8.7%), paired with a positive 12-month linear $/SF change (+2.8%), indicates that recent activity ha"
+  },
+  "1077-swaner-st-san-diego-ca-92114": {
+    "slug": "1077-swaner-st-san-diego-ca-92114",
+    "title": "Market Trends: San Diego 92114 \u2014 June 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92114"
+    ],
+    "market_area": "",
+    "date_iso": "2026-06-12",
+    "date_display": "June 12, 2026",
+    "mod_time": "2026-06-25T17:21:19.669240",
+    "folder_name": "1077 Swaner St, San Diego, CA 92114",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$765,000",
+        "trend": "Stable"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$533.07",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-0.5%",
+        "trend": "Stable"
+      },
+      "Months of Inventory": {
+        "value": "0.2",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "8",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.7%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+12.1%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+1.4%), paired with a slightly negative 12-month linear $/SF change (-0.5%), indicates that recent activity has fi"
   }
 }
