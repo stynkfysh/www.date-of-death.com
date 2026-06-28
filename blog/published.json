@@ -1638,51 +1638,49 @@
   },
   "market-trends": {
     "slug": "market-trends",
-    "title": "Market Trends: Escondido 92026 \u2014 May 2026",
-    "city": "Escondido",
-    "zip_codes": [
-      "92026"
-    ],
+    "title": "Market Trends: Solana Beach \u2014 June 2026",
+    "city": "Solana Beach",
+    "zip_codes": [],
     "market_area": "",
-    "date_iso": "2026-05-13",
-    "date_display": "May 13, 2026",
-    "mod_time": "2026-06-19T19:45:53.745844",
+    "date_iso": "2026-06-26",
+    "date_display": "June 26, 2026",
+    "mod_time": "2026-06-27T17:18:10.530119",
     "folder_name": "_market_trends",
     "metrics_summary": {
       "Median Sale Price (0\u20133 Mo)": {
-        "value": "$920,000",
+        "value": "$3,250,000",
         "trend": "Increasing"
       },
       "Median $/SF (0\u20133 Mo)": {
-        "value": "$466.67",
-        "trend": "Decreasing"
+        "value": "$1,413.88",
+        "trend": "Increasing"
       },
       "12-Mo Linear $/SF Change": {
-        "value": "-2.9%",
-        "trend": "Negative"
+        "value": "+10.1%",
+        "trend": "Positive"
       },
       "Months of Inventory": {
-        "value": "2.6",
+        "value": "0.0",
         "trend": "Tight supply"
       },
       "Median Days on Market": {
-        "value": "32",
-        "trend": "Worsening"
+        "value": "8",
+        "trend": "Improving"
       },
       "SP/LP Ratio": {
-        "value": "100.0%",
+        "value": "9950.0%",
         "trend": "Strengthening"
       },
       "Sales Volume Change (Qtr)": {
-        "value": "-1.2%",
-        "trend": "Stable"
+        "value": "+13.3%",
+        "trend": "Increasing"
       },
       "Anticipated Marketing Time": {
         "value": "30\u201360 days",
         "trend": "Active market"
       }
     },
-    "summary_text": "In summary, the seller's market is best characterized as directionally weakening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The negative 6-month $/SF trend (-0.2%), paired with a negative 12-month linear $/SF change (-2.9%), indicates that recent activity has so"
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.6%), paired with a positive 12-month linear $/SF change (+10.1%), indicates that recent activity h"
   },
   "13316-caminito-ciera-174-san-diego-ca-92129": {
     "slug": "13316-caminito-ciera-174-san-diego-ca-92129",
@@ -1884,7 +1882,7 @@
     "market_area": "",
     "date_iso": "2026-06-10",
     "date_display": "June 10, 2026",
-    "mod_time": "2026-06-26T22:19:56.594617",
+    "mod_time": "2026-06-28T01:06:00.654652",
     "folder_name": "EC 1475 Honey Hill Rd",
     "metrics_summary": {
       "Median Sale Price (0\u20133 Mo)": {
@@ -1921,5 +1919,99 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.0%), paired with a slightly negative 12-month linear $/SF change (-1.0%), indicates that recent activity has fi"
+  },
+  "633-sonrisa-st-solana-beach-ca-92075": {
+    "slug": "633-sonrisa-st-solana-beach-ca-92075",
+    "title": "Market Trends: Solana Beach 92075 \u2014 June 2026",
+    "city": "Solana Beach",
+    "zip_codes": [
+      "92075"
+    ],
+    "market_area": "",
+    "date_iso": "2026-06-26",
+    "date_display": "June 26, 2026",
+    "mod_time": "2026-06-27T18:06:49.802575",
+    "folder_name": "633 Sonrisa St, Solana Beach, CA 92075",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$3,250,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$1,413.88",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+10.1%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "0.0",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "11",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.5%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+13.3%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.6%), paired with a positive 12-month linear $/SF change (+10.1%), indicates that recent activity h"
+  },
+  "market-trends-test": {
+    "slug": "market-trends-test",
+    "title": "Market Trends: Solana Beach \u2014 June 2026",
+    "city": "Solana Beach",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-06-26",
+    "date_display": "June 26, 2026",
+    "mod_time": "2026-06-27T18:06:27.036512",
+    "folder_name": "_market_trends_test",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$3,250,000",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$1,413.88",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+10.1%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "0.0",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "11",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "99.5%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+13.3%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.6%), paired with a positive 12-month linear $/SF change (+10.1%), indicates that recent activity h"
   }
 }
