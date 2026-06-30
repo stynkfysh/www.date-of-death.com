@@ -2013,5 +2013,51 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+2.6%), paired with a positive 12-month linear $/SF change (+10.1%), indicates that recent activity h"
+  },
+  "lq-53585-avenida-bermudas": {
+    "slug": "lq-53585-avenida-bermudas",
+    "title": "Market Trends: La Quinta \u2014 June 2026",
+    "city": "La Quinta",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-06-13",
+    "date_display": "June 13, 2026",
+    "mod_time": "2026-06-30T05:22:46.737733",
+    "folder_name": "LQ 53585 Avenida Bermudas",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$927,500",
+        "trend": "Decreasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$395.06",
+        "trend": "Decreasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+14.6%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "3.1",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "45",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "97.2%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+32.0%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60\u201390 days",
+        "trend": "Balanced market"
+      }
+    },
+    "summary_text": "In summary, the balanced market is best characterized as directionally strengthening. The anticipated marketing time of 60\u201390 days reflects current absorption rates. The negative 6-month $/SF trend (-7.8%), paired with a positive 12-month linear $/SF change (+14.6%), indicates that recent activity h"
   }
 }
