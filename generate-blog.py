@@ -641,6 +641,12 @@ def main():
         # Skip root-level test files and "files" folders
         if folder_name in ('Reports', 'files', ''):
             continue
+        # Skip helper/build/test subfolders nested inside a property folder
+        # (e.g. _market_trends, _market_trends_test, _market_trends_fresh/sfr,
+        #  "_build artifacts") — these produce junk slugs and duplicate entries.
+        _dir_parts = os.path.relpath(filepath, REPORTS_DIR).split(os.sep)[:-1]
+        if any(p.startswith('_market_trends') or p.startswith('_build') for p in _dir_parts):
+            continue
         # Skip files with "(1)" duplicates
         if '(1)' in os.path.basename(filepath):
             continue
