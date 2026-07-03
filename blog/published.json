@@ -1967,5 +1967,51 @@
       }
     },
     "summary_text": "In summary, the balanced market is best characterized as directionally strengthening. The anticipated marketing time of 60\u201390 days reflects current absorption rates. The negative 6-month $/SF trend (-7.8%), paired with a positive 12-month linear $/SF change (+14.6%), indicates that recent activity h"
+  },
+  "ju-3576-slumbering-oaks-trl": {
+    "slug": "ju-3576-slumbering-oaks-trl",
+    "title": "Market Trends: Julian \u2014 June 2026",
+    "city": "Julian",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-06-24",
+    "date_display": "June 24, 2026",
+    "mod_time": "2026-07-02T19:25:31.160206",
+    "folder_name": "JU 3576 Slumbering Oaks Trl",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$626,500",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$383.50",
+        "trend": "Decreasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "-6.2%",
+        "trend": "Negative"
+      },
+      "Months of Inventory": {
+        "value": "5.7",
+        "trend": "Balanced"
+      },
+      "Median Days on Market": {
+        "value": "34",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "97.7%",
+        "trend": "Stable"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+5.3%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60\u201390 days",
+        "trend": "Balanced market"
+      }
+    },
+    "summary_text": "In summary, the balanced market is best characterized as directionally weakening. The anticipated marketing time of 60\u201390 days reflects current absorption rates. The negative 6-month $/SF trend (-13.3%), paired with a negative 12-month linear $/SF change (-6.2%), indicates that recent activity has s"
   }
 }
