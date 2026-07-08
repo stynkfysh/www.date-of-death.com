@@ -2013,5 +2013,51 @@
       }
     },
     "summary_text": "In summary, the balanced market is best characterized as directionally weakening. The anticipated marketing time of 60\u201390 days reflects current absorption rates. The negative 6-month $/SF trend (-13.3%), paired with a negative 12-month linear $/SF change (-6.2%), indicates that recent activity has s"
+  },
+  "en-256-sea-view-ct": {
+    "slug": "en-256-sea-view-ct",
+    "title": "Market Trends: Encinitas \u2014 May 2026",
+    "city": "Encinitas",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-05-23",
+    "date_display": "May 23, 2026",
+    "mod_time": "2026-07-08T10:40:13",
+    "folder_name": "EN 256 Sea View Ct",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$2,461,750",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$976.92",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+3.7%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.7",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "20",
+        "trend": "Worsening"
+      },
+      "SP/LP Ratio": {
+        "value": "99.3%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+90.3%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+1.0%), paired with a positive 12-month linear $/SF change (+3.7%), indicates that recent activity ha"
   }
 }
