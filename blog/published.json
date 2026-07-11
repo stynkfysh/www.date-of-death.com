@@ -2107,5 +2107,145 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The negative 6-month $/SF trend (-2.7%), paired with a positive 12-month linear $/SF change (+11.3%), indicates that recent activity h"
+  },
+  "20361-highway-76-pauma-valley-ca-92061": {
+    "slug": "20361-highway-76-pauma-valley-ca-92061",
+    "title": "Market Trends: Pauma Valley 92061 \u2014 July 2026",
+    "city": "Pauma Valley",
+    "zip_codes": [
+      "92061"
+    ],
+    "market_area": "",
+    "date_iso": "2026-07-02",
+    "date_display": "July 02, 2026",
+    "mod_time": "2026-07-11T13:34:39",
+    "folder_name": "20361 Highway 76, Pauma Valley, CA 92061",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$359,500",
+        "trend": "Stable"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$239.82",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "0.0%",
+        "trend": "Stable"
+      },
+      "Months of Inventory": {
+        "value": "0.0",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "75",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "99.3%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "0.0%",
+        "trend": "Stable"
+      },
+      "Anticipated Marketing Time": {
+        "value": "N/A \u2014 insufficient recent activity",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as broadly stable. The anticipated marketing time of N/A \u2014 insufficient recent activity reflects current absorption rates. The negative 6-month $/SF trend (0.0%), paired with a positive 12-month linear $/SF change (0.0%), indicates that recent ac"
+  },
+  "an-579-060-013-apn": {
+    "slug": "an-579-060-013-apn",
+    "title": "Market Trends: Anza \u2014 June 2026",
+    "city": "Anza",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-06-08",
+    "date_display": "June 08, 2026",
+    "mod_time": "2026-07-11T14:32:06.906710",
+    "folder_name": "AN 579-060-013 APN",
+    "metrics_summary": {
+      "Median Sale Price (0-3 Mo)": {
+        "value": "$336,000",
+        "trend": "Declining"
+      },
+      "Median $/SF (0-3 Mo)": {
+        "value": "$239.75",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+28.08%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "3.5",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "48",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "97.2%",
+        "trend": "Slight softening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+14.3%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "60-90 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "The data reveals a notable divergence between median sale prices and price per square foot trends. The steeper decline in overall median prices relative to $/SF suggests a compositional shift toward smaller or lower-priced properties in the sales mix, rather than a uniform decline in property values"
+  },
+  "lm-4286-calavo-dr": {
+    "slug": "lm-4286-calavo-dr",
+    "title": "Market Trends: La Mesa \u2014 June 2026",
+    "city": "La Mesa",
+    "zip_codes": [],
+    "market_area": "",
+    "date_iso": "2026-06-10",
+    "date_display": "June 10, 2026",
+    "mod_time": "2026-07-11T14:18:58.876530",
+    "folder_name": "LM 4286 Calavo Dr",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$1,100,000",
+        "trend": "Decreasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$577.28",
+        "trend": "Increasing"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+7.2%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "1.6",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "22",
+        "trend": "Stable"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "+16.7%",
+        "trend": "Increasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+4.3%), paired with a positive 12-month linear $/SF change (+7.2%), indicates that recent activity ha"
   }
 }
