@@ -2059,5 +2059,53 @@
       }
     },
     "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The positive 6-month $/SF trend (+1.0%), paired with a positive 12-month linear $/SF change (+3.7%), indicates that recent activity ha"
+  },
+  "sd-7027-ladrillo-st": {
+    "slug": "sd-7027-ladrillo-st",
+    "title": "Market Trends: San Diego 92111 \u2014 July 2026",
+    "city": "San Diego",
+    "zip_codes": [
+      "92111"
+    ],
+    "market_area": "",
+    "date_iso": "2026-07-10",
+    "date_display": "July 10, 2026",
+    "mod_time": "2026-07-10T15:55:50",
+    "folder_name": "SD 7027 Ladrillo St",
+    "metrics_summary": {
+      "Median Sale Price (0\u20133 Mo)": {
+        "value": "$1,073,500",
+        "trend": "Increasing"
+      },
+      "Median $/SF (0\u20133 Mo)": {
+        "value": "$774.07",
+        "trend": "Stable"
+      },
+      "12-Mo Linear $/SF Change": {
+        "value": "+11.3%",
+        "trend": "Positive"
+      },
+      "Months of Inventory": {
+        "value": "0.6",
+        "trend": "Tight supply"
+      },
+      "Median Days on Market": {
+        "value": "8",
+        "trend": "Improving"
+      },
+      "SP/LP Ratio": {
+        "value": "100.0%",
+        "trend": "Strengthening"
+      },
+      "Sales Volume Change (Qtr)": {
+        "value": "-30.6%",
+        "trend": "Decreasing"
+      },
+      "Anticipated Marketing Time": {
+        "value": "30\u201360 days",
+        "trend": "Active market"
+      }
+    },
+    "summary_text": "In summary, the seller's market is best characterized as directionally strengthening. The anticipated marketing time of 30\u201360 days reflects current absorption rates. The negative 6-month $/SF trend (-2.7%), paired with a positive 12-month linear $/SF change (+11.3%), indicates that recent activity h"
   }
 }
