@@ -196,7 +196,7 @@ async function sendNotificationEmail(env, clientEmail, propertyAddress, photoCou
     body: JSON.stringify({
       // Same brianward.com Resend account as submit-order.js -- see the note
       // there. orders@date-of-death.com is not a usable sender on this key.
-      from: env.RESEND_FROM || 'Date-of-Death Appraisals <noreply@brianward.com>',
+      from: env.RESEND_FROM || 'Date-of-Death Appraisals <contact@brianward.com>',
       to: ['orders@date-of-death.com'],
       reply_to: clientEmail,
       subject: subject,

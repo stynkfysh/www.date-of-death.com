@@ -539,7 +539,7 @@ async function sendEmail(to, subject, html, replyTo, env) {
       // whose key is held. date-of-death.com is registered on a separate
       // Resend account, so orders@date-of-death.com cannot be used as the
       // sender; replies still go to orders@date-of-death.com via reply_to.
-      from: env.RESEND_FROM || 'Date-of-Death Appraisals <noreply@brianward.com>',
+      from: env.RESEND_FROM || 'Date-of-Death Appraisals <contact@brianward.com>',
       to: [to],
       reply_to: replyTo,
       subject: subject,
