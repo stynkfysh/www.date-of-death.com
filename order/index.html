@@ -186,7 +186,10 @@
             </div>
 
             <button type="button" class="hero-cta form-submit" id="order-submit-btn">Submit Request</button>
-        </form>
+        
+      <!-- Cloudflare Turnstile: free bot check, normally invisible to real visitors -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAEFgsf4j03QkGavy" data-theme="light" data-appearance="interaction-only" style="margin:14px 0;"></div>
+    </form>
 
         <!-- Confirmation (shown after successful submit) -->
         <div id="order-confirmation" class="order-confirmation" style="display: none;">
@@ -296,6 +299,7 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
     var data = {
         _formType: "order-request",
         _token: _formToken,
+        cf_turnstile_response: (document.querySelector('[name="cf-turnstile-response"]') || {}).value || "",
         company_url: (document.getElementById("company-url") || {}).value || "",
         _ts: _pageLoadTs,
         website: document.getElementById("website").value,
@@ -353,5 +357,6 @@ fetch("/api/form-token", { credentials: "omit" })
   .then(function (d) { if (d && d.token) _formToken = d.token; })
   .catch(function () { /* non-blocking */ });
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>
