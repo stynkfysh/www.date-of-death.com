@@ -535,9 +535,11 @@ async function sendEmail(to, subject, html, replyTo, env) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      // Configurable so the sending identity can be switched without a code
-      // change (e.g. if the Resend key in use has a different verified domain).
-      from: env.RESEND_FROM || 'Date-of-Death Appraisals <orders@date-of-death.com>',
+      // Sent through the brianward.com Resend account, which is the only one
+      // whose key is held. date-of-death.com is registered on a separate
+      // Resend account, so orders@date-of-death.com cannot be used as the
+      // sender; replies still go to orders@date-of-death.com via reply_to.
+      from: env.RESEND_FROM || 'Date-of-Death Appraisals <noreply@brianward.com>',
       to: [to],
       reply_to: replyTo,
       subject: subject,
