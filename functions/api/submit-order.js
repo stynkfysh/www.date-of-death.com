@@ -535,7 +535,9 @@ async function sendEmail(to, subject, html, replyTo, env) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Date-of-Death Appraisals <orders@date-of-death.com>',
+      // Configurable so the sending identity can be switched without a code
+      // change (e.g. if the Resend key in use has a different verified domain).
+      from: env.RESEND_FROM || 'Date-of-Death Appraisals <orders@date-of-death.com>',
       to: [to],
       reply_to: replyTo,
       subject: subject,
