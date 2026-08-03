@@ -210,6 +210,30 @@ async function sendNotificationEmail(env, clientEmail, propertyAddress, photoCou
 }
 
 // --- Main handler ---
+
+// --- Signed-token gate -----------------------------------------------------
+// The photo endpoint emails a notification and writes to Google Drive, so an
+// unguarded endpoint burns Resend credit and Drive storage. Require the same
+// token the contact forms use.
+async function _hmac(secret, data) {
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data));
+  return [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function verifyUploadToken(token, env) {
+  if (!token || typeof token !== 'string') return false;
+  const parts = token.split('.');
+  if (parts.length !== 3) return false;
+  const [ts, nonce, sig] = parts;
+  if (sig !== await _hmac(env.FORM_SECRET || env.RESEND_API_KEY || 'fallback-secret', `${ts}.${nonce}`)) return false;
+  const age = Date.now() - Number(ts);
+  return age >= 0 && age < 7200000;
+}
+
 export async function onRequestPost(context) {
   const requestOrigin = context.request.headers.get('Origin') || '';
   const corsHeaders = getCorsHeaders(requestOrigin);
@@ -223,7 +247,21 @@ export async function onRequestPost(context) {
       });
     }
 
-    const formData = await context.request.formData();
+    // Honeypot + signed token: the page fetches one on load, a script does not.
+    const _form = await context.request.formData();
+    if (_form.get('website') || _form.get('company_url')) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    if (!await verifyUploadToken(_form.get('_token'), context.env)) {
+      return new Response(JSON.stringify({ error: 'Please reload the page and try again.' }), {
+        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    context.__formData = _form;
+
+    const formData = context.__formData;
     const file = formData.get('file');
     const email = formData.get('email');
     const propertyAddress = formData.get('property_address');

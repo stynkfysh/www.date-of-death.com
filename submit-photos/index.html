@@ -568,6 +568,7 @@
 
             var formData = new FormData();
             formData.append('file', file);
+            formData.append('_token', _uploadToken);
             formData.append('email', email.value);
             formData.append('property_address', address.value);
             if (folderId) formData.append('folder_id', folderId);
@@ -627,5 +628,21 @@
 })();
 </script>
 
+<script>
+// Signed upload token, fetched on load. The upload endpoint requires it so
+// the notification email and Drive folder cannot be driven by a script.
+var _uploadToken = "";
+(function () {
+  function grab() {
+    fetch('/api/form-token', { credentials: 'omit' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && d.token) _uploadToken = d.token; })
+      .catch(function () { /* retried before upload */ });
+  }
+  grab();
+  // Tokens last two hours; refresh hourly for long photo sessions.
+  setInterval(grab, 3600000);
+})();
+</script>
 </body>
 </html>

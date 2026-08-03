@@ -295,6 +295,8 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
 
     var data = {
         _formType: "order-request",
+        _token: _formToken,
+        company_url: (document.getElementById("company-url") || {}).value || "",
         _ts: _pageLoadTs,
         website: document.getElementById("website").value,
         client_name: document.getElementById("client-name").value,
@@ -340,6 +342,16 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         alert("Your request was submitted successfully. We'll be in touch within 24 business hours.");
     }
 });
+</script>
+<script>
+// Signed form token: distinguishes a real page load from a bot POSTing
+// straight at the API. Failure is non-blocking -- the submission still goes
+// through, it is just scored more cautiously.
+var _formToken = "";
+fetch("/api/form-token", { credentials: "omit" })
+  .then(function (r) { return r.json(); })
+  .then(function (d) { if (d && d.token) _formToken = d.token; })
+  .catch(function () { /* non-blocking */ });
 </script>
 </body>
 </html>

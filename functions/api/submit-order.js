@@ -273,6 +273,140 @@ async function createSquareCheckout(data, env) {
   return result.payment_link.url;
 }
 
+// ---------------------------------------------------------------------------
+// Spam scoring. Shared by every Brian Ward site's contact endpoint.
+//
+// Design rule: a real lead must never be silently lost. Scores land in three
+// bands -- deliver, deliver-but-flag, drop -- and only overwhelming evidence
+// reaches the drop band. Anything uncertain is still delivered, just marked.
+//
+// The auto-reply is gated on the CLEAN band only. Spammers submit harvested
+// third-party addresses, so replying to an unverified submission means mailing
+// strangers on the attacker's behalf and burning the sending domain.
+// ---------------------------------------------------------------------------
+
+const CLEAN = 'clean';
+const SUSPECT = 'suspect';
+const SPAM = 'spam';
+
+const DROP_AT = 90;
+const FLAG_AT = 50;
+
+// Free-mail domains heavily used by form-spam tooling.
+const BAD_EMAIL_DOMAINS = [
+  'bk.ru', 'mail.ru', 'list.ru', 'inbox.ru', 'rambler.ru', 'yandex.ru',
+  'internet.ru', 'bigpind.com', 'outllook.com',
+];
+
+// Placeholder locality tokens seen across this campaign.
+const JUNK_PLACES = [
+  'leo', 'tro', 'mtskheta', 'lilongwe', 'porsgrunn', 'shekhupura',
+  'lac la biche', 'tbilisi', 'kralupy', 'gujranwala',
+];
+
+const VALID_PURPOSES = [
+  // brianward.com and the market-area sites
+  'bankruptcy', 'date-of-death', 'divorce', 'estate', 'tax', 'before-buying',
+  'before-selling', 'family-transaction', 'insurance-dispute', 'pmi-removal',
+  'bonds', 'other',
+  // date-of-death.com
+  'step-up', 'trust', 'gift-tax', 'estate-tax',
+];
+
+function scoreSubmission(f) {
+  const reasons = [];
+  let score = 0;
+  const add = (n, why) => { score += n; reasons.push(`${why} (+${n})`); };
+
+  const name = (f.name || '').trim();
+  const email = (f.email || '').trim();
+  const phone = (f.phone || '').trim();
+  const street = (f.street || '').trim();
+  const city = (f.city || '').trim();
+  const zip = (f.zip || '').trim();
+  const message = (f.message || '').trim();
+  const purpose = (f.purpose || '').trim();
+  const all = [name, email, phone, street, city, zip, message].join(' ');
+
+  // --- Hard signal: only an automated client fills a hidden field ---
+  if (f.honeypot) add(100, 'hidden honeypot field was filled');
+
+  // --- Proof the submission came from a real page load ---
+  if (!f.tokenValid) add(40, 'no valid form token (posted directly to the API)');
+  if (f.dwellMs != null && f.dwellMs < 3000) add(40, 'submitted under 3s after page load');
+
+  // --- Non-Latin script in a California appraisal form ---
+  if (/[Ѐ-ӿ؀-ۿ一-鿿]/.test(all)) add(50, 'non-Latin script');
+
+  // --- Contact details ---
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length === 11 && digits[0] !== '1') add(35, 'phone is 11 digits not starting with 1');
+  else if (digits.length > 11) add(25, 'phone has more than 11 digits');
+
+  const domain = (email.split('@')[1] || '').toLowerCase();
+  if (BAD_EMAIL_DOMAINS.includes(domain)) add(40, `email domain ${domain}`);
+
+  if (name && !/\s/.test(name) && name.length >= 8) add(25, 'single-token name');
+
+  // --- Address plausibility ---
+  if (street && city && street.toLowerCase() === city.toLowerCase()) {
+    add(30, 'street and city are identical');
+  }
+  if (street && !/\d/.test(street)) add(25, 'street address contains no number');
+  if (JUNK_PLACES.includes(city.toLowerCase()) || JUNK_PLACES.includes(street.toLowerCase())) {
+    add(30, 'known placeholder locality');
+  }
+  if (zip && !/^\d{5}(-\d{4})?$/.test(zip)) add(20, 'zip is not a US 5-digit code');
+
+  // --- Payload ---
+  if (/https?:\/\/|www\.|\[url|\[link|<a\s/i.test(message)) add(35, 'message contains a link');
+  if (purpose && !VALID_PURPOSES.includes(purpose.toLowerCase().replace(/\s+/g, '-'))) {
+    add(20, 'appraisal purpose is not one of the form options');
+  }
+
+  let verdict = CLEAN;
+  if (score >= DROP_AT) verdict = SPAM;
+  else if (score >= FLAG_AT) verdict = SUSPECT;
+
+  return { score, verdict, reasons };
+}
+
+// --- Form token: proves a real browser loaded the page before submitting ----
+// HMAC-signed timestamp. Bots that POST straight at the endpoint have none.
+
+async function hmac(secret, data) {
+  const key = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data));
+  return [...new Uint8Array(sig)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function formSecret(env) {
+  return env.FORM_SECRET || env.RESEND_API_KEY || 'fallback-secret';
+}
+
+async function issueToken(env) {
+  const ts = Date.now();
+  const nonce = crypto.randomUUID();
+  const sig = await hmac(formSecret(env), `${ts}.${nonce}`);
+  return `${ts}.${nonce}.${sig}`;
+}
+
+// Returns { valid, dwellMs }
+async function verifyToken(token, env) {
+  if (!token || typeof token !== 'string') return { valid: false, dwellMs: null };
+  const parts = token.split('.');
+  if (parts.length !== 3) return { valid: false, dwellMs: null };
+  const [ts, nonce, sig] = parts;
+  const expected = await hmac(formSecret(env), `${ts}.${nonce}`);
+  if (sig !== expected) return { valid: false, dwellMs: null };
+  const age = Date.now() - Number(ts);
+  if (!(age >= 0 && age < 7200000)) return { valid: false, dwellMs: age };
+  return { valid: true, dwellMs: age };
+}
+
 // --- Identify which website a submission came from ---
 const SITE_NAME = 'date-of-death.com';
 const SITE_LABEL = 'Date-of-Death Appraisals (date-of-death.com)';
@@ -394,6 +528,51 @@ export async function onRequestPost(context) {
       });
     }
 
+
+    // --- Spam evaluation -------------------------------------------------
+    // Normalise each form type onto one shape so a single filter covers all.
+    const _p = {
+      'general-contact': ['contact_name', 'contact_email', 'contact_phone', 'appraisal_address', 'question'],
+      'contact':         ['contact_name', 'contact_email', 'contact_phone', 'property_address', 'contact_notes'],
+      'order-request':   ['client_name', 'client_email', 'client_phone', 'property_address', 'notes'],
+      'photo-submission':['contact_name', 'email', 'phone', 'property_address', 'notes'],
+    }[formType] || [];
+
+    const { valid: tokenValid, dwellMs: tokenDwell } = await verifyToken(body._token, context.env);
+
+    // The page has always sent _ts; keep using it when the token is absent.
+    const dwellMs = tokenDwell != null
+      ? tokenDwell
+      : (body._ts ? Date.now() - Number(body._ts) : null);
+
+    const { score: spamScore, verdict, reasons: spamReasons } = scoreSubmission({
+      name: body[_p[0]],
+      email: body[_p[1]],
+      phone: body[_p[2]],
+      street: body[_p[3]],
+      message: body[_p[4]],
+      purpose: body.purpose,
+      honeypot: body.website || body.company_url,
+      tokenValid,
+      dwellMs,
+    });
+
+    // Drop outright: no notification, no auto-reply, no Resend credit spent.
+    // The client still sees success so the bot gets no signal to adapt against.
+    if (verdict === SPAM) {
+      console.log(JSON.stringify({
+        blocked: true, site: SITE_NAME, formType,
+        name: body[_p[0]], email: body[_p[1]], score: spamScore, reasons: spamReasons,
+      }));
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const flagged = verdict === SUSPECT;
+    const flagPrefix = flagged ? '[POSSIBLE SPAM] ' : '';
+
     if (formType === 'photo-submission') {
       // --- PHOTO SUBMISSION: email notification with photo links ---
       if (!body.email || !body.property_address) {
@@ -404,12 +583,12 @@ export async function onRequestPost(context) {
       }
 
       const photoCount = body.photo_count || (body.photos ? body.photos.length : 0);
-      const subject = `[${SITE_NAME}] Photos Received (${photoCount}) — ${body.property_address}`;
+      const subject = `${flagPrefix}[${SITE_NAME}] Photos Received (${photoCount}) — ${body.property_address}`;
       const html = buildPhotoSubmissionEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.email, context.env);
 
-      await sendAutoReply(
+      if (verdict === CLEAN) await sendAutoReply(
         body.email,
         `We received your photos — ${SITE_LABEL}`,
         buildAutoReplyEmail(
@@ -442,12 +621,12 @@ export async function onRequestPost(context) {
       // Accept either field name for the address the visitor typed.
       body.appraisal_address = body.appraisal_address || body.property_addresses || '';
 
-      const subject = `[${SITE_NAME}] Contact Inquiry — ${body.contact_name}`;
+      const subject = `${flagPrefix}[${SITE_NAME}] Contact Inquiry — ${body.contact_name}`;
       const html = buildGeneralContactEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.contact_email, context.env);
 
-      await sendAutoReply(
+      if (verdict === CLEAN) await sendAutoReply(
         body.contact_email,
         `We received your message — ${SITE_LABEL}`,
         buildAutoReplyEmail(
@@ -478,12 +657,12 @@ export async function onRequestPost(context) {
         });
       }
 
-      const subject = `[${SITE_NAME}] Complex Quote Request — ${body.property_address}`;
+      const subject = `${flagPrefix}[${SITE_NAME}] Complex Quote Request — ${body.property_address}`;
       const html = buildContactEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.contact_email, context.env);
 
-      await sendAutoReply(
+      if (verdict === CLEAN) await sendAutoReply(
         body.contact_email,
         `We received your quote request — ${SITE_LABEL}`,
         buildAutoReplyEmail(
@@ -514,12 +693,12 @@ export async function onRequestPost(context) {
         });
       }
 
-      const subject = `[${SITE_NAME}] New Appraisal Request — ${body.property_address}`;
+      const subject = `${flagPrefix}[${SITE_NAME}] New Appraisal Request — ${body.property_address}`;
       const html = buildOrderRequestEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.client_email, context.env);
 
-      await sendAutoReply(
+      if (verdict === CLEAN) await sendAutoReply(
         body.client_email,
         `We received your appraisal request — ${SITE_LABEL}`,
         buildAutoReplyEmail(

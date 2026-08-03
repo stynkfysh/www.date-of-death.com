@@ -399,5 +399,15 @@
     });
 </script>
 
+<script>
+// Signed form token: distinguishes a real page load from a bot POSTing
+// straight at the API. Failure is non-blocking -- the submission still goes
+// through, it is just scored more cautiously.
+var _formToken = "";
+fetch("/api/form-token", { credentials: "omit" })
+  .then(function (r) { return r.json(); })
+  .then(function (d) { if (d && d.token) _formToken = d.token; })
+  .catch(function () { /* non-blocking */ });
+</script>
 </body>
 </html>
