@@ -54,6 +54,10 @@ function buildOrderRequestEmail(data) {
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
   <h2 style="color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px;">New Appraisal Request</h2>
 
+  <p style="font-size:15px;background:#1a5276;color:#fff;padding:10px 14px;border-radius:4px;margin:0 0 14px;">
+    Submitted from website: <strong>date-of-death.com</strong>
+  </p>
+
   <h3 style="color: #555; margin-top: 24px;">Contact Information</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Name</td><td style="padding: 6px 12px;">${escapeHtml(data.client_name)}</td></tr>
@@ -73,7 +77,7 @@ function buildOrderRequestEmail(data) {
   </table>
 
   <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
-    Submitted from date-of-death.com — pending your review and invoice.
+    Source Website: date-of-death.com — pending your review and invoice.
   </p>
 </body>
 </html>`;
@@ -98,6 +102,10 @@ function buildContactEmail(data) {
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
   <h2 style="color: #b8860b; border-bottom: 2px solid #f0d060; padding-bottom: 10px;">Complex Property — Custom Quote Request</h2>
 
+  <p style="font-size:15px;background:#1a5276;color:#fff;padding:10px 14px;border-radius:4px;margin:0 0 14px;">
+    Submitted from website: <strong>date-of-death.com</strong>
+  </p>
+
   <h3 style="color: #555; margin-top: 24px;">Contact Information</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Name</td><td style="padding: 6px 12px;">${escapeHtml(data.contact_name)}</td></tr>
@@ -115,7 +123,7 @@ function buildContactEmail(data) {
   </table>
 
   <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
-    Submitted from date-of-death.com — complex property contact form
+    Source Website: date-of-death.com — complex property contact form
   </p>
 </body>
 </html>`;
@@ -127,6 +135,10 @@ function buildGeneralContactEmail(data) {
 <head><meta charset="utf-8"></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
   <h2 style="color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px;">New Contact Form Inquiry</h2>
+
+  <p style="font-size:15px;background:#1a5276;color:#fff;padding:10px 14px;border-radius:4px;margin:0 0 14px;">
+    Submitted from website: <strong>date-of-death.com</strong>
+  </p>
 
   <h3 style="color: #555; margin-top: 24px;">Contact Information</h3>
   <table style="width: 100%; border-collapse: collapse;">
@@ -145,7 +157,7 @@ function buildGeneralContactEmail(data) {
   <div style="padding: 12px; background: #f9f9f9; border-radius: 6px; white-space: pre-wrap;">${escapeHtml(data.question) || '—'}</div>
 
   <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
-    Submitted from date-of-death.com — general contact form
+    Source Website: date-of-death.com — general contact form
   </p>
 </body>
 </html>`;
@@ -165,6 +177,10 @@ function buildPhotoSubmissionEmail(data) {
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
   <h2 style="color: #27ae60; border-bottom: 2px solid #27ae60; padding-bottom: 10px;">Property Photos Submitted</h2>
 
+  <p style="font-size:15px;background:#1a5276;color:#fff;padding:10px 14px;border-radius:4px;margin:0 0 14px;">
+    Submitted from website: <strong>date-of-death.com</strong>
+  </p>
+
   <h3 style="color: #555; margin-top: 24px;">Order Reference</h3>
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 6px 12px; font-weight: 600; width: 140px;">Email</td><td style="padding: 6px 12px;"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
@@ -180,7 +196,7 @@ function buildPhotoSubmissionEmail(data) {
   ${data.notes ? `<h3 style="color: #555; margin-top: 24px;">Notes</h3><div style="padding: 12px; background: #f9f9f9; border-radius: 6px; white-space: pre-wrap;">${escapeHtml(data.notes)}</div>` : ''}
 
   <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
-    Submitted from date-of-death.com — photo upload form
+    Source Website: date-of-death.com — photo upload form
   </p>
 </body>
 </html>`;
@@ -255,6 +271,60 @@ async function createSquareCheckout(data, env) {
 
   const result = await resp.json();
   return result.payment_link.url;
+}
+
+// --- Identify which website a submission came from ---
+const SITE_NAME = 'date-of-death.com';
+const SITE_LABEL = 'Date-of-Death Appraisals (date-of-death.com)';
+
+// --- Auto-reply sent to the person who submitted the form ---
+function buildAutoReplyEmail(name, summaryRows, intro) {
+  const rows = summaryRows
+    .filter(function (r) { return r[1]; })
+    .map(function (r) {
+      return `<tr><td style="padding:6px 12px;font-weight:600;width:150px;vertical-align:top;">${escapeHtml(r[0])}</td><td style="padding:6px 12px;">${escapeHtml(r[1])}</td></tr>`;
+    })
+    .join('');
+
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+  <h2 style="color: #1a5276; border-bottom: 2px solid #1a5276; padding-bottom: 10px;">We received your request</h2>
+
+  <p>Hi ${escapeHtml(name) || 'there'},</p>
+
+  <p>${intro}</p>
+
+  <p>Someone will get back to you within <strong>24 business hours</strong>. If your matter is time-sensitive, you can reply directly to this email or call <strong>(951) 309-2131</strong>.</p>
+
+  <h3 style="color: #555; margin-top: 24px;">What you sent us</h3>
+  <table style="width: 100%; border-collapse: collapse; background: #f9f9f9; border-radius: 6px;">
+    ${rows}
+  </table>
+
+  <p style="margin-top: 24px;">Thank you,<br>
+  <strong>Brian Ward</strong><br>
+  California Certified Residential Real Estate Appraiser<br>
+  License No. AR036053</p>
+
+  <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">
+    This is an automatic confirmation that your submission on ${SITE_NAME} was received.
+    You do not need to submit the form again.
+  </p>
+</body>
+</html>`;
+}
+
+// Sends the submitter's confirmation. Never throws — a failed auto-reply must
+// not make a successfully received submission look like a failure.
+async function sendAutoReply(to, subject, html, env) {
+  if (!to) return;
+  try {
+    await sendEmail(to, subject, html, 'orders@date-of-death.com', env);
+  } catch (err) {
+    console.error('Auto-reply failed (submission still received):', err.message);
+  }
 }
 
 // --- Send email via Resend ---
@@ -334,10 +404,26 @@ export async function onRequestPost(context) {
       }
 
       const photoCount = body.photo_count || (body.photos ? body.photos.length : 0);
-      const subject = `Photos Received (${photoCount}) — ${body.property_address}`;
+      const subject = `[${SITE_NAME}] Photos Received (${photoCount}) — ${body.property_address}`;
       const html = buildPhotoSubmissionEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.email, context.env);
+
+      await sendAutoReply(
+        body.email,
+        `We received your photos — ${SITE_LABEL}`,
+        buildAutoReplyEmail(
+          body.contact_name || '',
+          [
+            ['Email', body.email],
+            ['Property Address', body.property_address],
+            ['Photos Received', String(photoCount)],
+            ['Notes', body.notes],
+          ],
+          `Thank you — we received <strong>${photoCount}</strong> photo${photoCount === 1 ? '' : 's'} for your property through <strong>date-of-death.com</strong>.`
+        ),
+        context.env
+      );
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
@@ -353,10 +439,30 @@ export async function onRequestPost(context) {
         });
       }
 
-      const subject = `Contact Inquiry — ${body.contact_name}`;
+      // Accept either field name for the address the visitor typed.
+      body.appraisal_address = body.appraisal_address || body.property_addresses || '';
+
+      const subject = `[${SITE_NAME}] Contact Inquiry — ${body.contact_name}`;
       const html = buildGeneralContactEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.contact_email, context.env);
+
+      await sendAutoReply(
+        body.contact_email,
+        `We received your message — ${SITE_LABEL}`,
+        buildAutoReplyEmail(
+          body.contact_name,
+          [
+            ['Name', body.contact_name],
+            ['Email', body.contact_email],
+            ['Phone', body.contact_phone],
+            ['Property Address', body.appraisal_address],
+            ['Your Question', body.question],
+          ],
+          'Thank you for contacting us through <strong>date-of-death.com</strong>. Your message has been received.'
+        ),
+        context.env
+      );
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
@@ -372,10 +478,27 @@ export async function onRequestPost(context) {
         });
       }
 
-      const subject = `Complex Quote Request — ${body.property_address}`;
+      const subject = `[${SITE_NAME}] Complex Quote Request — ${body.property_address}`;
       const html = buildContactEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.contact_email, context.env);
+
+      await sendAutoReply(
+        body.contact_email,
+        `We received your quote request — ${SITE_LABEL}`,
+        buildAutoReplyEmail(
+          body.contact_name,
+          [
+            ['Name', body.contact_name],
+            ['Email', body.contact_email],
+            ['Phone', body.contact_phone],
+            ['Property Address', body.property_address],
+            ['Notes', body.contact_notes],
+          ],
+          'Thank you for your request through <strong>date-of-death.com</strong>. Because this property needs a custom quote, Brian will review the details personally and send you a fee proposal.'
+        ),
+        context.env
+      );
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
@@ -391,10 +514,30 @@ export async function onRequestPost(context) {
         });
       }
 
-      const subject = `New Appraisal Request — ${body.property_address}`;
+      const subject = `[${SITE_NAME}] New Appraisal Request — ${body.property_address}`;
       const html = buildOrderRequestEmail(body);
 
       await sendEmail('orders@date-of-death.com', subject, html, body.client_email, context.env);
+
+      await sendAutoReply(
+        body.client_email,
+        `We received your appraisal request — ${SITE_LABEL}`,
+        buildAutoReplyEmail(
+          body.client_name,
+          [
+            ['Name', body.client_name],
+            ['Email', body.client_email],
+            ['Phone', body.client_phone],
+            ['Property Address', body.property_address],
+            ['Report Type', body.tier],
+            ['Purpose', body.purpose],
+            ['Date of Death', body.date_of_death],
+            ['Notes', body.notes],
+          ],
+          'Thank you for your appraisal request through <strong>date-of-death.com</strong>. Brian will review your property details and send you an invoice to confirm the assignment.'
+        ),
+        context.env
+      );
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,

@@ -317,16 +317,27 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         });
         var result = await resp.json();
         if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
-
-        form.style.display = "none";
-        var conf = document.getElementById("order-confirmation");
-        document.getElementById("confirmation-email").textContent = data.client_email;
-        conf.style.display = "block";
-        conf.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
         btn.disabled = false;
         btn.textContent = "Submit Request";
         alert("There was a problem submitting your request. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
+        return;
+    }
+
+    // --- Success. Nothing below here may block the confirmation from showing. ---
+    try {
+        form.style.display = "none";
+        var conf = document.getElementById("order-confirmation");
+        var confEmail = document.getElementById("confirmation-email");
+        if (confEmail) confEmail.textContent = data.client_email;
+        conf.style.display = "block";
+        conf.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (uiErr) {
+        // The request was submitted successfully; only the confirmation UI failed.
+        console.error("Confirmation UI error:", uiErr);
+        btn.disabled = true;
+        btn.textContent = "Request Submitted — Thank You";
+        alert("Your request was submitted successfully. We'll be in touch within 24 business hours.");
     }
 });
 </script>

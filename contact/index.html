@@ -77,8 +77,8 @@
                         <input type="text" id="contact-name" name="contact_name" required autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="contact-email">Email Address</label>
-                        <input type="email" id="contact-email" name="contact_email" autocomplete="email">
+                        <label for="contact-email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="contact-email" name="contact_email" required autocomplete="email">
                     </div>
                 </div>
                 <div style="display: flex; align-items: flex-end; gap: 16px; margin-bottom: 16px;">
@@ -118,6 +118,7 @@
             <div class="confirmation-icon">&#10004;</div>
             <h2>Message Sent!</h2>
             <p>Thank you for reaching out. Someone from our team will get back to you within 24 business hours.</p>
+            <p class="confirmation-detail">A confirmation has been sent to <strong id="confirmation-email"></strong>. If you don&rsquo;t see it, please check your spam folder.</p>
         </div>
     </div>
 </section>
@@ -182,6 +183,7 @@ document.getElementById("contact-submit-btn").addEventListener("click", async fu
         contact_email: document.getElementById("contact-email").value,
         contact_phone: document.getElementById("contact-phone").value,
         texting_ok: document.getElementById("texting-ok").checked,
+        appraisal_address: document.getElementById("property-addresses").value,
         property_addresses: document.getElementById("property-addresses").value,
         question: document.getElementById("question").value
     };
@@ -194,17 +196,28 @@ document.getElementById("contact-submit-btn").addEventListener("click", async fu
         });
         var result = await resp.json();
         if (!resp.ok || result.error) throw new Error(result.error || "Submit failed");
-
-        // Show confirmation
-        document.getElementById("contact-form").style.display = "none";
-        var conf = document.getElementById("contact-confirmation");
-        document.getElementById("confirmation-email").textContent = data.contact_email;
-        conf.style.display = "block";
-        window.scrollTo({ top: conf.offsetTop - 100, behavior: "smooth" });
     } catch (err) {
         btn.disabled = false;
         btn.textContent = "Send Message";
         alert("There was a problem sending your message. Please try again, or email us directly at orders@date-of-death.com.\n\n" + (err.message || ""));
+        return;
+    }
+
+    // --- Success. Nothing below here may block the confirmation from showing. ---
+    try {
+        form.style.display = "none";
+        var conf = document.getElementById("contact-confirmation");
+        var confEmail = document.getElementById("confirmation-email");
+        if (confEmail) confEmail.textContent = data.contact_email;
+        conf.style.display = "block";
+        window.scrollTo({ top: conf.offsetTop - 100, behavior: "smooth" });
+    } catch (uiErr) {
+        // The message was sent successfully; only the confirmation UI failed.
+        // Never tell the visitor it failed — that causes duplicate submissions.
+        console.error("Confirmation UI error:", uiErr);
+        btn.disabled = true;
+        btn.textContent = "Message Sent — Thank You";
+        alert("Your message was sent successfully. We'll get back to you within 24 business hours.");
     }
 });
 </script>
