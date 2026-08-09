@@ -234,7 +234,7 @@ async function createSquareCheckout(data, env) {
       location_id: locationId,
     },
     checkout_options: {
-      redirect_url: 'https://date-of-death.com/order/thank-you',
+      redirect_url: 'https://date-of-death.com/order/thank-you/',
       ask_for_shipping_address: false,
     },
     pre_populated_data: {
