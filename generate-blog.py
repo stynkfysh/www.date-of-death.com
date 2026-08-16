@@ -336,11 +336,11 @@ def generate_blog_entry_html(entry):
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="Real estate market trends for {location_label} &mdash; key metrics for estate valuations.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://date-of-death.com/blog/{slug}">
+    <meta property="og:url" content="https://date-of-death.com/blog/{slug}/">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{title}">
     <meta name="twitter:description" content="Real estate market trends for {location_label} &mdash; key metrics for estate valuations.">
-    <link rel="canonical" href="https://date-of-death.com/blog/{slug}">
+    <link rel="canonical" href="https://date-of-death.com/blog/{slug}/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -373,14 +373,14 @@ def generate_blog_entry_html(entry):
             <span></span><span></span><span></span>
         </button>
         <nav class="main-nav">
-            <a href="/why-desktop">Why Desktop</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/faq">FAQ</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/service-areas">Service Areas</a>
-            <a href="/order" class="nav-cta">Order Now</a>
+            <a href="/why-desktop/">Why Desktop</a>
+            <a href="/how-it-works/">How It Works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+            <a href="/service-areas/">Service Areas</a>
+            <a href="/order/" class="nav-cta">Order Now</a>
         </nav>
     </div>
 </header>
@@ -394,7 +394,7 @@ def generate_blog_entry_html(entry):
 
 <section>
     <div class="container blog-content">
-        <p class="blog-meta"><a href="/blog">&larr; All Posts</a> &nbsp;&middot;&nbsp; {date_str} &nbsp;&middot;&nbsp; {location_label}, California</p>
+        <p class="blog-meta"><a href="/blog/">&larr; All Posts</a> &nbsp;&middot;&nbsp; {date_str} &nbsp;&middot;&nbsp; {location_label}, California</p>
         <h2>{title}</h2>
 
         <div class="blog-metrics-table">
@@ -415,7 +415,7 @@ def generate_blog_entry_html(entry):
         <div class="blog-cta-box">
             <h3>Need a Date-of-Death Appraisal?</h3>
             <p>Our market trend analyses are performed as part of every appraisal we prepare. If you need a USPAP-compliant date-of-death appraisal for the IRS step-up in basis, we provide certified desktop appraisals statewide across California &mdash; starting at $299.</p>
-            <a href="/order" class="hero-cta">Order Your Appraisal</a>
+            <a href="/order/" class="hero-cta">Order Your Appraisal</a>
         </div>
     </div>
 </section>
@@ -424,23 +424,23 @@ def generate_blog_entry_html(entry):
     <div class="footer-inner">
         <div class="footer-col">
             <h4>Services</h4>
-            <a href="/pricing">Pricing</a>
-            <a href="/why-desktop">Why Desktop Appraisals</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/order">Order Now</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/why-desktop/">Why Desktop Appraisals</a>
+            <a href="/how-it-works/">How It Works</a>
+            <a href="/order/">Order Now</a>
         </div>
         <div class="footer-col">
             <h4>Resources</h4>
-            <a href="/faq">FAQ</a>
-            <a href="/about">About &amp; Credentials</a>
-            <a href="/service-areas">Service Areas</a>
-            <a href="/step-up-in-basis">Step-Up in Basis Guide</a>
-            <a href="/blog">Market Trends</a>
-            <a href="/reviews">Reviews</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/about/">About &amp; Credentials</a>
+            <a href="/service-areas/">Service Areas</a>
+            <a href="/step-up-in-basis/">Step-Up in Basis Guide</a>
+            <a href="/blog/">Market Trends</a>
+            <a href="/reviews/">Reviews</a>
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
-            <a href="/contact">Contact Form</a>
+            <a href="/contact/">Contact Form</a>
         </div>
     </div>
     <div class="footer-bottom">
@@ -456,7 +456,7 @@ def generate_blog_entry_html(entry):
 def generate_index_page(entries, page_num, total_pages):
     """Generate a paginated blog index page."""
     is_first = page_num == 1
-    path_prefix = "/blog" if is_first else f"/blog/page/{page_num}"
+    path_prefix = "/blog/" if is_first else f"/blog/page/{page_num}/"
 
     cards_html = ""
     for entry in entries:
@@ -488,14 +488,14 @@ def generate_index_page(entries, page_num, total_pages):
                 <span class="blog-card-date">{entry['date_display']}</span>
                 <span class="blog-card-location">{location}, CA</span>
             </div>
-            <h3><a href="/blog/{entry['slug']}">{entry['title']}</a></h3>
+            <h3><a href="/blog/{entry['slug']}/">{entry['title']}</a></h3>
             <div class="blog-card-metrics">
                 <span>Median Price: <strong>{price_val}</strong></span>
                 <span>$/SF: <strong>{ppsf_val}</strong></span>
                 <span>Inventory: <strong>{inventory_val} mo</strong></span>
             </div>
             <p>{summary_text}</p>
-            <a href="/blog/{entry['slug']}" class="blog-read-more">Read full analysis &rarr;</a>
+            <a href="/blog/{entry['slug']}/" class="blog-read-more">Read full analysis &rarr;</a>
         </article>"""
 
     # Pagination
@@ -503,14 +503,14 @@ def generate_index_page(entries, page_num, total_pages):
     if total_pages > 1:
         pagination_html = '<div class="blog-pagination">'
         if page_num > 1:
-            prev_url = "/blog" if page_num == 2 else f"/blog/page/{page_num - 1}"
+            prev_url = "/blog/" if page_num == 2 else f"/blog/page/{page_num - 1}/"
             pagination_html += f'<a href="{prev_url}" class="blog-page-link">&larr; Newer</a>'
         for p in range(1, total_pages + 1):
-            url = "/blog" if p == 1 else f"/blog/page/{p}"
+            url = "/blog/" if p == 1 else f"/blog/page/{p}/"
             active = ' class="blog-page-active"' if p == page_num else ''
             pagination_html += f'<a href="{url}"{active}>{p}</a>'
         if page_num < total_pages:
-            pagination_html += f'<a href="/blog/page/{page_num + 1}" class="blog-page-link">Older &rarr;</a>'
+            pagination_html += f'<a href="/blog/page/{page_num + 1}/" class="blog-page-link">Older &rarr;</a>'
         pagination_html += '</div>'
 
     return f"""<!DOCTYPE html>
@@ -543,14 +543,14 @@ def generate_index_page(entries, page_num, total_pages):
             <span></span><span></span><span></span>
         </button>
         <nav class="main-nav">
-            <a href="/why-desktop">Why Desktop</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/faq">FAQ</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/service-areas">Service Areas</a>
-            <a href="/order" class="nav-cta">Order Now</a>
+            <a href="/why-desktop/">Why Desktop</a>
+            <a href="/how-it-works/">How It Works</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+            <a href="/service-areas/">Service Areas</a>
+            <a href="/order/" class="nav-cta">Order Now</a>
         </nav>
     </div>
 </header>
@@ -572,30 +572,30 @@ def generate_index_page(entries, page_num, total_pages):
 <section class="cta-banner">
     <h2>Need a Date-of-Death Appraisal?</h2>
     <p>USPAP-compliant desktop appraisals for the IRS step-up in basis &mdash; serving all 58 California counties.</p>
-    <a href="/order" class="hero-cta">Order Your Appraisal &mdash; From $299</a>
+    <a href="/order/" class="hero-cta">Order Your Appraisal &mdash; From $299</a>
 </section>
 
 <footer class="site-footer">
     <div class="footer-inner">
         <div class="footer-col">
             <h4>Services</h4>
-            <a href="/pricing">Pricing</a>
-            <a href="/why-desktop">Why Desktop Appraisals</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/order">Order Now</a>
+            <a href="/pricing/">Pricing</a>
+            <a href="/why-desktop/">Why Desktop Appraisals</a>
+            <a href="/how-it-works/">How It Works</a>
+            <a href="/order/">Order Now</a>
         </div>
         <div class="footer-col">
             <h4>Resources</h4>
-            <a href="/faq">FAQ</a>
-            <a href="/about">About &amp; Credentials</a>
-            <a href="/service-areas">Service Areas</a>
-            <a href="/step-up-in-basis">Step-Up in Basis Guide</a>
-            <a href="/blog">Market Trends</a>
-            <a href="/reviews">Reviews</a>
+            <a href="/faq/">FAQ</a>
+            <a href="/about/">About &amp; Credentials</a>
+            <a href="/service-areas/">Service Areas</a>
+            <a href="/step-up-in-basis/">Step-Up in Basis Guide</a>
+            <a href="/blog/">Market Trends</a>
+            <a href="/reviews/">Reviews</a>
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
-            <a href="/contact">Contact Form</a>
+            <a href="/contact/">Contact Form</a>
         </div>
     </div>
     <div class="footer-bottom">
