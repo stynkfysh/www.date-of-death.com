@@ -927,7 +927,8 @@
         var skipped = [];
         for (var i = 0; i < fileList.length; i++) {
             var f = fileList[i];
-            if (!f.type.match(/^image\//)) { skipped.push(f.name + ' (not an image)'); continue; }
+            var looksLikeImage = /^image\//.test(f.type || '') || /\.(jpe?g|png|heic|heif|webp|gif|tiff?|bmp|dng|avif)$/i.test(f.name || '');
+            if (!looksLikeImage) { skipped.push(f.name + ' (not an image)'); continue; }
             if (f.size > MAX_FILE_SIZE) { skipped.push(f.name + ' (over 25 MB)'); continue; }
             var isDupe = selectedFiles.some(function(ex) { return ex.name === f.name && ex.size === f.size; });
             if (!isDupe) selectedFiles.push(f);
@@ -998,6 +999,16 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Uploading\u2026';
         hideError();
+
+        // Make sure the signed upload token is in hand (the on-load fetch can
+        // fail or be blocked); without it every upload is rejected.
+        if (!_uploadToken) {
+            try {
+                var tokResp = await fetch('/api/form-token', { credentials: 'omit', cache: 'no-store' });
+                var tokData = await tokResp.json();
+                if (tokData && tokData.token) _uploadToken = tokData.token;
+            } catch (e) { /* fall through; server will report */ }
+        }
         uploadResult.style.display = 'none';
         progressEl.style.display = 'block';
         progressBar.style.width = '0%';
