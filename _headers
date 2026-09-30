@@ -13,7 +13,9 @@
 
 # The uploader page and API must never be served stale from a browser cache.
 /client/*
+  ! Cache-Control
   Cache-Control: no-cache
 
 /api/*
+  ! Cache-Control
   Cache-Control: no-store
