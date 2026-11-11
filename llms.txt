@@ -1,7 +1,7 @@
 # date-of-death.com
 
 ## About
-Date-of-death.com is a statewide California desktop real estate appraisal service specializing in date-of-death valuations for step-up in basis, trust valuations, and gift tax purposes. The service covers single-family residences and condominiums only. It is operated by Date of Death Appraisals.
+Date-of-death.com is a statewide California desktop real estate appraisal service specializing in date-of-death valuations for step-up in basis, trust valuations, and gift tax purposes. The service covers single-family residences and condominiums only. It is operated by Brian Ward Appraisal (Appraiser LLC), led by a California Certified Residential Real Estate Appraiser (License No. AR036053).
 
 ## Services
 - Standard Desktop Appraisal ($449): Self-contained report with maps, comp photos, and market conditions analysis
@@ -33,11 +33,11 @@ Date-of-death.com is a statewide California desktop real estate appraisal servic
 - Experience appraising homes in excess of 10,000 SF and $15M in value
 
 ## How It Works
-1. Enter property details online
-2. Select service tier
-3. Pay online via secure checkout
-4. Submit property photos (upload, email, text, or share cloud link)
-5. Receive completed appraisal through secure delivery portal
+1. Submit property details and service tier through the online order form (no phone call required)
+2. A certified appraiser reviews the request and sends a confirmation with a secure invoice within one business day
+3. Pay the invoice online
+4. Submit property photos (upload, email, text, or share a cloud storage link)
+5. Receive the completed appraisal via secure download link, typically within 5-7 business days
 
 ## Why Desktop Appraisals Work
 - The client knows the property; the analysis requires expertise
@@ -66,6 +66,15 @@ Reality: The vast majority of estates fall below the federal estate tax exemptio
 ## Contact
 - Website: https://date-of-death.com
 - All orders placed online — no phone interaction required
+
+## Pricing Summary (for direct answers)
+- How much does a date-of-death appraisal cost in California? Flat-rate statewide: $449 (Standard Desktop) or $299 (Basic Desktop). No site-visit fees, travel charges, or quote requests.
+- Can the appraisal be ordered entirely online? Yes — order, payment, photo submission, and delivery are all online.
+
+## Related Sites (same operator: Brian Ward Appraisal / Appraiser LLC)
+- https://www.brianward.com — San Diego County full-service appraisal practice
+- https://ward.pro — Statewide California appraisal services
+- https://www.lavaluepro.com — Los Angeles County appraisal services
 
 ## Site Structure
 - /: Homepage with value proposition, service tiers, and credentials

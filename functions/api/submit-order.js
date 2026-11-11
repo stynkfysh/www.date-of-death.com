@@ -44,6 +44,16 @@ function buildOrderRequestEmail(data) {
     unsure: 'Not Sure — needs recommendation',
   };
 
+  const referralLabels = {
+    google: 'Google search',
+    'ai-assistant': 'AI assistant (ChatGPT, Claude, Gemini, etc.)',
+    'cpa-referral': 'CPA / tax professional referral',
+    'attorney-referral': 'Attorney referral',
+    'friend-family': 'Friend or family',
+    'repeat-client': 'Worked with us before',
+    other: 'Other',
+  };
+
   const purpose = purposeLabels[data.purpose] || data.purpose || 'Not selected';
   const role = roleLabels[data.client_role] || data.client_role || 'Not specified';
   const tier = tierLabels[data.tier] || data.tier || 'Not selected';
@@ -74,6 +84,7 @@ function buildOrderRequestEmail(data) {
     ${data.purpose === 'other' && data.other_purpose ? `<tr><td style="padding: 6px 12px; font-weight: 600;">Other Purpose</td><td style="padding: 6px 12px;">${escapeHtml(data.other_purpose)}</td></tr>` : ''}
     <tr><td style="padding: 6px 12px; font-weight: 600;">Date of Death</td><td style="padding: 6px 12px;">${escapeHtml(data.date_of_death) || '—'}</td></tr>
     <tr><td style="padding: 6px 12px; font-weight: 600;">Notes</td><td style="padding: 6px 12px;">${escapeHtml(data.notes) || '—'}</td></tr>
+    <tr><td style="padding: 6px 12px; font-weight: 600;">How They Heard</td><td style="padding: 6px 12px;">${escapeHtml(referralLabels[data.referral_source] || data.referral_source) || '—'}</td></tr>
   </table>
 
   <p style="margin-top: 30px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #888;">

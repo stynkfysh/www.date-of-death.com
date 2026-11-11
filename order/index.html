@@ -176,6 +176,20 @@
                     <p class="form-note">Our expertise is date-of-death valuations and the IRS step-up in basis. For other purposes, please confirm with your attorney or the requesting party that a desktop appraisal will be accepted.</p>
                 </div>
                 <div class="form-group full-width">
+                    <label for="referral-source">How did you hear about us?</label>
+                    <select id="referral-source" name="referral_source">
+                        <option value="">Select...</option>
+                        <option value="google">Google search</option>
+                        <option value="ai-assistant">AI assistant (ChatGPT, Claude, Gemini, etc.)</option>
+                        <option value="cpa-referral">CPA / tax professional referral</option>
+                        <option value="attorney-referral">Attorney referral</option>
+                        <option value="friend-family">Friend or family</option>
+                        <option value="repeat-client">Worked with us before</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
                     <label for="notes">Additional Notes</label>
                     <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know about the property or assignment..."></textarea>
                 </div>
@@ -312,6 +326,7 @@ document.getElementById("order-submit-btn").addEventListener("click", async func
         purpose: document.getElementById("purpose").value,
         other_purpose: document.getElementById("other-purpose") ? document.getElementById("other-purpose").value : "",
         date_of_death: document.getElementById("date-of-death").value,
+        referral_source: document.getElementById("referral-source") ? document.getElementById("referral-source").value : "",
         notes: document.getElementById("notes").value
     };
 
