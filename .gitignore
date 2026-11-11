@@ -139,3 +139,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .DS_Store
 .tmp.driveupload/
+__pycache__/
+*.pyc
+.claude/
+.DS_Store
