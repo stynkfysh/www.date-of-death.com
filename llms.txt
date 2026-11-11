@@ -76,6 +76,10 @@ Reality: The vast majority of estates fall below the federal estate tax exemptio
 - https://ward.pro — Statewide California appraisal services
 - https://www.lavaluepro.com — Los Angeles County appraisal services
 
+## For Referring Professionals
+- CPAs, estate attorneys, trustees and fiduciaries can download a one-page referral sheet (no email required): https://date-of-death.com/date-of-death-appraisal-referral-sheet.pdf
+- Signing fair market value forms a CPA has prepared is included in the appraisal fee at no additional charge
+
 ## Site Structure
 - /: Homepage with value proposition, service tiers, and credentials
 - /why-desktop: Why desktop appraisals work for estate valuations
@@ -90,3 +94,4 @@ Reality: The vast majority of estates fall below the federal estate tax exemptio
 - /step-up-in-basis: Comprehensive guide to the step-up in basis under IRC §1014, including gift vs inheritance, California's double step-up, IRS forms, audit risk, and Proposition 19
 - /blog: Market trends analysis from our appraisal practice across California
 - /reviews: Verified client reviews from Google and Yelp
+- /date-of-death-appraisal-referral-sheet.pdf: One-page referral sheet for CPAs, attorneys, trustees and fiduciaries

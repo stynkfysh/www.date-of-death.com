@@ -120,6 +120,7 @@ service_areas_html = f'''<!DOCTYPE html>
             <a href="/faq">FAQ</a>
             <a href="/about">About &amp; Credentials</a>
             <a href="/service-areas">Service Areas</a>
+            <a href="/date-of-death-appraisal-referral-sheet.pdf">For CPAs &amp; Attorneys (PDF)</a>
         </div>
         <div class="footer-col">
             <h4>Contact</h4>
