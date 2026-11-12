@@ -219,7 +219,7 @@ def generate_content(loc):
     faqs = [
         {
             "q": f"How much does a date-of-death appraisal cost {in_label}?",
-            "a": f"Our desktop date-of-death appraisals for properties {in_label} start at a flat rate. The exact fee depends on property complexity and the type of report needed. Visit our <a href='/pricing'>pricing page</a> for current rates."
+            "a": f"Our desktop date-of-death appraisals for properties {in_label} start at $299. Visit our <a href='/pricing'>pricing page</a> for current rates."
         },
         {
             "q": f"How long does a date-of-death appraisal take for a {name} property?",
@@ -278,7 +278,7 @@ def generate_page_html(loc):
     zip_code = loc.get('zip', '')
 
     title = f"Date of Death Appraisal — {cl}"
-    meta_desc = f"Need a date-of-death appraisal {il}? California certified desktop appraisals for estate settlement, IRS filings, and stepped-up basis. Fast turnaround, flat-rate pricing."
+    meta_desc = f"Need a date-of-death appraisal {il}? California certified desktop appraisals for estate settlement, IRS filings, and stepped-up basis. Fast turnaround, transparent pricing."
 
     # Schema markup
     schema_local = json.dumps({
@@ -474,7 +474,7 @@ def generate_page_html(loc):
 <section class="cta-banner" style="background:#1a5276;color:#fff">
     <div class="container">
         <h2>Ready to Order?</h2>
-        <p>Get a certified date-of-death appraisal for your {name} property. Flat-rate pricing, fast turnaround, no property visit required.</p>
+        <p>Get a certified date-of-death appraisal for your {name} property. Transparent pricing, fast turnaround, no property visit required.</p>
         <a href="/order" class="hero-cta">Order Your Appraisal</a>
     </div>
 </section>

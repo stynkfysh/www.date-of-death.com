@@ -101,7 +101,7 @@ def build_county_page(county, members):
     median = f"${cd['median']:,.0f}"
     title = f"Date-of-Death Appraisal — {county} County, California"
     meta = (f"Desktop date-of-death appraisals throughout {county} County, California. "
-            f"USPAP-compliant, IRS-accepted, flat-rate $299-$449, ordered entirely online. "
+            f"USPAP-compliant, IRS-accepted, $299-$449, ordered entirely online. "
             f"Serving {n_areas} {county} County communities.")
     schema = json.dumps({
         "@context": "https://schema.org",
@@ -185,7 +185,7 @@ def build_county_page(county, members):
         <h2>Date-of-Death Appraisals Throughout {county} County</h2>
         <p>When a property owner passes away, the estate needs a defensible fair market value as of the date of death. Under IRC &sect;1014, that value becomes the heirs&rsquo; new cost basis &mdash; the step-up that can eliminate capital gains tax on decades of appreciation. Our desktop appraisal service delivers that valuation for any single-family home or condominium in {county} County, prepared by a California Certified Residential Appraiser and accepted by the IRS, CPAs, and estate attorneys.</p>
         <p>{county} County's median home value is approximately {median}, with typical homes selling in about {cd['dom']} days. Whether the date of death was last month or years ago, we analyze the comparable sales and market conditions that applied on that specific date.</p>
-        <p>Flat-rate pricing statewide: <strong>$449</strong> Standard Desktop or <strong>$299</strong> Basic Desktop &mdash; see <a href="/pricing/">pricing details</a>. The entire process is online: <a href="/order/">submit your order</a>, receive an invoice within one business day, pay, share photos, and download your completed report.</p>
+        <p>Pricing: <strong>$449</strong> Standard Desktop or <strong>$299</strong> Basic Desktop &mdash; see <a href="/pricing/">pricing details</a>. The entire process is online: <a href="/order/">submit your order</a>, receive an invoice within one business day, pay, share photos, and download your completed report.</p>
     </div>
 </section>
 {assessor_html}
@@ -203,7 +203,7 @@ def build_county_page(county, members):
 <section class="cta-banner" style="background:#1a5276;color:#fff">
     <div class="container">
         <h2>Ready to Order in {county} County?</h2>
-        <p>Flat-rate, USPAP-compliant desktop appraisals &mdash; no phone call required, no property visit needed.</p>
+        <p>USPAP-compliant desktop appraisals &mdash; no phone call required, no property visit needed.</p>
         <a href="/order/" class="hero-cta">Order Your Appraisal</a>
     </div>
 </section>
